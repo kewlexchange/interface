@@ -1,0 +1,23 @@
+@import "variables";
+
+.wrapper {
+  background-color: var(--bs-secondary-bg);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.plinkoGrid {
+  padding: $spacer;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 40rem;
+}
+
+.plinko {
+  display: inline-block;
+}
+
+@value font #{$font-family-sans-serif};

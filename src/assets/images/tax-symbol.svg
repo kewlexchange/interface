@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 70 70">
+    <g id="Group_397" data-name="Group 397" transform="translate(-195 -2879)">
+        <g id="Icon" transform="translate(-10 10)">
+            <rect id="Rectangle_7" data-name="Rectangle 7" width="70" height="70" rx="5"
+                transform="translate(205 2869)" fill="#e73697" />
+        </g>
+        <path id="Icon_awesome-feather" data-name="Icon awesome-feather"
+            d="M24.711,2.372C21.4-.933,16.159-1.055,11.366,3.733L6.83,8.264c-3.2,3.195-3.723,7.979-3.366,11.17L12.9,10.006a.847.847,0,1,1,1.2,1.2L.372,24.916a1.27,1.27,0,0,0,1.8,1.8l3.5-3.493c2.767.831,9.092.961,13.057-2.906H13.529l7.806-2.6c2.644-2.641,1.924-1.914,2.45-2.479H18.613l6.958-2.317c2.4-3.939,1.815-7.873-.86-10.546Z"
+            transform="translate(216.458 2900.458)" fill="#fff" />
+    </g>
+</svg>  

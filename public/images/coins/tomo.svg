@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)"
+   sodipodi:docname="Tomo-Chain-TOMO-Coin-Icon-256x256.svg"
+   id="svg31"
+   version="1.1"
+   viewBox="0 0 256 256"
+   height="256"
+   width="256">
+  <metadata
+     id="metadata37">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>logo-tomochain-fl</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs35" />
+  <sodipodi:namedview
+     inkscape:current-layer="svg31"
+     inkscape:window-maximized="1"
+     inkscape:window-y="0"
+     inkscape:window-x="0"
+     inkscape:cy="166.87552"
+     inkscape:cx="99.615461"
+     inkscape:zoom="1.0207486"
+     fit-margin-bottom="0"
+     fit-margin-right="0"
+     fit-margin-left="0"
+     fit-margin-top="0"
+     showgrid="false"
+     id="namedview33"
+     inkscape:window-height="878"
+     inkscape:window-width="1440"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <title
+     id="title10">logo-tomochain-fl</title>
+  <desc
+     id="desc12">Created with Sketch.</desc>
+  <g
+     transform="translate(43.5,111)"
+     id="g152">
+    <circle
+       style="fill:#242828;fill-opacity:1;stroke-width:8.98622"
+       id="path53"
+       cx="84.5"
+       cy="17"
+       r="128" />
+    <g
+       id="g130"
+       transform="matrix(4.7354758,0,0,4.7067367,31.163039,-64.87264)">
+      <g
+         transform="translate(0.2712,0.9061)"
+         id="Group-5"
+         style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1">
+        <polygon
+           points="0.00037777778,5.4966667 5.4957852,0 5.4957852,10.992074 0.00037777778,16.488741 "
+           fill="#ffffff"
+           id="Fill-18" />
+        <path
+           fill="#ffffff"
+           id="Fill-19"
+           d="m 21.984148,21.985281 c 0,6.06963 -4.921185,10.992075 -10.992074,10.992075 C 4.9199259,32.977356 0,28.054911 0,21.985281 v -5.496666 h 5.4954074 v 5.496666 c 0,3.029778 2.4656296,5.495408 5.4966666,5.495408 3.031037,0 5.496667,-2.46563 5.496667,-5.495408 z" />
+        <polygon
+           points="5.4954074,10.992578 21.984148,10.992578 16.488741,16.487985 7.1054274e-15,16.487985 "
+           fill="#00e8b4"
+           id="Fill-20" />
+      </g>
+    </g>
+  </g>
+</svg>

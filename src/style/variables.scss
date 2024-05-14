@@ -1,0 +1,231 @@
+
+$min-contrast-ratio: 3; // prefer white as text color for buttons
+$enable-dark-mode: true;
+
+$white:    #fff !default;
+$gray-100: #f7f7fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #5f707c !default;
+$gray-700: #374854 !default;
+$gray-800: #283945 !default;
+$gray-900: #1A2B38 !default;
+$black:    #000 !default;
+
+$white--night:    darken($gray-900, 2.5%) !default;
+$gray-100--night: $gray-900 !default;
+$gray-200--night: $gray-800 !default;
+$gray-300--night: $gray-700 !default;
+$gray-400--night: $gray-600 !default;
+$gray-500--night: $gray-500 !default;
+$gray-600--night: $gray-400 !default;
+$gray-700--night: $gray-300 !default;
+$gray-800--night: $gray-200 !default;
+$gray-900--night: $gray-100 !default;
+$black--night:    $white !default;
+
+
+$grays: () !default;
+$grays: map-merge((
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+), $grays);
+
+$grays--night: () !default;
+$grays--night: map-merge((
+  "100": $gray-100--night,
+  "200": $gray-200--night,
+  "300": $gray-300--night,
+  "400": $gray-400--night,
+  "500": $gray-500--night,
+  "600": $gray-600--night,
+  "700": $gray-700--night,
+  "800": $gray-800--night,
+  "900": $gray-900--night
+), $grays--night);
+
+$blue:    #3498db !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #e74c3c !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #64bc0c !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+$colors: () !default;
+$colors: map-merge((
+  "blue":       $blue,
+  "indigo":     $indigo,
+  "purple":     $purple,
+  "pink":       $pink,
+  "red":        $red,
+  "orange":     $orange,
+  "yellow":     $yellow,
+  "green":      $green,
+  "teal":       $teal,
+  "cyan":       $cyan,
+  "white":      $white,
+  "gray":       $gray-600,
+  "gray-dark":  $gray-900
+), $colors);
+
+$darken: 2.5%;
+
+$blue--night:    darken($blue, $darken) !default;
+$indigo--night:  darken($indigo, $darken) !default;
+$purple--night:  darken($purple, $darken) !default;
+$pink--night:    darken($pink, $darken) !default;
+$red--night:     darken($red, $darken) !default;
+$orange--night:  darken($orange, $darken) !default;
+$yellow--night:  darken($yellow, $darken) !default;
+$green--night:   darken($green, $darken) !default;
+$teal--night:    darken($teal, $darken) !default;
+$cyan--night:    darken($cyan, $darken) !default;
+
+$colors--night: () !default;
+$colors--night: map-merge((
+  "blue":       $blue--night,
+  "indigo":     $indigo--night,
+  "purple":     $purple--night,
+  "pink":       $pink--night,
+  "red":        $red--night,
+  "orange":     $orange--night,
+  "yellow":     $yellow--night,
+  "green":      $green--night,
+  "teal":       $teal--night,
+  "cyan":       $cyan--night,
+  "white":      $white--night,
+  "gray":       $gray-600--night,
+  "gray-dark":  $gray-800--night
+), $colors--night);
+
+
+
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $orange !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-900 !default;
+$primary:       $blue !default;
+
+$secondary--night:     $gray-600--night !default;
+$success--night:       $green--night !default;
+$info--night:          $cyan--night !default;
+$warning--night:       $orange--night !default;
+$danger--night:        $red--night !default;
+$light--night:         $gray-100--night !default;
+$dark--night:          $gray-900--night !default;
+$primary--night:       $blue--night !default;
+
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+  (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark
+  ),
+  $theme-colors
+);
+
+$theme-colors--night: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors--night: map-merge(
+  (
+    "primary":    $primary--night,
+    "secondary":  $secondary--night,
+    "success":    $success--night,
+    "info":       $info--night,
+    "warning":    $warning--night,
+    "danger":     $danger--night,
+    "light":      $light--night,
+    "dark":       $dark--night
+  ),
+  $theme-colors--night
+);
+
+$form-label-margin-bottom: 0;
+
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+$popover-header-padding-y: 1rem;
+$popover-header-padding-x: 1rem;
+
+$btn-border-width: 1px;
+
+
+@function map-collect($maps...) {
+  $collection: ();
+
+  @each $map in $maps {
+    $collection: map-merge($collection, $map);
+  }
+  @return $collection;
+}
+
+@mixin themify($property, $color) {
+  #{$property}: map-get(map-collect($theme-colors, $colors, $grays), $color);
+  :global(.night) & {
+    // Output the declaration
+    #{$property}: map-get(map-collect($theme-colors--night, $colors--night, $grays--night), $color);
+  }
+}
+
+@mixin color($arguments...) {
+  @include themify('color', $arguments...);
+}
+
+@mixin border-color($arguments...) {
+  @include themify('border-color', $arguments...);
+}
+
+@mixin background-color($arguments...) {
+  @include themify('background-color', $arguments...);
+}
+
+$link-hover-decoration: none;
+
+
+@mixin border-left {
+  border-left: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+@mixin border-bottom {
+  border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+$gray: $gray-400;
+$gray-dark: $gray-500;
+
+$chat-width: 400px;
+
+@mixin label-header {
+  font-weight: 500;
+  @include color("800");
+}
+
+@mixin remove-default-button-style {
+  padding: 0;
+  border-style: none;
+  border-radius: 0;
+  background: none;
+}

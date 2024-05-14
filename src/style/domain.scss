@@ -1,0 +1,11 @@
+.domainHead{
+    @apply flex flex-row items-center justify-between gap-2 p-2 rounded-lg
+}
+.domainSection {
+    .domainEntry {
+        @apply flex flex-row items-start justify-between p-2 gap-2  rounded-lg sm:flex sm:flex-col sm:items-start sm:text-start sm:justify-start
+    }
+  
+    @apply rounded-lg  p-2 gap-2 flex flex-col w-full
+  }
+  

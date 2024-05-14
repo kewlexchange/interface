@@ -1,0 +1,242 @@
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 99999;
+    transition: opacity 300ms ease-in-out;
+    opacity: 0;
+    &.show{
+        opacity: 1;
+        display: block;
+
+        .modal_overlay {
+            .modal-container {
+                @apply delay-500 duration-300 scale-100 blur-none;
+            }
+        }
+    }
+    &_overlay {
+        z-index: 10;
+        position: fixed;
+        top: 0;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgb(0 0 0 / 21%);
+        @apply inset-0 backdrop-filter backdrop-blur  transition-all duration-300;
+
+        .modal-container {
+
+         
+           background-color: #fff;
+
+            width: 100%;
+            padding-right: var(--bs-gutter-x, 0.75rem);
+            padding-left: var(--bs-gutter-x, 0.75rem);
+            margin-right: auto;
+            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: calc(30% - (0.5rem));
+            .modal-header{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .btn{
+                    user-select: none;
+                    font-size: 20px;
+                }
+            }
+            @apply rounded-3xl p-1 scale-75 blur-3xl transition-all duration-300 delay-500
+        }
+    }
+}
+
+@media (min-width: 1400px) {
+    .modal-container {
+        max-width: 630px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .modal-container {
+        max-width: 630px !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .modal-container {
+        max-width: 630px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .modal-container {
+        max-width: 680px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .modal-container {
+        max-width: 90% !important;
+    }
+}
+
+.stake-modal {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba($color: #000000, $alpha: 0.4);
+    transition: 0.3s ease-in-out;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__content {
+        width: 500px;
+        margin: 15% auto;
+        background-color: #fff;
+        border-radius: 5px;
+        position: relative;
+        transition: inherit;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-100px);
+    }
+
+    &.active &__content {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    &__header,
+    &__body,
+    &__footer {
+        padding: 8px 20px;
+    }
+
+    &__header,
+    &__footer {
+        text-align: center;
+    }
+
+    &__close {
+        position: absolute;
+        top: 8px;
+        right: 20px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #7f7f7f;
+
+        &:hover {
+            color: #000;
+        }
+    }
+}
+
+
+
+.network-container .thumb{
+    width: 20px !important;
+    height: 20px !important;
+    max-width: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    max-height: 20px !important;
+}
+.network-container .chains{
+    align-items: center;
+    justify-content: center;
+    @apply grid grid-cols-2 gap-2 sm:grid-cols-2
+}
+
+.network-container .chains .chain{
+    display: flex;
+    flex-direction: row;
+    margin: 3px;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2px;
+    height: 45px;
+    border-radius: 10px;
+    cursor: pointer !important;
+    @apply border border-pink-400 w-full
+
+}
+
+.network-container .chains .chain.active {
+
+    @apply bg-pink-700/20
+}
+
+.network-container .chains .chain:hover{
+    @apply bg-pink-700/20
+}
+
+
+.network-container .chains .chain .text{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+.network-container .chains .chain .text > span{
+    font-size: 12px;
+    font-weight: 700;
+    @apply text-pink-600;
+}
+
+
+.network-container .chains .chain .text > small{
+    font-size: 8px !important;
+    color: black;
+    font-weight: 400!important;
+}
+
+@keyframes shine {
+    to {
+        // Move shine from left to right, with offset on the right based on the width of the shine - see background-size
+        background-position: right -40px top 0;
+    }
+}
+
+.skeleton {
+    transform: rotate(40deg);
+    scale: 200%;
+    // The shine that's going to move across the skeleton:
+    background-image:
+            linear-gradient(
+                            90deg,
+                            rgba(#fff, 0),
+                            rgba(#fff, 0.5),
+                            rgba(#fff, 0)
+            );
+    background-size: 70px 100%; // width of the shine
+    background-repeat: no-repeat; // No need to repeat the shine effect
+    background-position: left -70px top 0; // Place shine on the left side, with offset on the left based on the width of the shine - see background-size
+    animation: shine 1.8s ease infinite; // increase animation time to see effect in 'slow-mo'
+}
+
+.blockchains{
+
+    .list{
+        @apply rounded-xl bg-pink-700/20 p-5 w-2/12 sm:w-full min-h-[300px] relative overflow-hidden flex flex-col items-start justify-center
+    }
+
+    @apply flex flex-wrap gap-20 items-start justify-center sm:gap-5
+}

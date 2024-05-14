@@ -1,0 +1,29 @@
+.btn {
+    
+    &.btn-xl {
+        @apply py-5 px-8 mx-2 text-xl rounded-full
+    }
+
+    &.btn-gradient {
+        background: transparent linear-gradient(289deg,  #6A00FF 0%, #28E7F0 100%) 0% 0% no-repeat padding-box;
+    }
+    &.btn-sm {
+        @apply px-3 py-2 mx-2 text-sm
+    }
+
+    &.btn-primary {
+        @apply bg-black text-white hover:bg-black/30 hover:text-white
+    }
+
+    &.btn-secondary {
+        @apply bg-blue-900 text-white hover:bg-blue-800
+    }
+    &.btn-icon {
+
+        @apply rounded-full hover:bg-slate-700 p-2 flex items-center justify-center transition-all duration-500 relative
+    }
+
+    @apply inline-flex flex-row items-center justify-center rounded-3xl leading-6 px-8 py-3 border-2 border-transparent transition-all duration-300
+    tracking-widest
+}
+

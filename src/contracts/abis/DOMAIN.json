@@ -1,0 +1,3122 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "DOMAIN",
+  "sourceName": "hardhat-diamond-abi/HardhatDiamondABI.sol",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "AlreadyExists",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidAction",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidDepositAmount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidManager",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidNameHash",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "NoContract",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotTransitiveOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ReentrancyGuard__ReentrantCall",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TooManySubDomains",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "expires",
+          "type": "uint256"
+        }
+      ],
+      "name": "NameRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "expires",
+          "type": "uint256"
+        }
+      ],
+      "name": "NameRenewed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "label",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "manager",
+          "type": "address"
+        }
+      ],
+      "name": "NewManager",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "label",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "manager",
+          "type": "address"
+        }
+      ],
+      "name": "NewOwner",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "key",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "value",
+          "type": "string"
+        }
+      ],
+      "name": "addAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "key",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "value",
+          "type": "string"
+        }
+      ],
+      "name": "addTextRecord",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "name": "encodeName",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getAvatar",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getContentHash",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "name": "getDomainInfo",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "isValid",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isTLD",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "useDefaultAvatar",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint64",
+              "name": "ttl",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "strategy",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "labelHash",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "createdDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "registrationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "expirationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "length",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "segmentLength",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "xp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "manager",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "resolver",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "avatar",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "contentHash",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes",
+              "name": "encodedName",
+              "type": "bytes"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "color0",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color1",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color2",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color3",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TColorInfo",
+              "name": "colors",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "namehash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "labelHashHex",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "parent",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TAddressEntry[]",
+              "name": "addresses",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordType",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TRecordEntry[]",
+              "name": "records",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "namehash",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct TSubDomainInfo[]",
+              "name": "subdomains",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "xp",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "asset",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "tokenId",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct TExtraAssets[]",
+              "name": "extras",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct TDomainInfo",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTLDS",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "labelhash",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "namehash",
+              "type": "bytes32"
+            }
+          ],
+          "internalType": "struct TLDEntry[]",
+          "name": "",
+          "type": "tuple[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pricePerYear",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "domainContract",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getURL",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "kickNFT",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "manager",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "recordExists",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "node",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "parent",
+              "type": "bytes32"
+            }
+          ],
+          "internalType": "struct RegisterParam",
+          "name": "params",
+          "type": "tuple"
+        }
+      ],
+      "name": "register",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "name": "registerTLD",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "renewDomain",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "resolver",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "_description",
+          "type": "string"
+        }
+      ],
+      "name": "setDescription",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ttl",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "key",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "value",
+          "type": "string"
+        },
+        {
+          "internalType": "bool",
+          "name": "isValid",
+          "type": "bool"
+        }
+      ],
+      "name": "updateAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "avatar",
+          "type": "string"
+        }
+      ],
+      "name": "updateAvatar",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "color0",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "color1",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "color2",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "color3",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct TColorInfo",
+          "name": "_colors",
+          "type": "tuple"
+        }
+      ],
+      "name": "updateColors",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "_hash",
+          "type": "string"
+        }
+      ],
+      "name": "updateContentHash",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "_manager",
+          "type": "address"
+        }
+      ],
+      "name": "updateManager",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "updateOwner",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "key",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "value",
+          "type": "string"
+        },
+        {
+          "internalType": "bool",
+          "name": "isValid",
+          "type": "bool"
+        }
+      ],
+      "name": "updateTextRecord",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "_url",
+          "type": "string"
+        }
+      ],
+      "name": "updateURL",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotTransitiveOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ReentrancyGuard__ReentrantCall",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "addr",
+          "type": "address"
+        }
+      ],
+      "name": "getAddressReverseRecordHash",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getDomainByNodeAndIndex",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "isValid",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isTLD",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "useDefaultAvatar",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint64",
+              "name": "ttl",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "strategy",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "labelHash",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "createdDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "registrationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "expirationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "length",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "segmentLength",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "xp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "manager",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "resolver",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "avatar",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "contentHash",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes",
+              "name": "encodedName",
+              "type": "bytes"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "color0",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color1",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color2",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color3",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TColorInfo",
+              "name": "colors",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "namehash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "labelHashHex",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "parent",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TAddressEntry[]",
+              "name": "addresses",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordType",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TRecordEntry[]",
+              "name": "records",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "namehash",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct TSubDomainInfo[]",
+              "name": "subdomains",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "xp",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "asset",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "tokenId",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct TExtraAssets[]",
+              "name": "extras",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct TDomainInfo",
+          "name": "domainInfo",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "tld",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "getDomainByTLDAndIndex",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "isValid",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isTLD",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "useDefaultAvatar",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint64",
+              "name": "ttl",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "strategy",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "labelHash",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "createdDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "registrationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "expirationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "length",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "segmentLength",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "xp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "manager",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "resolver",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "avatar",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "contentHash",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes",
+              "name": "encodedName",
+              "type": "bytes"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "color0",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color1",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color2",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color3",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TColorInfo",
+              "name": "colors",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "namehash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "labelHashHex",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "parent",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TAddressEntry[]",
+              "name": "addresses",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordType",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TRecordEntry[]",
+              "name": "records",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "namehash",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct TSubDomainInfo[]",
+              "name": "subdomains",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "xp",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "asset",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "tokenId",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct TExtraAssets[]",
+              "name": "extras",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct TDomainInfo",
+          "name": "domainInfo",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getDomainCountByNode",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "tld",
+          "type": "string"
+        }
+      ],
+      "name": "getDomainCountByTLD",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "namehash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getDomainInfoByNameHash",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "isValid",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isTLD",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "useDefaultAvatar",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint64",
+              "name": "ttl",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "strategy",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "labelHash",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "createdDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "registrationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "expirationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "length",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "segmentLength",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "xp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "manager",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "resolver",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "avatar",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "contentHash",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes",
+              "name": "encodedName",
+              "type": "bytes"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "color0",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color1",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color2",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color3",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TColorInfo",
+              "name": "colors",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "namehash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "labelHashHex",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "parent",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TAddressEntry[]",
+              "name": "addresses",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordType",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TRecordEntry[]",
+              "name": "records",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "namehash",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct TSubDomainInfo[]",
+              "name": "subdomains",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "xp",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "asset",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "tokenId",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct TExtraAssets[]",
+              "name": "extras",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct TDomainInfo",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "addr",
+          "type": "address"
+        }
+      ],
+      "name": "isRegistered",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_contract",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getAssetURI",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_contract",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_tokenId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_salePrice",
+          "type": "uint256"
+        }
+      ],
+      "name": "getRoyaltiesInfo",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidNameHash",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotTransitiveOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ReentrancyGuard__ReentrantCall",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "namehash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getDomainAndResolveInfoByNameHash",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "isValid",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isTLD",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "useDefaultAvatar",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint64",
+              "name": "ttl",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "strategy",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "labelHash",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "createdDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "registrationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "expirationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "length",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "segmentLength",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "xp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "manager",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "resolver",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "avatar",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "contentHash",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes",
+              "name": "encodedName",
+              "type": "bytes"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "color0",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color1",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color2",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color3",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TColorInfo",
+              "name": "colors",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "namehash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "labelHashHex",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "parent",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TAddressEntry[]",
+              "name": "addresses",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordType",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TRecordEntry[]",
+              "name": "records",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "namehash",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct TSubDomainInfo[]",
+              "name": "subdomains",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "xp",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "asset",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "tokenId",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct TExtraAssets[]",
+              "name": "extras",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct TDomainInfo",
+          "name": "domainInfo",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "isValid",
+              "type": "bool"
+            },
+            {
+              "internalType": "address",
+              "name": "manager",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "namehash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "reversehash",
+              "type": "bytes32"
+            }
+          ],
+          "internalType": "struct TResolveInfo",
+          "name": "resolveInfo",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "addr",
+          "type": "address"
+        }
+      ],
+      "name": "getDomainByAddress",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "isValid",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isTLD",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "useDefaultAvatar",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint64",
+              "name": "ttl",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "strategy",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "labelHash",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "createdDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "registrationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "expirationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "length",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "segmentLength",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "xp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "manager",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "resolver",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "avatar",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "contentHash",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes",
+              "name": "encodedName",
+              "type": "bytes"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "color0",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color1",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color2",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color3",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TColorInfo",
+              "name": "colors",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "namehash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "labelHashHex",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "parent",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TAddressEntry[]",
+              "name": "addresses",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordType",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TRecordEntry[]",
+              "name": "records",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "namehash",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct TSubDomainInfo[]",
+              "name": "subdomains",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "xp",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "asset",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "tokenId",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct TExtraAssets[]",
+              "name": "extras",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct TDomainInfo",
+          "name": "domain",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "namehash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getDomainByNameHash",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "isValid",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isTLD",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "useDefaultAvatar",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint64",
+              "name": "ttl",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint256",
+              "name": "strategy",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "labelHash",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "createdDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "registrationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "expirationDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "length",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "segmentLength",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "xp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "manager",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "resolver",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "url",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "avatar",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "contentHash",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "bytes",
+              "name": "encodedName",
+              "type": "bytes"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "string",
+                  "name": "color0",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color1",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color2",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "color3",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TColorInfo",
+              "name": "colors",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "namehash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "labelHashHex",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "parent",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "entryValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TAddressEntry[]",
+              "name": "addresses",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "bool",
+                  "name": "isValid",
+                  "type": "bool"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordKey",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordType",
+                  "type": "string"
+                },
+                {
+                  "internalType": "string",
+                  "name": "recordValue",
+                  "type": "string"
+                }
+              ],
+              "internalType": "struct TRecordEntry[]",
+              "name": "records",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "index",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "string",
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "namehash",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct TSubDomainInfo[]",
+              "name": "subdomains",
+              "type": "tuple[]"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "uint256",
+                  "name": "xp",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "address",
+                  "name": "asset",
+                  "type": "address"
+                },
+                {
+                  "internalType": "address",
+                  "name": "tokenId",
+                  "type": "address"
+                }
+              ],
+              "internalType": "struct TExtraAssets[]",
+              "name": "extras",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct TDomainInfo",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "addr",
+          "type": "address"
+        }
+      ],
+      "name": "getNameByAddress",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "node",
+          "type": "bytes32"
+        }
+      ],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "addr",
+          "type": "address"
+        }
+      ],
+      "name": "node",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "addr",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "namehash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "setName",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotTransitiveOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ReentrancyGuard__ReentrantCall",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "getDomainContract",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRoyaltiesReceiver",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "domainContract",
+          "type": "address"
+        }
+      ],
+      "name": "setDomainContract",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "isPaused",
+          "type": "bool"
+        }
+      ],
+      "name": "setPaused",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "pricePerYear",
+          "type": "uint256"
+        }
+      ],
+      "name": "setPricePerYear",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "royaltiesReceiver",
+          "type": "address"
+        }
+      ],
+      "name": "setRoyaltiesReceiver",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotTransitiveOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ReentrancyGuard__ReentrantCall",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdrawCustomETHAmount",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_tokenAddr",
+          "type": "address"
+        }
+      ],
+      "name": "withdrawERC",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdrawETH",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "deployedBytecode": "",
+  "bytecode": "",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

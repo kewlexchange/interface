@@ -1,0 +1,1213 @@
+{
+    "_format": "hh-sol-artifact-1",
+    "contractName": "KEWLPREDICT",
+    "sourceName": "hardhat-diamond-abi/HardhatDiamondABI.sol",
+    "abi": [
+      {
+        "inputs": [],
+        "name": "InsufficientAllowance",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "InsufficientBalance",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "InvalidAction",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "NoContract",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "Ownable__NotOwner",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "Ownable__NotTransitiveOwner",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "Paused",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ReentrancyGuard__ReentrantCall",
+        "type": "error"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "previousOwner",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "matchId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "bettorSide",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "bettorId",
+            "type": "uint256"
+          }
+        ],
+        "name": "claim",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "startDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "endDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "homeName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "homeSlug",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "awayName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "awaySlug",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct CreateMatchParam",
+            "name": "params",
+            "type": "tuple"
+          }
+        ],
+        "name": "create",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "startDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "endDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "homeName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "homeSlug",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "awayName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "awaySlug",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct CreateMatchParam[]",
+            "name": "params",
+            "type": "tuple[]"
+          }
+        ],
+        "name": "createBatch",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "fetch",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "bool",
+                "name": "valid",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "expired",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "verified",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "betCount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "matchId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "startDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "endDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "creator",
+                "type": "address"
+              },
+              {
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "score",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "betCount",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                  },
+                  {
+                    "internalType": "string",
+                    "name": "slug",
+                    "type": "string"
+                  }
+                ],
+                "internalType": "struct Team",
+                "name": "home",
+                "type": "tuple"
+              },
+              {
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "score",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "betCount",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                  },
+                  {
+                    "internalType": "string",
+                    "name": "slug",
+                    "type": "string"
+                  }
+                ],
+                "internalType": "struct Team",
+                "name": "away",
+                "type": "tuple"
+              },
+              {
+                "components": [
+                  {
+                    "internalType": "uint256",
+                    "name": "score",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "uint256",
+                    "name": "betCount",
+                    "type": "uint256"
+                  },
+                  {
+                    "internalType": "string",
+                    "name": "name",
+                    "type": "string"
+                  },
+                  {
+                    "internalType": "string",
+                    "name": "slug",
+                    "type": "string"
+                  }
+                ],
+                "internalType": "struct Team",
+                "name": "draw",
+                "type": "tuple"
+              }
+            ],
+            "internalType": "struct Match[]",
+            "name": "",
+            "type": "tuple[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "matchId",
+            "type": "uint256"
+          }
+        ],
+        "name": "fetchBets",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "bool",
+                "name": "valid",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "claimed",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bettorId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "bettor",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "betAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "rewardAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "claimedAt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "rewardToken",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct Bet[]",
+            "name": "",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "bool",
+                "name": "valid",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "claimed",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bettorId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "bettor",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "betAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "rewardAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "claimedAt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "rewardToken",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct Bet[]",
+            "name": "",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "bool",
+                "name": "valid",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "claimed",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bettorId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "bettor",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "betAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "rewardAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "claimedAt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "rewardToken",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct Bet[]",
+            "name": "",
+            "type": "tuple[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "matchId",
+            "type": "uint256"
+          }
+        ],
+        "name": "fetchMatchDetails",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "matchId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalBet",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalWithdraw",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalHomeBet",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalAwayBet",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalDrawBet",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalLoserWithdraw",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct MatchDetail",
+            "name": "",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "matchId",
+            "type": "uint256"
+          }
+        ],
+        "name": "fetchMatchDetailsWithBets",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "matchId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalBet",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalWithdraw",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalHomeBet",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalAwayBet",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalDrawBet",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "totalLoserWithdraw",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct MatchDetail",
+            "name": "",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "bool",
+                "name": "valid",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "claimed",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bettorId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "bettor",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "betAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "rewardAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "claimedAt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "rewardToken",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct Bet[]",
+            "name": "",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "bool",
+                "name": "valid",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "claimed",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bettorId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "bettor",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "betAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "rewardAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "claimedAt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "rewardToken",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct Bet[]",
+            "name": "",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "bool",
+                "name": "valid",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "claimed",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "bettorId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "bettor",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "betAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "rewardAmount",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "claimedAt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "rewardToken",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct Bet[]",
+            "name": "",
+            "type": "tuple[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "matchId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "side",
+            "type": "uint256"
+          }
+        ],
+        "name": "predict",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "matchId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "home",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "away",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "draw",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "expired",
+            "type": "bool"
+          }
+        ],
+        "name": "setScore",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "matchId",
+            "type": "uint256"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "startDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "endDate",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "homeName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "homeSlug",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "awayName",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "awaySlug",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct CreateMatchParam",
+            "name": "params",
+            "type": "tuple"
+          }
+        ],
+        "name": "update",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "NoContract",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "Ownable__NotOwner",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "Ownable__NotTransitiveOwner",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ReentrancyGuard__ReentrantCall",
+        "type": "error"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "previousOwner",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_fee",
+            "type": "uint256"
+          }
+        ],
+        "name": "setFee",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_feeReceiver",
+            "type": "address"
+          }
+        ],
+        "name": "setFeeReceiver",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_kewl",
+            "type": "address"
+          }
+        ],
+        "name": "setKEWLToken",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_reward",
+            "type": "uint256"
+          }
+        ],
+        "name": "setLoserReward",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bool",
+            "name": "isPaused",
+            "type": "bool"
+          }
+        ],
+        "name": "setPaused",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_rewardToken",
+            "type": "address"
+          }
+        ],
+        "name": "setRewardToken",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_weth9",
+            "type": "address"
+          }
+        ],
+        "name": "setWETH9Token",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "InvalidAction",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "Ownable__NotOwner",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "Ownable__NotTransitiveOwner",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ReentrancyGuard__ReentrantCall",
+        "type": "error"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "previousOwner",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "uint256[]",
+            "name": "",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "bytes",
+            "name": "",
+            "type": "bytes"
+          }
+        ],
+        "name": "onERC1155BatchReceived",
+        "outputs": [
+          {
+            "internalType": "bytes4",
+            "name": "",
+            "type": "bytes4"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes",
+            "name": "",
+            "type": "bytes"
+          }
+        ],
+        "name": "onERC1155Received",
+        "outputs": [
+          {
+            "internalType": "bytes4",
+            "name": "",
+            "type": "bytes4"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes",
+            "name": "",
+            "type": "bytes"
+          }
+        ],
+        "name": "onERC721Received",
+        "outputs": [
+          {
+            "internalType": "bytes4",
+            "name": "",
+            "type": "bytes4"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_tokenAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "_to",
+            "type": "address"
+          }
+        ],
+        "name": "withdrawCustomERC",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "receiver",
+            "type": "address"
+          }
+        ],
+        "name": "withdrawCustomETHAmount",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_tokenAddr",
+            "type": "address"
+          }
+        ],
+        "name": "withdrawERC",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "withdrawETH",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ],
+    "deployedBytecode": "",
+    "bytecode": "",
+    "linkReferences": {},
+    "deployedLinkReferences": {}
+  }
+  

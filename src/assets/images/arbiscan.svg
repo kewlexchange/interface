@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36.077" height="40.517" viewBox="0 0 36.077 40.517">
+  <defs>
+    <filter id="Path_833" x="0" y="2.479" width="35.551" height="38.037" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_207" data-name="Group 207" transform="translate(-247.923 -5455.66)">
+    <rect id="Rectangle_32" data-name="Rectangle 32" width="36" height="37" rx="6" transform="translate(248 5455.66)" fill="#e73697"/>
+    <g id="Symbol_-_Original_7_" transform="translate(253.594 5462.1)">
+      <g id="Group_206" data-name="Group 206">
+        <g transform="matrix(1, 0, 0, 1, -5.67, -6.44)" filter="url(#Path_833)">
+          <path id="Path_833-2" data-name="Path 833" d="M208.587,82.009l1.669-2.832,4.5,7.006,0,1.344-.015-9.252a.7.7,0,0,0-.322-.555l-8.1-4.658a.714.714,0,0,0-.619,0,.7.7,0,0,0-.072.042l-.028.018-7.86,4.555-.031.014a.715.715,0,0,0-.116.068.7.7,0,0,0-.28.442.714.714,0,0,0-.01.082l.012,7.539,4.19-6.494a3.072,3.072,0,0,1,2.744-1.123l1.252.033-7.378,11.832.87.5,7.466-12.321,3.3-.012-7.447,12.632,3.1,1.785.371.213a.712.712,0,0,0,.5.01l8.212-4.759-1.57.91Zm.637,9.17-3.134-4.919L208,83.012l4.116,6.488Z" transform="translate(-188.26 -64.46)" fill="#fff" stroke="#fff" stroke-width="0.1"/>
+        </g>
+        <path id="Path_834" data-name="Path 834" d="M321.883,218.32l3.134,4.919,2.9-1.678-4.116-6.488Z" transform="translate(-309.719 -202.958)" fill="#e73697"/>
+        <path id="Path_835" data-name="Path 835" d="M363.472,169.034l0-1.344-4.5-7.006-1.669,2.832,4.342,7.023,1.57-.91a.7.7,0,0,0,.257-.507Z" transform="translate(-342.641 -152.405)" fill="#e73697"/>
+        <path id="Path_836" data-name="Path 836" d="M177.491,157.517l2.217,1.277,7.378-11.832-1.252-.033a3.072,3.072,0,0,0-2.744,1.123l-4.19,6.494-1.409,2.166v.8Z" transform="translate(-175.509 -139.62)" fill="#e73697"/>
+        <path id="Path_837" data-name="Path 837" d="M232.032,147.406l-3.3.012-7.466,12.321,2.61,1.5.71-1.2Z" transform="translate(-216.197 -140.063)" fill="#e73697"/>
+      </g>
+    </g>
+  </g>
+</svg>

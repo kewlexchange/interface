@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+<g id="Denmark_1_">
+	<circle id="circle50_46_" fill="#BD042C" cx="25" cy="25" r="24.494"/>
+	<path fill="#FFFFFF" d="M49.188,21.326h-26.52V0.623c-2.59,0.245-5.059,0.89-7.349,1.876v18.825H0.812
+		c-0.183,1.202-0.307,2.422-0.307,3.674c0,1.253,0.124,2.473,0.307,3.674H15.32v18.826c2.29,0.986,4.759,1.633,7.349,1.875V28.675
+		h26.521c0.183-1.202,0.307-2.423,0.307-3.674C49.495,23.748,49.371,22.528,49.188,21.326z"/>
+</g>
+<g>
+	<g>
+		<g>
+			<g>
+				<defs>
+					<circle id="SVGID_1_" cx="25" cy="25" r="24.5"/>
+				</defs>
+				<clipPath id="SVGID_2_">
+					<use xlink:href="#SVGID_1_"  overflow="visible"/>
+				</clipPath>
+				
+					<radialGradient id="circle50_2_" cx="750.7598" cy="1657.9609" r="27.4688" gradientTransform="matrix(1 0 0 1 -725.7598 -1632.9609)" gradientUnits="userSpaceOnUse">
+					<stop  offset="0" style="stop-color:#000000;stop-opacity:0"/>
+					<stop  offset="0.7576" style="stop-color:#000000;stop-opacity:0"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</radialGradient>
+				
+					<circle id="circle50_1_" opacity="0.4" clip-path="url(#SVGID_2_)" fill="url(#circle50_2_)" enable-background="new    " cx="25" cy="25" r="27.469"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<g>
+				<defs>
+					<circle id="SVGID_3_" cx="25" cy="25" r="24.5"/>
+				</defs>
+				<clipPath id="SVGID_4_">
+					<use xlink:href="#SVGID_3_"  overflow="visible"/>
+				</clipPath>
+				
+					<radialGradient id="circle50_3_" cx="750.7598" cy="1657.9609" r="31.6777" gradientTransform="matrix(1 0 0 1 -725.7598 -1632.9609)" gradientUnits="userSpaceOnUse">
+					<stop  offset="0" style="stop-color:#000000;stop-opacity:0"/>
+					<stop  offset="0.5758" style="stop-color:#000000;stop-opacity:0"/>
+					<stop  offset="1" style="stop-color:#000000"/>
+				</radialGradient>
+				
+					<circle id="circle50_7_" opacity="0.6" clip-path="url(#SVGID_4_)" fill="url(#circle50_3_)" enable-background="new    " cx="25" cy="25" r="31.678"/>
+			</g>
+		</g>
+	</g>
+</g>
+<linearGradient id="SVGID_5_" gradientUnits="userSpaceOnUse" x1="750.4824" y1="1663.666" x2="750.4824" y2="1635.6641" gradientTransform="matrix(1 0 0 1 -725.7598 -1632.9609)">
+	<stop  offset="0.0727" style="stop-color:#FFFFFF;stop-opacity:0.05"/>
+	<stop  offset="0.897" style="stop-color:#FFFFFF;stop-opacity:0.75"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.75"/>
+</linearGradient>
+<ellipse fill="url(#SVGID_5_)" cx="24.723" cy="16.704" rx="17.306" ry="14.001"/>
+</svg>

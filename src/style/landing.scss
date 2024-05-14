@@ -1,0 +1,179 @@
+.landing-wrapper {
+    .circle-container {
+        $particleWidth: 10px;
+        $particleNum: 100;
+        $particleColor: hsl(180, 100%, 80%);
+
+        position: absolute;
+        transform: translateY(-10vh);
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+
+        .circle {
+       
+            opacity: .2;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            background-image: radial-gradient(hsl(180, 100%, 80%),
+                    hsl(180, 100%, 80%) 10%,
+                    hsla(180, 100%, 80%, 0) 56%);
+
+            animation: fadein-frames 200ms infinite, scale-frames 2s infinite;
+
+            @keyframes fade-frames {
+                0% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0.7;
+                }
+
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            @keyframes scale-frames {
+                0% {
+                    transform: scale3d(0.4, 0.4, 1);
+                }
+
+                50% {
+                    transform: scale3d(2.2, 2.2, 1);
+                }
+
+                100% {
+                    transform: scale3d(0.4, 0.4, 1);
+                }
+            }
+        }
+
+        @for $i from 1 through $particleNum {
+            &:nth-child(#{$i}) {
+                $circleSize: random($particleWidth);
+                width: $circleSize + px;
+                height: $circleSize + px;
+
+                $startPositionY: random(10)+100;
+                $framesName: "move-frames-"+$i;
+                $moveDuration: 7000+random(4000)+ms;
+
+                animation-name: #{$framesName};
+                animation-duration: $moveDuration;
+                animation-delay: random(11000) + ms;
+
+                @keyframes #{$framesName} {
+                    from {
+                        transform: translate3d(#{random(100) + vw},
+                            #{$startPositionY + vh},
+                            0);
+                    }
+
+                    to {
+                        transform: translate3d(#{random(100) + vw},
+                            #{- $startPositionY - random(30) + vh},
+                            0);
+                    }
+                }
+
+                .circle {
+                    animation-delay: random(4000) + ms;
+                }
+            }
+        }
+    }
+
+    .hero {
+       
+        @apply -z-10 w-screen fixed inset-0  text-white overflow-hidden
+    }
+
+    .bg-balls{
+
+        @keyframes blurAnim {
+            0% {
+                opacity: 1;
+                filter: blur(20px);
+            }
+
+            50% {
+                opacity: 0.2;
+                filter: blur(10px);
+            }
+
+            100% {
+                opacity: 1;
+                filter: blur(20px);
+            }
+        }
+
+
+        @keyframes spinAnim {
+            0% {
+               transform: rotate(0deg);
+            }
+
+           
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        
+
+        img{
+            cursor:default !important;
+            &:nth-child(1){
+                top:calc(50% - 100px);
+                @apply w-[200px] left-[10%]
+            }
+            &:nth-child(2){
+                @apply w-[180px] right-[10%] top-[20%]
+            }
+            &:nth-child(3){
+                left:calc(50% - 75px);
+                @apply w-[150px] top-[2%]
+            }
+            &:nth-child(4){
+                left:calc(60% - 130px);
+                @apply w-[260px] bottom-[10%]
+            }
+            &:nth-child(5){
+                @apply w-[120px] left-[5%] top-[20%]
+            }
+
+            &:nth-child(6){
+                animation: spinAnim 3s ease-in-out 0s infinite normal forwards;
+                @apply w-[120px] left-[30%] top-[20%] 
+            }
+
+            &:nth-child(7){
+                animation: spinAnim 3s ease-in-out 0s infinite normal forwards;
+
+                @apply w-[160px] left-[5%] bottom-[20%] animate-bounce
+            }
+
+            &:nth-child(8){
+                animation: spinAnim 3s ease-in-out 0s infinite normal forwards;
+                @apply w-[260px] right-[5%] top-[70%] animate-bounce delay-500
+            }
+
+            &:nth-child(9){
+                animation: spinAnim 3s ease-in-out 0s infinite normal forwards;
+                @apply w-[130px] left-[60%] top-[10%]
+            }
+
+            animation: blurAnim 5s ease 0s infinite normal forwards;
+            @apply absolute w-[200px] cursor-pointer hover:opacity-100  opacity-20 hover:transition hover:fade-in hover:duration-500 hover:z-[999999999]
+        }
+        @apply w-full h-screen relative
+
+        
+    }
+    
+    @apply  fixed inset-0 overflow-y-hidden overflow-x-hidden
+}
