@@ -1,7 +1,7 @@
 import { Slider, Image, Badge, Card, Tabs, Tab, Input, CardBody, CardFooter, Button, TableRow, TableColumn, TableHeader, Spinner, TableCell, TableBody, Table, User } from "@nextui-org/react";
 import IPage from "../../interfaces/page";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { isAddress, parseEther } from "ethers/lib/utils";
+import { getAddress, isAddress, parseEther } from "ethers/lib/utils";
 import { useERC20Contract, useKEWLListingContract } from "../../hooks/useContract";
 import { ChainId } from "../../constants/chains";
 import { useWeb3React } from "@web3-react/core";
@@ -169,6 +169,12 @@ const ListingPage: React.FunctionComponent<IPage> = props => {
         return checkAsset?.logoURI;
     }
     
+    const isCancelled = (address: any) : boolean =>{
+        if(getAddress("0x13D9E110e0c13016CAF9982CcB79A70aC39C1374") == getAddress(address) ){
+            return true 
+        }
+        return false
+    }
 
     return (
 
@@ -238,9 +244,11 @@ const ListingPage: React.FunctionComponent<IPage> = props => {
                                                         </div>
                                                         :
 
+                                                       
+
                                                         <div className='w-full p-2 rounded-lg bg-danger-500/10 text-danger-500 flex flex-row gap-2 p-2 items-center justify-start'>
                                                             <Spinner size='sm' color="danger" />
-                                                            <span>Processing...</span>
+                                                            <span>{ isCancelled(collection.assetInfo?.token) ? "Cancelled": "Processing..."}</span>
                                                         </div>}</TableCell>
 
                                                 </TableRow>
