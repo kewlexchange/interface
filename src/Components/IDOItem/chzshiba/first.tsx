@@ -310,8 +310,8 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
                                             </div>
                                         </div>
 
-                                        <div className={"bg-warning-200/30 rounded-xl p-2"}>
-                                            <span className={"text-warning-500 flex flex-row items-center justify-center gap-2"}>
+                                        <div className={"bg-danger-200/30 rounded-xl p-2"}>
+                                            <span className={"text-danger-500 flex flex-row items-center justify-center gap-2"}>
                                                 <svg
                                                     className="animate-spin h-5 w-5 text-current"
                                                     fill="none"
@@ -332,7 +332,7 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
                                                         fill="currentColor"
                                                     />
                                                 </svg>
-                                                {"UPCOMING"}
+                                                {"CANCELLED"}
                                             </span>
                                         </div>
 
