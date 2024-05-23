@@ -304,8 +304,12 @@ const _SWAP_TAB = () => {
 
         const handleClaim = async (bettorInfo: any, match: any, side: any) => {
 
+
+            
             const isEther = baseAsset.address === ETHER_ADDRESS
             const token = isEther ? ethers.constants.AddressZero : baseAsset.address
+           // const rewardInfo = await PREDICTIONS.rewardInfo(token, matchEntry.matchId, side, bettorInfo.bettorId);
+
             toggleLoading();
             await PREDICTIONS.claim(token, matchEntry.matchId, side, bettorInfo.bettorId).then(async (tx) => {
                 await tx.wait();
