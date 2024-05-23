@@ -300,9 +300,9 @@ const _SWAP_TAB = () => {
         toggleSelectToken();
     }
 
-    const PREDICTION_SECTION = (data: any, side:any,match:any) => {
+    const PREDICTION_SECTION = (data: any, side: any, match: any) => {
 
-        const handleClaim = async (bettorInfo:any,match:any,side:any) => {
+        const handleClaim = async (bettorInfo: any, match: any, side: any) => {
 
             const isEther = baseAsset.address === ETHER_ADDRESS
             const token = isEther ? ethers.constants.AddressZero : baseAsset.address
@@ -322,8 +322,8 @@ const _SWAP_TAB = () => {
         }
         useEffect(() => {
 
-            console.log("matchInfo:",data)
-            console.log("side",data.side)
+            console.log("matchInfo:", data)
+            console.log("side", data.side)
         }, [data])
 
         return (
@@ -351,8 +351,8 @@ const _SWAP_TAB = () => {
                                 <TableCell>
                                     {
                                         bettorInfo && !bettorInfo.claimed ? <>
-                                            <Button onClick={()=>{
-                                                handleClaim(bettorInfo,data.match,data.side)
+                                            <Button onClick={() => {
+                                                handleClaim(bettorInfo, data.match, data.side)
                                             }} size='sm' color='danger'>Claim</Button>
                                         </> : <>
                                             Claimed
@@ -514,7 +514,7 @@ const _SWAP_TAB = () => {
 
                         <Card shadow='sm'>
                             <CardHeader>
-                            <span className={title({ size: "xs", color: "red" })}>Make Your Prediction</span>
+                                <span className={title({ size: "xs", color: "red" })}>Make Your Prediction</span>
 
                             </CardHeader>
                             <CardBody className='flex flex-col gap-2'>
@@ -587,104 +587,104 @@ const _SWAP_TAB = () => {
 
 
                         <div className='w-full'>
-                    <Card shadow='sm'>
-                        <CardHeader>
-                            <span className={title({ size: "xs", color: "red" })}>Predictions</span>
-                        </CardHeader>
-                        <CardBody>
+                            <Card shadow='sm'>
+                                <CardHeader>
+                                    <span className={title({ size: "xs", color: "red" })}>Predictions</span>
+                                </CardHeader>
+                                <CardBody>
 
-                            {
-                                baseAsset && matchEntry && matchDetails &&
+                                    {
+                                        baseAsset && matchEntry && matchDetails &&
 
-                                <Tabs aria-label="Options">
-                                    <Tab key="stats" title={"Statistics"}>
+                                        <Tabs aria-label="Options">
+                                            <Tab key="stats" title={"Statistics"}>
 
-                                        <Table removeWrapper>
-                                            <TableHeader>
-                                                <TableColumn>TEAM</TableColumn>
-                                                <TableColumn>DEPOSIT</TableColumn>
-                                                <TableColumn>WHALE</TableColumn>
-                                                <TableColumn>SCORE</TableColumn>
-                                                <TableColumn>TOTAL</TableColumn>
-                                            </TableHeader>
-                                            <TableBody>
-                                                <TableRow key="home">
-                                                    <TableCell>{matchEntry.home.name}</TableCell>
-                                                    <TableCell>{formatUnits(matchDetails.DETAILS.totalHomeBet, baseAsset.decimals)} {baseAsset.symbol}</TableCell>
-                                                    <TableCell>{matchDetails.HOME.length}</TableCell>
-                                                    <TableCell>
-                                                        {
-                                                            matchEntry.expired ? <>
-                                                                {BigNumber.from(matchEntry.home.score).toNumber()}
-                                                            </> :
-                                                                <Spinner size='sm' color="danger" />
-                                                        }
-                                                    </TableCell>
-                                                    <TableCell>{BigNumber.from(matchEntry.home.betCount).toNumber()}</TableCell>
-                                                </TableRow>
-                                                <TableRow key="away">
-                                                    <TableCell>{matchEntry.away.name}</TableCell>
-                                                    <TableCell>{formatUnits(matchDetails.DETAILS.totalAwayBet, baseAsset.decimals)} {baseAsset.symbol}</TableCell>
-                                                    <TableCell>{matchDetails.AWAY.length}</TableCell>
-                                                    <TableCell>
-                                                        {
-                                                            matchEntry.expired ? <>
-                                                                {BigNumber.from(matchEntry.away.score).toNumber()}
-                                                            </> :
-                                                                <Spinner size='sm' color="danger" />
-                                                        }
+                                                <Table removeWrapper>
+                                                    <TableHeader>
+                                                        <TableColumn>TEAM</TableColumn>
+                                                        <TableColumn>DEPOSIT</TableColumn>
+                                                        <TableColumn>WHALE</TableColumn>
+                                                        <TableColumn>SCORE</TableColumn>
+                                                        <TableColumn>TOTAL</TableColumn>
+                                                    </TableHeader>
+                                                    <TableBody>
+                                                        <TableRow key="home">
+                                                            <TableCell>{matchEntry.home.name}</TableCell>
+                                                            <TableCell>{formatUnits(matchDetails.DETAILS.totalHomeBet, baseAsset.decimals)} {baseAsset.symbol}</TableCell>
+                                                            <TableCell>{matchDetails.HOME.length}</TableCell>
+                                                            <TableCell>
+                                                                {
+                                                                    matchEntry.expired ? <>
+                                                                        {BigNumber.from(matchEntry.home.score).toNumber()}
+                                                                    </> :
+                                                                        <Spinner size='sm' color="danger" />
+                                                                }
+                                                            </TableCell>
+                                                            <TableCell>{BigNumber.from(matchEntry.home.betCount).toNumber()}</TableCell>
+                                                        </TableRow>
+                                                        <TableRow key="away">
+                                                            <TableCell>{matchEntry.away.name}</TableCell>
+                                                            <TableCell>{formatUnits(matchDetails.DETAILS.totalAwayBet, baseAsset.decimals)} {baseAsset.symbol}</TableCell>
+                                                            <TableCell>{matchDetails.AWAY.length}</TableCell>
+                                                            <TableCell>
+                                                                {
+                                                                    matchEntry.expired ? <>
+                                                                        {BigNumber.from(matchEntry.away.score).toNumber()}
+                                                                    </> :
+                                                                        <Spinner size='sm' color="danger" />
+                                                                }
 
-                                                    </TableCell>
-                                                    <TableCell>{BigNumber.from(matchEntry.away.betCount).toNumber()}</TableCell>
-                                                </TableRow>
-                                                <TableRow key="draw">
-                                                    <TableCell>{matchEntry.draw.name}</TableCell>
-                                                    <TableCell>{formatUnits(matchDetails.DETAILS.totalDrawBet, baseAsset.decimals)} {baseAsset.symbol}</TableCell>
-                                                    <TableCell>{matchDetails.DRAW.length}</TableCell>
-                                                    <TableCell>
-                                                        {
-                                                            matchEntry.expired ? <>
+                                                            </TableCell>
+                                                            <TableCell>{BigNumber.from(matchEntry.away.betCount).toNumber()}</TableCell>
+                                                        </TableRow>
+                                                        <TableRow key="draw">
+                                                            <TableCell>{matchEntry.draw.name}</TableCell>
+                                                            <TableCell>{formatUnits(matchDetails.DETAILS.totalDrawBet, baseAsset.decimals)} {baseAsset.symbol}</TableCell>
+                                                            <TableCell>{matchDetails.DRAW.length}</TableCell>
+                                                            <TableCell>
+                                                                {
+                                                                    matchEntry.expired ? <>
 
-                                                            </> :
-                                                                <Spinner size='sm' color="danger" />
-                                                        }
-                                                    </TableCell>
-                                                    <TableCell>{BigNumber.from(matchEntry.draw.betCount).toNumber()}</TableCell>
-                                                </TableRow>
-                                                <TableRow key="total">
-                                                    <TableCell>TOTAL</TableCell>
-                                                    <TableCell>{formatUnits(matchDetails.DETAILS.totalBet, baseAsset.decimals)} {baseAsset.symbol}</TableCell>
-                                                    <TableCell>{matchDetails.HOME.length + matchDetails.DRAW.length + matchDetails.AWAY.length}</TableCell>
-                                                    <TableCell>{""}</TableCell>
-                                                    <TableCell>{BigNumber.from(matchEntry.home.betCount.add(matchEntry.away.betCount).add(matchEntry.draw.betCount)).toNumber()}</TableCell>
-                                                </TableRow>
-                                            </TableBody>
+                                                                    </> :
+                                                                        <Spinner size='sm' color="danger" />
+                                                                }
+                                                            </TableCell>
+                                                            <TableCell>{BigNumber.from(matchEntry.draw.betCount).toNumber()}</TableCell>
+                                                        </TableRow>
+                                                        <TableRow key="total">
+                                                            <TableCell>TOTAL</TableCell>
+                                                            <TableCell>{formatUnits(matchDetails.DETAILS.totalBet, baseAsset.decimals)} {baseAsset.symbol}</TableCell>
+                                                            <TableCell>{matchDetails.HOME.length + matchDetails.DRAW.length + matchDetails.AWAY.length}</TableCell>
+                                                            <TableCell>{""}</TableCell>
+                                                            <TableCell>{BigNumber.from(matchEntry.home.betCount.add(matchEntry.away.betCount).add(matchEntry.draw.betCount)).toNumber()}</TableCell>
+                                                        </TableRow>
+                                                    </TableBody>
 
-                                        </Table>
+                                                </Table>
 
-                                    </Tab>
-                                    <Tab key="photos" title={matchEntry.home.name}>
-                                        <PREDICTION_SECTION data={matchDetails.HOME} side={0} match={matchEntry} />
-                                    </Tab>
-                                    <Tab key="music" title={matchEntry.away.name}>
-                                        <PREDICTION_SECTION data={matchDetails.AWAY} side={1} match={matchEntry}/>
-                                    </Tab>
-                                    <Tab key="videos" title={matchEntry.draw.name}>
-                                        <PREDICTION_SECTION data={matchDetails.DRAW} side={2} match={matchEntry}/>
-                                    </Tab>
-                                </Tabs>
-                            }
-                        </CardBody>
+                                            </Tab>
+                                            <Tab key="homeMatchEntries" title={matchEntry.home.name}>
+                                                <PREDICTION_SECTION data={matchDetails.HOME} side={0} match={matchEntry} />
+                                            </Tab>
+                                            <Tab key="awayMatchEntries" title={matchEntry.away.name}>
+                                                <PREDICTION_SECTION data={matchDetails.AWAY} side={1} match={matchEntry} />
+                                            </Tab>
+                                            <Tab key="drawMatchEntries" title={matchEntry.draw.name}>
+                                                <PREDICTION_SECTION data={matchDetails.DRAW} side={2} match={matchEntry} />
+                                            </Tab>
+                                        </Tabs>
+                                    }
+                                </CardBody>
 
-                    </Card>
-                </div>
+                            </Card>
+                        </div>
 
                     </div>
                 </div>
 
 
 
-        
+
             </div>
 
         </>
