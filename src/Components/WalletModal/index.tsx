@@ -29,7 +29,7 @@ export default function WalletModal() {
             <>
               <div className={"w-full flex flex-col gap-2 mb-2"}>
                 <span className={"text-2xl"}>Connect</span>
-                <span className={"text-sm"}>Connect wallet in one click to start using IMON</span>
+                <span className={"text-sm"}>Connect wallet in one click to start using KEWL</span>
               </div>
               <div className={"w-full grid sm:grid-cols-2 grid-cols-1 gap-4 rounded-lg border border-default p-4 mb-2"}>
                 {connections

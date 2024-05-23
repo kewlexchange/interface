@@ -300,11 +300,30 @@ const _SWAP_TAB = () => {
         toggleSelectToken();
     }
 
-    const PREDICTION_SECTION = (data: any) => {
+    const PREDICTION_SECTION = (data: any, side:any,match:any) => {
 
+        const handleClaim = async (bettorInfo:any,match:any,side:any) => {
+
+            const isEther = baseAsset.address === ETHER_ADDRESS
+            const token = isEther ? ethers.constants.AddressZero : baseAsset.address
+            toggleLoading();
+            await PREDICTIONS.claim(token, matchEntry.matchId, side, bettorInfo.bettorId).then(async (tx) => {
+                await tx.wait();
+                const summary = `Trading : ${tx.hash}`
+                setTransaction({ hash: tx.hash, summary: summary, error: null });
+                toggleTransactionSuccess();
+            }).catch((error: Error) => {
+                setTransaction({ hash: '', summary: '', error: error });
+                toggleError();
+            }).finally(async () => {
+                toggleLoading();
+            });
+
+        }
         useEffect(() => {
 
-            console.log(data)
+            console.log("matchInfo:",data)
+            console.log("side",data.side)
         }, [data])
 
         return (
@@ -320,7 +339,7 @@ const _SWAP_TAB = () => {
                         loadingContent={<Spinner color="danger" />}>
 
                         {(bettorInfo: any) => (
-                            <TableRow key={bettorInfo.bettor}>
+                            <TableRow key={bettorInfo.bettorId}>
 
                                 <TableCell>
                                     <span className='text-xs'>{bettorInfo.bettor}</span>
@@ -332,7 +351,9 @@ const _SWAP_TAB = () => {
                                 <TableCell>
                                     {
                                         bettorInfo && !bettorInfo.claimed ? <>
-                                            <Button size='sm' color='danger'>Claim</Button>
+                                            <Button onClick={()=>{
+                                                handleClaim(bettorInfo,data.match,data.side)
+                                            }} size='sm' color='danger'>Claim</Button>
                                         </> : <>
                                             Claimed
                                         </>
@@ -643,13 +664,13 @@ const _SWAP_TAB = () => {
 
                                     </Tab>
                                     <Tab key="photos" title={matchEntry.home.name}>
-                                        <PREDICTION_SECTION data={matchDetails.HOME} />
+                                        <PREDICTION_SECTION data={matchDetails.HOME} side={0} match={matchEntry} />
                                     </Tab>
                                     <Tab key="music" title={matchEntry.away.name}>
-                                        <PREDICTION_SECTION data={matchDetails.AWAY} />
+                                        <PREDICTION_SECTION data={matchDetails.AWAY} side={1} match={matchEntry}/>
                                     </Tab>
                                     <Tab key="videos" title={matchEntry.draw.name}>
-                                        <PREDICTION_SECTION data={matchDetails.DRAW} />
+                                        <PREDICTION_SECTION data={matchDetails.DRAW} side={2} match={matchEntry}/>
                                     </Tab>
                                 </Tabs>
                             }

@@ -74,7 +74,7 @@ const injectedCoin98Connection: Connection = {
   // If on non-injected, non-mobile browser, prompt user to install Metamask
   overrideActivate: () => {
     if (getShouldAdvertiseMetaMask()) {
-      window.open('https://wallet.coin98.com', '')
+      window.open('https://coin98.com/wallet', '')
       return true
     }
     return false
