@@ -175,12 +175,23 @@ const _SWAP_TAB = () => {
         setAllExchangePairs(_allExchangePairs)
 
         const _matchesList = await PREDICTIONS.fetch();
-        setAllMatches(_matchesList);
+        const _newMatches = _matchesList.slice().sort((a, b) => {
+            if (a.expired !== b.expired) {
+                // Expire olanları en altta sırala
+                return a.expired ? 1 : -1;
+            } else {
+                // startDate'ye göre artan şekilde sırala
+                return a.startDate - b.startDate;
+            }
+        });
+
+        console.log(_newMatches)
+        setAllMatches(_newMatches);
 
         if (matchEntry) {
             setSelectedMatch(_matchesList[matchEntry.matchId])
         } else {
-            setSelectedMatch(_matchesList[0])
+            setSelectedMatch(_newMatches[0])
         }
 
 
@@ -427,7 +438,7 @@ const _SWAP_TAB = () => {
                                 <CardBody>
 
                                     {
-                                        matchEntry && <Card isDisabled={matchEntry.expired} fullWidth isHoverable isPressable={true} onClick={() => {
+                                        matchEntry && <Card fullWidth isHoverable isPressable={true} onClick={() => {
                                             toggleExpand()
                                         }}>
                                             <CardHeader>
@@ -470,7 +481,7 @@ const _SWAP_TAB = () => {
                                                     return <Card onClick={() => {
                                                         setSelectedMatch(matchEntry)
                                                         toggleExpand();
-                                                    }} isDisabled={matchEntry.expired} isHoverable fullWidth isPressable={!matchEntry.expired}>
+                                                    }} isHoverable fullWidth isPressable={true}>
                                                         <CardHeader>
 
                                                             <span className={title({ size: "xxs", color: "cyan" })}>{unixTimeToDateTime(BigNumber.from(matchEntry.startDate).toNumber())}</span>

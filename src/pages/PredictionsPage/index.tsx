@@ -20,6 +20,7 @@ import { formatEther, parseEther } from "@ethersproject/units";
 import { ChainId } from "../../constants/chains";
 import useModal, { ModalError, ModalLoading, ModalSuccessTransaction } from "../../hooks/useModals";
 import { BET_TAB } from "../../Components/PredictionTabs/BetTab";
+import { BET_CREATE_TAB } from "../../Components/PredictionTabs/CreateTab";
 
 
 const PredictionsPage: React.FunctionComponent<IPage> = props => {
@@ -94,11 +95,13 @@ const PredictionsPage: React.FunctionComponent<IPage> = props => {
                         <CardBody>
                         <div className="w-full max-w-full">
                             <Tabs color={"danger"} aria-label="Swap Tabs">
-                                <Tab key="swap" title="Match Predictions">
+                                <Tab key="predictions" title="Match Predictions">
                                     <BET_TAB />
                                 </Tab>
-                            
-                                
+                                <Tab key="create" title="Create Match">
+                                    <BET_CREATE_TAB/>
+                                </Tab>
+                        
                             </Tabs>
                         </div>
                         </CardBody>
