@@ -9,12 +9,10 @@ import { formatEther, formatUnits, parseEther } from '@ethersproject/units';
 import { ChainId } from '../../constants/chains';
 import { useDomainContract, useCHZINULaunchpadContract, useTBTLaunchpadSecondContract, useCHILIZPEPELaunchpadSecondContract, useAngryHoopLaunchpadSecondContract } from '../../hooks/useContract';
 import useModal, { ModalInfo, ModalLoading, ModalSuccessTransaction, ModalSelectToken } from '../../hooks/useModals';
-import CHZINU_LOGO from "./tbt.png"
+import CHZINU_LOGO from "./mrl.jpg"
 import { NavLink } from 'react-router-dom';
-import { TBTROUND1IDO } from './tbt/round1';
-import { TBTROUND2IDO } from './tbt/round2';
-import { TBTROUND3IDO } from './tbt/round3';
-const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
+import { MRLROUND1IDO } from './mrl/round1';
+ const _MRLIDO = (props: { IDOParams, name }) => {
     const { connector, account, provider, chainId } = useWeb3React()
 
     const [depositAmount, setDepositAmount] = useState("500")
@@ -34,7 +32,7 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
     const { state: isErrorShowing, toggle: toggleError } = useModal()
     const [transaction, setTransaction] = useState({ hash: '', summary: '', error: null })
     const [acceptAggrement, setAcceptAggrement] = useState(false)
-    const [selected, setSelected] = useState("round3");
+    const [selected, setSelected] = useState("round1");
 
     const [hardCap, setHardCap] = useState(parseEther("183100"))
 
@@ -300,18 +298,8 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
                             <CardBody>
                             <Tabs onSelectionChange={setSelected}  selectedKey={selected} aria-label="Options">
                                 <Tab key="round1" title="Phase 1">
-                                <Card shadow='sm'>
-                                    <TBTROUND1IDO />
-                                    </Card>
-                                </Tab>
-                                <Tab key="round2" title="Phase 2">
                                     <Card shadow='sm'>
-                                        <TBTROUND2IDO />
-                                    </Card>
-                                </Tab>
-                                <Tab key="round3" title="Phase 3">
-                                <Card shadow='sm'>
-                                    <TBTROUND3IDO />
+                                        <MRLROUND1IDO />
                                     </Card>
                                 </Tab>
                             </Tabs>
@@ -334,4 +322,4 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
         </>
     );
 }
-export const TBTTokenIDO = memo(_ANGRYHOOPIDO)
+export const MRLTokenIDO = memo(_MRLIDO)

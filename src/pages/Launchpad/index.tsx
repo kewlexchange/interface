@@ -21,6 +21,7 @@ import { CHILIZPEPESECONDIDO } from "../../Components/IDOItem/chilizpepesecond";
 import { ANGRYHOOPIDO } from "../../Components/IDOItem/angryhoop";
 import { TBTTokenIDO } from "../../Components/IDOItem/tbttoken";
 import { ChilizShibaIDO } from "../../Components/IDOItem/chilizshiba";
+import { MRLTokenIDO } from "../../Components/IDOItem/mrl";
 
 const LaunchpadPage: React.FunctionComponent<IPage> = props => {
     const { connector, account, provider, chainId } = useWeb3React()
@@ -91,8 +92,16 @@ const LaunchpadPage: React.FunctionComponent<IPage> = props => {
                                 location.pathname === "/launchpad/chilizshiba" &&
                                 <ChilizShibaIDO name={"Chiliz SHIBA"} />
                             }
+                             {
+                                location.pathname === "/launchpad/mrl" &&
+                                <MRLTokenIDO name={"MarloVerse"} />
+                            }
                             {
-                                (location.pathname === "/launchpad" || location.pathname === "/launchpad/") && <TBTTokenIDO name={"TBT IDO"} />
+                                location.pathname === "/launchpad/tbt" &&
+                                <TBTTokenIDO name={"TBT IDO"} />
+                            }
+                            {
+                                (location.pathname === "/launchpad" || location.pathname === "/launchpad/") &&  <MRLTokenIDO name={"MarloVerse"} />
 
                             }
                         </CardBody>

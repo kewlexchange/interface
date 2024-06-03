@@ -283,6 +283,12 @@ export function useChilizShibaLaunchpadThirdContract(chainId?:any, withSignerIfP
     return useContract(contracts?.CHILIZ_SHIBA, IMON_LAUNCHPAD_ABI.abi, withSignerIfPossible)
 }
 
+export function useMRLLaunchpadContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
+    let contracts = useFindDiamondByChainId(chainId);
+    return useContract(contracts?.MRL_LAUNCH, IMON_LAUNCHPAD_ABI.abi, withSignerIfPossible)
+}
+
+
 export function useKEWLVestingContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
     let contracts = useFindDiamondByChainId(chainId);
     return useContract(contracts?.VESTING, KEWLVESTING_ABI.abi, withSignerIfPossible)
