@@ -427,7 +427,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
 
 
                             </Tab>
-                            <Tab isDisabled={isSoldOut} key="contribute" title="Invest">
+                            <Tab key="contribute" title="Invest">
                                 <Card fullWidth shadow='none' className='w-full flex flex-col gap-2'>
                                     <CardHeader className="flex justify-between items-start">
                                         <div className="flex gap-5">
