@@ -397,6 +397,10 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                             <span className={"font-bold text-warning-600"}>-</span>
                                         </div>
                                         <div className=' w-full flex flex-row items-center justify-between'>
+                                            <span className={"font-normal"}>KWL Token Holding Obligation</span>
+                                            <span className={"font-bold text-warning-600"}>20 KWL</span>
+                                        </div>
+                                        <div className=' w-full flex flex-row items-center justify-between'>
                                             <span className={"font-normal"}>Vesting Info</span>
                                             <div className='grid grid-rows-3'>
                                             <span className={"font-bold text-warning-600"}>%10 Unlocked</span>
