@@ -370,7 +370,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
 
                                         <div className='w-full flex flex-row items-center justify-between'>
                                             <span className={"font-normal"}>Soft Capitalization</span>
-                                            <span className={"font-bold text-warning-600"}>70.000 CHZ</span>
+                                            <span className={"font-bold text-warning-600"}>17.000 CHZ</span>
                                         </div>
                                         <div className='w-full flex flex-row items-center justify-between'>
                                             <span className={"font-normal"}>Hard Capitalization</span>
