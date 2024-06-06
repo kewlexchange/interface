@@ -33,7 +33,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
     const [acceptAggrement, setAcceptAggrement] = useState(false)
 
     const [hardCap, setHardCap] = useState(parseEther("183100"))
-    const [selected, setSelected] = useState("info");
+    const [selected, setSelected] = useState("refund");
 
     useEffect(() => {
     }, [])
@@ -505,7 +505,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
 
                                 </Card>
                             </Tab>
-                            <Tab isDisabled={true} key="refund" title="Refund">
+                            <Tab key="refund" title="Refund">
                                 <Card fullWidth shadow='none' className='w-full flex flex-col gap-2'>
                                     <CardHeader className="flex justify-between items-start">
                                         <div className="flex gap-5">
@@ -514,7 +514,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                             <div className="flex flex-col gap-1 items-start justify-center">
                                                 <h4 className="text-small font-semibold leading-none text-default-600">Refund</h4>
                                                 <h5 className="text-small tracking-tight rounded-xl text-danger-400">
-                                                    You can retrieve the money you invested in the KEWL CHZPEPE Launch by requesting a refund.
+                                                    You can retrieve the money you invested in the MarloVerse Launch by requesting a refund.
                                                 </h5>
                                             </div>
 
