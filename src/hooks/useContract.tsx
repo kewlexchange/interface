@@ -289,6 +289,13 @@ export function useMRLLaunchpadContract(chainId?:any, withSignerIfPossible?: boo
 }
 
 
+export function useWWLaunchpadContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
+    let contracts = useFindDiamondByChainId(chainId);
+    return useContract(contracts?.WW_LAUNCH, IMON_LAUNCHPAD_ABI.abi, withSignerIfPossible)
+}
+
+
+
 export function useKEWLVestingContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
     let contracts = useFindDiamondByChainId(chainId);
     return useContract(contracts?.VESTING, KEWLVESTING_ABI.abi, withSignerIfPossible)
