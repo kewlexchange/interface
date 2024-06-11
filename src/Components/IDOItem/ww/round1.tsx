@@ -288,11 +288,6 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                             <span className={title({ size: "md", color: "yellow" })}>{props.name}</span>
                         </div>
 
-
-
-
-
-
                         <Tabs onSelectionChange={setSelected} selectedKey={selected} size={"md"} color='warning' aria-label="Tabs sizes">
                             <Tab key={"info"} title={"Info"}>
                                 <Card fullWidth shadow='none' >
