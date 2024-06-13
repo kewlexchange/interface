@@ -308,26 +308,26 @@ const App = () => {
                 </DropdownItem>
 
 
-                <DropdownItem as={NavLink} to={"/migrate"}
+           {/*      <DropdownItem hidden as={NavLink} to={"/migrate"}
                   key="migrate"
                   description="Convert your IMON Tokens to KWL Tokens"
                 >
                   {t("IMON to KWL Migrator")}
                 </DropdownItem>
 
-                <DropdownItem as={NavLink} to={"/ai"}
+                <DropdownItem hidden as={NavLink} to={"/ai"}
                   key="ai"
                   description="Have artificial intelligence perform technical and fundamental analysis."
                 >
                   {t("Artifical Intelligence")}
                 </DropdownItem>
 
-                <DropdownItem as={NavLink} to={"/platformearnings"}
-                  key="ai"
+                <DropdownItem hidden as={NavLink} to={"/platformearnings"}
+                  key="platform"
                   description="Detailed information about KEWL Platform's revenues"
                 >
                   {t("Platform Revenues")}
-                </DropdownItem>
+                </DropdownItem> */}
               </DropdownMenu>
 
 
@@ -344,7 +344,7 @@ const App = () => {
 
                 <Dropdown
                   showArrow
-                  arrowSize={"lg"}
+                  
                   radius="sm"
                   classNames={{
                     base: "before:bg-default-200", // change arrow background
@@ -445,14 +445,14 @@ const App = () => {
             </NavbarMenuItem>
 
 
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
+             <NavbarMenuItem className='flex flex-row items-center justify-start'>
               <Link onClick={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/earn"}>
 
                 <span className='text-3xl'>{t("Earn")}</span></Link>
-            </NavbarMenuItem>
+            </NavbarMenuItem> 
 
 
 
@@ -516,7 +516,7 @@ const App = () => {
 
 
 
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
+         {/*    <NavbarMenuItem className='flex flex-row items-center justify-start'>
               <Link onClick={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
@@ -533,7 +533,7 @@ const App = () => {
               }} color="foreground" as={NavLink} to={"/ai"}>
 
                 <span className='text-3xl'>{t("Artifical Intelligence")}</span></Link>
-            </NavbarMenuItem>
+            </NavbarMenuItem> */}
 
 
           </NavbarMenu>
