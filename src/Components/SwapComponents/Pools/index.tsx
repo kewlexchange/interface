@@ -130,9 +130,7 @@ const _POOL_TAB = () => {
         }
 
 
-        if((baseAsset.decimals === 0) || (quoteAsset.decimals === 0)){
-            displayError("Fan Token Swap is under maintenance!"); return; 
-        }
+   
 
 
         const amountADesired = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals);

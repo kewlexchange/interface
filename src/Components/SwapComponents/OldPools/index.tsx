@@ -119,11 +119,6 @@ const _OLD_POOL_TAB = () => {
         const [baseToken, quoteToken] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]
 
 
-        if((baseAsset.decimals === 0) || (quoteAsset.decimals === 0)){
-            displayError("Fan Token Swap is under maintenance!"); return; 
-        }
-
-
         const amountADesired = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals);
         const amountBDesired = ethers.utils.parseUnits(quoteInputValue, quoteAsset.decimals);
 

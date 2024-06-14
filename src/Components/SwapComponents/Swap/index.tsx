@@ -363,9 +363,7 @@ const _SWAP_TAB = () => {
         }
 
 
-        if((baseAsset.decimals === 0) || (quoteAsset.decimals === 0)){
-            displayError("Fan Token Swap is under maintenance!"); return;
-        }
+ 
 
 
         

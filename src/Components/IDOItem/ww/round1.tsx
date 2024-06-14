@@ -33,7 +33,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
     const [acceptAggrement, setAcceptAggrement] = useState(false)
 
     const [hardCap, setHardCap] = useState(parseEther("183100"))
-    const [selected, setSelected] = useState("info");
+    const [selected, setSelected] = useState("refund");
 
     useEffect(() => {
     }, [])
@@ -300,8 +300,8 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                             </div>
                                         </div>
 
-                                        <div className={"bg-success-200/30 rounded-xl p-2"}>
-                                            <span className={"text-success-500 flex flex-row items-center justify-center gap-2"}>
+                                        <div className={"bg-danger-200/30 rounded-xl p-2"}>
+                                            <span className={"text-danger-500 flex flex-row items-center justify-center gap-2"}>
                                                 <svg
                                                     className="animate-spin h-5 w-5 text-current"
                                                     fill="none"
@@ -322,7 +322,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                                         fill="currentColor"
                                                     />
                                                 </svg>
-                                                {"LIVE"}
+                                                {"CANCELLED"}
                                             </span>
                                         </div>
 
@@ -410,7 +410,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
 
 
                             </Tab>
-                            <Tab key="contribute" title="Invest">
+                            <Tab isDisabled={true} key="contribute" title="Invest">
                                 <Card fullWidth shadow='none' className='w-full flex flex-col gap-2'>
                                     <CardHeader className="flex justify-between items-start">
                                         <div className="flex gap-5">
@@ -500,7 +500,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
 
                                 </Card>
                             </Tab>
-                            <Tab isDisabled={true} key="refund" title="Refund">
+                            <Tab  key="refund" title="Refund">
                                 <Card fullWidth shadow='none' className='w-full flex flex-col gap-2'>
                                     <CardHeader className="flex justify-between items-start">
                                         <div className="flex gap-5">
