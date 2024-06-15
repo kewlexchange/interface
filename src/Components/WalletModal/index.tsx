@@ -28,7 +28,6 @@ export default function WalletModal() {
         ) : (
             <>
               <div className={"w-full flex flex-col gap-2 mb-2"}>
-                <span className={"text-2xl"}>Connect</span>
                 <span className={"text-sm"}>Connect wallet in one click to start using KEWL</span>
               </div>
               <div className={"w-full grid sm:grid-cols-2 grid-cols-1 gap-4 rounded-lg border border-default p-4 mb-2"}>
@@ -39,14 +38,12 @@ export default function WalletModal() {
                     ))}
               </div>
               <div className={"w-full border border-default p-2 flex flex-col gap-2 rounded-lg"}>
-                <span className={"flex flex-row gap-2"}>
+                <span className={"flex text-sm flex-row gap-2"}>
                   <span translate={"no"} className="material-symbols-outlined">visibility</span>
                   View only permissions. We cannot do anything without your approval.
                 </span>
-                <span className={"flex flex-row gap-2"}><span translate={"no"} className="material-symbols-outlined">info</span>
+                <span className={"flex flex-row gap-2 text-sm flex-wrap"}><span translate={"no"} className="material-symbols-outlined">info</span>
               New to Web3? <a className={"text-pink-960 flex flex-row gap-2"} target={"_blank"} href={"https://ethereum.org/en/wallets/"}>Learn more about wallets <span translate={"no"} className="material-symbols-outlined">arrow_outward</span></a></span>
-
-
               </div>
             </>
         )}

@@ -11,11 +11,12 @@ import COINBASE_ICON from '../assets/wallets/coinbase-icon.svg'
 import UNIWALLET_ICON from '../assets/wallets/uniswap-wallet-icon.png'
 import WALLET_CONNECT_ICON from '../assets/wallets/walletconnect-icon.svg'
 import COIN98_WALLET_ICON from "../assets/wallets/coin98.svg"
+import OKX_WALLET_ICON from "../assets/wallets/okx.svg"
 
 import { RPC_URLS } from '../constants/networks'
 import { RPC_PROVIDERS } from '../constants/providers'
 import { Connection, ConnectionType } from './types'
-import { getInjection, getIsCoin98Wallet, getIsCoinbaseWallet, getIsInjected, getIsMetaMaskWallet } from './utils'
+import { getInjection, getIsCoin98Wallet, getIsCoinbaseWallet, getIsInjected, getIsMetaMaskWallet, getIsOKXWallet } from './utils'
 import { UniwalletConnect as UniwalletWCV2Connect, WalletConnectV2 } from './WalletConnectV2'
 import {MAINNET_INFO} from "../constants/chainInfo";
 import { isMobile, isTouchable, isWebAndroid, isWebIOS } from '../utils/platform'
@@ -80,6 +81,24 @@ const injectedCoin98Connection: Connection = {
     return false
   },
 }
+
+const injectedOKXConnection: Connection = {
+  getName: () =>"OKX Wallet",
+  connector: web3Injected,
+  hooks: web3InjectedHooks,
+  type: ConnectionType.INJECTED,
+  getIcon: (isDarkMode: boolean) => OKX_WALLET_ICON,
+  shouldDisplay: () => getIsOKXWallet() || getIsCoin98Wallet() || getIsMetaMaskWallet() || getShouldAdvertiseMetaMask() || getIsGenericInjector(),
+  // If on non-injected, non-mobile browser, prompt user to install Metamask
+  overrideActivate: () => {
+    if (getShouldAdvertiseMetaMask()) {
+      window.open('https://www.okx.com/web3', '')
+      return true
+    }
+    return false
+  },
+}
+
 const [web3GnosisSafe, web3GnosisSafeHooks] = initializeConnector<GnosisSafe>((actions) => new GnosisSafe({ actions }))
 export const gnosisSafeConnection: Connection = {
   getName: () => 'Gnosis Safe',
@@ -97,7 +116,7 @@ export const walletConnectV2Connection: Connection = new (class implements Conne
   type = ConnectionType.WALLET_CONNECT_V2
   getName = () => 'WalletConnect'
   getIcon = () => WALLET_CONNECT_ICON
-  shouldDisplay = () => !getIsInjectedMobileBrowser()
+  shouldDisplay = () => true
 
   private _connector = initializeConnector<WalletConnectV2>(this.initializer)
   overrideActivate = (chainId?: ChainId) => {
@@ -162,8 +181,9 @@ const coinbaseWalletConnection: Connection = {
 
 export function getConnections() {
   return [
-    injectedCoin98Connection,
+    injectedOKXConnection,
     injectedConnection,
+    injectedCoin98Connection,
     uniwalletWCV2ConnectConnection,
     walletConnectV2Connection,
     coinbaseWalletConnection,

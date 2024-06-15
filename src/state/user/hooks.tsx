@@ -55,7 +55,6 @@ export const fetchAllTokenList = async (chainId,account) => {
         if(customTokens){
             tokenList = [...tokenList, ...customTokens];
         }
-        console.log("custom",tokenList)
 
         let abiInterfaceParam = new ethers.utils.Interface(abiERC)
         let multicallParams = [];

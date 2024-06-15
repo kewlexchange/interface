@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import {Connection} from "../../connection/types";
 import {ActivationStatus, useActivationState} from "../../connection/activate";
 import {useWeb3React} from "@web3-react/core";
+import { Button } from '@nextui-org/react';
 
 
 export default function Option({ connection }: { connection: Connection }) {
@@ -15,10 +16,19 @@ export default function Option({ connection }: { connection: Connection }) {
   const isCurrentOptionPending = isSomeOptionPending && activationState.connection.type === connection.type
 
   return (
-    <button className={"border border-default p-2 rounded-xl w-full flex flex-row gap-2 items-center justify-start"} onClick={activate}>
-        <img className={"w-10 h-10 rounded-xl"} src={connection.getIcon?.(false)} alt="Icon" />
-        <span className={"text-pink-960"}>{connection.getName()}</span>
+    <Button 
+    size='lg'
+    fullWidth={true}
+    color='default'
+    variant='flat'
+    className='px-2'
+    startContent={
+      <img className={"w-10 h-10 rounded-xl"} src={connection.getIcon?.(false)} alt="Icon" />
+    }
+    onClick={activate}>
+
+        <span className='w-full text-start'>{connection.getName()}</span>
        {/*{isCurrentOptionPending && <span className={"w-full"}>WAIT PLEASE</span>}*/}
-    </button>
+    </Button>
   )
 }
