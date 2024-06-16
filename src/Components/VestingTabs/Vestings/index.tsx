@@ -236,12 +236,25 @@ const _SWAP_TAB = () => {
                                 </TableCell>
                                 <TableCell align='center' valign='top'>
                                     {
+
+                                      
                                         moment().unix() > vestingInfo.expiredAt ? <>
-                                             <Button onClick={()=>{
-                                                handleClaim(vestingInfo.index);
-                                             }} fullWidth size="sm" color="success" variant="flat">
-                                        Claim
-                                    </Button>
+
+                                            {
+                                                  !vestingInfo.isValid ? <>
+                                                   <Button fullWidth size="sm" color="warning" variant="flat">
+                                                    Already Claimed
+                                                    </Button>
+                                                  </> : <>
+                                                  <Button onClick={()=>{
+                                                        handleClaim(vestingInfo.index);
+                                                    }} fullWidth size="sm" color="success" variant="flat">
+                                                        Claim
+                                                  </Button>
+                                                  </>
+                                            }
+
+                                           
                                         </> : <>
                                         <Button fullWidth size="sm" color="danger" variant="flat">
                                         Locked
