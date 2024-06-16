@@ -142,8 +142,16 @@ const _SWAP_TAB = () => {
 
  
     const handleLockTokens = async () => {
+
+        setTransaction({ hash: '', summary: '', error: {message:"Under maintenance!"} });
+        toggleError();
+        
         const baseVal = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals);
         const expireDate = moment(lockDate).unix();
+
+
+
+        return;
         toggleLoading();
         var hasError = false;
         let fanToken = ERC20Contract(baseAsset.address);
