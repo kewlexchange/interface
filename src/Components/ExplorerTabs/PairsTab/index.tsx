@@ -357,7 +357,7 @@ const _PairTAB = (props: { exchange, tokens }) => {
                     isLoading={!isLoaded}
                     items={allExchangePairs}
                     loadingContent={<Spinner color="danger" />}>
-                    {(pair) => (
+                    {(pair:any) => (
 
                         
 <TableRow key={`/explorer/${pair.pair}`}>

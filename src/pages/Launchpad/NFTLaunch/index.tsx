@@ -42,8 +42,6 @@ const NFTLaunch: React.FunctionComponent<IPage> = props => {
         setPricePerMint(_pricePerMint);
         setTotalRaised(_totalBalance);
         setTotalSupply(_totalSupply);
-
-
     }
 
     useEffect(() => {
