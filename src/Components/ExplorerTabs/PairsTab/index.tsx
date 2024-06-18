@@ -44,7 +44,7 @@ const _PairTAB = (props: { exchange, tokens }) => {
             const updatedPair = { ..._pair, basePrice: _basePrice, quotePrice: _quotePrice };
             _pairList.push(updatedPair);
         }));
- 
+
         setAllExchangePairs(_pairList);
         setLoaded(true);
     }
@@ -186,9 +186,9 @@ const _PairTAB = (props: { exchange, tokens }) => {
             console.log(`index`, pair)
 
             let pairContract = PAIRContract(pair);
-            
-            let  token0 = await pairContract.token0(); 
-            let  token1 = await pairContract.token1()
+
+            let token0 = await pairContract.token0();
+            let token1 = await pairContract.token1()
 
             const [_reserve0, _reserve1, _blockTimestampLast] = await pairContract.getReserves();
 
@@ -309,11 +309,11 @@ const _PairTAB = (props: { exchange, tokens }) => {
         } else if (props.exchange === "JALA") {
             console.log("jalaswap")
             fetchJALAPairs();
-        }else if (props.exchange === "CHILIZSWAP") {
+        } else if (props.exchange === "CHILIZSWAP") {
             console.log("chilizswap")
             fetchChilizSwapPairs();
         }
-    }, [props.exchange,chainId,account])
+    }, [props.exchange, chainId, account])
 
 
     const getIconPath = (ticker: any) => {
@@ -341,9 +341,9 @@ const _PairTAB = (props: { exchange, tokens }) => {
     return (
         <>
             <Table color='danger'
-              onRowAction={(key : any) => {
+                onRowAction={(key: any) => {
                     navigate(`${key}`)
-            }}
+                }}
                 selectionMode="single"
                 aria-label="Example static collection table">
                 <TableHeader>
@@ -357,10 +357,10 @@ const _PairTAB = (props: { exchange, tokens }) => {
                     isLoading={!isLoaded}
                     items={allExchangePairs}
                     loadingContent={<Spinner color="danger" />}>
-                    {(pair:any) => (
+                    {(pair: any) => (
 
-                        
-<TableRow key={`/explorer/${pair.pair}`}>
+
+                        <TableRow key={`/explorer/${pair.pair}`}>
 
                             <TableCell>
                                 <div className='flex flex-row gap-2 items-center justify-start'>
@@ -381,7 +381,7 @@ const _PairTAB = (props: { exchange, tokens }) => {
                                 {parseFloat(ethers.utils.formatUnits(pair.reserveQuote, pair.quote.decimals)).toFixed(4)} {pair.quote.symbol}
 
                             </TableCell >
-                            <TableCell  className='items-end justify-end text-end'>
+                            <TableCell className='items-end justify-end text-end'>
                                 {pair.basePrice}  {pair.quote.symbol}
                             </TableCell>
 
@@ -390,7 +390,7 @@ const _PairTAB = (props: { exchange, tokens }) => {
 
                             </TableCell>
                         </TableRow>
-                        
+
                     )}
                 </TableBody>
             </Table>
