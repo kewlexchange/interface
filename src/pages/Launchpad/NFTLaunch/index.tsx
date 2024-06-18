@@ -149,7 +149,7 @@ const NFTLaunch: React.FunctionComponent<IPage> = props => {
                             label={"Enter your mint amount"}
                             color="danger"
                             showSteps={true}
-                            maxValue={10}
+                            maxValue={25}
                             minValue={1}
                             defaultValue={1}
                             className="w-full"

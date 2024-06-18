@@ -97,7 +97,10 @@ const routes:IRoute[]=[
     {path:"/swap",name:"SwapPage",title:'Swap',component:SwapPage,exact:true},
     {path:"/oldswap",name:"OldSwap",title:'Swap',component:OldSwapPage,exact:true},
     {path:"/farms",name:"FarmPage",title:'Farms',component:FarmPage,exact:true},
-    {path:"/launchpad",name:"LaunchpadPage",title:'Launchpad',component:LaunchpadPage,exact:true},
+//    {path:"/launchpad",name:"LaunchpadPage",title:'Launchpad',component:LaunchpadPage,exact:true},
+    {path:"/launchpad/nft",name:"NFTLaunchpadPage",title:'INO - Initial NFT Offering',component:NFTLaunch,exact:true},
+    {path:"/launchpad",name:"NFTLaunchpadPage",title:'INO - Initial NFT Offering',component:NFTLaunch,exact:true},
+
     {path:"/launchpad/create",name:"LaunchpadPage",title:'Create Launchpad',component:CreateLaunchPage,exact:true},
     {path:"/launchpad/nft",name:"NFTLaunchpadPage",title:'INO - Initial NFT Offering',component:NFTLaunch,exact:true},
     {path:"/launchpad/dist",name:"NFDistributor",title:'NFT Distributor',component:NFTDistributor,exact:true},

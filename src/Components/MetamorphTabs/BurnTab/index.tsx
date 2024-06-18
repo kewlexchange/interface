@@ -26,7 +26,7 @@ const _BURN_TAB = () => {
     const dispatch = useAppDispatch()
     const Metamorph = useMetamorphContract(chainId, true)
     const ERC20Contract = useERC20Contract()
-    const [baseTokenAllowance, setBaseTokenAllowance] = useState(parseEther("0"))
+    const [baseTokenAllowance, setBaseTokenAllowance] : any = useState(parseEther("0"))
     const [morphTokens, setMorphTokens] : any = useState(null);
 
     const [baseAsset, setBaseAsset] = useState(null)

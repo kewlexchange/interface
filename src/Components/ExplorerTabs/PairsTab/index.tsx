@@ -178,18 +178,17 @@ const _PairTAB = (props: { exchange, tokens }) => {
             return
         }
         const jalaPairList = []
-        const pairLength = await CHILIZSWAP.allPairsLength()
-
-        console.log("pairLen",pairLength)
+        const pairLength = (await CHILIZSWAP.allPairsLength()).toNumber()
 
 
         for (let i = 0; i < pairLength; i++) {
             const pair = await CHILIZSWAP.allPairs(i);
+            console.log(`index`, pair)
 
             let pairContract = PAIRContract(pair);
             
             let  token0 = await pairContract.token0(); 
-            let  token1= await pairContract.token1()
+            let  token1 = await pairContract.token1()
 
             const [_reserve0, _reserve1, _blockTimestampLast] = await pairContract.getReserves();
 
@@ -270,7 +269,7 @@ const _PairTAB = (props: { exchange, tokens }) => {
 
             } catch (e) {
                 console.log("multicallException:", e)
-                setLoaded(false)
+                //setLoaded(false)
                 return
             }
 
@@ -303,6 +302,7 @@ const _PairTAB = (props: { exchange, tokens }) => {
     }
 
     useEffect(() => {
+
 
         if (props.exchange === "IMON") {
             fetchIMONPairs();
