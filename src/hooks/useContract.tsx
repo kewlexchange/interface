@@ -349,7 +349,6 @@ export function useKEWLListingContract(chainId?:any, withSignerIfPossible?: bool
 }
 
 
-
 export function useNFTLaunchpadContract() {
     const { account, provider } = useWeb3React()
     return useCallback(
@@ -369,7 +368,6 @@ export function useNFTLaunchpadContract() {
         [account, provider]
     )
 }
-
 
 export function useNFTSoccerGameContract() {
     const { account, provider } = useWeb3React()

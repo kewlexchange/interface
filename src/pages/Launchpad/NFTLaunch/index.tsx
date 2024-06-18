@@ -139,7 +139,6 @@ const NFTLaunch: React.FunctionComponent<IPage> = props => {
                     <div className="w-full gap-2 flex flex-col items-center justify-center">
                         <Input className="w-full" readOnly size={"lg"} type="text" label="Contract Address" value={contractAddress} placeholder="Enter your contract address" />
 
-
                         <Slider
                             onChange={(e) => {
                                 setAmount(e)
@@ -149,13 +148,11 @@ const NFTLaunch: React.FunctionComponent<IPage> = props => {
                             label={"Enter your mint amount"}
                             color="danger"
                             showSteps={true}
-                            maxValue={25}
+                            maxValue={30}
                             minValue={1}
                             defaultValue={1}
                             className="w-full"
                         />
-
-
 
                         <div className="w-full rounded-lg border  border-default flex flex-row gap-2 items-center justify-between p-2">
                             <span>Total</span>
