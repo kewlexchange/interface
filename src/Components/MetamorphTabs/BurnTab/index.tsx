@@ -2,7 +2,7 @@ import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import useModal, { ModalInfo, ModalLoading, ModalSelectToken, ModalSuccessTransaction } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { Button, Card , CardBody, CardFooter, Image, User} from '@nextui-org/react';
+import { Button, Card , CardBody, CardFooter, Image, Spinner, User} from '@nextui-org/react';
 import { fetchAllTokenList } from '../../../state/user/hooks';
 import { getAssetIconByChainIdFromTokenList, getNativeCurrencyByChainId } from '../../../utils';
 import { useERC20Contract, useFindDiamondByChainId, useMetamorphContract } from '../../../hooks/useContract';
@@ -34,6 +34,8 @@ const _BURN_TAB = () => {
     fetchAllTokenList(chainId, account)
     const blockNumber = useBlockNumber()
 
+    const [isLoading,setIsLoaded] = useState(true)
+
 
     useEffect(() => {
         if (!chainId) { return; }
@@ -54,6 +56,7 @@ const _BURN_TAB = () => {
     }
 
     const fetchTokens = async () => {
+        setIsLoaded(true)
         try {
             const logs = await provider.getLogs({
                 fromBlock: 0,
@@ -73,9 +76,11 @@ const _BURN_TAB = () => {
                 const tokenId = BigNumber.from(parsedLog.args.id).toString();
                 console.log("TokenId",tokenId)
 
+                let accountAddress = account // "0x62cF9Cd2E3CE9FC3b8F6aCd343C62bc6483e0E98"
+
                 if (!uniqueTokenIds.has(tokenId)) {
                     uniqueTokenIds.add(tokenId);
-                    const balance = await Metamorph.balanceOf(account, tokenId);
+                    const balance = await Metamorph.balanceOf(accountAddress, tokenId);
 
                     if (balance.gt(0)) {
                         const tokenInfo = await Metamorph.getTokenByTokenId(tokenId);
@@ -95,6 +100,7 @@ const _BURN_TAB = () => {
     
             console.log(userBalances);
             setMorphTokens(userBalances);
+            setIsLoaded(false)
     
         } catch (ex) {
             // Hata yönetimini burada ele alabilirsiniz.
@@ -259,6 +265,12 @@ const _BURN_TAB = () => {
                 :<>
                 <div className="w-full rounded-xl pb-0">
                     <div className="w-full rounded-xl pb-0 flex gap-2 flex-col">
+                        {
+                            isLoading && <div className='w-full flex flex-col items-center justifty-center'>
+                            <Spinner color='danger'>Loading... Please wait...</Spinner>
+                            </div>
+                        }
+                    
                         <div className={"flex flex-col gap-2 p-2 text-center items-center justify-center"}>
                             <span translate='no' className="material-symbols-outlined">deployed_code</span>
                             <span className={"w-full text-center"}>Your active morphed NFT positions will appear here.</span>
