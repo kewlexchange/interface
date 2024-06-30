@@ -11,6 +11,8 @@ import { formatEther, parseEther, parseUnits } from '@ethersproject/units';
 import { ETHER_ADDRESS } from '../../../constants/misc';
 import useBlockNumber from '../../../hooks/useBlockNumber';
 import { NavLink } from 'react-router-dom';
+import { ChainId } from '../../../constants/chains';
+import { MORALIS_API_KEY } from '../../../constants/ai';
 
 
 const _BURN_TAB = () => {
@@ -56,6 +58,8 @@ const _BURN_TAB = () => {
     }
 
     const fetchTokens = async () => {
+        fetchNFTsMoralis();
+        return
         setIsLoaded(true)
         try {
             const logs = await provider.getLogs({
@@ -109,11 +113,87 @@ const _BURN_TAB = () => {
     };
     
 
+
+
+    const fetchNFTsMoralis = async () => {
+        var _userNFTAssets = [];
+        if (!account) {
+            return;
+        }
+        let url = "";
+        if (chainId === ChainId.CHILIZ_SPICY_TESTNET) {
+            url = `https://deep-index.moralis.io/api/v2.2/${account}/nft?chain=chiliz%20testnet&format=decimal&media_items=false`;
+        } else if (chainId === ChainId.CHILIZ_MAINNET) {
+            url = `https://deep-index.moralis.io/api/v2.2/${account}/nft?chain=chiliz&format=decimal&media_items=false`;
+        } else if (chainId === ChainId.ARBITRUM_ONE) {
+            url = `https://deep-index.moralis.io/api/v2.2/${account}/nft?chain=arbitrum&format=decimal&media_items=false`;
+        } else {
+            return;
+        }
+        const userBalances = [];
+    
+        const options = {
+            method: 'GET', // or 'POST', 'PUT', etc.
+            headers: {
+                'X-Moralis-Application-Id': "IMON",
+                'X-API-Key': MORALIS_API_KEY,
+                'Content-Type': 'application/json',
+            },
+        };
+    
+        try {
+            const response = await fetch(url, options);
+            const data = await response.json();
+            if (!data) {
+                return;
+            }
+    
+            const promises = data.result.map(async (token) => {
+                try {
+                 
+                    if(ethers.utils.getAddress(token.token_address) != ethers.utils.getAddress(Metamorph.address) ){
+                        return null
+                    }
+                    const tokenInfo = await Metamorph.getTokenByTokenId(token.token_id);
+    
+                    return {
+                        name: "Metamorph",
+                        token: tokenInfo,
+                        balance: token.amount,
+                        contract: Metamorph.address,
+                        id: token.token_id,
+                        type: 'ERC-1155'
+                    };
+                } catch (error) {
+                    console.error(`Error fetching token info for token ID ${token.token_id}:`, error);
+                    return null; // Hata durumunda null döndür
+                }
+            });
+    
+            // Tüm işlemler tamamlandığında sonuçları toplayın
+            const results = await Promise.all(promises);
+    
+            // Hatalı işlemleri filtreleyin (null olanları kaldırın)
+            for (const result of results) {
+                if (result !== null) {
+                    userBalances.push(result);
+                }
+            }
+    
+            console.log("API_RESULTS", data);
+            setMorphTokens(userBalances);
+            setIsLoaded(false);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     
 
     const initDefaults = async () => {
         checkAllowance();
-        fetchTokens();
+        fetchNFTsMoralis();
+       // fetchTokens();
     }
     const onSelectToken = (tokenInfo) => {
         setBaseAsset(tokenInfo)
