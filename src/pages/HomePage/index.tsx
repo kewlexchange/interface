@@ -240,6 +240,11 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
 
                     <SocialLinks className={"w-full my-auto"} />
+                    <div className='w-full flex items-center justify-center py-5 my-5'>
+     
+     <a target="_blank" href="https://dorahacks.io/buidl/13943"><img src="https://cdn.dorahacks.io/images/buidl-embed/colored-simple.png" height="33" width="84" /></a>
+
+ </div>
                 </div>
             </div>
         </>

@@ -552,11 +552,14 @@ const App = () => {
         </div>
 
 
+
+      
         <div className='flex flex-col items-center justify-center  fixed bottom-0 w-full backdrop-blur-sm'>
           <div className=' footer w-full flex items-center justify-between text-sm px-6'>
             <div className={"font-semibold"}>
               © 2024 - KEWL [KEWL.EXCHANGE]
             </div>
+       
             <div className='flex items-center font-semibold justify-end gap-x-1'>
               <div className='w-2 h-2  bg-green-600 animate-pulse rounded-full mt-0.5'></div>
               {blockNumber}
