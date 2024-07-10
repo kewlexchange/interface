@@ -12,11 +12,9 @@ import { UNSTAKE_TAB } from "../../Components/StakeTabs/Unstake";
 import { useWeb3React } from "@web3-react/core";
 import { FARM_TAB } from "../../Components/StakeTabs/Farm";
 import { DAO_TAB } from "../../Components/StakeTabs/DAO";
-import { CREATE_STAKE_POOL_TAB } from "../../Components/EarnTabs/Create";
-import { STAKE_POOLS_TAB } from "../../Components/EarnTabs/Stake";
 
 
-const StakePage: React.FunctionComponent<IPage> = props => {
+const OldStakePage: React.FunctionComponent<IPage> = props => {
     const { pathname } = useLocation();
     const { connector, account, provider, chainId } = useWeb3React()
 
@@ -37,17 +35,24 @@ const StakePage: React.FunctionComponent<IPage> = props => {
 
                         <div className="w-full max-w-full">
 
-                            <Tabs color={"danger"} aria-label="Stake Tabs">
-                                <Tab key="stake" title="Stake Pools">
-                                <STAKE_POOLS_TAB/>
-
+                            <Tabs color={"danger"} aria-label="Swap Tabs">
+                                <Tab key="farm" title="Farm">
+                                     <FARM_TAB /> 
                                 </Tab>
                           
-                                <Tab key="create" title="Create Pool">
-                                    <CREATE_STAKE_POOL_TAB/>
-                                
+                                <Tab key="boost" title="Boost">
+                                     <DAO_TAB/> 
                                 </Tab>
                                
+                                <Tab key="unstake" title="Claim v2">
+                                <p>Under Development</p>
+                                </Tab>
+                                <Tab key="unstake_legacy" title="Claim v1">
+                                    <div className="rounded-lg p-2 w-full my-2 text-center bg-warning-500/10 text-warning-500">
+                                        This pool have been deprecated as we're moving them to our V2 pool. Your KWL rewards will be distributed via airdrop.
+                                    </div>
+                                    <UNSTAKE_TAB />
+                                </Tab>
                             </Tabs>
 
                         </div>
@@ -61,4 +66,4 @@ const StakePage: React.FunctionComponent<IPage> = props => {
 }
 
 
-export default StakePage;
+export default OldStakePage;

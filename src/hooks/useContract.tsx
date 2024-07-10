@@ -34,6 +34,7 @@ import KEWLMIGRATOR from "../contracts/abis/KEWLMIGRATOR.json"
 import KEWLLISTING_ABI from "../contracts/abis/KEWLLISTING.json"
 import KEWLVESTING_ABI from "../contracts/abis/KEWLVesting.json"
 import PREDICTIONS_ABI from "../contracts/abis/PREDICTIONS.json"
+import KEWLSTAKE_ABI from "../contracts/abis/KEWLSTAKE.json"
 import {CONTRACT_ADRESSES} from "../contracts/addresses";
 import {BLOCKCHAINS, DEFAULT_CHAIN_INFO, isSupportedChain} from "../constants/chains";
 import {BigNumber} from "@ethersproject/bignumber";
@@ -346,6 +347,11 @@ export function useKEWLMigratorContract(chainId?:any, withSignerIfPossible?: boo
 export function useKEWLListingContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
     let contracts = useFindDiamondByChainId(chainId);
     return useContract(contracts?.LISTING, KEWLLISTING_ABI.abi, withSignerIfPossible)
+}
+
+export function useKEWLStakeContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
+    let contracts = useFindDiamondByChainId(chainId);
+    return useContract(contracts?.KEWLSTAKE, KEWLSTAKE_ABI.abi, withSignerIfPossible)
 }
 
 

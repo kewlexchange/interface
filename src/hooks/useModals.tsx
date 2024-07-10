@@ -686,6 +686,8 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
     }
 
     useEffect(() => {
+
+        console.log(tokenList)
         if (tokenList) {
             setFilteredItems(tokenList)
             setAllTokenList(tokenList)
