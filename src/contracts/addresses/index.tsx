@@ -372,7 +372,7 @@ export const CONTRACT_ADRESSES = {
                 LISTING:"",
                 PREDICTIONS:"0xB0Bc7E3c72fC7406dd098484D20382d7DAD517e7",
                 REFLECTOR:"",
-                KEWLSTAKE:"0x5892CC00D346CEC49f6a2a8c3BE8ae5316F439aa",
+                KEWLSTAKE:"0x71b5Ea15483acF93E31FB103D8306E631FbFd382",
             }
         },
         AVAX:{

@@ -99,99 +99,100 @@ const _STAKE_POOL_TAB = () => {
     const initDefaults = async () => {
         setLoaded(false)
 
-        //const _pools = await KEWLSTAKE.fetch();
+        const _pools = await KEWLSTAKE.fetch();
+
+        
+
+        // const samplePools = [
+        //     {
+
+        //         valid: true,
+        //         totalReward: 0,
+        //         totalRewardWithdraw: 0,
+        //         totalDeposit: 0,
+        //         totalWithdraw: 0,
+        //         rewardPerSecond: 0,
+        //         accumulatedTokenPerShare: 0,
+        //         tokenPrecision: 0,
+        //         createdAt: 0,
+        //         expiredAt: 0,
+        //         rewardedAt: 0,
+        //         tokenDecimals: 0,
+        //         rewardDecimals: 0,
+        //         factory: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+        //         token: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+        //         reward: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+        //         pool: '0xa16E02E87b7454126E5E10d957A927A7F5B5d2be',
+        //         name: 'KEWL - STAKE KEWL TEST TOKEN EARN KEWLTEST',
+        //         symbol: 'KEWL - KEWLTESTxKEWLTEST',
+        //         tokenName: 'KEWL TEST TOKEN',
+        //         rewardName: 'KEWL TEST TOKEN',
+        //         tokenSymbol: 'TBT',
+        //         rewardSymbol: 'KWL',
+        //         rewardToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+        //         stakeToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+        //     }, {
+
+        //         valid: true,
+        //         totalReward: 0,
+        //         totalRewardWithdraw: 0,
+        //         totalDeposit: 0,
+        //         totalWithdraw: 0,
+        //         rewardPerSecond: 0,
+        //         accumulatedTokenPerShare: 0,
+        //         tokenPrecision: 0,
+        //         createdAt: 0,
+        //         expiredAt: 0,
+        //         rewardedAt: 0,
+        //         tokenDecimals: 0,
+        //         rewardDecimals: 0,
+        //         factory: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+        //         token: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+        //         reward: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+        //         pool: '0xa16E02E87b7454126E5E10d957A927A7F5B5d2be',
+        //         name: 'KEWL - STAKE KEWL TEST TOKEN EARN KEWLTEST',
+        //         symbol: 'KEWL - KEWLTESTxKEWLTEST',
+        //         tokenName: 'KEWL TEST TOKEN',
+        //         rewardName: 'KEWL TEST TOKEN',
+        //         tokenSymbol: 'KWL',
+        //         rewardSymbol: 'CHZ',
+        //         rewardToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+        //         stakeToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+        //     }, {
+
+        //         valid: true,
+        //         totalReward: 0,
+        //         totalRewardWithdraw: 0,
+        //         totalDeposit: 0,
+        //         totalWithdraw: 0,
+        //         rewardPerSecond: 0,
+        //         accumulatedTokenPerShare: 0,
+        //         tokenPrecision: 0,
+        //         createdAt: 0,
+        //         expiredAt: 0,
+        //         rewardedAt: 0,
+        //         tokenDecimals: 0,
+        //         rewardDecimals: 0,
+        //         factory: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+        //         token: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+        //         reward: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+        //         pool: '0xa16E02E87b7454126E5E10d957A927A7F5B5d2be',
+        //         name: 'KEWL - STAKE KEWL TEST TOKEN EARN KEWLTEST',
+        //         symbol: 'KEWL - KEWLTESTxKEWLTEST',
+        //         tokenName: 'KEWL TEST TOKEN',
+        //         rewardName: 'KEWL TEST TOKEN',
+        //         tokenSymbol: 'KWL',
+        //         rewardSymbol: 'CHZINU',
+        //         rewardToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+        //         stakeToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+        //     },]
+
+        // setPools(samplePools)
 
 
-        const samplePools = [
-            {
 
-                valid: true,
-                totalReward: 0,
-                totalRewardWithdraw: 0,
-                totalDeposit: 0,
-                totalWithdraw: 0,
-                rewardPerSecond: 0,
-                accumulatedTokenPerShare: 0,
-                tokenPrecision: 0,
-                createdAt: 0,
-                expiredAt: 0,
-                rewardedAt: 0,
-                tokenDecimals: 0,
-                rewardDecimals: 0,
-                factory: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-                token: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-                reward: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-                pool: '0xa16E02E87b7454126E5E10d957A927A7F5B5d2be',
-                name: 'KEWL - STAKE KEWL TEST TOKEN EARN KEWLTEST',
-                symbol: 'KEWL - KEWLTESTxKEWLTEST',
-                tokenName: 'KEWL TEST TOKEN',
-                rewardName: 'KEWL TEST TOKEN',
-                tokenSymbol: 'TBT',
-                rewardSymbol: 'KWL',
-                rewardToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-                stakeToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
-            }, {
-
-                valid: true,
-                totalReward: 0,
-                totalRewardWithdraw: 0,
-                totalDeposit: 0,
-                totalWithdraw: 0,
-                rewardPerSecond: 0,
-                accumulatedTokenPerShare: 0,
-                tokenPrecision: 0,
-                createdAt: 0,
-                expiredAt: 0,
-                rewardedAt: 0,
-                tokenDecimals: 0,
-                rewardDecimals: 0,
-                factory: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-                token: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-                reward: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-                pool: '0xa16E02E87b7454126E5E10d957A927A7F5B5d2be',
-                name: 'KEWL - STAKE KEWL TEST TOKEN EARN KEWLTEST',
-                symbol: 'KEWL - KEWLTESTxKEWLTEST',
-                tokenName: 'KEWL TEST TOKEN',
-                rewardName: 'KEWL TEST TOKEN',
-                tokenSymbol: 'KWL',
-                rewardSymbol: 'CHZ',
-                rewardToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-                stakeToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
-            }, {
-
-                valid: true,
-                totalReward: 0,
-                totalRewardWithdraw: 0,
-                totalDeposit: 0,
-                totalWithdraw: 0,
-                rewardPerSecond: 0,
-                accumulatedTokenPerShare: 0,
-                tokenPrecision: 0,
-                createdAt: 0,
-                expiredAt: 0,
-                rewardedAt: 0,
-                tokenDecimals: 0,
-                rewardDecimals: 0,
-                factory: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-                token: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-                reward: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-                pool: '0xa16E02E87b7454126E5E10d957A927A7F5B5d2be',
-                name: 'KEWL - STAKE KEWL TEST TOKEN EARN KEWLTEST',
-                symbol: 'KEWL - KEWLTESTxKEWLTEST',
-                tokenName: 'KEWL TEST TOKEN',
-                rewardName: 'KEWL TEST TOKEN',
-                tokenSymbol: 'KWL',
-                rewardSymbol: 'CHZINU',
-                rewardToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-                stakeToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
-            },]
-
-        setPools(samplePools)
-
-
-
-
-        console.log(samplePools)
+        setPools(_pools);
+        console.log(_pools)
         setLoaded(true)
     }
 
@@ -377,30 +378,27 @@ const _STAKE_POOL_TAB = () => {
                                                             <span>{pool.rewardSymbol}</span>
                                                             <span className='text-xs'>{pool.rewardName}</span>
                                                         </div>
-
-
-
                                                     </div>
 
                                                     <div className='grid grid-cols-4'>
                                                         <div className='flex flex-col gap-2'>
                                                             <span className='text-xs'>Total Reward</span>
-                                                            <span>0</span>
+                                                            <span>{ethers.utils.formatUnits(pool.totalReward,pool.rewardDecimals)} {pool.rewardSymbol}</span>
                                                         </div>
 
                                                         <div className='flex flex-col gap-2'>
                                                             <span className='text-xs'>Total Claim</span>
-                                                            <span>0</span>
+                                                            <span>{ethers.utils.formatUnits(pool.totalRewardWithdraw,pool.rewardDecimals)} {pool.rewardSymbol}</span>
                                                         </div>
 
                                                         <div className='flex flex-col gap-2'>
                                                             <span className='text-xs'>Total Deposit</span>
-                                                            <span>0</span>
+                                                            <span>{ethers.utils.formatUnits(pool.totalDeposit, pool.tokenDecimals)} {pool.tokenSymbol}</span>
                                                         </div>
 
                                                         <div className='flex flex-col gap-2'>
                                                             <span className='text-xs'>Total Withdraw</span>
-                                                            <span>0</span>
+                                                            <span>{ethers.utils.formatUnits(pool.totalWithdraw, pool.tokenDecimals)} {pool.tokenSymbol}</span>
                                                         </div>
 
                                                     </div>

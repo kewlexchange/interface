@@ -486,6 +486,16 @@
             },
             {
               "internalType": "uint256",
+              "name": "joinedUserCount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "leavedUserCount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
               "name": "totalReward",
               "type": "uint256"
             },
@@ -547,16 +557,6 @@
             {
               "internalType": "address",
               "name": "factory",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "token",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "reward",
               "type": "address"
             },
             {
@@ -632,6 +632,16 @@
             },
             {
               "internalType": "uint256",
+              "name": "joinedUserCount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "leavedUserCount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
               "name": "totalReward",
               "type": "uint256"
             },
@@ -693,16 +703,6 @@
             {
               "internalType": "address",
               "name": "factory",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "token",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "reward",
               "type": "address"
             },
             {
