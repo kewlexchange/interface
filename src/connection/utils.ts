@@ -47,6 +47,7 @@ export function getInjection(isDarkMode?: boolean): { name: string; icon: string
 export const getIsMetaMaskWallet = () => getInjection().name === 'MetaMask'
 export const getIsCoin98Wallet = () => getInjection().name === 'Coin98'
 export const getIsOKXWallet = () => getInjection().name === 'OKX Wallet'
+export const getIsRabbyWallet = () => getInjection().name === 'Rabby'
 
 export const getIsCoinbaseWallet = () => Boolean(window.ethereum?.isCoinbaseWallet)
 

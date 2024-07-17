@@ -12,11 +12,12 @@ import UNIWALLET_ICON from '../assets/wallets/uniswap-wallet-icon.png'
 import WALLET_CONNECT_ICON from '../assets/wallets/walletconnect-icon.svg'
 import COIN98_WALLET_ICON from "../assets/wallets/coin98.svg"
 import OKX_WALLET_ICON from "../assets/wallets/okx.svg"
+import RABY_WALLET_ICON from "../assets/wallets/rabby-icon.svg"
 
 import { RPC_URLS } from '../constants/networks'
 import { RPC_PROVIDERS } from '../constants/providers'
 import { Connection, ConnectionType } from './types'
-import { getInjection, getIsCoin98Wallet, getIsCoinbaseWallet, getIsInjected, getIsMetaMaskWallet, getIsOKXWallet } from './utils'
+import { getInjection, getIsCoin98Wallet, getIsCoinbaseWallet, getIsInjected, getIsMetaMaskWallet, getIsOKXWallet, getIsRabbyWallet } from './utils'
 import { UniwalletConnect as UniwalletWCV2Connect, WalletConnectV2 } from './WalletConnectV2'
 import {MAINNET_INFO} from "../constants/chainInfo";
 import { isMobile, isTouchable, isWebAndroid, isWebIOS } from '../utils/platform'
@@ -76,6 +77,24 @@ const injectedCoin98Connection: Connection = {
   overrideActivate: () => {
     if (getShouldAdvertiseMetaMask()) {
       window.open('https://coin98.com/wallet', '')
+      return true
+    }
+    return false
+  },
+}
+
+
+const injectedRabyConnection: Connection = {
+  getName: () =>"Rabby",
+  connector: web3Injected,
+  hooks: web3InjectedHooks,
+  type: ConnectionType.INJECTED,
+  getIcon: (isDarkMode: boolean) => RABY_WALLET_ICON,
+  shouldDisplay: () => getIsRabbyWallet() || getIsMetaMaskWallet() || getShouldAdvertiseMetaMask() || getIsGenericInjector(),
+  // If on non-injected, non-mobile browser, prompt user to install Metamask
+  overrideActivate: () => {
+    if (getShouldAdvertiseMetaMask()) {
+      window.open('https://rabby.io/', '')
       return true
     }
     return false
@@ -183,6 +202,7 @@ export function getConnections() {
   return [
     injectedOKXConnection,
     injectedConnection,
+    injectedRabyConnection,
     injectedCoin98Connection,
     uniwalletWCV2ConnectConnection,
     walletConnectV2Connection,

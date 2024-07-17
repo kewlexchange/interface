@@ -98,99 +98,7 @@ const _STAKE_POOL_TAB = () => {
 
     const initDefaults = async () => {
         setLoaded(false)
-
         const _pools = await KEWLSTAKE.fetch();
-
-        
-
-        // const samplePools = [
-        //     {
-
-        //         valid: true,
-        //         totalReward: 0,
-        //         totalRewardWithdraw: 0,
-        //         totalDeposit: 0,
-        //         totalWithdraw: 0,
-        //         rewardPerSecond: 0,
-        //         accumulatedTokenPerShare: 0,
-        //         tokenPrecision: 0,
-        //         createdAt: 0,
-        //         expiredAt: 0,
-        //         rewardedAt: 0,
-        //         tokenDecimals: 0,
-        //         rewardDecimals: 0,
-        //         factory: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-        //         token: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-        //         reward: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-        //         pool: '0xa16E02E87b7454126E5E10d957A927A7F5B5d2be',
-        //         name: 'KEWL - STAKE KEWL TEST TOKEN EARN KEWLTEST',
-        //         symbol: 'KEWL - KEWLTESTxKEWLTEST',
-        //         tokenName: 'KEWL TEST TOKEN',
-        //         rewardName: 'KEWL TEST TOKEN',
-        //         tokenSymbol: 'TBT',
-        //         rewardSymbol: 'KWL',
-        //         rewardToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-        //         stakeToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
-        //     }, {
-
-        //         valid: true,
-        //         totalReward: 0,
-        //         totalRewardWithdraw: 0,
-        //         totalDeposit: 0,
-        //         totalWithdraw: 0,
-        //         rewardPerSecond: 0,
-        //         accumulatedTokenPerShare: 0,
-        //         tokenPrecision: 0,
-        //         createdAt: 0,
-        //         expiredAt: 0,
-        //         rewardedAt: 0,
-        //         tokenDecimals: 0,
-        //         rewardDecimals: 0,
-        //         factory: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-        //         token: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-        //         reward: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-        //         pool: '0xa16E02E87b7454126E5E10d957A927A7F5B5d2be',
-        //         name: 'KEWL - STAKE KEWL TEST TOKEN EARN KEWLTEST',
-        //         symbol: 'KEWL - KEWLTESTxKEWLTEST',
-        //         tokenName: 'KEWL TEST TOKEN',
-        //         rewardName: 'KEWL TEST TOKEN',
-        //         tokenSymbol: 'KWL',
-        //         rewardSymbol: 'CHZ',
-        //         rewardToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-        //         stakeToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
-        //     }, {
-
-        //         valid: true,
-        //         totalReward: 0,
-        //         totalRewardWithdraw: 0,
-        //         totalDeposit: 0,
-        //         totalWithdraw: 0,
-        //         rewardPerSecond: 0,
-        //         accumulatedTokenPerShare: 0,
-        //         tokenPrecision: 0,
-        //         createdAt: 0,
-        //         expiredAt: 0,
-        //         rewardedAt: 0,
-        //         tokenDecimals: 0,
-        //         rewardDecimals: 0,
-        //         factory: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-        //         token: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-        //         reward: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-        //         pool: '0xa16E02E87b7454126E5E10d957A927A7F5B5d2be',
-        //         name: 'KEWL - STAKE KEWL TEST TOKEN EARN KEWLTEST',
-        //         symbol: 'KEWL - KEWLTESTxKEWLTEST',
-        //         tokenName: 'KEWL TEST TOKEN',
-        //         rewardName: 'KEWL TEST TOKEN',
-        //         tokenSymbol: 'KWL',
-        //         rewardSymbol: 'CHZINU',
-        //         rewardToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
-        //         stakeToken: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
-        //     },]
-
-        // setPools(samplePools)
-
-
-
         setPools(_pools);
         console.log(_pools)
         setLoaded(true)
@@ -251,7 +159,30 @@ const _STAKE_POOL_TAB = () => {
 
     const StakePool = (props: { pool: any }) => {
         const [quoteInputValue, setQuoteInputValue] = useState("")
+        const [userStakings,setUserStakings] : any = useState(null)
+        const [isLoaded,setLoaded] = useState(false)
 
+        const fetchUserStakings = async () => {
+            setLoaded(false);
+            if(!account){
+                setLoaded(true)
+                return;
+            }
+            const _userStakings =  await KEWLSTAKE.getUserInfoByPoolAddress(props.pool.pool,account)
+            setUserStakings(_userStakings);
+            setLoaded(true)
+
+            console.log(_userStakings)
+
+        }
+
+        useEffect(()=>{
+            fetchUserStakings();
+        },[props.pool])
+
+        const calculateAPR = () => {
+            return `APR`;
+        }
 
         const setInputValue = (e, isBase) => {
             const regex = /^[0-9]*\.?[0-9]*$/;

@@ -28,8 +28,6 @@ const StakePage: React.FunctionComponent<IPage> = props => {
     return (
 
         <>
-
-
             <div className={"w-full px-2 py-5 swap"}>
                 <div className={"min-w-xl max-w-xl w-full sm:w-full mx-auto flex flex-col gap-5 my-5"}>
 
@@ -40,12 +38,10 @@ const StakePage: React.FunctionComponent<IPage> = props => {
                             <Tabs color={"danger"} aria-label="Stake Tabs">
                                 <Tab key="stake" title="Stake Pools">
                                 <STAKE_POOLS_TAB/>
-
                                 </Tab>
                           
                                 <Tab key="create" title="Create Pool">
                                     <CREATE_STAKE_POOL_TAB/>
-                                
                                 </Tab>
                                
                             </Tabs>
