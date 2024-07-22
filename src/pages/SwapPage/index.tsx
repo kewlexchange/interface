@@ -10,6 +10,7 @@ import { SETTINGS_TAB } from "../../Components/SwapComponents/Settings";
 import { useWeb3React } from "@web3-react/core";
 import {MORPH_TAB} from "../../Components/MetamorphTabs/MorphTab";
 import {BURN_TAB} from "../../Components/MetamorphTabs/BurnTab";
+import { WRAP_TAB } from "../../Components/SwapComponents/Wrap";
 
 
 const SwapPage: React.FunctionComponent<IPage> = props => {
@@ -26,7 +27,7 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
         <>
             <div className={"w-full px-2 py-5 swap"}>
                 <div className={"min-w-xl max-w-xl w-full sm:w-full mx-auto flex flex-col gap-5 my-5"}>
-                    <Card  className={" flex gap-2 flex-col w-full"}>
+                    <Card  fullWidth shadow="sm" className={" flex gap-2 flex-col w-full"}>
                         <CardBody>
                         <div className="w-full max-w-full">
                             <Tabs color={"danger"} aria-label="Swap Tabs">
@@ -37,6 +38,7 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                     <POOL_TAB />
 
                                 </Tab>
+                              
                                 <Tab key="morph" title="Morph">
                                     <div className={"flex flex-col gap-2"}>
                                     <MORPH_TAB />

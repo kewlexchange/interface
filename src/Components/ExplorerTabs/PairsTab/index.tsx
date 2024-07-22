@@ -10,6 +10,7 @@ import { Price, Token, WETH9 } from '../../../entities';
 import { CONTRACT_ADRESSES } from '../../../contracts/addresses';
 import { ChainId } from '../../../constants/chains';
 import { useNavigate } from 'react-router-dom';
+import { sendHTTPRequest } from '../../../utils';
 
 const _PairTAB = (props: { exchange, tokens }) => {
     const { connector, account, provider, chainId } = useWeb3React()
@@ -24,424 +25,35 @@ const _PairTAB = (props: { exchange, tokens }) => {
     const PAIRContract = usePAIRContract()
     const ERC20Contract = useERC20Contract()
 
-    const fetchIMONPairs = async () => {
-        setLoaded(false);
-        const _exchangePairs = await EXCHANGE.getAllPairs();
 
-        let _pairList = []
-        await Promise.all(_exchangePairs.map(async (item, index) => {
-            const _pair = await EXCHANGE.getPairInfo(item.base.token, item.quote.token);
-            const tokenA = new Token(chainId, _pair.base.token, BigNumber.from(_pair.base.decimals).toNumber())
-            const tokenB = new Token(chainId, _pair.quote.token, BigNumber.from(_pair.quote.decimals).toNumber())
-            const [baseToken, quoteToken] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]
-            const price = new Price(baseToken, quoteToken, _pair.reserveBase, _pair.reserveQuote)
 
-            const canInvertPrice = Boolean(
-                price && price.baseCurrency && price.quoteCurrency && !price.baseCurrency.equals(price.quoteCurrency))
+    const fetchPairs = async (dexName : any) => {
+        setLoaded(false)
+        let dexURL = ` https://api.kewl.exchange/explorer?dex=${dexName}`
+        var response: any;
+        var responseData: any = null
+        try {
+            response = await fetch(dexURL);
+            let responseJSON = await response.json()
+            setAllExchangePairs(responseJSON.PairInfo)
+        } catch (error) {
+            responseData = { Message: "Internal Service Error!", Status: false }
+            response = { status: 500, statusText: "Internal Service Error!" }
+        }
+        setLoaded(true)
 
-            const _basePrice = price?.toSignificant(6)
-            const _quotePrice = canInvertPrice ? price?.invert()?.toSignificant(6) : "-"
-            const updatedPair = { ..._pair, basePrice: _basePrice, quotePrice: _quotePrice };
-            _pairList.push(updatedPair);
-        }));
-
-        setAllExchangePairs(_pairList);
-        setLoaded(true);
     }
-
-    const fetchJALAPairs = async () => {
-        if (chainId != ChainId.CHILIZ_MAINNET) {
-            return
-        }
-        const jalaPairList = []
-        const jalaPairLogs = await JALASWAP.queryFilter("PairCreated")
-        for (const log of jalaPairLogs) {
-            const parsedLog = JALASWAP.interface.parseLog(log);
-
-            let pairContract = PAIRContract(parsedLog.args.pair);
-
-            const [_reserve0, _reserve1, _blockTimestampLast] = await pairContract.getReserves();
-
-
-            const [token0, token1, pair] = [parsedLog.args.token0, parsedLog.args.token1, parsedLog.args.pair]
-
-
-            let token0ERC = ERC20Contract(token0);
-            let token1ERC = ERC20Contract(token1);
-
-            let abiERC = [
-                'function name() external view returns (string memory)',
-                'function symbol() external view returns (string memory)',
-                'function decimals() external view returns (uint256)',
-            ];
-
-            let abiInterfaceParam = new ethers.utils.Interface(abiERC)
-
-            let multicallParams = [
-                {
-                    target: token0,
-                    callData: abiInterfaceParam.encodeFunctionData("name", [])
-                },
-                {
-                    target: token0,
-                    callData: abiInterfaceParam.encodeFunctionData("symbol", [])
-                },
-                {
-                    target: token0,
-                    callData: abiInterfaceParam.encodeFunctionData("decimals", [])
-                },
-                {
-                    target: token1,
-                    callData: abiInterfaceParam.encodeFunctionData("name", [])
-                },
-                {
-                    target: token1,
-                    callData: abiInterfaceParam.encodeFunctionData("symbol", [])
-                },
-                {
-                    target: token1,
-                    callData: abiInterfaceParam.encodeFunctionData("decimals", [])
-                },
-            ];
-
-            let abiERCResults = [
-                { "type": 'string memory', "variable": "name" },
-                { "type": 'string memory', "variable": "symbol" },
-                { "type": 'uint256', "variable": "decimals" },
-                { "type": 'string memory', "variable": "name" },
-                { "type": 'string memory', "variable": "symbol" },
-                { "type": 'uint256', "variable": "decimals" },
-            ];
-
-            var base = {
-                name: "",
-                symbol: "",
-                decimals: 0
-            }
-            var quote = {
-                name: "",
-                symbol: "",
-                decimals: 0
-            }
-
-            try {
-                const [blockNum, multicallResult] = await EXCHANGE.callStatic.aggregate(multicallParams)
-
-
-                base.name = ethers.utils.defaultAbiCoder.decode(["string memory name"], multicallResult[0]).name
-                base.symbol = ethers.utils.defaultAbiCoder.decode(["string memory symbol"], multicallResult[1]).symbol
-                base.decimals = ethers.utils.defaultAbiCoder.decode(["uint256 decimals"], multicallResult[2]).decimals
-
-                quote.name = ethers.utils.defaultAbiCoder.decode(["string memory name"], multicallResult[3]).name
-                quote.symbol = ethers.utils.defaultAbiCoder.decode(["string memory symbol"], multicallResult[4]).symbol
-                quote.decimals = ethers.utils.defaultAbiCoder.decode(["uint256 decimals"], multicallResult[5]).decimals
-
-
-
-            } catch (e) {
-                console.log("multicallException:", e)
-                setLoaded(false)
-                return
-            }
-
-
-            const tokenA = new Token(chainId, token0, BigNumber.from(base.decimals).toNumber())
-            const tokenB = new Token(chainId, token1, BigNumber.from(quote.decimals).toNumber())
-            const price = new Price(tokenA, tokenB, _reserve0, _reserve1)
-
-            const canInvertPrice = Boolean(
-                price && price.baseCurrency && price.quoteCurrency && !price.baseCurrency.equals(price.quoteCurrency))
-
-            const _basePrice = price?.toSignificant(6)
-            const _quotePrice = canInvertPrice ? price?.invert()?.toSignificant(6) : "-"
-            let pairInfo = {
-                base: base,
-                quote: quote,
-                token0: token0,
-                token1: token1,
-                pair: pair,
-                reserveBase: _reserve0,
-                reserveQuote: _reserve1,
-                basePrice: _basePrice,
-                quotePrice: _quotePrice,
-            }
-
-            jalaPairList.push(pairInfo)
-        }
-        setAllExchangePairs(jalaPairList);
-        setLoaded(true);
-    }
-
-    const fetchChilizSwapPairs = async () => {
-        console.log("chilizswap")
-        if (chainId != ChainId.CHILIZ_MAINNET) {
-            return
-        }
-        const jalaPairList = []
-        const pairLength = (await CHILIZSWAP.allPairsLength()).toNumber()
-
-
-        for (let i = 0; i < pairLength; i++) {
-            const pair = await CHILIZSWAP.allPairs(i);
-            console.log(`index`, pair)
-
-            let pairContract = PAIRContract(pair);
-
-            let token0 = await pairContract.token0();
-            let token1 = await pairContract.token1()
-
-            const [_reserve0, _reserve1, _blockTimestampLast] = await pairContract.getReserves();
-
-
-
-
-            let token0ERC = ERC20Contract(token0);
-            let token1ERC = ERC20Contract(token1);
-
-            let abiERC = [
-                'function name() external view returns (string memory)',
-                'function symbol() external view returns (string memory)',
-                'function decimals() external view returns (uint256)',
-            ];
-
-            let abiInterfaceParam = new ethers.utils.Interface(abiERC)
-
-            let multicallParams = [
-                {
-                    target: token0,
-                    callData: abiInterfaceParam.encodeFunctionData("name", [])
-                },
-                {
-                    target: token0,
-                    callData: abiInterfaceParam.encodeFunctionData("symbol", [])
-                },
-                {
-                    target: token0,
-                    callData: abiInterfaceParam.encodeFunctionData("decimals", [])
-                },
-                {
-                    target: token1,
-                    callData: abiInterfaceParam.encodeFunctionData("name", [])
-                },
-                {
-                    target: token1,
-                    callData: abiInterfaceParam.encodeFunctionData("symbol", [])
-                },
-                {
-                    target: token1,
-                    callData: abiInterfaceParam.encodeFunctionData("decimals", [])
-                },
-            ];
-
-            let abiERCResults = [
-                { "type": 'string memory', "variable": "name" },
-                { "type": 'string memory', "variable": "symbol" },
-                { "type": 'uint256', "variable": "decimals" },
-                { "type": 'string memory', "variable": "name" },
-                { "type": 'string memory', "variable": "symbol" },
-                { "type": 'uint256', "variable": "decimals" },
-            ];
-
-            var base = {
-                name: "",
-                symbol: "",
-                decimals: 0
-            }
-            var quote = {
-                name: "",
-                symbol: "",
-                decimals: 0
-            }
-
-            try {
-                const [blockNum, multicallResult] = await EXCHANGE.callStatic.aggregate(multicallParams)
-
-
-                base.name = ethers.utils.defaultAbiCoder.decode(["string memory name"], multicallResult[0]).name
-                base.symbol = ethers.utils.defaultAbiCoder.decode(["string memory symbol"], multicallResult[1]).symbol
-                base.decimals = ethers.utils.defaultAbiCoder.decode(["uint256 decimals"], multicallResult[2]).decimals
-
-                quote.name = ethers.utils.defaultAbiCoder.decode(["string memory name"], multicallResult[3]).name
-                quote.symbol = ethers.utils.defaultAbiCoder.decode(["string memory symbol"], multicallResult[4]).symbol
-                quote.decimals = ethers.utils.defaultAbiCoder.decode(["uint256 decimals"], multicallResult[5]).decimals
-
-
-
-            } catch (e) {
-                console.log("multicallException:", e)
-                //setLoaded(false)
-                return
-            }
-
-
-            const tokenA = new Token(chainId, token0, BigNumber.from(base.decimals).toNumber())
-            const tokenB = new Token(chainId, token1, BigNumber.from(quote.decimals).toNumber())
-            const price = new Price(tokenA, tokenB, _reserve0, _reserve1)
-
-            const canInvertPrice = Boolean(
-                price && price.baseCurrency && price.quoteCurrency && !price.baseCurrency.equals(price.quoteCurrency))
-
-            const _basePrice = price?.toSignificant(6)
-            const _quotePrice = canInvertPrice ? price?.invert()?.toSignificant(6) : "-"
-            let pairInfo = {
-                base: base,
-                quote: quote,
-                token0: token0,
-                token1: token1,
-                pair: pair,
-                reserveBase: _reserve0,
-                reserveQuote: _reserve1,
-                basePrice: _basePrice,
-                quotePrice: _quotePrice,
-            }
-
-            jalaPairList.push(pairInfo)
-        }
-        setAllExchangePairs(jalaPairList);
-        setLoaded(true);
-    }
-
-
-    const fetchKayenPairs = async () => {
-        console.log("chilizswap")
-        if (chainId != ChainId.CHILIZ_MAINNET) {
-            return
-        }
-        const jalaPairList = []
-        const pairLength = (await JALASWAP.allPairsLength()).toNumber()
-        console.log("JALA PAIR LENGTH",pairLength)
-
-        for (let i = 0; i < pairLength; i++) {
-            const pair = await JALASWAP.allPairs(i);
-            console.log(`index`, pair)
-
-            let pairContract = PAIRContract(pair);
-
-            let token0 = await pairContract.token0();
-            let token1 = await pairContract.token1()
-
-            const [_reserve0, _reserve1, _blockTimestampLast] = await pairContract.getReserves();
-
-
-
-
-            let token0ERC = ERC20Contract(token0);
-            let token1ERC = ERC20Contract(token1);
-
-            let abiERC = [
-                'function name() external view returns (string memory)',
-                'function symbol() external view returns (string memory)',
-                'function decimals() external view returns (uint256)',
-            ];
-
-            let abiInterfaceParam = new ethers.utils.Interface(abiERC)
-
-            let multicallParams = [
-                {
-                    target: token0,
-                    callData: abiInterfaceParam.encodeFunctionData("name", [])
-                },
-                {
-                    target: token0,
-                    callData: abiInterfaceParam.encodeFunctionData("symbol", [])
-                },
-                {
-                    target: token0,
-                    callData: abiInterfaceParam.encodeFunctionData("decimals", [])
-                },
-                {
-                    target: token1,
-                    callData: abiInterfaceParam.encodeFunctionData("name", [])
-                },
-                {
-                    target: token1,
-                    callData: abiInterfaceParam.encodeFunctionData("symbol", [])
-                },
-                {
-                    target: token1,
-                    callData: abiInterfaceParam.encodeFunctionData("decimals", [])
-                },
-            ];
-
-            let abiERCResults = [
-                { "type": 'string memory', "variable": "name" },
-                { "type": 'string memory', "variable": "symbol" },
-                { "type": 'uint256', "variable": "decimals" },
-                { "type": 'string memory', "variable": "name" },
-                { "type": 'string memory', "variable": "symbol" },
-                { "type": 'uint256', "variable": "decimals" },
-            ];
-
-            var base = {
-                name: "",
-                symbol: "",
-                decimals: 0
-            }
-            var quote = {
-                name: "",
-                symbol: "",
-                decimals: 0
-            }
-
-            try {
-                const [blockNum, multicallResult] = await EXCHANGE.callStatic.aggregate(multicallParams)
-
-
-                base.name = ethers.utils.defaultAbiCoder.decode(["string memory name"], multicallResult[0]).name
-                base.symbol = ethers.utils.defaultAbiCoder.decode(["string memory symbol"], multicallResult[1]).symbol
-                base.decimals = ethers.utils.defaultAbiCoder.decode(["uint256 decimals"], multicallResult[2]).decimals
-
-                quote.name = ethers.utils.defaultAbiCoder.decode(["string memory name"], multicallResult[3]).name
-                quote.symbol = ethers.utils.defaultAbiCoder.decode(["string memory symbol"], multicallResult[4]).symbol
-                quote.decimals = ethers.utils.defaultAbiCoder.decode(["uint256 decimals"], multicallResult[5]).decimals
-
-
-
-            } catch (e) {
-                console.log("multicallException:", e)
-                //setLoaded(false)
-                //return
-            }
-
-
-            const tokenA = new Token(chainId, token0, BigNumber.from(base.decimals).toNumber())
-            const tokenB = new Token(chainId, token1, BigNumber.from(quote.decimals).toNumber())
-            const price = new Price(tokenA, tokenB, _reserve0, _reserve1)
-
-            const canInvertPrice = Boolean(
-                price && price.baseCurrency && price.quoteCurrency && !price.baseCurrency.equals(price.quoteCurrency))
-
-            const _basePrice = price?.toSignificant(6)
-            const _quotePrice = canInvertPrice ? price?.invert()?.toSignificant(6) : "-"
-            let pairInfo = {
-                base: base,
-                quote: quote,
-                token0: token0,
-                token1: token1,
-                pair: pair,
-                reserveBase: _reserve0,
-                reserveQuote: _reserve1,
-                basePrice: _basePrice,
-                quotePrice: _quotePrice,
-            }
-
-            jalaPairList.push(pairInfo)
-        }
-        setAllExchangePairs(jalaPairList);
-        setLoaded(true);
-    }
-
     useEffect(() => {
 
 
         if (props.exchange === "IMON") {
-            fetchIMONPairs();
+            fetchPairs(`KEWL`);
         } else if (props.exchange === "JALA") {
             console.log("jalaswap")
-            fetchKayenPairs();
+            fetchPairs(`KAYEN`);
         } else if (props.exchange === "CHILIZSWAP") {
             console.log("chilizswap")
-            fetchChilizSwapPairs();
+            fetchPairs(`CHILIZSWAP`);
         }
     }, [props.exchange, chainId, account])
 
@@ -490,13 +102,13 @@ const _PairTAB = (props: { exchange, tokens }) => {
                     {(pair: any) => (
 
 
-                        <TableRow key={`/explorer/${pair.pair}`}>
+                        <TableRow key={`/explorer/${pair.pairAddress}`}>
 
                             <TableCell>
                                 <div className='flex flex-row gap-2 items-center justify-start'>
-                                    <DoubleCurrencyIcon baseIcon={getIconPath(pair.base.symbol)} quoteIcon={getIconPath(pair.quote.symbol)} />
+                                    <DoubleCurrencyIcon baseIcon={getIconPath(pair.baseSymbol)} quoteIcon={getIconPath(pair.quoteSymbol)} />
                                     <span>
-                                        {pair.base.symbol} x {pair.quote.symbol}
+                                        {pair.baseSymbol} x {pair.quoteSymbol}
                                     </span>
                                 </div>
 
@@ -504,19 +116,19 @@ const _PairTAB = (props: { exchange, tokens }) => {
                             </TableCell>
 
                             <TableCell className='items-end justify-end text-end'>
-                                {parseFloat(ethers.utils.formatUnits(pair.reserveBase, pair.base.decimals)).toFixed(4)}   {pair.base.symbol}
+                                {parseFloat(pair.reserveBase).toFixed(4)}   {pair.baseSymbol}
                             </TableCell>
 
                             <TableCell className='items-end justify-end text-end'>
-                                {parseFloat(ethers.utils.formatUnits(pair.reserveQuote, pair.quote.decimals)).toFixed(4)} {pair.quote.symbol}
+                                {parseFloat(pair.reserveQuote).toFixed(4)} {pair.quoteSymbol}
 
                             </TableCell >
                             <TableCell className='items-end justify-end text-end'>
-                                {pair.basePrice}  {pair.quote.symbol}
+                                {pair.priceBase}  {pair.quoteSymbol}
                             </TableCell>
 
                             <TableCell className='items-end justify-end text-end'>
-                                {pair.quotePrice} {pair.base.symbol}
+                                {pair.priceQuote} {pair.baseSymbol}
 
                             </TableCell>
                         </TableRow>

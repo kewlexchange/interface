@@ -32,6 +32,7 @@ import { ThemeSwitch } from './Components/ThemeSwitch';
 import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button, Dropdown, DropdownTrigger, DropdownItem, Avatar, DropdownMenu, DropdownSection, User, Badge } from "@nextui-org/react";
 import { Network } from './Components/Network';
 import { DropdownNetwork } from './Components/DropdownNetwork';
+import { LandingBG } from './Components/Landing';
 
 const ReactAudioPlayerEx = process.env.NODE_ENV === 'production' ? (ReactAudioPlayer as any).default : ReactAudioPlayer;
 const App = () => {
@@ -550,6 +551,7 @@ const App = () => {
               })}
           </Routes>
         </div>
+    
 
 
 
