@@ -306,11 +306,12 @@ const _SWAP_TAB = () => {
 
         const baseVal = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals);
 
+        let fanToken = ERC20Contract(baseAsset.address);
 
         
-        /*
+        //const allowanceAmount = fanToken.allowance()
+        
         toggleLoading();
-        let fanToken = ERC20Contract(baseAsset.address);
         await fanToken.approve(FANTOKENWRAPPER.address, baseVal, { from: account }).then(async (tx) => {
             await tx.wait();
             const summary = `Unlocking tokens for: ${FANTOKENWRAPPER.address}`
@@ -324,7 +325,7 @@ const _SWAP_TAB = () => {
         }).finally(async () => {
             toggleLoading();
         });
-        */
+        
             
         
         toggleLoading();
@@ -824,7 +825,7 @@ const _SWAP_TAB = () => {
 
 
                     <div className="w-full flex flex-col items-center justify-center">
-                
+                    
                         {
                             account ? isAllowanceRequired() === false && pairInfo && pairInfo.valid && hasLiquidity &&
                                 <Button className={"w-full"} onClick={() => {

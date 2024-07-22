@@ -295,6 +295,10 @@ export function useWWLaunchpadContract(chainId?:any, withSignerIfPossible?: bool
     return useContract(contracts?.WW_LAUNCH, IMON_LAUNCHPAD_ABI.abi, withSignerIfPossible)
 }
 
+export function useDSWAPLaunchpadContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
+    let contracts = useFindDiamondByChainId(chainId);
+    return useContract(contracts?.DSWAP_LAUNCH, IMON_LAUNCHPAD_ABI.abi, withSignerIfPossible)
+}
 
 
 export function useKEWLVestingContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {

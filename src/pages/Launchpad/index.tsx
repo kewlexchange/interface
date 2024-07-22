@@ -23,6 +23,7 @@ import { TBTTokenIDO } from "../../Components/IDOItem/tbttoken";
 import { ChilizShibaIDO } from "../../Components/IDOItem/chilizshiba";
 import { MRLTokenIDO } from "../../Components/IDOItem/mrl";
 import { WWTokenIDO } from "../../Components/IDOItem/ww";
+import { DSWAPTokenIDO } from "../../Components/IDOItem/dswap";
 
 const LaunchpadPage: React.FunctionComponent<IPage> = props => {
     const { connector, account, provider, chainId } = useWeb3React()
@@ -105,8 +106,12 @@ const LaunchpadPage: React.FunctionComponent<IPage> = props => {
                                 location.pathname === "/launchpad/ww" &&
                                 <WWTokenIDO name={"WHOWINS IDO"} />
                             }
+                              {
+                                location.pathname === "/launchpad/dswap" &&
+                                <DSWAPTokenIDO name={"DSWAP IDO"} />
+                            }
                             {
-                                (location.pathname === "/launchpad" || location.pathname === "/launchpad/") &&  <WWTokenIDO name={"WHOWINS IDO"} />
+                                (location.pathname === "/launchpad" || location.pathname === "/launchpad/") &&  <DSWAPTokenIDO name={"DSWAP IDO"} />
 
                             }
                         </CardBody>

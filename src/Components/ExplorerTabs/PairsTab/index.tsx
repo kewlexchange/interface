@@ -124,11 +124,11 @@ const _PairTAB = (props: { exchange, tokens }) => {
 
                             </TableCell >
                             <TableCell className='items-end justify-end text-end'>
-                                {pair.priceBase}  {pair.quoteSymbol}
+                                {parseFloat(pair.priceBase).toFixed(4)}  {pair.quoteSymbol}
                             </TableCell>
 
                             <TableCell className='items-end justify-end text-end'>
-                                {pair.priceQuote} {pair.baseSymbol}
+                                {parseFloat(pair.priceQuote).toFixed(4)} {pair.baseSymbol}
 
                             </TableCell>
                         </TableRow>
