@@ -18,3 +18,5 @@ yarn.lock
 ./dist
 dist
 .DS_Store
+./build
+build
