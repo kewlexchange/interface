@@ -11,7 +11,6 @@ import { useDomainContract, useCHZINULaunchpadContract, useTBTLaunchpadSecondCon
 import useModal, { ModalInfo, ModalLoading, ModalSuccessTransaction, ModalSelectToken } from '../../hooks/useModals';
 import CHZINU_LOGO from "./dswap.png"
 import { NavLink } from 'react-router-dom';
-import { WWROUND1IDO } from './ww/round1';
 import { DSWAP1IDO } from './dswap/round1';
  const _MRLIDO = (props: { IDOParams, name }) => {
     const { connector, account, provider, chainId } = useWeb3React()

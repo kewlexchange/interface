@@ -10,7 +10,6 @@ import { Price, Token, WETH9 } from '../../../entities';
 import { CONTRACT_ADRESSES } from '../../../contracts/addresses';
 import { ChainId } from '../../../constants/chains';
 import { useNavigate } from 'react-router-dom';
-import { sendHTTPRequest } from '../../../utils';
 
 const _PairTAB = (props: { exchange, tokens }) => {
     const { connector, account, provider, chainId } = useWeb3React()
