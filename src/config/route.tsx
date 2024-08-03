@@ -52,6 +52,7 @@ import ListingPage from "../pages/ListingPage";
 import TOSPage from "../pages/TosPage";
 import VestingPage from "../pages/VestingPage";
 import PredictionsPage from "../pages/PredictionsPage";
+import OldStakePage from "../pages/StakePage/oldstake";
 
 const routes:IRoute[]=[
 
@@ -96,6 +97,8 @@ const routes:IRoute[]=[
     {path:"/wrap",name:"WrapPage",title:'Wrap',component:WrapPage,exact:true},
     {path:"/swap",name:"SwapPage",title:'Swap',component:SwapPage,exact:true},
     {path:"/oldswap",name:"OldSwap",title:'Swap',component:OldSwapPage,exact:true},
+    {path:"/oldstake",name:"OldStake",title:'Swap',component:OldStakePage,exact:true},
+
     {path:"/farms",name:"FarmPage",title:'Farms',component:FarmPage,exact:true},
     {path:"/launchpad",name:"LaunchpadPage",title:'Launchpad',component:LaunchpadPage,exact:true},
     {path:"/launchpad/nft",name:"NFTLaunchpadPage",title:'INO - Initial NFT Offering',component:NFTLaunch,exact:true},

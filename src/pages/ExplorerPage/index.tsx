@@ -5,6 +5,7 @@ import { PairTAB } from "../../Components/ExplorerTabs/PairsTab";
 import { fetchAllTokenList } from "../../state/user/hooks";
 import { useWeb3React } from "@web3-react/core";
 import { useAppSelector } from "../../state/hooks";
+import { PricesTAB } from "../../Components/ExplorerTabs/PricesTab";
 
 const ExplorerPage: React.FunctionComponent<IPage> = props => {
     const [amount, setAmount] = useState(1);
@@ -19,13 +20,13 @@ const ExplorerPage: React.FunctionComponent<IPage> = props => {
     return (
 
         <>
-            <div className={" p-2 w-full flex items-center justify-center"}>
-                <Card className="w-full p-2">
-                    <Tabs color="danger" aria-label="Options">
+            <div className={" p-2  w-full"}>
+            <Tabs color="danger" aria-label="Options">
+                        <Tab key={"prices"} title={"RADAR"}>
+                            <PricesTAB tokens={defaultAssets}/>
+                        </Tab>
                         <Tab key="kewl" title="KEWL">
-
                             <PairTAB tokens={defaultAssets} exchange="IMON" />
-
                         </Tab>
                         <Tab key="kayen" title="KAYEN">
                             <PairTAB tokens={defaultAssets} exchange="JALA" />
@@ -33,8 +34,13 @@ const ExplorerPage: React.FunctionComponent<IPage> = props => {
                         <Tab key="chiliz" title="CHILIZSWAP">
                             <PairTAB tokens={defaultAssets} exchange="CHILIZSWAP" />
                         </Tab>
+                        <Tab key="diviswap" title="DIVISWAP">
+                            <PairTAB tokens={defaultAssets} exchange="DIVISWAP" />
+                        </Tab>
+                        <Tab key="all" title="ALL PAIRS">
+                            <PairTAB tokens={defaultAssets} exchange="ALL" />
+                        </Tab>
                     </Tabs>
-                </Card>
 
 
 

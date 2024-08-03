@@ -8,14 +8,14 @@ import { Route as ReactRoute, NavLink } from 'react-router-dom';
 import { isSupportedChain } from '../../../constants/chains';
 import { WETH9, Token, CurrencyAmount, Pair, Price, Trade, Currency, Percent, Route } from '../../../entities';
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useFanTokenWrapperContract } from '../../../hooks/useContract';
-import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalSelectExchangePair } from '../../../hooks/useModals';
+import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalSelectExchangePair, ModalSelectFanToken } from '../../../hooks/useModals';
 import { useAppSelector } from '../../../state/hooks';
 import { fetchAllTokenList } from '../../../state/user/hooks';
 import { getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../utils';
 import { DoubleCurrencyIcon } from '../../DoubleCurrency';
 import UniwalletModal from '../../Modal/UniwalletModal';
 import { Avatar, Button, ButtonGroup, Card, Image } from '@nextui-org/react';
-import { parseEther } from '@ethersproject/units';
+import { formatUnits, parseEther } from '@ethersproject/units';
 import { Chart } from '../../Chart';
 import { BLACK_LIST } from '../../../constants/blacklist';
 
@@ -60,28 +60,26 @@ const _SWAP_TAB = () => {
     const userSlippageTolerance = useAppSelector((state) => state.user.userSlippageTolerance);
     const [allExchangePairs, setAllExchangePairs]: any = useState(null)
 
+
     fetchAllTokenList(chainId, account)
-
-
-
 
     useEffect(() => {
         if (!chainId) { return; }
         if (!defaultAssets) { return }
         if (defaultAssets.length === 0) { return }
 
-        const kwlToken = defaultAssets.find(token => token && token.symbol === "KWL");
-        if (kwlToken) {
-            setQuoteAsset(kwlToken);
-            setBaseAsset(defaultAssets.find(token => token?.symbol === getNativeCurrencyByChainId(chainId)))
+
+        const assetInfo = defaultAssets.find(token => token && token.symbol === "GAL");
+        if (assetInfo) {
+            onSelectToken(assetInfo, false)
+
         } else {
-            console.error("KWL token not found in defaultAssets.");
             setBaseAsset(null)
             setQuoteAsset(null)
         }
 
 
-       // setQuoteAsset(defaultAssets.find(token => token?.symbol === "KWL"))
+        // setQuoteAsset(defaultAssets.find(token => token?.symbol === "KWL"))
     }, [defaultAssets])
 
     const setInputValue = (e, isBase) => {
@@ -90,11 +88,13 @@ const _SWAP_TAB = () => {
         if (regex.test(e)) {
             if (isBase) {
                 setBaseInputValue(e)
+                setQuoteInputValue(e)
             } else {
                 setQuoteInputValue(e)
+                setBaseInputValue(e)
+
             }
         }
-
         setIsBase(isBase)
     }
 
@@ -123,21 +123,21 @@ const _SWAP_TAB = () => {
         let _baseAddress = baseAsset.address === ETHER_ADDRESS ? WETH9[chainId].address : baseAsset.address
         let _quoteAddress = quoteAsset.address === ETHER_ADDRESS ? WETH9[chainId].address : quoteAsset.address
 
-        var _baseTokenBalance : any = 0;
-        var _quoteTokenBalance : any = 0;
+        var _baseTokenBalance: any = 0;
+        var _quoteTokenBalance: any = 0;
 
-        if(account){
-            if((baseAsset.address != ETHER_ADDRESS) && (quoteAsset.address != ETHER_ADDRESS)){
+        if (account) {
+            if ((baseAsset.address != ETHER_ADDRESS) && (quoteAsset.address != ETHER_ADDRESS)) {
                 const BaseERC20Token = ERC20Contract(baseAsset.address)
                 _baseTokenBalance = await BaseERC20Token.balanceOf(account);
-            const QuoteERC20Token = ERC20Contract(quoteAsset.address)
+                const QuoteERC20Token = ERC20Contract(quoteAsset.address)
                 _quoteTokenBalance = await QuoteERC20Token.balanceOf(account);
-            }else{
-                if(baseAsset.address == ETHER_ADDRESS){
+            } else {
+                if (baseAsset.address == ETHER_ADDRESS) {
                     _baseTokenBalance = await provider.getBalance(account);
                     const QuoteERC20Token = ERC20Contract(quoteAsset.address)
                     _quoteTokenBalance = await QuoteERC20Token.balanceOf(account);
-                }else  if(quoteAsset.address == ETHER_ADDRESS){
+                } else if (quoteAsset.address == ETHER_ADDRESS) {
                     _quoteTokenBalance = await provider.getBalance(account);
                     const BaseERC20Token = ERC20Contract(baseAsset.address)
                     _baseTokenBalance = await BaseERC20Token.balanceOf(account);
@@ -147,7 +147,7 @@ const _SWAP_TAB = () => {
 
 
 
-      
+
 
         const _allExchangePairs = await EXCHANGE.getAllPairs();
         setAllExchangePairs(_allExchangePairs)
@@ -187,13 +187,13 @@ const _SWAP_TAB = () => {
         const [baseReserve, quoteReserve] = baseToken.sortsBefore(quoteToken) ? [_reserve0, _reserve1] : [_reserve1, _reserve0]
 
 
-  
-      
+
+
 
         const baseAssetBalance = CurrencyAmount.fromRawAmount(baseToken, _baseTokenBalance).toSignificant(6)
         const quoteAssetBalance = CurrencyAmount.fromRawAmount(quoteToken, _quoteTokenBalance).toSignificant(6)
 
-    
+
         /*
         let _updatedBaseAsset ={
                 chainId:baseAsset.chainId,
@@ -306,11 +306,59 @@ const _SWAP_TAB = () => {
 
         const baseVal = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals);
 
-
-        /*
-        toggleLoading();
         let fanToken = ERC20Contract(baseAsset.address);
-        await fanToken.approve(FANTOKENWRAPPER.address, baseVal, { from: account }).then(async (tx) => {
+
+
+        let allowance = await fanToken.allowance(account, FANTOKENWRAPPER.address);
+        if (allowance.lt(baseVal)) {
+            toggleLoading();
+            await fanToken.approve(FANTOKENWRAPPER.address, ethers.constants.MaxUint256, { from: account }).then(async (tx) => {
+                await tx.wait();
+                const summary = `Unlocking tokens for: ${FANTOKENWRAPPER.address}`
+                setTransaction({ hash: tx.hash, summary: summary, error: null });
+                await provider.getTransactionReceipt(tx.hash).then(() => {
+                    toggleTransactionSuccess();
+                });
+            }).catch((error: Error) => {
+                setTransaction({ hash: '', summary: '', error: error });
+                toggleError();
+            }).finally(async () => {
+                toggleLoading();
+            });
+        }
+
+
+        toggleLoading();
+        await FANTOKENWRAPPER.wrap(account, baseAsset.address, baseVal).then(async (tx) => {
+            await tx.wait();
+            const summary = `Wrapping : ${tx.hash}`
+            setTransaction({ hash: tx.hash, summary: summary, error: null });
+            toggleTransactionSuccess();
+        }).catch((error: Error) => {
+            setTransaction({ hash: '', summary: '', error: error });
+            toggleError();
+        }).finally(async () => {
+            toggleLoading();
+        });
+    }
+
+    const handleUnWrap = async () => {
+        if (!baseAsset) { displayError("Please select base asset!"); return; }
+
+
+
+        let FAN_TOKEN_ADDRESS = baseAsset.address
+        let fanToken = ERC20Contract(FAN_TOKEN_ADDRESS);
+        const fanTokenDecimals = await fanToken.decimals();
+
+        const baseVal = ethers.utils.parseUnits(baseInputValue, fanTokenDecimals);
+
+
+
+        let allowance = await fanToken.allowance(account, FANTOKENWRAPPER.address);
+        if (allowance.lt(baseVal)) {
+        toggleLoading();
+        await fanToken.approve(FANTOKENWRAPPER.address, ethers.constants.MaxUint256, { from: account }).then(async (tx) => {
             await tx.wait();
             const summary = `Unlocking tokens for: ${FANTOKENWRAPPER.address}`
             setTransaction({ hash: tx.hash, summary: summary, error: null });
@@ -323,9 +371,12 @@ const _SWAP_TAB = () => {
         }).finally(async () => {
             toggleLoading();
         });
-            */
+    }
+
+
+
         toggleLoading();
-        await FANTOKENWRAPPER.wrap(account,baseAsset.address,baseVal).then(async (tx) => {
+        await FANTOKENWRAPPER.unwrap(account, FAN_TOKEN_ADDRESS, baseVal).then(async (tx) => {
             await tx.wait();
             const summary = `Wrapping : ${tx.hash}`
             setTransaction({ hash: tx.hash, summary: summary, error: null });
@@ -339,229 +390,14 @@ const _SWAP_TAB = () => {
 
     }
 
-    const handleSwap = async () => {
-        if (!baseAsset) { displayError("Please select base asset!"); return; }
-        if (!quoteAsset) { displayError("Please select quote asset!"); return; }
-        if (!pairInfo) { displayError("Pair not found!"); return; }
-        if (!pairInfo.valid) { displayError("Pair isnt exits!"); return; }
-        if (!hasLiquidity) { displayError("No liquidity avalialable!"); return; }
-        if (baseInputValue === "") { displayError("Input amount not valid!"); return; }
-        if (quoteInputValue === "") { displayError("Input amount not valid!"); return; }
-        if (tradeInfo === null) { displayError("Input or output is amount not valid!"); return; }
-
-
-        if (BLACK_LIST.includes(baseAsset.address)) {
-            displayError("Under Maintenance!"); return;
-        }
-
-
-        if (BLACK_LIST.includes(quoteAsset.address)) {
-            displayError("Under Maintenance!"); return;
-        }
-
-        if (BLACK_LIST.includes(account)) {
-            displayError("Account is blacklisted!"); return;
-        }
-
-
- 
-
-
-        
-        if (parseFloat(tradeInfo.priceImpact.toFixed(2)) > 15) {
-           // displayError("A swap of this size may have a high price impact, given the current liquidity in the pool. There may be a large difference between the amount of your input token and what you will receive in the output token");
-          //  return
-        }
-        
-
-        const DEFAULT_ADD_SLIPPAGE_TOLERANCE = new Percent(userSlippageTolerance, 10_000)
-
-
-        const etherIn = baseAsset.address === ETHER_ADDRESS
-        const etherOut = quoteAsset.address === ETHER_ADDRESS
-
-        if ([baseAsset.address, quoteAsset.address].includes("0x9631be8566fC71d91970b10AcfdEe29F21Da6C27")) {
-            setTransaction({ hash: '', summary: '', error: {message:"Unsupported Asset! Please Migrate IMON to KWL!"} });
-            toggleError();
-            return;
-        }
-        
-
-        const amountIn: string = toHex(tradeInfo.maximumAmountIn(DEFAULT_ADD_SLIPPAGE_TOLERANCE))
-        const amountOut: string = toHex(tradeInfo.minimumAmountOut(DEFAULT_ADD_SLIPPAGE_TOLERANCE))
-
-        console.log("TradeInfo", tradeInfo)
-        console.log("amountIn", amountIn)
-        console.log("amountOut", amountOut)
-        console.log("etherIn", etherIn)
-        console.log("etherOut", etherOut)
-
-        const addressTo = account
-        const deadline = moment().utc().unix() + (userDeadline)
-
-
-        const path: string[] = tradeInfo.route.path.map((token: Token) => token.address)
-        toggleLoading();
-        switch (tradeInfo.tradeType) {
-            case TradeType.EXACT_INPUT:
-                if (etherIn) {
-                    let overrides = { value: amountIn }
-
-                    if(userTax){
-                        console.log("input,etherIn,tax,swapExactETHForTokensSupportingFeeOnTransferTokens")
-                        await EXCHANGE.swapExactETHForTokensSupportingFeeOnTransferTokens(amountOut, path, addressTo, deadline, overrides).then(async (tx) => {
-                            await tx.wait();
-                            const summary = `Trading : ${tx.hash}`
-                            setTransaction({ hash: tx.hash, summary: summary, error: null });
-                            toggleTransactionSuccess();
-                        }).catch((error: Error) => {
-                            setTransaction({ hash: '', summary: '', error: error });
-                            toggleError();
-                        }).finally(async () => {
-                            toggleLoading();
-                            fetchPrice();
-                        });
-                    }else{
-                        console.log("input,etherIn,tax,swapExactETHForTokens")
-                        await EXCHANGE.swapExactETHForTokens(amountOut, path, addressTo, deadline, overrides).then(async (tx) => {
-                            await tx.wait();
-                            const summary = `Trading : ${tx.hash}`
-                            setTransaction({ hash: tx.hash, summary: summary, error: null });
-                            toggleTransactionSuccess();
-                        }).catch((error: Error) => {
-                            setTransaction({ hash: '', summary: '', error: error });
-                            toggleError();
-                        }).finally(async () => {
-                            toggleLoading();
-                            fetchPrice();
-                        }); 
-                    }
-
-               
-                } else if (etherOut) {
-                    if(userTax){
-                        console.log("input,etherOut,taxOn,swapExactTokensForETHSupportingFeeOnTransferTokens")
-                        await EXCHANGE.swapExactTokensForETHSupportingFeeOnTransferTokens(amountIn, amountOut, path, addressTo, deadline).then(async (tx) => {
-                            await tx.wait();
-                            const summary = `Trading : ${tx.hash}`
-                            setTransaction({ hash: tx.hash, summary: summary, error: null });
-                            toggleTransactionSuccess();
-                        }).catch((error: Error) => {
-                            setTransaction({ hash: '', summary: '', error: error });
-                            toggleError();
-                        }).finally(async () => {
-                            toggleLoading();
-                            fetchPrice();
-                        }); 
-                    }
-                    else
-                    {
-                        console.log("input,etherOut,taxOf,swapExactTokensForETH")
-                            await EXCHANGE.swapExactTokensForETH(amountIn, amountOut, path, addressTo, deadline).then(async (tx) => {
-                                await tx.wait();
-                                const summary = `Trading : ${tx.hash}`
-                                setTransaction({ hash: tx.hash, summary: summary, error: null });
-                                toggleTransactionSuccess();
-                            }).catch((error: Error) => {
-                                setTransaction({ hash: '', summary: '', error: error });
-                                toggleError();
-                            }).finally(async () => {
-                                toggleLoading();
-                                fetchPrice();
-                            });
-                    }
-
-            
-                } else {
-                    if(userTax){
-                        console.log("input,tokenToken,taxOn,swapExactTokensForTokensSupportingFeeOnTransferTokens")
-                        await EXCHANGE.swapExactTokensForTokensSupportingFeeOnTransferTokens(amountIn, amountOut, path, addressTo, deadline).then(async (tx) => {
-                            await tx.wait();
-                            const summary = `Trading : ${tx.hash}`
-                            setTransaction({ hash: tx.hash, summary: summary, error: null });
-                            toggleTransactionSuccess();
-                        }).catch((error: Error) => {
-                            setTransaction({ hash: '', summary: '', error: error });
-                            toggleError();
-                        }).finally(async () => {
-                            toggleLoading();
-                            fetchPrice();
-                        });
-                    }else{
-                        console.log("input,tokenToken,taxOff,swapExactTokensForTokensSupportingFeeOnTransferTokens")
-                        await EXCHANGE.swapExactTokensForTokens(amountIn, amountOut, path, addressTo, deadline).then(async (tx) => {
-                            await tx.wait();
-                            const summary = `Trading : ${tx.hash}`
-                            setTransaction({ hash: tx.hash, summary: summary, error: null });
-                            toggleTransactionSuccess();
-                        }).catch((error: Error) => {
-                            setTransaction({ hash: '', summary: '', error: error });
-                            toggleError();
-                        }).finally(async () => {
-                            toggleLoading();
-                            fetchPrice();
-                        });
-                    }
-                 
-                }
-                break
-            case TradeType.EXACT_OUTPUT:
-                if (etherIn) {
-                    let overrides = { value: amountIn }
-                    await EXCHANGE.swapETHForExactTokens(amountOut, path, addressTo, deadline, overrides).then(async (tx) => {
-                        await tx.wait();
-                        const summary = `Trading : ${tx.hash}`
-                        setTransaction({ hash: tx.hash, summary: summary, error: null });
-                        toggleTransactionSuccess();
-                    }).catch((error: Error) => {
-                        setTransaction({ hash: '', summary: '', error: error });
-                        toggleError();
-                    }).finally(async () => {
-                        toggleLoading();
-                        fetchPrice();
-                    });
-                } else if (etherOut) {
-
-                    await EXCHANGE.swapTokensForExactETH(amountOut, amountIn, path, addressTo, deadline).then(async (tx) => {
-                        await tx.wait();
-                        const summary = `Trading : ${tx.hash}`
-                        setTransaction({ hash: tx.hash, summary: summary, error: null });
-                        toggleTransactionSuccess();
-                    }).catch((error: Error) => {
-                        setTransaction({ hash: '', summary: '', error: error });
-                        toggleError();
-                    }).finally(async () => {
-                        toggleLoading();
-                        fetchPrice();
-                    });
-                } else {
-
-                    await EXCHANGE.swapTokensForExactTokens(amountOut, amountIn, path, addressTo, deadline).then(async (tx) => {
-                        await tx.wait();
-                        const summary = `Trading : ${tx.hash}`
-                        setTransaction({ hash: tx.hash, summary: summary, error: null });
-                        toggleTransactionSuccess();
-                    }).catch((error: Error) => {
-                        setTransaction({ hash: '', summary: '', error: error });
-                        toggleError();
-                    }).finally(async () => {
-                        toggleLoading();
-                        fetchPrice();
-                    });
-                }
-                break
-        }
-
-    }
-
     useEffect(() => {
         if (!isSupportedChain(chainId)) {
             setBaseAsset(null)
             setQuoteAsset(null)
             setPairInfo(null)
         }
-        fetchPrice()
-    }, [chainId, account, defaultAssets, provider,baseAsset,quoteAsset,  baseInputValue, quoteInputValue])
+
+    }, [chainId, account, defaultAssets, provider, baseAsset, quoteAsset])
 
     const handleApprove = async (token) => {
         let poolToken = ERC20Contract(token);
@@ -589,19 +425,44 @@ const _SWAP_TAB = () => {
         const temp = baseAsset;
         setBaseAsset(quoteAsset);
         setQuoteAsset(temp)
-
     }
 
-    const onSelectToken = (tokenInfo) => {
-        isBase ? setBaseAsset(tokenInfo) : setQuoteAsset(tokenInfo)
-        toggleSelectToken()
+    const onSelectToken = async (tokenInfo: any, selection: boolean = true) => {
+
+        let baseAssetInfo = { ...tokenInfo };
+        let wrappedAssetInfo = { ...baseAssetInfo };
+        wrappedAssetInfo.symbol = "W" + tokenInfo.symbol;
+        wrappedAssetInfo.decimals = 18;
+        const wrappedAsset = await FANTOKENWRAPPER.underlyingToWrapped(baseAssetInfo.address);
+
+
+        if (ethers.constants.AddressZero != wrappedAsset) {
+            let wrappedTokenERC = ERC20Contract(wrappedAsset);
+            let wrappedBalance = await wrappedTokenERC.balanceOf(account);
+            const wrappedToken = new Token(baseAssetInfo.chainId, wrappedAsset, 18, wrappedAssetInfo.symbol)
+            const wrappedTokenBalance = CurrencyAmount.fromRawAmount(wrappedToken, wrappedBalance).toSignificant(6)
+            wrappedAssetInfo.balance = wrappedTokenBalance
+
+        }
+
+        if (isBase) {
+            wrappedAssetInfo.address = wrappedAsset;
+            setBaseAsset(baseAssetInfo)
+            setQuoteAsset(wrappedAssetInfo)
+
+        } else {
+            wrappedAssetInfo.address = wrappedAsset;
+            setQuoteAsset(baseAssetInfo)
+            setBaseAsset(wrappedAssetInfo)
+
+
+        }
+
+        if (selection) {
+            toggleSelectToken()
+        }
     }
 
-    const handleSelectPair = (pair:any, base: any, quote: any) => {
-        setBaseAsset(base);
-        setQuoteAsset(quote);
-        toggleSelectToken();
-    }
     const isAllowanceRequired = () => {
         if (!baseAsset) {
             return false
@@ -624,7 +485,7 @@ const _SWAP_TAB = () => {
     return (
         <>
             <ModalNoProvider isShowing={isNoProvider} hide={toggleNoProvider} />
-            <ModalSelectToken disableToken={!isBase ? baseAsset : quoteAsset} hide={toggleSelectToken} isShowing={isSelectToken} onSelect={onSelectToken} isClosable={true} tokenList={defaultAssets} onSelectPair={handleSelectPair} allExchangePairs={allExchangePairs} />
+            <ModalSelectFanToken disableToken={!isBase ? baseAsset : quoteAsset} hide={toggleSelectToken} isShowing={isSelectToken} onSelect={onSelectToken} isClosable={true} tokenList={defaultAssets} onSelectPair={null} allExchangePairs={null} />
             <UniwalletModal />
             <ModalConnect isShowing={isConnect} hide={toggleConnectModal} />
             <ModalNoProvider isShowing={isNoProvider} hide={toggleNoProvider} />
@@ -643,7 +504,7 @@ const _SWAP_TAB = () => {
             <div className="flex flex-col gap-2 rounded-xl w-full">
                 <div className="w-full rounded-xl">
 
-            
+
 
 
                     <div className="swap-inputs">
@@ -717,7 +578,7 @@ const _SWAP_TAB = () => {
                                         </span>
                                     }
                                 >
-        
+
                                     {quoteAsset.symbol}
                                 </Button>
 
@@ -740,72 +601,6 @@ const _SWAP_TAB = () => {
                 </div>
 
                 <div className={"flex flex-col gap-2 w-full"}>
-                    <div className={"w-full flex flex-col gap-2 rounded-lg"}>
-
-                        {
-                            tradeInfo && <div className={"w-full grid grid-cols-2 rounded-lg border border-default-100 p-2 text-center gap-2"}>
-
-                                <div className={"flex items-start justify-start w-full col-span-2"}>
-                                    Trading Info
-                                </div>
-                                <small className={"col-span-2 text-left"}>Available Liquidity</small>
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
-                                    <small className={"w-full text-start py-2"} >{baseLiquidity} {baseAsset?.symbol}</small>
-                                </div>
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
-                                    <small className={"w-full text-start py-2"} >{quoteLiquidity} {quoteAsset?.symbol}</small>
-                                </div>
-
-                                <small className={"col-span-2 text-left"}>Price</small>
-
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
-                                    <small className="py-2">{tradeInfo.executionPrice.invert().toSignificant()} {baseAsset?.symbol} per {quoteAsset?.symbol}</small>
-                                </div>
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
-                                    <small className="py-2">{tradeInfo.executionPrice.toSignificant()}  {quoteAsset?.symbol} per {baseAsset?.symbol}</small>
-                                </div>
-
-
-                            </div>
-                        }
-
-                        {
-                            tradeInfo && <div className={"w-full grid grid-cols-2 gap-2 justify-around rounded-lg border border-default-100 p-2 text-center"}>
-                                <small className={"text-left"}>Price Impact</small>
-                                <small className={"text-right"}>{tradeInfo.priceImpact.toFixed(2)}%</small>
-
-                                {
-                                    parseFloat(tradeInfo.priceImpact.toFixed(2)) > 5 &&
-                                    <small className={"text-center bg-danger-500/10 text-danger-500 rounded-lg col-span-2 p-2"}>
-                                        A swap of this size may have a high price impact, given the current liquidity in the pool. There may be a large difference between the amount of your input token and what you will receive in the output token
-                                    </small>
-                                }
-
-                            </div>
-                        }
-
-
-
-
-                        {
-                            pairInfo && pairInfo.valid && pairInfo.reserveBase == 0 && pairInfo.reserveQuote == 0 && <div className={"bg-red-500 text-white text-center w-full rounded-lg p-2"}>
-                                {baseAsset?.symbol} x {quoteAsset?.symbol} No liquidity found!
-                            </div>
-                        }
-                        {
-                            pairInfo && !pairInfo.valid && <div className={"flex flex-col gap-2 text-white text-center w-full rounded-lg"}>
-                                <Card className={"w-full rounded-lg flex flex-row items-center justify-start gap-2 p-2"}>
-                                    <DoubleCurrencyIcon baseIcon={baseAsset?.logoURI} quoteIcon={quoteAsset?.logoURI} />
-                                    <span className={"text-red-500"}>{baseAsset?.symbol} x {quoteAsset?.symbol} liquidity doesn't exists!</span>
-                                </Card>
-                            </div>
-                        }
-                    </div>
-
                     {
                         pairInfo && pairInfo.valid && baseAsset && quoteAsset && <div className={"w-full grid grid-cols-1 gap-2"}>
                             {
@@ -820,24 +615,20 @@ const _SWAP_TAB = () => {
                     }
 
 
-                    <div className="w-full flex flex-col items-center justify-center">
-                        <Button className='w-full' onClick={()=>{
-                            handleWrap()
-                        }}> WRAP</Button>
+                    <div className="w-full flex flex-col gap-2 items-center justify-center">
+
                         {
-                            account ? isAllowanceRequired() === false && pairInfo && pairInfo.valid && hasLiquidity &&
-                                <Button className={"w-full"} onClick={() => {
-                                    handleSwap()
-                                }} color="danger">
-                                    Swap
-                                </Button>
+                            baseAsset && quoteAsset && quoteAsset.symbol == `W${baseAsset.symbol}` ?
+                                baseAsset && quoteAsset && <Button color={"danger"} variant='solid' fullWidth onClick={() => {
+                                    handleWrap()
+                                }}> Wrap {baseAsset.symbol} to {quoteAsset.symbol}  </Button>
                                 :
-                                <Button className={"w-full"} onClick={() => {
-                                    toggleConnectModal()
-                                }} color="danger">
-                                    Connect
-                                </Button>
+                                baseAsset && quoteAsset && <Button color={"danger"} variant='solid' fullWidth onClick={() => {
+                                    handleUnWrap()
+                                }}> Unwrap {baseAsset.symbol} to {quoteAsset.symbol} </Button>
+
                         }
+
 
 
                     </div>
@@ -846,7 +637,7 @@ const _SWAP_TAB = () => {
 
                 </div>
             </div>
-          
+
         </>
     );
 }

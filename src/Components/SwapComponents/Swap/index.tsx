@@ -343,6 +343,52 @@ const _SWAP_TAB = () => {
 
     }
 
+    const handleUnWrap = async () => {
+        if (!baseAsset) { displayError("Please select base asset!"); return; }
+
+
+
+        let FAN_TOKEN_ADDRESS = "0x7B9d4199368CA5F567999Fc35Aa3F6f86b18D2F2"
+        let fanToken = ERC20Contract(FAN_TOKEN_ADDRESS);
+        const fanTokenDecimals = await fanToken.decimals();
+
+        const baseVal = ethers.utils.parseUnits(baseInputValue, fanTokenDecimals);
+
+        
+        //const allowanceAmount = fanToken.allowance()
+        
+        toggleLoading();
+        await fanToken.approve(FANTOKENWRAPPER.address, baseVal, { from: account }).then(async (tx) => {
+            await tx.wait();
+            const summary = `Unlocking tokens for: ${FANTOKENWRAPPER.address}`
+            setTransaction({ hash: tx.hash, summary: summary, error: null });
+            await provider.getTransactionReceipt(tx.hash).then(() => {
+                toggleTransactionSuccess();
+            });
+        }).catch((error: Error) => {
+            setTransaction({ hash: '', summary: '', error: error });
+            toggleError();
+        }).finally(async () => {
+            toggleLoading();
+        });
+        
+            
+        
+        toggleLoading();
+        await FANTOKENWRAPPER.unwrap(account,FAN_TOKEN_ADDRESS,baseVal).then(async (tx) => {
+            await tx.wait();
+            const summary = `Wrapping : ${tx.hash}`
+            setTransaction({ hash: tx.hash, summary: summary, error: null });
+            toggleTransactionSuccess();
+        }).catch((error: Error) => {
+            setTransaction({ hash: '', summary: '', error: error });
+            toggleError();
+        }).finally(async () => {
+            toggleLoading();
+        });
+
+    }
+
     const handleSwap = async () => {
         if (!baseAsset) { displayError("Please select base asset!"); return; }
         if (!quoteAsset) { displayError("Please select quote asset!"); return; }
@@ -825,7 +871,8 @@ const _SWAP_TAB = () => {
 
 
                     <div className="w-full flex flex-col items-center justify-center">
-                    
+              
+                        
                         {
                             account ? isAllowanceRequired() === false && pairInfo && pairInfo.valid && hasLiquidity &&
                                 <Button className={"w-full"} onClick={() => {

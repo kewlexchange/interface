@@ -184,8 +184,7 @@ const App = () => {
 
 
         <Navbar
-          isBlurred={true}
-          isBordered shouldHideOnScroll={false} maxWidth={"full"} position="sticky"
+          shouldHideOnScroll={false} maxWidth={"full"} position="sticky"
           isMenuOpen={isMenuOpen}
 
           onMenuOpenChange={setIsMenuOpen}
@@ -219,19 +218,7 @@ const App = () => {
             </NavbarItem>
 
 
-            <NavbarItem className='flex flex-row items-center justify-center'>
-              <Link color="foreground" as={NavLink} to={"/earn"}>
-
-                <span>{t("Earn")}</span></Link>
-            </NavbarItem>
-
-            <NavbarItem className='flex flex-row items-center justify-center'>
-              <Link color="foreground" as={NavLink} to={"/euro2024"}>
-
-                <span>{t("EURO 2024")}</span></Link>
-            </NavbarItem>
-
-
+  
             <NavbarItem className='flex flex-row items-center justify-center'>
               <Link color="foreground" as={NavLink} to={"/cns"}>
 
@@ -246,6 +233,13 @@ const App = () => {
             </NavbarItem>
 
 
+
+  
+            <NavbarItem className='flex flex-row items-center justify-center'>
+              <Link color="foreground" as={NavLink} to={"/explorer"}>
+
+                <span>{t("Explorer")}</span></Link>
+            </NavbarItem>
 
 
             <Dropdown>
@@ -276,13 +270,6 @@ const App = () => {
               >
 
 
-
-                <DropdownItem as={NavLink} to={"/explorer"}
-                  key="explorer"
-                  description="New pairs listed on KEWL Swap with pool variation in real time"
-                >
-                  {t("Pair Explorer")}
-                </DropdownItem>
 
 
                 <DropdownItem as={NavLink} to={"/listing"}

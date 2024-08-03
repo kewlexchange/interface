@@ -11,7 +11,7 @@ import { CONTRACT_ADRESSES } from '../../../contracts/addresses';
 import { ChainId } from '../../../constants/chains';
 import { useNavigate } from 'react-router-dom';
 
-const _PairTAB = (props: { exchange, tokens }) => {
+const _PricesTAB = (props: { tokens: any }) => {
     const { connector, account, provider, chainId } = useWeb3React()
     const EXCHANGE = useExchangeContract(chainId, true)
     const JALASWAP = useJALASwapFactory(chainId, true)
@@ -26,9 +26,9 @@ const _PairTAB = (props: { exchange, tokens }) => {
 
 
 
-    const fetchPairs = async (dexName: any) => {
+    const fetchPairs = async () => {
         setLoaded(false)
-        let dexURL = ` https://api.kewl.exchange/explorer?dex=${dexName}`
+        let dexURL = ` https://api.kewl.exchange/radar`
         var response: any;
         var responseData: any = null
         try {
@@ -36,6 +36,7 @@ const _PairTAB = (props: { exchange, tokens }) => {
             let responseJSON = await response.json()
             setAllExchangePairs(responseJSON.PairInfo)
         } catch (error) {
+            setAllExchangePairs([])
             responseData = { Message: "Internal Service Error!", Status: false }
             response = { status: 500, statusText: "Internal Service Error!" }
         }
@@ -43,24 +44,9 @@ const _PairTAB = (props: { exchange, tokens }) => {
 
     }
     useEffect(() => {
+        fetchPairs();
 
-
-        if (props.exchange === "IMON") {
-            fetchPairs(`KEWL`);
-        } else if (props.exchange === "JALA") {
-            console.log("jalaswap")
-            fetchPairs(`KAYEN`);
-        } else if (props.exchange === "CHILIZSWAP") {
-            console.log("chilizswap")
-            fetchPairs(`CHILIZSWAP`);
-        } else if (props.exchange === "DIVISWAP") {
-            console.log("diwiswap")
-            fetchPairs(`DIVISWAP`);
-        } else if (props.exchange === "ALL") {
-            console.log("diwiswap")
-            fetchPairs(``);
-        }
-    }, [props.exchange, chainId, account])
+    }, [chainId, account])
 
 
     const getIconPath = (ticker: any) => {
@@ -86,72 +72,62 @@ const _PairTAB = (props: { exchange, tokens }) => {
     }
 
 
+    const formatCurrency = (currency : any) => {
+        return isNaN(parseFloat(currency)) ? "-" : parseFloat(currency).toFixed(4);
+    }
+
     return (
         <>
-            <Table removeWrapper isStriped isHeaderSticky color='danger'
-                onRowAction={(key: any) => {
-                    navigate(`${key}`)
-                }}
+            <Table removeWrapper  isHeaderSticky color='danger'
                 classNames={{
-                    base: "h-screen overflow-scroll",
+                    base: "max-h-[600px] overflow-scroll",
+                    table: "min-h-[420px]",
                 }}
                 selectionMode="single"
                 aria-label="Example static collection table">
                 <TableHeader>
-                    <TableColumn>DEX</TableColumn>
-                    <TableColumn>ChainId</TableColumn>
-                    <TableColumn>Pair Info</TableColumn>
-                    <TableColumn>Base Liquidity</TableColumn>
-                    <TableColumn>Quote Liquidity</TableColumn>
-                    <TableColumn>Base Price</TableColumn>
-                    <TableColumn>Quote Price</TableColumn>
+                    <TableColumn>ASSET</TableColumn>
+                    <TableColumn>KEWL</TableColumn>
+                    <TableColumn>CHILIZNET</TableColumn>
+                    <TableColumn>KAYEN</TableColumn>
+                    <TableColumn>CHILIZSWAP</TableColumn>
+                    <TableColumn>DIVISWAP</TableColumn>
                 </TableHeader>
                 <TableBody emptyContent={isLoaded ? "No Pairs Found!" : "Loading... Please Wait!"}
                     isLoading={!isLoaded}
                     items={allExchangePairs}
                     loadingContent={<Spinner color="danger" />}>
                     {(pair: any) => (
-
-
-                        parseFloat(ethers.utils.formatUnits(pair.reserveBase, pair.baseDecimals)) > 1 && parseFloat(ethers.utils.formatUnits(pair.reserveQuote, pair.quoteDecimals)) > 1 && <TableRow key={`/explorer/${pair.pairAddress}`}>
+                       getIconPath(pair.ticker) != "" && <TableRow key={pair.ticker}>
 
                             <TableCell>
-                                {pair.DEX}
-
-
-                            </TableCell>
-                            <TableCell>
-
-                                {pair.chainId}
-
-                            </TableCell>
-                            <TableCell>
-                                <div className='flex flex-row gap-2 items-center justify-start'>
-                                    <DoubleCurrencyIcon baseIcon={getIconPath(pair.baseSymbol)} quoteIcon={getIconPath(pair.quoteSymbol)} />
-                                    <span>
-                                        {pair.baseSymbol} x {pair.quoteSymbol}
-                                    </span>
+                            <div className='flex flex-row gap-2 items-center justify-start'>
+                            <Avatar isBordered src={getIconPath(pair.ticker)}/>
+                            {pair.ticker}
                                 </div>
-
-
+                        
+                            </TableCell>
+                            <TableCell  className='items-end justify-end text-end'>
+                                {formatCurrency(pair.kewl)}
                             </TableCell>
 
                             <TableCell className='items-end justify-end text-end'>
-                                {parseFloat(ethers.utils.formatUnits(pair.reserveBase, pair.baseDecimals)).toFixed(4)}   {pair.baseSymbol}
-                            </TableCell>
-
-                            <TableCell className='items-end justify-end text-end'>
-                                {parseFloat(ethers.utils.formatUnits(pair.reserveQuote, pair.quoteDecimals)).toFixed(4)} {pair.quoteSymbol}
-
+                                {formatCurrency(pair.chilizx)}
                             </TableCell >
-                            <TableCell className='items-end justify-end text-end'>
-                                {parseFloat(pair.priceBase).toFixed(8)}  {pair.quoteSymbol}
+                           
+                            <TableCell  className='items-end justify-end text-end'>
+                                {formatCurrency(pair.kayen)}
+
+                            </TableCell>
+                            <TableCell  className='items-end justify-end text-end'>
+                                {formatCurrency(pair.chilizswap)}
                             </TableCell>
 
                             <TableCell className='items-end justify-end text-end'>
-                                {parseFloat(pair.priceQuote).toFixed(8)} {pair.baseSymbol}
-
+                                {formatCurrency(pair.diviswap)}
                             </TableCell>
+
+
                         </TableRow>
 
                     )}
@@ -160,4 +136,4 @@ const _PairTAB = (props: { exchange, tokens }) => {
         </>
     );
 }
-export const PairTAB = memo(_PairTAB)
+export const PricesTAB = memo(_PricesTAB)

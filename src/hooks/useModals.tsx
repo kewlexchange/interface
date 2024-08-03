@@ -853,6 +853,411 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
     )
 }
 
+export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, onSelect, isClosable, allExchangePairs, onSelectPair }) => {
+    const { chainId, account } = useWeb3React()
+    const [allTokenList, setAllTokenList] = useState([])
+    const [searchText, setSearchText] = useState("")
+    const [filteredItems, setFilteredItems] = useState([]);
+    const [externalTokenName, setExternalTokenName] = useState("")
+    const [externalTokenSymbol, setExternalTokenSymbol] = useState("")
+    const [externalTokenAddress, setExternalTokenAddress] = useState("")
+    const [externalTokenDecimals, setExternalTokenDecimals] = useState(0)
+    const [externalTokenBalance, setExternalTokenBalance] = useState("0")
+    const ERC20Contract = useERC20Contract()
+    const dispatch = useAppDispatch()
+    var customTokens = useAppSelector((state) => state.user.customTokenList && state.user.customTokenList[chainId])
+    const {state:isTransactionSuccess, toggle:toggleTransactionSuccess } = useModal();
+    const {state:isShowLoading, toggle:toggleLoading } = useModal();
+    const { state: isErrorShowing, toggle: toggleError } = useModal()
+    const { state: isInfoShowing, toggle: toggleInfo } = useModal()
+    const [transaction, setTransaction] = useState({hash: '',summary: '',error: null})
+    const [isSelected, setIsSelected] = useState(false);
+
+    const CNS_DOMAIN_CONTRACT = useDomainContract(chainId, true);
+
+
+    useEffect(() => {
+        if (searchText !== "") {
+            const filteredList = tokenList.filter((item) =>
+                item.symbol.toLowerCase().includes(searchText.toLowerCase())
+            );
+            setFilteredItems(filteredList);
+        } else {
+            setFilteredItems(tokenList)
+        }
+
+    }, [searchText])
+
+    const getIconPath = (ticker: any) => {
+        if (!tokenList) {
+            return
+        }
+        if (tokenList.length == 0) {
+            return;
+        }
+        const findItem = tokenList.filter((item) => item.symbol.toLowerCase().includes(ticker.toLowerCase()));
+        return findItem.length > 0 ? findItem[0].logoURI : ""
+
+    }
+
+    const handleSelectPair = (exchangeItem: any) => {
+        const baseItem = tokenList.filter((item) => item.address.toLowerCase().includes(exchangeItem.base.token.toLowerCase()));
+        const quoteItem = tokenList.filter((item) => item.address.toLowerCase().includes(exchangeItem.quote.token.toLowerCase()));
+
+
+        if(baseItem.length == 0){
+            baseItem.push( {
+                "chainId": chainId,
+                "address": exchangeItem.base.token,
+                "name": exchangeItem.base.name,
+                "symbol": exchangeItem.base.symbol,
+                "decimals": BigNumber.from(exchangeItem.base.decimals).toNumber(),
+                "logoURI": DEFAULT_TOKEN_LOGO,
+                "balance": "0"
+            })
+        }
+        if(quoteItem.length == 0){
+            quoteItem.push( {
+                "chainId": chainId,
+                "address": exchangeItem.quote.token,
+                "name": exchangeItem.quote.name,
+                "symbol": exchangeItem.quote.symbol,
+                "decimals": BigNumber.from(exchangeItem.quote.decimals).toNumber(),
+                "logoURI": DEFAULT_TOKEN_LOGO,
+                "balance": "0"
+            })
+        }
+
+        console.log(baseItem,quoteItem,exchangeItem)
+        if (onSelectPair) {
+            if (baseItem.length > 0 && quoteItem.length > 0) {
+                onSelectPair(exchangeItem, baseItem[0], quoteItem[0]);
+            }
+        }
+
+
+    }
+
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setSearchText(event.target.value);
+    };
+
+    const fetchTokenInfo = async (tokenAddress: any) => {
+        try {
+            const ERC20Token = ERC20Contract(tokenAddress)
+            const name = await ERC20Token.name();
+            const symbol = await ERC20Token.symbol();
+            const decimals = await ERC20Token.decimals();
+            const balance = await ERC20Token.balanceOf(account)
+
+
+            const tokenAddr = new Token(chainId, tokenAddress, BigNumber.from(decimals).toNumber())
+
+            setExternalTokenName(name)
+            setExternalTokenDecimals(BigNumber.from(decimals).toNumber())
+            setExternalTokenSymbol(symbol)
+            setExternalTokenBalance(CurrencyAmount.fromRawAmount(tokenAddr, balance).toSignificant())
+        } catch (e) {
+
+        }
+
+    }
+
+    useEffect(() => {
+        if (isAddress(externalTokenAddress)) {
+            fetchTokenInfo(getAddress(externalTokenAddress))
+        } else {
+            setExternalTokenDecimals(0)
+            setExternalTokenName("")
+            setExternalTokenSymbol("")
+        }
+    }, [externalTokenAddress])
+
+    const handleContractAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (isAddress(event?.target?.value)) {
+            setExternalTokenAddress(event?.target?.value)
+        } else {
+            setExternalTokenAddress("")
+
+        }
+    };
+
+    const handleImportToken = async () => {
+        if (!isAddress(externalTokenAddress)) {
+            return
+        }
+        let tokenInfo = {
+            "chainId": chainId,
+            "address": externalTokenAddress,
+            "name": externalTokenName,
+            "symbol": externalTokenSymbol,
+            "decimals": externalTokenDecimals,
+            "logoURI": "https://kewl.exchange/images/coins/skull.svg"
+        }
+
+        if (!chainId) {
+            return
+        }
+        if (chainId < 1) {
+            return
+        }
+
+
+        /*
+        const [_isRegistered, _Address] = await CNS_DOMAIN_CONTRACT.isRegistered(account);
+       if(!_isRegistered){
+        setTransaction({ hash: '', summary: '', error:{message:`To import external tokens, you need to perform Domain Registration. Please complete your Domain Registration.`}});
+        toggleError();
+        return
+       }
+       */
+
+        let customTokenList = [];
+        customTokenList.push(tokenInfo)
+        if (customTokens) {
+
+            let hasToken = customTokens.some(token => token.address === externalTokenAddress);
+            if (!hasToken) {
+                customTokenList = [] = [...customTokenList, ...customTokens];
+            } else {
+                console.log("already exists")
+            }
+
+        }
+
+
+        let newToken = [{
+            "chainId": chainId,
+            "address": externalTokenAddress,
+            "name": externalTokenName,
+            "symbol": externalTokenSymbol,
+            "decimals": externalTokenDecimals,
+            "logoURI": "https://kewl.exchange/images/coins/skull.svg",
+            "balance": externalTokenBalance
+        }]
+        let newTokenList = [] = [...filteredItems, ...newToken];
+        setFilteredItems(newTokenList)
+
+        dispatch(updateCustomTokenList({ chainId: chainId, tokens: customTokenList }))
+
+        setTransaction({ hash: '', summary: '', error:{message:`Token has been imported.`}});
+        toggleInfo();
+
+    }
+
+
+    const canDisplayExchangePair = (pair) => {
+
+        const baseItem = filteredItems.filter((item) => item.address.toLowerCase().includes(pair.base.token.toLowerCase()));
+        const quoteItem = filteredItems.filter((item) => item.address.toLowerCase().includes(pair.quote.token.toLowerCase()));
+
+     
+        
+        if(baseItem.length == 0){
+            return false
+        }
+
+        if(quoteItem.length == 0){
+            return false
+        }
+
+        return true
+
+    }
+
+    const canDisplay = (inputAddress) => {
+
+
+
+
+        let hideAddresses = [
+            "0x70d0fd23C13ebA3104C28e1dC8c470a253F73Fd7",
+            "0xE02A38Ad58152Ab7CFC68Db4705E8c88B93479CB",
+            "0xc57765AE831BD4c117BA103B802b74DdCF3750d2",
+            "0xF299328bC0ED4ADC6713f1B3d4aa169569431579",
+            "0xC245A489aaDC5E4519B852142D1AFF3E3418151e",
+            "0x68d73FE616c3faaC1FC0feC6899a84e69b2CfA4F",
+            "0xd4A1da83dc89aA13B8fa15d3Bf4EB1D52B6A949e"
+        ]
+        if (hideAddresses.includes(inputAddress)) {
+            if (chainId == ChainId.ARBITRUM_ONE) {
+                return false;
+            }
+        }
+
+        let chilizAddresses = [
+            "0x67289d20400EF06171dF3ADe7f5B826Daf3685D8",
+            "0x70d0fd23C13ebA3104C28e1dC8c470a253F73Fd7",
+            "0x9631be8566fC71d91970b10AcfdEe29F21Da6C27",
+
+        ]
+        if (chilizAddresses.includes(inputAddress)) {
+            if (chainId == ChainId.CHILIZ_MAINNET) {
+                return false;
+            }
+        }
+
+
+        let ret = true;
+        if (!chainId) { return false }
+        if (!disableToken) {
+            return false;
+        }
+        if (inputAddress === disableToken?.address) {
+            ret = false;
+        }
+
+        if (!isSupportedChain(chainId)) {
+            return false
+        }
+        const weth9Address = WETH9[chainId].address
+        if (disableToken.address === ETHER_ADDRESS) {
+            if (inputAddress === weth9Address) {
+                ret = false;
+            }
+        }
+
+        if (disableToken.address === weth9Address) {
+            if (inputAddress === ETHER_ADDRESS) {
+                ret = false;
+            }
+        }
+        return ret
+    }
+
+    useEffect(() => {
+
+        console.log(tokenList)
+        if (tokenList) {
+            setFilteredItems(tokenList)
+            setAllTokenList(tokenList)
+        }
+    }, [tokenList])
+
+    return (<>
+
+        <ModalInfo
+            isShowing={isInfoShowing}
+            hide={toggleInfo}
+            error={transaction.error}
+        />
+            <ModalError
+                isShowing={isErrorShowing}
+                hide={toggleError}
+                error={transaction.error}
+            />
+        <CustomModal header={"Select Token"} isShowing={isShowing} hide={hide} closable={isClosable}>
+            <div className={"w-full"}>
+
+
+
+
+                <Card shadow="sm" fullWidth={true}>
+
+                    <CardBody>
+                        <Tabs color="danger" aria-label="Options">
+                            <Tab key="tokens" title="Tokens">
+                                <Card shadow="sm">
+                                    <CardHeader>
+                                        <Input startContent={
+                                            <span translate="no" className="material-symbols-outlined">
+                                                search
+                                            </span>
+                                        }
+
+                                            label="Search" variant="flat" size="lg" value={searchText}
+                                            onChange={handleInputChange}
+                                            className="w-full" type="text" placeholder="" />
+
+                                    </CardHeader>
+                                    <CardBody>
+                                        <ScrollShadow orientation="horizontal" className="w-full h-[270px] max-h-[270px]">
+
+                                            <Listbox className="w-full" variant="flat" aria-label="Listbox menu with sections">
+
+                                                <ListboxSection title="Tokens">
+
+                                                    {
+                                                        disableToken && filteredItems && filteredItems.map((tokenItem) => {
+                                                            return (tokenItem.decimals < 18 && canDisplay(tokenItem.address)) &&
+                                                                <ListboxItem startContent={
+                                                                    <AvatarGroup size='sm' isBordered>
+
+                                                                        <Avatar size='sm' src={tokenItem.logoURI} />
+
+                                                                    </AvatarGroup>
+
+                                                                }
+                                                                    key={`token${tokenItem.address}`} onClick={() => {
+                                                                        onSelect(tokenItem)
+                                                                        setSearchText("")
+                                                                    }} className={"w-full flex flex-row items-center justify-between gap-2"}>
+                                                                    <div className={"flex flex-row items-center justify-between gap-2 w-full"}>
+                                                                        <div className={"w-full flex flex-col items-center justify-center gap-2"}>
+                                                                            <div className={"w-full flex flex-col items-start justify-start whitespace-nowrap overflow-ellipsis"}>
+                                                                                <span className="font-bold">{tokenItem.symbol}</span>
+                                                                                <span className={"text-xs whitespace-nowrap overflow-ellipsis"}>{tokenItem.name}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className={"w-full text-xs text-end "}>
+                                                                            {tokenItem.balance}
+                                                                        </div>
+                                                                    </div>
+
+                                                                </ListboxItem>
+                                                        })
+                                                    }
+                                                </ListboxSection>
+                                            </Listbox>
+                                        </ScrollShadow>
+                                    </CardBody>
+                                </Card>
+                            </Tab>
+                        
+                            <Tab key={"import"} title={"Import Token"}>
+                                <Card>
+                                    <CardBody className="flex flex-col gap-2">
+                                        <Input onChange={handleContractAddressChange} size="lg" type="text" label="Contract Address" placeholder="0x" />
+                                        <Input isDisabled isReadOnly size="lg" type="text" label="Name" placeholder="" value={externalTokenName} />
+                                        <div className="grid grid-cols-2 gap-2">
+                                        <Input isDisabled isReadOnly size="lg" type="text" label="Symbol" placeholder="" value={externalTokenSymbol} />
+                                        <Input isDisabled isReadOnly size="lg" type="text" label="Decimals" placeholder="" value={externalTokenDecimals} />
+                                        </div>
+                                    </CardBody>
+                                    <CardFooter className="flex flex-col gap-2">
+                                        <div className="w-full flex flex-row gap-2 items-center justify-center rounded-lg bg-danger-500/30 text-danger-500 p-2">
+                                            <Image className="h-[128px] w-[128px]"  src={DEFAULT_TOKEN_LOGO}/>
+                                            <span>External tokens are likely added for testing purposes or as potential scams. Please conduct your own research. Otherwise, you may risk losing your assets. Please refrain from making purchases.</span>
+                                        </div>
+                                        <div className="w-full flex flex-row items-center justify-between">
+                                        <Switch  isSelected={isSelected} onValueChange={setIsSelected} defaultSelected color="danger">I understand. I promise not to buy, I swear to God.</Switch>
+
+                                            <Button isDisabled={!isSelected} onClick={() => {
+                                                handleImportToken()
+                                            }} size="lg" color="danger">Import Token</Button>
+                                        </div>
+
+                                    
+                                    </CardFooter>
+                                </Card>
+                            </Tab>
+
+                        </Tabs>
+                    </CardBody>
+                </Card>
+
+
+
+
+            </div>
+        </CustomModal>
+    </>
+
+
+    )
+}
+
+
 export const ModalSelectCryptoCurrency = ({ isShowing, disableToken, hide, tokenList, onSelect, isClosable }) => {
     const [searchText, setSearchText] = useState("")
 

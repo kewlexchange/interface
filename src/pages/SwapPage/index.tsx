@@ -38,6 +38,9 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                     <POOL_TAB />
 
                                 </Tab>
+                                <Tab key={"wrap"} title="Wrap">
+                                    <WRAP_TAB/>
+                                </Tab>
                               
                                 <Tab key="morph" title="Morph">
                                     <div className={"flex flex-col gap-2"}>

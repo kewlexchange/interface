@@ -11,7 +11,7 @@ const CustomModal = ({ isShowing, hide, header = null, closable, children }) => 
         }
     }
 
-    return       <Modal  size='2xl' backdrop='blur' placement='center' isDismissable={false} hideCloseButton={!closable} isOpen={isShowing} onOpenChange={onChange}>
+    return       <Modal size='3xl' backdrop='blur' placement='center' isDismissable={false} hideCloseButton={!closable} isOpen={isShowing} onOpenChange={onChange}>
     <ModalContent>
                 <ModalHeader className="flex flex-col gap-1">{header}</ModalHeader>
                 <ModalBody>
