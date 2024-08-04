@@ -11,6 +11,7 @@ import { useWeb3React } from "@web3-react/core";
 import {MORPH_TAB} from "../../Components/MetamorphTabs/MorphTab";
 import {BURN_TAB} from "../../Components/MetamorphTabs/BurnTab";
 import { WRAP_TAB } from "../../Components/SwapComponents/Wrap";
+import { TRADE_TAB } from "../../Components/SwapComponents/Trade";
 
 
 const SwapPage: React.FunctionComponent<IPage> = props => {
@@ -34,9 +35,11 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                 <Tab key="swap" title="Swap">
                                     <SWAP_TAB />
                                 </Tab>
+                                <Tab key={"trade"} title={"Trade"}>
+                                    <TRADE_TAB/>
+                                </Tab>
                                 <Tab key="pools" title="Pools">
                                     <POOL_TAB />
-
                                 </Tab>
                                 <Tab key={"wrap"} title="Wrap">
                                     <WRAP_TAB/>

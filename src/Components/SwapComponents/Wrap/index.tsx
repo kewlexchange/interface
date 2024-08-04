@@ -68,7 +68,6 @@ const _SWAP_TAB = () => {
         if (!defaultAssets) { return }
         if (defaultAssets.length === 0) { return }
 
-
         const assetInfo = defaultAssets.find(token => token && token.symbol === "GAL");
         if (assetInfo) {
             onSelectToken(assetInfo, false)
