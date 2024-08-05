@@ -70,3 +70,25 @@ export const INIT_CODE_HASH = '0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbe
 export const SWAP_FEE_ON = true
 
 
+export const DECENTRALIZED_EXCHANGES = [
+    {
+        dex:"KEWL",
+        router:"0xA0BB8f9865f732C277d0C162249A4F6c157ae9D0",
+        weth:"0x721EF6871f1c4Efe730Dce047D40D1743B886946"
+    },
+    {
+        dex:"KAYEN",
+        router:"0xE2918AA38088878546c1A18F2F9b1BC83297fdD3",
+        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47"
+    },
+    {
+        dex:"CHILIZSWAP",
+        router:"0xcF4A2be8Fe92fEe8e350AD8D876274749Ae0CBb1",
+        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47"
+    },
+    {
+        dex:"DIVISWAP",
+        router:"0xbdd9c322ecf401e09c9d2dca3be46a7e45d48bb1",
+        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47"
+    },
+]

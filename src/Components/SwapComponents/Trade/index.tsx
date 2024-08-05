@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useMemo, useState } from 'react';
-import { DEFAULT_TOKEN_LOGO, ETHER_ADDRESS, TradeType } from '../../../constants/misc';
+import { DECENTRALIZED_EXCHANGES, DEFAULT_TOKEN_LOGO, ETHER_ADDRESS, TradeType } from '../../../constants/misc';
 import { ethers } from 'ethers';
 import { useWeb3React } from '@web3-react/core';
 import JSBI from 'jsbi';
@@ -28,6 +28,7 @@ const _SWAP_TAB = () => {
     const IMONDIAMOND = useDiamondContract(chainId, true);
     const EXCHANGE = useExchangeContract(chainId, true)
     const FANTOKENWRAPPER = useFanTokenWrapperContract(chainId, true)
+    
 
     const { state: isTransactionSuccess, toggle: toggleTransactionSuccess } = useModal();
     const { state: isShowLoading, toggle: toggleLoading } = useModal();
@@ -52,6 +53,9 @@ const _SWAP_TAB = () => {
     const [baseTokenAllowance, setBaseTokenAllowance] = useState(0)
     const [quoteTokenAllowance, setQuoteTokenAllowance] = useState(0)
     const ERC20Contract = useERC20Contract()
+
+    const [tradingPairs,setTradingPairs] = useState([])
+
     const [pairInfo, setPairInfo] = useState(null)
     const PAIRContract = usePAIRContract()
     const [hasLiquidity, setHasLiquidity] = useState(false)
@@ -111,6 +115,7 @@ const _SWAP_TAB = () => {
         }
         setBaseLiquidity("")
         setQuoteLiquidity("")
+        setTradingPairs([])
     }
     const fetchPrice = async () => {
         if (!chainId) { return }
@@ -153,15 +158,11 @@ const _SWAP_TAB = () => {
         const _allExchangePairs = await EXCHANGE.getAllPairs();
         setAllExchangePairs(_allExchangePairs)
 
-        const _pairInfo = await EXCHANGE.getPairInfo(_baseAddress, _quoteAddress);
-        setPairInfo(_pairInfo)
-        if (!_pairInfo.valid) {
-            await resetSwap(isBase)
-            return;
-        }
-        await checkAllowance(_baseAddress, _quoteAddress)
 
 
+       
+
+       
         if (isBase) {
             if (parseFloatWithDefault(baseInputValue, 0) === 0) {
                 await resetSwap(true)
@@ -173,6 +174,31 @@ const _SWAP_TAB = () => {
                 return
             }
         }
+
+        let depositAmount = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals);
+        const availableTradingPairs = await EXCHANGE.fetchPairs(DECENTRALIZED_EXCHANGES, FANTOKENWRAPPER.address,_baseAddress,_quoteAddress,depositAmount)
+        setTradingPairs(availableTradingPairs)
+
+        console.log('pairs',availableTradingPairs)
+
+        return
+
+        const _pairInfo = await EXCHANGE.getPairInfo(_baseAddress, _quoteAddress);
+        setPairInfo(_pairInfo)
+        if (!_pairInfo.valid) {
+            await resetSwap(isBase)
+            return;
+        }
+        await checkAllowance(_baseAddress, _quoteAddress)
+
+
+    
+
+
+        //
+
+        
+
         const pairAddress = _pairInfo.pair
         let pairContract = PAIRContract(pairAddress);
         const [_reserve0, _reserve1, _blockTimestampLast] = await pairContract.getReserves();
@@ -182,9 +208,11 @@ const _SWAP_TAB = () => {
             return
         }
 
-
         const baseToken = new Token(baseAsset.chainId, _baseAddress, baseAsset.decimals, baseAsset.symbol)
         const quoteToken = new Token(quoteAsset.chainId, _quoteAddress, quoteAsset.decimals, quoteAsset.symbol)
+        const baseAmount: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(baseToken, JSBI.BigInt(ethers.utils.parseUnits(baseInputValue, baseToken.decimals).toString()));
+      
+
         const [baseReserve, quoteReserve] = baseToken.sortsBefore(quoteToken) ? [_reserve0, _reserve1] : [_reserve1, _reserve0]
 
 
@@ -302,93 +330,6 @@ const _SWAP_TAB = () => {
     }
 
 
-    const handleWrap = async () => {
-        if (!baseAsset) { displayError("Please select base asset!"); return; }
-
-        const baseVal = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals);
-
-        let fanToken = ERC20Contract(baseAsset.address);
-
-
-        //const allowanceAmount = fanToken.allowance()
-
-        toggleLoading();
-        await fanToken.approve(FANTOKENWRAPPER.address, baseVal, { from: account }).then(async (tx) => {
-            await tx.wait();
-            const summary = `Unlocking tokens for: ${FANTOKENWRAPPER.address}`
-            setTransaction({ hash: tx.hash, summary: summary, error: null });
-            await provider.getTransactionReceipt(tx.hash).then(() => {
-                toggleTransactionSuccess();
-            });
-        }).catch((error: Error) => {
-            setTransaction({ hash: '', summary: '', error: error });
-            toggleError();
-        }).finally(async () => {
-            toggleLoading();
-        });
-
-
-
-        toggleLoading();
-        await FANTOKENWRAPPER.wrap(account, baseAsset.address, baseVal).then(async (tx) => {
-            await tx.wait();
-            const summary = `Wrapping : ${tx.hash}`
-            setTransaction({ hash: tx.hash, summary: summary, error: null });
-            toggleTransactionSuccess();
-        }).catch((error: Error) => {
-            setTransaction({ hash: '', summary: '', error: error });
-            toggleError();
-        }).finally(async () => {
-            toggleLoading();
-        });
-
-    }
-
-    const handleUnWrap = async () => {
-        if (!baseAsset) { displayError("Please select base asset!"); return; }
-
-
-
-        let FAN_TOKEN_ADDRESS = "0x7B9d4199368CA5F567999Fc35Aa3F6f86b18D2F2"
-        let fanToken = ERC20Contract(FAN_TOKEN_ADDRESS);
-        const fanTokenDecimals = await fanToken.decimals();
-
-        const baseVal = ethers.utils.parseUnits(baseInputValue, fanTokenDecimals);
-
-
-        //const allowanceAmount = fanToken.allowance()
-
-        toggleLoading();
-        await fanToken.approve(FANTOKENWRAPPER.address, baseVal, { from: account }).then(async (tx) => {
-            await tx.wait();
-            const summary = `Unlocking tokens for: ${FANTOKENWRAPPER.address}`
-            setTransaction({ hash: tx.hash, summary: summary, error: null });
-            await provider.getTransactionReceipt(tx.hash).then(() => {
-                toggleTransactionSuccess();
-            });
-        }).catch((error: Error) => {
-            setTransaction({ hash: '', summary: '', error: error });
-            toggleError();
-        }).finally(async () => {
-            toggleLoading();
-        });
-
-
-
-        toggleLoading();
-        await FANTOKENWRAPPER.unwrap(account, FAN_TOKEN_ADDRESS, baseVal).then(async (tx) => {
-            await tx.wait();
-            const summary = `Wrapping : ${tx.hash}`
-            setTransaction({ hash: tx.hash, summary: summary, error: null });
-            toggleTransactionSuccess();
-        }).catch((error: Error) => {
-            setTransaction({ hash: '', summary: '', error: error });
-            toggleError();
-        }).finally(async () => {
-            toggleLoading();
-        });
-
-    }
 
     const handleSwap = async () => {
         if (!baseAsset) { displayError("Please select base asset!"); return; }
@@ -672,12 +613,70 @@ const _SWAP_TAB = () => {
     }
 
 
-    const TradeContainer = (props) => {
-        
+    const PairInfo = (props:{pair:any}) =>{
+
+        const [tradeInfo, setTradeInfo] = useState(null)
+
+        const getDexNameByRouterAddress = (router:any) => {
+            const exchange = DECENTRALIZED_EXCHANGES.find(exchange => exchange.router.toLowerCase() === router.toLowerCase());
+            return exchange ? exchange.dex : null;
+        }
+
+        useEffect(()=>{
+
+        },[props.pair])
+
+        return <Card shadow='sm'>
+            <CardHeader>
+                {getDexNameByRouterAddress(props.pair.router)}
+            </CardHeader>
+            <CardBody>
+            {
+                            tradeInfo && <div className={"w-full grid grid-cols-2 rounded-lg border border-default-100 p-2 text-center gap-2"}>
+
+                                <div className={"flex items-start justify-start w-full col-span-2"}>
+                                    Trading Info
+                                </div>
+                                <small className={"col-span-2 text-left"}>Available Liquidity</small>
+                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                    <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
+                                    <small className={"w-full text-start py-2"} >{baseLiquidity} {baseAsset?.symbol}</small>
+                                </div>
+                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                    <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
+                                    <small className={"w-full text-start py-2"} >{quoteLiquidity} {quoteAsset?.symbol}</small>
+                                </div>
+
+                                <small className={"col-span-2 text-left"}>Price</small>
+
+                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                    <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
+                                    <small className="py-2">{tradeInfo.executionPrice.invert().toSignificant()} {baseAsset?.symbol} per {quoteAsset?.symbol}</small>
+                                </div>
+                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                    <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
+                                    <small className="py-2">{tradeInfo.executionPrice.toSignificant()}  {quoteAsset?.symbol} per {baseAsset?.symbol}</small>
+                                </div>
+
+
+                            </div>
+                        }
+            </CardBody>
+            <CardFooter>
+
+            </CardFooter>
+        </Card>
+    } 
+    const TradeContainer = () => {
+
         
           return (
             <>
-            
+              {
+                 tradingPairs.map((pair:any, index) => (
+                    pair.valid && <PairInfo key={index} pair={pair}/>
+                ))
+              }
             </>
           );
     }
@@ -774,33 +773,12 @@ const _SWAP_TAB = () => {
                         </Card>
 
 
-                        <div className="input sm:order-3">
-
-
-
-
-
-                            <div onClick={() => {
-                                setInputValue(quoteAsset && quoteAsset.balance, false)
-                            }} className="balance cursor-pointer">
-                                Balance: {quoteAsset && quoteAsset.balance}
-                            </div>
-
-
-                            <input value={quoteInputValue} onChange={(e) => {
-                                setInputValue(e.target.value, false)
-                            }} inputMode="decimal" autoComplete="off" autoCorrect="off" type="text"
-                                pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0" minLength={0} maxLength={100} spellCheck="false" />
-                        </div>
                     </div>
                 </div>
 
 
+                <TradeContainer/>
 
-                <TradeContainer dex={"KAYEN"}/>
-                <TradeContainer dex={"KEWL"}/>
-                <TradeContainer dex={"CHILIZSWAP"}/>
-                <TradeContainer dex={"DIVISWAP"}/>
 
                 <div className={"flex flex-col gap-2 w-full"}>
                     <div className={"w-full flex flex-col gap-2 rounded-lg"}>
