@@ -616,13 +616,41 @@ const _SWAP_TAB = () => {
     const PairInfo = (props:{pair:any}) =>{
 
         const [tradeInfo, setTradeInfo] = useState(null)
-
+        const [baseLiquidity, setBaseLiquidity] = useState("0")
+        const [quoteLiquidity, setQuoteLiquidity] = useState("0")
+        
         const getDexNameByRouterAddress = (router:any) => {
             const exchange = DECENTRALIZED_EXCHANGES.find(exchange => exchange.router.toLowerCase() === router.toLowerCase());
             return exchange ? exchange.dex : null;
         }
 
         useEffect(()=>{
+
+
+            const baseToken = new Token(baseAsset.chainId, props.pair.token0, baseAsset.decimals, baseAsset.symbol)
+            const quoteToken = new Token(quoteAsset.chainId, props.pair.token1, quoteAsset.decimals, quoteAsset.symbol)
+            const [baseReserve, quoteReserve] = baseToken.sortsBefore(quoteToken) ? [props.pair.reserve0, props.pair.reserve1] : [props.pair.reserve1, props.pair.reserve0]
+    
+
+          const exchangePair = new Pair(
+            CurrencyAmount.fromRawAmount(baseToken, baseReserve),
+            CurrencyAmount.fromRawAmount(quoteToken, quoteReserve)
+        )
+
+            const baseAmount: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(baseToken, JSBI.BigInt(ethers.utils.parseUnits(baseInputValue, baseToken.decimals).toString()));
+            let _tradeInfo = new Trade(
+                new Route([exchangePair], baseToken, quoteToken),
+                CurrencyAmount.fromRawAmount(baseToken, baseAmount.quotient),
+                TradeType.EXACT_INPUT
+            )
+            console.log(_tradeInfo.outputAmount.toSignificant())
+            console.log("amount0Out",ethers.utils.formatUnits(props.pair.amount0Out,props.pair.token0Decimals))
+            console.log("amount1Out", ethers.utils.formatUnits(props.pair.amount1Out,props.pair.token1Decimals))
+
+            setTradeInfo(_tradeInfo)
+            setBaseLiquidity(CurrencyAmount.fromRawAmount(baseToken, baseReserve).toSignificant(6))
+            setQuoteLiquidity(CurrencyAmount.fromRawAmount(quoteToken, quoteReserve).toSignificant(6))
+
 
         },[props.pair])
 
@@ -631,6 +659,8 @@ const _SWAP_TAB = () => {
                 {getDexNameByRouterAddress(props.pair.router)}
             </CardHeader>
             <CardBody>
+     
+     
             {
                             tradeInfo && <div className={"w-full grid grid-cols-2 rounded-lg border border-default-100 p-2 text-center gap-2"}>
 
@@ -661,6 +691,22 @@ const _SWAP_TAB = () => {
 
                             </div>
                         }
+
+                        {
+                            tradeInfo && <div className={"w-full grid grid-cols-2 gap-2 justify-around rounded-lg border border-default-100 p-2 text-center"}>
+                                <small className={"text-left"}>Price Impact</small>
+                                <small className={"text-right"}>{tradeInfo.priceImpact.toFixed(2)}%</small>
+
+                                {
+                                    parseFloat(tradeInfo.priceImpact.toFixed(2)) > 5 &&
+                                    <small className={"text-center bg-danger-500/10 text-danger-500 rounded-lg col-span-2 p-2"}>
+                                        A swap of this size may have a high price impact, given the current liquidity in the pool. There may be a large difference between the amount of your input token and what you will receive in the output token
+                                    </small>
+                                }
+
+                            </div>
+                        }
+
             </CardBody>
             <CardFooter>
 
@@ -783,51 +829,7 @@ const _SWAP_TAB = () => {
                 <div className={"flex flex-col gap-2 w-full"}>
                     <div className={"w-full flex flex-col gap-2 rounded-lg"}>
 
-                        {
-                            tradeInfo && <div className={"w-full grid grid-cols-2 rounded-lg border border-default-100 p-2 text-center gap-2"}>
-
-                                <div className={"flex items-start justify-start w-full col-span-2"}>
-                                    Trading Info
-                                </div>
-                                <small className={"col-span-2 text-left"}>Available Liquidity</small>
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
-                                    <small className={"w-full text-start py-2"} >{baseLiquidity} {baseAsset?.symbol}</small>
-                                </div>
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
-                                    <small className={"w-full text-start py-2"} >{quoteLiquidity} {quoteAsset?.symbol}</small>
-                                </div>
-
-                                <small className={"col-span-2 text-left"}>Price</small>
-
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
-                                    <small className="py-2">{tradeInfo.executionPrice.invert().toSignificant()} {baseAsset?.symbol} per {quoteAsset?.symbol}</small>
-                                </div>
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
-                                    <small className="py-2">{tradeInfo.executionPrice.toSignificant()}  {quoteAsset?.symbol} per {baseAsset?.symbol}</small>
-                                </div>
-
-
-                            </div>
-                        }
-
-                        {
-                            tradeInfo && <div className={"w-full grid grid-cols-2 gap-2 justify-around rounded-lg border border-default-100 p-2 text-center"}>
-                                <small className={"text-left"}>Price Impact</small>
-                                <small className={"text-right"}>{tradeInfo.priceImpact.toFixed(2)}%</small>
-
-                                {
-                                    parseFloat(tradeInfo.priceImpact.toFixed(2)) > 5 &&
-                                    <small className={"text-center bg-danger-500/10 text-danger-500 rounded-lg col-span-2 p-2"}>
-                                        A swap of this size may have a high price impact, given the current liquidity in the pool. There may be a large difference between the amount of your input token and what you will receive in the output token
-                                    </small>
-                                }
-
-                            </div>
-                        }
+                     
 
 
 
