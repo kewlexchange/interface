@@ -37,7 +37,7 @@ const StakePage: React.FunctionComponent<IPage> = props => {
 
                             <Tabs color={"danger"} aria-label="Stake Tabs">
                                 <Tab key="stake" title="Stake Pools">
-                                <STAKE_POOLS_TAB/>
+                                    <STAKE_POOLS_TAB/>
                                 </Tab>
                           
                                 <Tab key="create" title="Create Pool">

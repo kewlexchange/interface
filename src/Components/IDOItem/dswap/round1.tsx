@@ -90,9 +90,11 @@ const _MRLIDO = (props: { IDOParams, name }) => {
         setDepositAmount("500")
         setUserBalance("0")
 
+
+        let _activeAccount = account ? account : ethers.constants.AddressZero;
         const _balance = await provider.getBalance(account ? account : ethers.constants.AddressZero);
         setUserBalance(formatEther(_balance))
-        const [_totalDeposit, _userInfo, _contributors] = await IMON_LAUNCHPAD_CONTRACT.getFairLaunchInfo(account ? account : ethers.constants.AddressZero);
+        const [_totalDeposit, _userInfo, _contributors] = await IMON_LAUNCHPAD_CONTRACT.getFairLaunchInfo(_activeAccount);
         setTotalDeposit(formatEther(_totalDeposit))
 
         if (_totalDeposit >= hardCap) {
@@ -573,7 +575,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
 
                             </Tab>
 
-                            <Tab isDisabled={true} key="claim" title="Claim">
+                            <Tab  key="claim" title="Claim">
                                 <Card fullWidth shadow='none' className='w-full flex flex-col gap-2'>
                                     <CardHeader className="flex justify-between items-start">
                                         <div className="flex gap-5">
@@ -581,7 +583,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                             </Button>
                                             <div className="flex flex-col gap-1 items-start justify-center">
                                                 <h4 className="text-small font-semibold leading-none text-default-600">Claim Tokens</h4>
-                                                <h5 className="text-small tracking-tight  text-secondary-400">Thank you for participating in the MRL Token project on the KEWL Launchpad.</h5>
+                                                <h5 className="text-small tracking-tight  text-secondary-400">Thank you for participating in the DSWAP Token project on the KEWL Launchpad.</h5>
                                             </div>
 
 
@@ -621,7 +623,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                                 </div>
                                                 <div className='w-full flex flex-row items-center justify-between border border-default p-2 rounded-xl'>
                                                     <span>Withdraw Amount</span>
-                                                    <span>{userInfo ? formatUnits(userInfo.withdrawAmount, 18) : "-"} WW</span>
+                                                    <span>{userInfo ? formatUnits(userInfo.withdrawAmount, 18) : "-"} DSWAP</span>
                                                 </div>
                                             </div>
 
