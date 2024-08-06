@@ -2765,6 +2765,11 @@
               "type": "address"
             },
             {
+              "internalType": "address",
+              "name": "weth",
+              "type": "address"
+            },
+            {
               "internalType": "uint256",
               "name": "amount",
               "type": "uint256"
@@ -2832,6 +2837,11 @@
             {
               "internalType": "address",
               "name": "router",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "weth",
               "type": "address"
             }
           ],
@@ -2940,6 +2950,11 @@
             {
               "internalType": "address",
               "name": "router",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "weth",
               "type": "address"
             }
           ],

@@ -14,11 +14,11 @@ import { fetchAllTokenList } from '../../../state/user/hooks';
 import { getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../utils';
 import { DoubleCurrencyIcon } from '../../DoubleCurrency';
 import UniwalletModal from '../../Modal/UniwalletModal';
-import { Avatar, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Image } from '@nextui-org/react';
+import { Accordion, AccordionItem, Avatar, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Image, ScrollShadow } from '@nextui-org/react';
 import { parseEther } from '@ethersproject/units';
 import { Chart } from '../../Chart';
 import { BLACK_LIST } from '../../../constants/blacklist';
-import {RadioGroup, Radio, useRadio, VisuallyHidden, cn} from "@nextui-org/react";
+import { RadioGroup, Radio, useRadio, VisuallyHidden, cn } from "@nextui-org/react";
 
 
 
@@ -28,7 +28,7 @@ const _SWAP_TAB = () => {
     const IMONDIAMOND = useDiamondContract(chainId, true);
     const EXCHANGE = useExchangeContract(chainId, true)
     const FANTOKENWRAPPER = useFanTokenWrapperContract(chainId, true)
-    
+
 
     const { state: isTransactionSuccess, toggle: toggleTransactionSuccess } = useModal();
     const { state: isShowLoading, toggle: toggleLoading } = useModal();
@@ -54,7 +54,7 @@ const _SWAP_TAB = () => {
     const [quoteTokenAllowance, setQuoteTokenAllowance] = useState(0)
     const ERC20Contract = useERC20Contract()
 
-    const [tradingPairs,setTradingPairs] = useState([])
+    const [tradingPairs, setTradingPairs] = useState([])
 
     const [pairInfo, setPairInfo] = useState(null)
     const PAIRContract = usePAIRContract()
@@ -64,7 +64,7 @@ const _SWAP_TAB = () => {
     const userTax = useAppSelector((state) => state.user.userTax);
     const userSlippageTolerance = useAppSelector((state) => state.user.userSlippageTolerance);
     const [allExchangePairs, setAllExchangePairs]: any = useState(null)
-
+    const [isLoaded,setLoaded] = useState(false)
     fetchAllTokenList(chainId, account)
 
 
@@ -118,6 +118,8 @@ const _SWAP_TAB = () => {
         setTradingPairs([])
     }
     const fetchPrice = async () => {
+        setLoaded(false)
+        setTradingPairs([])
         if (!chainId) { return }
         if (!baseAsset) { return }
         if (!quoteAsset) { return }
@@ -152,17 +154,14 @@ const _SWAP_TAB = () => {
         }
 
 
-
-
-
         const _allExchangePairs = await EXCHANGE.getAllPairs();
         setAllExchangePairs(_allExchangePairs)
 
 
 
-       
 
-       
+
+
         if (isBase) {
             if (parseFloatWithDefault(baseInputValue, 0) === 0) {
                 await resetSwap(true)
@@ -176,128 +175,12 @@ const _SWAP_TAB = () => {
         }
 
         let depositAmount = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals);
-        const availableTradingPairs = await EXCHANGE.fetchPairs(DECENTRALIZED_EXCHANGES, FANTOKENWRAPPER.address,_baseAddress,_quoteAddress,depositAmount)
+        const availableTradingPairs = await EXCHANGE.fetchPairs(DECENTRALIZED_EXCHANGES, FANTOKENWRAPPER.address, _baseAddress, _quoteAddress, depositAmount)
         setTradingPairs(availableTradingPairs)
 
-        console.log('pairs',availableTradingPairs)
+        console.log('pairs', availableTradingPairs)
+        setLoaded(true)
 
-        return
-
-        const _pairInfo = await EXCHANGE.getPairInfo(_baseAddress, _quoteAddress);
-        setPairInfo(_pairInfo)
-        if (!_pairInfo.valid) {
-            await resetSwap(isBase)
-            return;
-        }
-        await checkAllowance(_baseAddress, _quoteAddress)
-
-
-    
-
-
-        //
-
-        
-
-        const pairAddress = _pairInfo.pair
-        let pairContract = PAIRContract(pairAddress);
-        const [_reserve0, _reserve1, _blockTimestampLast] = await pairContract.getReserves();
-        let noLiquidity = _reserve0 === 0 && _reserve1 === 0
-        setHasLiquidity(!noLiquidity)
-        if (noLiquidity) {
-            return
-        }
-
-        const baseToken = new Token(baseAsset.chainId, _baseAddress, baseAsset.decimals, baseAsset.symbol)
-        const quoteToken = new Token(quoteAsset.chainId, _quoteAddress, quoteAsset.decimals, quoteAsset.symbol)
-        const baseAmount: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(baseToken, JSBI.BigInt(ethers.utils.parseUnits(baseInputValue, baseToken.decimals).toString()));
-      
-
-        const [baseReserve, quoteReserve] = baseToken.sortsBefore(quoteToken) ? [_reserve0, _reserve1] : [_reserve1, _reserve0]
-
-
-
-
-
-        const baseAssetBalance = CurrencyAmount.fromRawAmount(baseToken, _baseTokenBalance).toSignificant(6)
-        const quoteAssetBalance = CurrencyAmount.fromRawAmount(quoteToken, _quoteTokenBalance).toSignificant(6)
-
-
-        /*
-        let _updatedBaseAsset ={
-                chainId:baseAsset.chainId,
-                address:baseAsset.address,
-                balance:baseAssetBalance,
-                logoURI:baseAsset.logoURI,
-                decimals:baseAsset.decimals,
-                name:baseAsset.name,
-                symbol:baseAsset.symbol,
-            }
-        let _updatedQuoteAsset ={
-                chainId:quoteAsset.chainId,
-                address:quoteAsset.address,
-                balance:quoteAssetBalance,
-                logoURI:quoteAsset.logoURI,
-                decimals:quoteAsset.decimals,
-                name:quoteAsset.name,
-                symbol:quoteAsset.symbol,
-            }
-        setBaseAsset(_updatedBaseAsset)
-        setQuoteAsset(_updatedQuoteAsset)
-        */
-
-        setBaseLiquidity(CurrencyAmount.fromRawAmount(baseToken, baseReserve).toSignificant(6))
-        setQuoteLiquidity(CurrencyAmount.fromRawAmount(quoteToken, quoteReserve).toSignificant(6))
-
-        const exchangePair = new Pair(
-            CurrencyAmount.fromRawAmount(baseToken, baseReserve),
-            CurrencyAmount.fromRawAmount(quoteToken, quoteReserve)
-        )
-
-        const price = new Price(baseToken, quoteToken, baseReserve, quoteReserve)
-        const canInvertPrice = Boolean(
-            price && price.baseCurrency && price.quoteCurrency && !price.baseCurrency.equals(price.quoteCurrency))
-        const _basePrice = price?.toSignificant(6)
-        const _quotePrice = canInvertPrice ? price?.invert()?.toSignificant(6) : undefined
-
-        console.log("ERSAN BASE", _basePrice, "QUOTe", _quotePrice)
-
-        try {
-            var _tradeInfo
-            if (isBase) {
-                const baseAmount: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(baseToken, JSBI.BigInt(ethers.utils.parseUnits(baseInputValue, baseToken.decimals).toString()));
-                _tradeInfo = new Trade(
-                    new Route([exchangePair], baseToken, quoteToken),
-                    CurrencyAmount.fromRawAmount(baseToken, baseAmount.quotient),
-                    TradeType.EXACT_INPUT
-                )
-                setQuoteInputValue(_tradeInfo.outputAmount.toSignificant())
-            } else {
-                const quoteAmount: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(quoteToken, JSBI.BigInt(ethers.utils.parseUnits(quoteInputValue, quoteToken.decimals).toString()));
-                _tradeInfo = new Trade(
-                    new Route([exchangePair], baseToken, quoteToken),
-                    CurrencyAmount.fromRawAmount(quoteToken, quoteAmount.quotient),
-                    TradeType.EXACT_OUTPUT
-                )
-                setBaseInputValue(_tradeInfo.inputAmount.toSignificant())
-
-            }
-            setTradeInfo(_tradeInfo)
-
-            console.log("exactIn", isBase ? "EXACT_INPUT" : "EXACT_OUTPUT");
-
-            console.log("priceImpactFirst", _tradeInfo.priceImpact.toFixed(2));
-
-            console.log("inputAmount", _tradeInfo.inputAmount.toSignificant());
-            console.log("outputAmount", _tradeInfo.outputAmount.toSignificant());
-            console.log("outputAmount22", _tradeInfo.outputAmount.toExact());
-
-            console.log("executionPrice", _tradeInfo.executionPrice.toSignificant());
-            console.log("executionPriceEx", _tradeInfo.executionPrice.invert().toSignificant());
-        } catch (e) {
-            console.log(e);
-            setTradeInfo(null)
-        }
 
     }
 
@@ -577,6 +460,7 @@ const _SWAP_TAB = () => {
 
 
     const handleSwapAssets = () => {
+        setPairInfo(null)
         const temp = baseAsset;
         setBaseAsset(quoteAsset);
         setQuoteAsset(temp)
@@ -612,88 +496,206 @@ const _SWAP_TAB = () => {
         return baseVal.gt(baseTokenAllowance)
     }
 
+    const getDexNameByRouterAddress = (router: any) => {
+        const exchange = DECENTRALIZED_EXCHANGES.find(exchange => exchange.router.toLowerCase() === router.toLowerCase());
+        return exchange ? exchange.dex : null;
+    }
 
-    const PairInfo = (props:{pair:any}) =>{
+    const PairInfo = (props: { pair: any }) => {
 
         const [tradeInfo, setTradeInfo] = useState(null)
         const [baseLiquidity, setBaseLiquidity] = useState("0")
         const [quoteLiquidity, setQuoteLiquidity] = useState("0")
+        const [outputAmount,setOutputAmount] = useState("0")
+        const [isTradable,setIsTradable] = useState(true)
+
+
+        const handleSwap = async () => {
+            toggleLoading();
+
+            let DEPOSIT_AMOUNT = ethers.utils.parseUnits(baseInputValue,baseAsset.decimals)
+            let INPUT_TOKEN = baseAsset.address === ETHER_ADDRESS ? props.pair.weth : baseAsset.address;
+            let IS_NATIVE = baseAsset.address == ETHER_ADDRESS
+            let SwapParam = {
+                    amount:DEPOSIT_AMOUNT,
+                    weth9:props.pair.weth,
+                    wrapper:FANTOKENWRAPPER.address,
+                    pair:props.pair.pair,
+                    input:INPUT_TOKEN
+               }
+               let overrides = {
+                   value:IS_NATIVE ? DEPOSIT_AMOUNT : 0
+               }
+
+               if ((!IS_NATIVE) && (SwapParam.input != ethers.constants.AddressZero)){
+                const tokenContract = ERC20Contract(SwapParam.input);
+
+                const allowance = await tokenContract.allowance(account,EXCHANGE.address);
+                if(allowance.lt(DEPOSIT_AMOUNT)){
+                    const approveTx = await tokenContract.approve(EXCHANGE.address,ethers.constants.MaxUint256)
+                    await approveTx.wait();
+                }
         
-        const getDexNameByRouterAddress = (router:any) => {
-            const exchange = DECENTRALIZED_EXCHANGES.find(exchange => exchange.router.toLowerCase() === router.toLowerCase());
-            return exchange ? exchange.dex : null;
+            }
+        
+           await EXCHANGE.swap(SwapParam,overrides).then(async (tx) => {
+               await tx.wait();
+               const summary = `Wrapping : ${tx.hash}`
+               setTransaction({ hash: tx.hash, summary: summary, error: null });
+               toggleTransactionSuccess();
+           }).catch((error: Error) => {
+               setTransaction({ hash: '', summary: '', error: error });
+               toggleError();
+           }).finally(async () => {
+               toggleLoading();
+           });
+             
         }
+        useEffect(() => {
 
-        useEffect(()=>{
+
+            if (parseFloatWithDefault(baseInputValue, 0) === 0) {
+                return
+            }
 
 
-            const baseToken = new Token(baseAsset.chainId, props.pair.token0, baseAsset.decimals, baseAsset.symbol)
-            const quoteToken = new Token(quoteAsset.chainId, props.pair.token1, quoteAsset.decimals, quoteAsset.symbol)
+
+            
+            let _baseAddress, _quoteAddress;
+
+            if (props.pair.amount0Out == 0 && props.pair.amount1Out > 0) {
+                _baseAddress = props.pair.token0;
+                _quoteAddress = props.pair.token1;
+            } else if (props.pair.amount1Out == 0 && props.pair.amount0Out > 0) {
+                _baseAddress = props.pair.token1;
+                _quoteAddress = props.pair.token0;
+            } else {
+                _baseAddress = props.pair.token0;
+                _quoteAddress = props.pair.token1;
+            }
+
+            let _baseDecimals = props.pair.amount0Out == 0 ? props.pair.token0Decimals : props.pair.token1Decimals
+            let _quoteDecimals = props.pair.amount1Out == 0 ? props.pair.token0Decimals : props.pair.token1Decimals
+
+            console.log("BASE",_baseAddress,_baseDecimals.toNumber() )
+            console.log("QUOTE",_quoteAddress,_quoteDecimals.toNumber())
+
+           
+
+
+
+            const baseToken = new Token(baseAsset.chainId, _baseAddress, _baseDecimals.toNumber(), baseAsset.symbol)
+            const quoteToken = new Token(quoteAsset.chainId,_quoteAddress, _quoteDecimals.toNumber(), quoteAsset.symbol)
+
+
+
             const [baseReserve, quoteReserve] = baseToken.sortsBefore(quoteToken) ? [props.pair.reserve0, props.pair.reserve1] : [props.pair.reserve1, props.pair.reserve0]
-    
 
-          const exchangePair = new Pair(
-            CurrencyAmount.fromRawAmount(baseToken, baseReserve),
-            CurrencyAmount.fromRawAmount(quoteToken, quoteReserve)
-        )
+            console.log("here2")
 
-            const baseAmount: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(baseToken, JSBI.BigInt(ethers.utils.parseUnits(baseInputValue, baseToken.decimals).toString()));
+            const exchangePair = new Pair(
+                CurrencyAmount.fromRawAmount(baseToken, baseReserve),
+                CurrencyAmount.fromRawAmount(quoteToken, quoteReserve)
+            )
+
+            const baseAmount: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(baseToken, JSBI.BigInt(ethers.utils.parseUnits(baseInputValue, _baseDecimals).toString()));
+
+
+
+            try{
+
+          
+            
             let _tradeInfo = new Trade(
                 new Route([exchangePair], baseToken, quoteToken),
                 CurrencyAmount.fromRawAmount(baseToken, baseAmount.quotient),
                 TradeType.EXACT_INPUT
             )
             console.log(_tradeInfo.outputAmount.toSignificant())
-            console.log("amount0Out",ethers.utils.formatUnits(props.pair.amount0Out,props.pair.token0Decimals))
-            console.log("amount1Out", ethers.utils.formatUnits(props.pair.amount1Out,props.pair.token1Decimals))
+            console.log("amount0Out", ethers.utils.formatUnits(props.pair.amount0Out, props.pair.token0Decimals))
+            console.log("amount1Out", ethers.utils.formatUnits(props.pair.amount1Out, props.pair.token1Decimals))
 
             setTradeInfo(_tradeInfo)
             setBaseLiquidity(CurrencyAmount.fromRawAmount(baseToken, baseReserve).toSignificant(6))
             setQuoteLiquidity(CurrencyAmount.fromRawAmount(quoteToken, quoteReserve).toSignificant(6))
+            }catch(ex){
+                console.log("EXCEPTION",ex)
+                setIsTradable(false)
+            }
 
+            var _out = "0";
+            
+            try{
+                _out = ethers.utils.formatUnits(props.pair.amount0Out == 0 ? props.pair.amount1Out : props.pair.amount0Out,props.pair.amount0Out == 0 ? props.pair.token1Decimals : props.pair.token0Decimals)
+            }catch(ex:any){
 
-        },[props.pair])
+            }
+            setOutputAmount(_out)
+        
 
-        return <Card shadow='sm'>
-            <CardHeader>
-                {getDexNameByRouterAddress(props.pair.router)}
-            </CardHeader>
-            <CardBody>
-     
-     
-            {
-                            tradeInfo && <div className={"w-full grid grid-cols-2 rounded-lg border border-default-100 p-2 text-center gap-2"}>
+        }, [props.pair])
 
-                                <div className={"flex items-start justify-start w-full col-span-2"}>
-                                    Trading Info
+        const getOutputAmount = () => {
+            var output = 0 
+            if(tradeInfo){
+            let price = parseFloat(tradeInfo.executionPrice.toSignificant());
+            let baseInput = parseFloat(baseInputValue);
+            output = price * baseInput
+         
+            }
+
+            return (output).toFixed(6)
+        
+        }
+
+        return (
+
+            isTradable && <Card isDisabled={!isTradable} isHoverable className='flex flex-col gap-2'>
+                <CardHeader>
+                    <div className='w-full flex flex-row items-between justify-between '>
+                        <div className='rounded-lg bg-danger-500/30 text-danger text-xs p-2'>{getDexNameByRouterAddress(props.pair.router)}</div>
+                        <div className='rounded-lg bg-success-500/30 text-success  text-xs p-2 text-end'>{getOutputAmount() } {quoteAsset.symbol}</div>
+                    </div>
+
+                </CardHeader>
+                <CardBody>
+                    {
+                        tradeInfo && <div className={"w-full flex flex-col rounded-lg border border-default-100 p-2 text-center gap-2"}>
+
+                            <div className='flex flex-col gap-2'>
+                                <div className='w-full items-start justify-center flex flex-col'>
+                                    <span className={"text-left text-xs w-full"}>Liquidity</span>
+
+                                    <div className='flex flex-col gap-2 w-full'>
+                                        <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                            <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
+                                            <small className={"w-full text-start py-2 text-xs"} >{baseLiquidity} {baseAsset?.symbol}</small>
+                                        </div>
+                                        <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                            <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
+                                            <small className={"w-full text-start py-2 text-xs"} >{quoteLiquidity} {quoteAsset?.symbol}</small>
+                                        </div>
+                                    </div>
                                 </div>
-                                <small className={"col-span-2 text-left"}>Available Liquidity</small>
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
-                                    <small className={"w-full text-start py-2"} >{baseLiquidity} {baseAsset?.symbol}</small>
-                                </div>
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
-                                    <small className={"w-full text-start py-2"} >{quoteLiquidity} {quoteAsset?.symbol}</small>
-                                </div>
 
-                                <small className={"col-span-2 text-left"}>Price</small>
+                                <div className='w-full items-start justify-center flex flex-col'>
+                                    <span className={"text-left text-xs w-full"}>Price</span>
 
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
-                                    <small className="py-2">{tradeInfo.executionPrice.invert().toSignificant()} {baseAsset?.symbol} per {quoteAsset?.symbol}</small>
+                                    <div className='flex flex-col gap-2 w-full'>
+
+                                        <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                            <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
+                                            <small className="py-2 text-xs">{tradeInfo.executionPrice.invert().toSignificant()} {baseAsset?.symbol} per {quoteAsset?.symbol}</small>
+                                        </div>
+                                        <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                            <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
+                                            <small className="py-2 text-xs">{tradeInfo.executionPrice.toSignificant()}  {quoteAsset?.symbol} per {baseAsset?.symbol}</small>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
-                                    <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
-                                    <small className="py-2">{tradeInfo.executionPrice.toSignificant()}  {quoteAsset?.symbol} per {baseAsset?.symbol}</small>
-                                </div>
-
-
                             </div>
-                        }
 
-                        {
-                            tradeInfo && <div className={"w-full grid grid-cols-2 gap-2 justify-around rounded-lg border border-default-100 p-2 text-center"}>
+                            <div className={"w-full grid grid-cols-2 gap-2 justify-around rounded-lg border border-default-100 p-2 text-center"}>
                                 <small className={"text-left"}>Price Impact</small>
                                 <small className={"text-right"}>{tradeInfo.priceImpact.toFixed(2)}%</small>
 
@@ -705,26 +707,37 @@ const _SWAP_TAB = () => {
                                 }
 
                             </div>
-                        }
+                        </div>
+                    }
+                </CardBody>
+                <CardFooter>
+                    <Button onClick={()=>{
+                        handleSwap()
+                    }} fullWidth size='sm' color='danger'>Swap</Button>
+                </CardFooter>
 
-            </CardBody>
-            <CardFooter>
+            </Card>
 
-            </CardFooter>
-        </Card>
-    } 
+        )
+    }
     const TradeContainer = () => {
 
-        
-          return (
-            <>
-              {
-                 tradingPairs.map((pair:any, index) => (
-                    pair.valid && <PairInfo key={index} pair={pair}/>
-                ))
-              }
-            </>
-          );
+
+        return (
+            <div className='w-full grid grid-cols-2 gap-2'>
+                {
+                    tradingPairs.map((pair: any, index) => (
+
+
+                        pair.valid && <PairInfo key={index} pair={pair} />
+
+
+
+                    ))
+                }
+
+            </div>
+        );
     }
 
     return (
@@ -823,13 +836,16 @@ const _SWAP_TAB = () => {
                 </div>
 
 
-                <TradeContainer/>
+                {
+                    isLoaded &&  <TradeContainer />
+                }
+               
 
 
                 <div className={"flex flex-col gap-2 w-full"}>
                     <div className={"w-full flex flex-col gap-2 rounded-lg"}>
 
-                     
+
 
 
 
