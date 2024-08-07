@@ -718,7 +718,7 @@ const _SWAP_TAB = () => {
 
 
         const handleSwapAll =  async  () => {
-
+            toggleLoading();
 
             let DEPOSIT_AMOUNT = ethers.utils.parseUnits(baseInputValue,baseAsset.decimals)
          
