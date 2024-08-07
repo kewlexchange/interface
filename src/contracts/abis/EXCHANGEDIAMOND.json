@@ -3024,6 +3024,46 @@
         {
           "components": [
             {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "weth9",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "wrapper",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "pair",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "input",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct Trade.SwapParam[]",
+          "name": "params",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "swapAll",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
               "internalType": "address",
               "name": "router",
               "type": "address"
@@ -3158,160 +3198,6 @@
       "name": "withdrawETH",
       "outputs": [],
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "Ownable__NotOwner",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "Ownable__NotTransitiveOwner",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "ReentrancyGuard__ReentrantCall",
-      "type": "error"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "previousOwner",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "OwnershipTransferred",
-      "type": "event"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "token",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "amountIn",
-          "type": "uint256"
-        },
-        {
-          "components": [
-            {
-              "internalType": "address",
-              "name": "pair",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "base",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "quote",
-              "type": "address"
-            }
-          ],
-          "internalType": "struct TOrder[]",
-          "name": "orders",
-          "type": "tuple[]"
-        }
-      ],
-      "name": "doTrade",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address[]",
-          "name": "pairs",
-          "type": "address[]"
-        }
-      ],
-      "name": "getPairReserves",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "address",
-              "name": "pair",
-              "type": "address"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "uint112",
-                  "name": "reserve",
-                  "type": "uint112"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "decimals",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "address",
-                  "name": "token",
-                  "type": "address"
-                },
-                {
-                  "internalType": "string",
-                  "name": "symbol",
-                  "type": "string"
-                }
-              ],
-              "internalType": "struct TTradeToken",
-              "name": "base",
-              "type": "tuple"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "uint112",
-                  "name": "reserve",
-                  "type": "uint112"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "decimals",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "address",
-                  "name": "token",
-                  "type": "address"
-                },
-                {
-                  "internalType": "string",
-                  "name": "symbol",
-                  "type": "string"
-                }
-              ],
-              "internalType": "struct TTradeToken",
-              "name": "quote",
-              "type": "tuple"
-            }
-          ],
-          "internalType": "struct TPairInfo[]",
-          "name": "pairInfo",
-          "type": "tuple[]"
-        }
-      ],
-      "stateMutability": "view",
       "type": "function"
     }
   ],

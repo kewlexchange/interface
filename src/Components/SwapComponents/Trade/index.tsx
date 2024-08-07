@@ -15,7 +15,7 @@ import { getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../util
 import { DoubleCurrencyIcon } from '../../DoubleCurrency';
 import UniwalletModal from '../../Modal/UniwalletModal';
 import { Accordion, AccordionItem, Avatar, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Image, ScrollShadow } from '@nextui-org/react';
-import { parseEther } from '@ethersproject/units';
+import { formatEther, parseEther } from '@ethersproject/units';
 import { Chart } from '../../Chart';
 import { BLACK_LIST } from '../../../constants/blacklist';
 import { RadioGroup, Radio, useRadio, VisuallyHidden, cn } from "@nextui-org/react";
@@ -516,7 +516,7 @@ const _SWAP_TAB = () => {
             let DEPOSIT_AMOUNT = ethers.utils.parseUnits(baseInputValue,baseAsset.decimals)
             let INPUT_TOKEN = baseAsset.address === ETHER_ADDRESS ? props.pair.weth : baseAsset.address;
             let IS_NATIVE = baseAsset.address == ETHER_ADDRESS
-            let SwapParam = {
+                let SwapParam = {
                     amount:DEPOSIT_AMOUNT,
                     weth9:props.pair.weth,
                     wrapper:FANTOKENWRAPPER.address,
@@ -577,11 +577,7 @@ const _SWAP_TAB = () => {
             let _baseDecimals = props.pair.amount0Out == 0 ? props.pair.token0Decimals : props.pair.token1Decimals
             let _quoteDecimals = props.pair.amount1Out == 0 ? props.pair.token0Decimals : props.pair.token1Decimals
 
-            console.log("BASE",_baseAddress,_baseDecimals.toNumber() )
-            console.log("QUOTE",_quoteAddress,_quoteDecimals.toNumber())
-
-           
-
+     
 
 
             const baseToken = new Token(baseAsset.chainId, _baseAddress, _baseDecimals.toNumber(), baseAsset.symbol)
@@ -591,7 +587,6 @@ const _SWAP_TAB = () => {
 
             const [baseReserve, quoteReserve] = baseToken.sortsBefore(quoteToken) ? [props.pair.reserve0, props.pair.reserve1] : [props.pair.reserve1, props.pair.reserve0]
 
-            console.log("here2")
 
             const exchangePair = new Pair(
                 CurrencyAmount.fromRawAmount(baseToken, baseReserve),
@@ -611,10 +606,7 @@ const _SWAP_TAB = () => {
                 CurrencyAmount.fromRawAmount(baseToken, baseAmount.quotient),
                 TradeType.EXACT_INPUT
             )
-            console.log(_tradeInfo.outputAmount.toSignificant())
-            console.log("amount0Out", ethers.utils.formatUnits(props.pair.amount0Out, props.pair.token0Decimals))
-            console.log("amount1Out", ethers.utils.formatUnits(props.pair.amount1Out, props.pair.token1Decimals))
-
+        
             setTradeInfo(_tradeInfo)
             setBaseLiquidity(CurrencyAmount.fromRawAmount(baseToken, baseReserve).toSignificant(6))
             setQuoteLiquidity(CurrencyAmount.fromRawAmount(quoteToken, quoteReserve).toSignificant(6))
@@ -643,9 +635,7 @@ const _SWAP_TAB = () => {
             output = price * baseInput
          
             }
-
             return (output).toFixed(6)
-        
         }
 
         return (
@@ -720,10 +710,83 @@ const _SWAP_TAB = () => {
 
         )
     }
+
+
+
     const TradeContainer = () => {
 
 
+
+        const handleSwapAll =  async  () => {
+
+
+            let DEPOSIT_AMOUNT = ethers.utils.parseUnits(baseInputValue,baseAsset.decimals)
+         
+    
+            let allSwapParams = [];
+    
+            let IS_NATIVE = baseAsset.address == ETHER_ADDRESS
+    
+
+            var j = 0;
+            tradingPairs.forEach((pair) => {
+                if (pair.valid) {
+                    
+                    let INPUT_TOKEN = baseAsset.address === ETHER_ADDRESS ? pair.weth : baseAsset.address;
+
+                    let swapParam = {
+                        amount:DEPOSIT_AMOUNT,
+                        weth9:pair.weth,
+                        wrapper:FANTOKENWRAPPER.address,
+                        pair:pair.pair,
+                        input:INPUT_TOKEN
+                   }
+
+                    allSwapParams.push(swapParam);
+
+                   
+                   j++;
+
+                }
+            });
+            
+            let overrides = {
+                 value : IS_NATIVE ? DEPOSIT_AMOUNT.mul(allSwapParams.length) : ethers.constants.Zero,
+                 //gasLimit: 1000000 // Gas limitini artırarak dene
+
+            }
+    
+            console.log("INFO:",allSwapParams, overrides)
+    
+            console.log("DEPOSIT:",formatEther(overrides.value))
+    
+    
+            if (!IS_NATIVE){
+                const tokenContract = ERC20Contract(baseAsset.address);
+                const allowance = await tokenContract.allowance(account,EXCHANGE.address);
+                if(allowance.lt(DEPOSIT_AMOUNT)){
+                    const approveTx = await tokenContract.approve(EXCHANGE.address,ethers.constants.MaxUint256)
+                    await approveTx.wait();
+                }
+        
+            }
+        
+           await EXCHANGE.swapAll(allSwapParams,overrides).then(async (tx) => {
+               await tx.wait();
+               const summary = `Swapping : ${tx.hash}`
+               setTransaction({ hash: tx.hash, summary: summary, error: null });
+               toggleTransactionSuccess();
+           }).catch((error: Error) => {
+               setTransaction({ hash: '', summary: '', error: error });
+               toggleError();
+           }).finally(async () => {
+               toggleLoading();
+           });
+        }
+    
         return (
+
+            <div className='flex flex-col gap-2 w-full'>
             <div className='w-full grid grid-cols-2 gap-2'>
                 {
                     tradingPairs.map((pair: any, index) => (
@@ -735,7 +798,10 @@ const _SWAP_TAB = () => {
 
                     ))
                 }
-
+            </div>
+            <Button onClick={()=>{
+                handleSwapAll();
+            }} color='danger' fullWidth>Swap All</Button>
             </div>
         );
     }
