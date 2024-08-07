@@ -540,7 +540,7 @@ const _SWAP_TAB = () => {
         
            await EXCHANGE.swap(SwapParam,overrides).then(async (tx) => {
                await tx.wait();
-               const summary = `Wrapping : ${tx.hash}`
+               const summary = `Swapping : ${tx.hash}`
                setTransaction({ hash: tx.hash, summary: summary, error: null });
                toggleTransactionSuccess();
            }).catch((error: Error) => {
@@ -654,7 +654,7 @@ const _SWAP_TAB = () => {
                 <CardHeader>
                     <div className='w-full flex flex-row items-between justify-between '>
                         <div className='rounded-lg bg-danger-500/30 text-danger text-xs p-2'>{getDexNameByRouterAddress(props.pair.router)}</div>
-                        <div className='rounded-lg bg-success-500/30 text-success  text-xs p-2 text-end'>{getOutputAmount() } {quoteAsset.symbol}</div>
+                        <div className='rounded-lg bg-green-600 animate-pulse bg-success-500/30 text-success  text-xs p-2 text-end'>{getOutputAmount() } {quoteAsset.symbol}</div>
                     </div>
 
                 </CardHeader>
