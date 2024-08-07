@@ -721,19 +721,13 @@ const _SWAP_TAB = () => {
             toggleLoading();
 
             let DEPOSIT_AMOUNT = ethers.utils.parseUnits(baseInputValue,baseAsset.decimals)
-         
-    
             let allSwapParams = [];
-    
             let IS_NATIVE = baseAsset.address == ETHER_ADDRESS
-    
 
-            var j = 0;
             tradingPairs.forEach((pair) => {
                 if (pair.valid) {
                     
                     let INPUT_TOKEN = baseAsset.address === ETHER_ADDRESS ? pair.weth : baseAsset.address;
-
                     let swapParam = {
                         amount:DEPOSIT_AMOUNT,
                         weth9:pair.weth,
@@ -741,25 +735,13 @@ const _SWAP_TAB = () => {
                         pair:pair.pair,
                         input:INPUT_TOKEN
                    }
-
-                    allSwapParams.push(swapParam);
-
-                   
-                   j++;
-
+                   allSwapParams.push(swapParam);
                 }
             });
             
             let overrides = {
                  value : IS_NATIVE ? DEPOSIT_AMOUNT.mul(allSwapParams.length) : ethers.constants.Zero,
-                 //gasLimit: 1000000 // Gas limitini artırarak dene
-
-            }
-    
-            console.log("INFO:",allSwapParams, overrides)
-    
-            console.log("DEPOSIT:",formatEther(overrides.value))
-    
+            }    
     
             if (!IS_NATIVE){
                 const tokenContract = ERC20Contract(baseAsset.address);
@@ -768,7 +750,6 @@ const _SWAP_TAB = () => {
                     const approveTx = await tokenContract.approve(EXCHANGE.address,ethers.constants.MaxUint256)
                     await approveTx.wait();
                 }
-        
             }
         
            await EXCHANGE.swapAll(allSwapParams,overrides).then(async (tx) => {
