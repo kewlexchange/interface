@@ -559,13 +559,14 @@ const _SWAP_TAB = () => {
             }
 
 
+        
 
 
-            let _baseAddress = props.pair.amount0Out > 0 ? props.pair.token1 : props.pair.token0
-            let _quoteAddress = props.pair.amount1Out > 0 ? props.pair.token1 : props.pair.token0
+            const [_baseAddress,_quoteAddress] = props.pair.amount1Out > 0 ? [props.pair.token0,props.pair.token1] : [props.pair.token1,props.pair.token0]
 
-
-
+            
+            
+            
             let _baseDecimals = props.pair.token0 == _baseAddress ? props.pair.token0Decimals : props.pair.token1Decimals
             let _quoteDecimals = props.pair.token1 == _quoteAddress ? props.pair.token1Decimals : props.pair.token0Decimals
      
@@ -587,14 +588,13 @@ const _SWAP_TAB = () => {
                 CurrencyAmount.fromRawAmount(quoteToken, quoteReserve)
             )
 
-            const baseAmount: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(baseToken, JSBI.BigInt(ethers.utils.parseUnits(baseInputValue, _baseDecimals).toString()));
 
 
 
             try{
 
-          
-            
+                const baseAmount: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(baseToken, JSBI.BigInt(ethers.utils.parseUnits(baseInputValue, _baseDecimals).toString()));
+
             let _tradeInfo = new Trade(
                 new Route([exchangePair], baseToken, quoteToken),
                 CurrencyAmount.fromRawAmount(baseToken, baseAmount.quotient),
