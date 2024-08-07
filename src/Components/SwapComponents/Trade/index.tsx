@@ -560,19 +560,11 @@ const _SWAP_TAB = () => {
 
 
 
-            
-            let _baseAddress, _quoteAddress;
 
-            if (props.pair.amount0Out == 0 && props.pair.amount1Out > 0) {
-                _baseAddress = props.pair.token0;
-                _quoteAddress = props.pair.token1;
-            } else if (props.pair.amount1Out == 0 && props.pair.amount0Out > 0) {
-                _baseAddress = props.pair.token1;
-                _quoteAddress = props.pair.token0;
-            } else {
-                _baseAddress = props.pair.token0;
-                _quoteAddress = props.pair.token1;
-            }
+            let _baseAddress = baseAsset.address === ETHER_ADDRESS ? props.pair.weth : baseAsset.address
+            let _quoteAddress = quoteAsset.address === ETHER_ADDRESS ? props.pair.weth : quoteAsset.address
+
+ 
 
             let _baseDecimals = props.pair.amount0Out == 0 ? props.pair.token0Decimals : props.pair.token1Decimals
             let _quoteDecimals = props.pair.amount1Out == 0 ? props.pair.token0Decimals : props.pair.token1Decimals
