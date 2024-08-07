@@ -561,23 +561,25 @@ const _SWAP_TAB = () => {
 
 
 
-            let _baseAddress = baseAsset.address === ETHER_ADDRESS ? props.pair.weth : baseAsset.address
-            let _quoteAddress = quoteAsset.address === ETHER_ADDRESS ? props.pair.weth : quoteAsset.address
+            let _baseAddress = props.pair.amount0Out > 0 ? props.pair.token1 : props.pair.token0
+            let _quoteAddress = props.pair.amount1Out > 0 ? props.pair.token1 : props.pair.token0
 
- 
 
-            let _baseDecimals = props.pair.amount0Out == 0 ? props.pair.token0Decimals : props.pair.token1Decimals
-            let _quoteDecimals = props.pair.amount1Out == 0 ? props.pair.token0Decimals : props.pair.token1Decimals
 
+            let _baseDecimals = props.pair.token0 == _baseAddress ? props.pair.token0Decimals : props.pair.token1Decimals
+            let _quoteDecimals = props.pair.token1 == _quoteAddress ? props.pair.token1Decimals : props.pair.token0Decimals
      
 
+            console.log("base",_baseAddress,_baseDecimals)
+            console.log("quote",_quoteAddress,_quoteDecimals)
 
+            
             const baseToken = new Token(baseAsset.chainId, _baseAddress, _baseDecimals.toNumber(), baseAsset.symbol)
             const quoteToken = new Token(quoteAsset.chainId,_quoteAddress, _quoteDecimals.toNumber(), quoteAsset.symbol)
 
 
 
-            const [baseReserve, quoteReserve] = baseToken.sortsBefore(quoteToken) ? [props.pair.reserve0, props.pair.reserve1] : [props.pair.reserve1, props.pair.reserve0]
+            const [baseReserve, quoteReserve] = _baseAddress == props.pair.token0 ? [props.pair.reserve0, props.pair.reserve1] : [props.pair.reserve1, props.pair.reserve0]
 
 
             const exchangePair = new Pair(
@@ -606,16 +608,6 @@ const _SWAP_TAB = () => {
                 console.log("EXCEPTION",ex)
                 setIsTradable(false)
             }
-
-            var _out = "0";
-            
-            try{
-                _out = ethers.utils.formatUnits(props.pair.amount0Out == 0 ? props.pair.amount1Out : props.pair.amount0Out,props.pair.amount0Out == 0 ? props.pair.token1Decimals : props.pair.token0Decimals)
-            }catch(ex:any){
-
-            }
-            setOutputAmount(_out)
-        
 
         }, [props.pair])
 
