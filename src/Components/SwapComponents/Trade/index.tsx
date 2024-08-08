@@ -558,13 +558,27 @@ const _SWAP_TAB = () => {
                 return
             }
 
-
+            let _selectedBaseAddress = baseAsset.address === ETHER_ADDRESS ? props.pair.weth : baseAsset.address
+            let _selectedQuoteAddress = quoteAsset.address === ETHER_ADDRESS ? props.pair.weth : quoteAsset.address
         
 
+            const [selectedBase,selectedQuote] = _selectedBaseAddress == props.pair.token0 ? [props.pair.token0,props.pair.token1] : [props.pair.token1,props.pair.token0]
 
-            const [_baseAddress,_quoteAddress] = props.pair.amount1Out > 0 ? [props.pair.token0,props.pair.token1] : [props.pair.token1,props.pair.token0]
 
-            
+
+        
+       
+            let _baseAddress = selectedBase;
+            let _quoteAddress = selectedQuote;
+
+           
+
+
+
+            console.log("base",baseAsset.address, _baseAddress)
+            console.log("quote",quoteAsset.address, _quoteAddress)
+
+        
             
             
             let _baseDecimals = props.pair.token0 == _baseAddress ? props.pair.token0Decimals : props.pair.token1Decimals
@@ -574,6 +588,8 @@ const _SWAP_TAB = () => {
             console.log("base",_baseAddress,_baseDecimals)
             console.log("quote",_quoteAddress,_quoteDecimals)
 
+
+            
             
             const baseToken = new Token(baseAsset.chainId, _baseAddress, _baseDecimals.toNumber(), baseAsset.symbol)
             const quoteToken = new Token(quoteAsset.chainId,_quoteAddress, _quoteDecimals.toNumber(), quoteAsset.symbol)
@@ -640,12 +656,12 @@ const _SWAP_TAB = () => {
                                 <div className='w-full items-start justify-center flex flex-col'>
                                     <span className={"text-left text-xs w-full"}>Liquidity</span>
 
-                                    <div className='flex flex-col gap-2 w-full'>
-                                        <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                    <div className='rounded-lg border border-default-100  flex flex-col w-full'>
+                                        <div className="flex items-center justify-start gap-2 px-2">
                                             <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
                                             <small className={"w-full text-start py-2 text-xs"} >{baseLiquidity} {baseAsset?.symbol}</small>
                                         </div>
-                                        <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                        <div className="flex items-center justify-start gap-2 px-2">
                                             <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
                                             <small className={"w-full text-start py-2 text-xs"} >{quoteLiquidity} {quoteAsset?.symbol}</small>
                                         </div>
@@ -655,13 +671,13 @@ const _SWAP_TAB = () => {
                                 <div className='w-full items-start justify-center flex flex-col'>
                                     <span className={"text-left text-xs w-full"}>Price</span>
 
-                                    <div className='flex flex-col gap-2 w-full'>
+                                    <div className='rounded-lg border border-default-100 flex flex-col w-full'>
 
-                                        <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                        <div className="flex items-center justify-start gap-2 px-2">
                                             <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
                                             <small className="py-2 text-xs">{tradeInfo.executionPrice.invert().toSignificant()} {baseAsset?.symbol} per {quoteAsset?.symbol}</small>
                                         </div>
-                                        <div className="rounded-lg border border-default-100 flex items-center justify-start gap-2 px-2">
+                                        <div className="flex items-center justify-start gap-2 px-2">
                                             <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
                                             <small className="py-2 text-xs">{tradeInfo.executionPrice.toSignificant()}  {quoteAsset?.symbol} per {baseAsset?.symbol}</small>
                                         </div>
@@ -685,7 +701,7 @@ const _SWAP_TAB = () => {
                     }
                 </CardBody>
                 <CardFooter>
-                    <Button onClick={()=>{
+                    <Button variant='solid' onClick={()=>{
                         handleSwap()
                     }} fullWidth size='sm' color='danger'>Swap</Button>
                 </CardFooter>
