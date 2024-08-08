@@ -22,7 +22,7 @@ import { AbiCoder, hexZeroPad } from "ethers/lib/utils";
 import useBlockNumber from "../../hooks/useBlockNumber";
 import { ChainId, DEFAULT_BITCI_CHAIN_NFT_URL, DEFAULT_CHAIN_ASSETS_URL, DEFAULT_CHAIN_NFT_URL } from "../../constants/chains";
 import { MORALIS_API_KEY } from "../../constants/ai";
-import { fetchAllTokenList } from "../../state/user/hooks";
+import { useFetchAllTokenList } from "../../state/user/hooks";
 import { TokenBalances } from "../../Components/AccountTabs/TokenBalances";
 import { NFTBalances } from "../../Components/AccountTabs/NFTBalances";
 import { WrapTab } from "../../Components/AccountTabs/WrapUnwrap";
@@ -38,7 +38,7 @@ const AccountPage: React.FunctionComponent<IPage> = props => {
     const { state: isSell, toggle: toggleSell } = useModal();
     const blockNumber = useBlockNumber()
     const [activeTab, setActiveTab] = useState(0)
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
     const navigate = useNavigate();
 
     const { state: isErrorShowing, toggle: toggleError } = useModal()

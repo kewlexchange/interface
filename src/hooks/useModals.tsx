@@ -21,7 +21,7 @@ import { DoubleCurrencyIcon } from "../Components/DoubleCurrency";
 import { Avatar, AvatarGroup, Button, Card, CardBody, CardFooter, CardHeader, Image, Input, Listbox, ListboxItem, ListboxSection, ScrollShadow, Slider, Switch, Tab, Tabs } from "@nextui-org/react";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import { updateCustomTokenList } from "../state/user/reducer";
-import { fetchAllTokenList } from "../state/user/hooks";
+import { useFetchAllTokenList } from "../state/user/hooks";
 import { fetchAndUpdateAllTokenList } from "../utils/fetchAllTokenList";
 
 export default function useModal(initialValue: boolean = false) {

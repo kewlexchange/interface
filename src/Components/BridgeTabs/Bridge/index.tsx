@@ -9,7 +9,7 @@ import { CHAIN_IDS_TO_NAMES, ChainId, isSupportedChain } from '../../../constant
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract, useDomainContract, useBridgeContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { fetchAllTokenList } from '../../../state/user/hooks';
+import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { getAssetIconByChainIdFromTokenList, getIconByChainId, getNativeCurrencyByChainId, parseFloatWithDefault, unixTimeToDateTime } from '../../../utils';
 import { Accordion, AccordionItem, Avatar, Image,Button, Card, Select, SelectItem, User } from '@nextui-org/react';
 import { formatEther, formatUnits, parseEther, parseUnits } from '@ethersproject/units';
@@ -46,7 +46,7 @@ const _BRIDGE_TAB = () => {
     const [targetChain, setTargetChain] = useState(new Set([]));
 
 
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
 
 
     const setInputValue = (e, isBase) => {

@@ -9,7 +9,7 @@ import { CHAIN_IDS_TO_NAMES, ChainId, isSupportedChain } from '../../../constant
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract, useDomainContract, useBridgeContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { fetchAllTokenList } from '../../../state/user/hooks';
+import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { generateExplorerURLByChain, getAssetIconByChainIdFromTokenList, getIconByChainId, getNativeCurrencyByChainId, getShordAccount, parseFloatWithDefault, unixTimeToDateTime } from '../../../utils';
 import { Accordion, AccordionItem, Avatar, Image,Button, Card, Select, SelectItem, User, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Spinner, Tooltip } from '@nextui-org/react';
 import { formatUnits, parseEther, parseUnits } from '@ethersproject/units';
@@ -41,7 +41,7 @@ const _BRIDGE_STATUS_TAB = () => {
     const [bridgeTransfers,setBridgeTransfers] = useState([])
     const navigate = useNavigate();
 
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
 
 
 

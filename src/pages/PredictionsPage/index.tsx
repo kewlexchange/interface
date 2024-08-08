@@ -12,7 +12,7 @@ import { UNSTAKE_TAB } from "../../Components/StakeTabs/Unstake";
 import { useWeb3React } from "@web3-react/core";
 import { BRIDGE_TAB } from "../../Components/BridgeTabs/Bridge";
 import { BRIDGE_STATUS_TAB } from "../../Components/BridgeTabs/Status";
-import { fetchAllTokenList } from "../../state/user/hooks";
+import { useFetchAllTokenList } from "../../state/user/hooks";
 import { useAppSelector } from "../../state/hooks";
 import { title } from "../../Components/Primitives";
 import { useERC20Contract, useKEWLMigratorContract } from "../../hooks/useContract";
@@ -40,7 +40,7 @@ const PredictionsPage: React.FunctionComponent<IPage> = props => {
     const MigratorContract = useKEWLMigratorContract(chainId, true)
 
     
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
 
 
     useEffect(() => {

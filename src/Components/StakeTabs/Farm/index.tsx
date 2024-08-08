@@ -9,7 +9,7 @@ import { ChainId, isSupportedChain } from '../../../constants/chains';
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract, useDomainContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo, ModalSelectExchangePair } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { fetchAllTokenList } from '../../../state/user/hooks';
+import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { getAssetIconByChainIdFromTokenList, getNativeCurrencyByChainId, parseFloatWithDefault, truncateDecimals, unixTimeToDateTime } from '../../../utils';
 import { Accordion, AccordionItem, Avatar, Button, Card } from '@nextui-org/react';
 import { formatUnits, parseEther, parseUnits } from '@ethersproject/units';
@@ -48,7 +48,7 @@ const _FARM_TAB = () => {
     const [baseLiquidity, setBaseLiquidity] = useState("0")
     const [quoteLiquidity, setQuoteLiquidity] = useState("0")
 
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
 
 
     const setInputValue = (e, isBase) => {

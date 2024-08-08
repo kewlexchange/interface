@@ -9,7 +9,7 @@ import { ChainId, isSupportedChain } from '../../../constants/chains';
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract, useDomainContract, useIMONMarketContract, useNFT721Contract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo, ModalSelectExchangePair } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { fetchAllTokenList } from '../../../state/user/hooks';
+import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { getAssetIconByChainIdFromTokenList, getNativeCurrencyByChainId, parseFloatWithDefault, unixTimeToDateTime } from '../../../utils';
 import { Accordion, AccordionItem, Avatar, Button, Card, Spinner, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react';
 import { formatEther, formatUnits, parseEther, parseUnits } from '@ethersproject/units';

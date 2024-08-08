@@ -3,7 +3,7 @@ import { useWeb3React } from '@web3-react/core';
 import useModal, { ModalInfo, ModalLoading, ModalSelectToken, ModalSuccessTransaction } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import { Button, Card , CardBody, CardFooter, Image, Spinner, User} from '@nextui-org/react';
-import { fetchAllTokenList } from '../../../state/user/hooks';
+import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { getAssetIconByChainIdFromTokenList, getNativeCurrencyByChainId } from '../../../utils';
 import { useERC20Contract, useFindDiamondByChainId, useMetamorphContract } from '../../../hooks/useContract';
 import { BigNumber, ethers } from 'ethers';
@@ -33,7 +33,7 @@ const _BURN_TAB = () => {
 
     const [baseAsset, setBaseAsset] = useState(null)
     const [baseInputValue, setBaseInputValue] = useState("")
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
     const blockNumber = useBlockNumber()
 
     const [isLoading,setIsLoaded] = useState(true)

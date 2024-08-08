@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { useAppSelector } from "../../../state/hooks";
 import { ChartView } from "../../../Components/ChartView";
-import { fetchAllTokenList } from "../../../state/user/hooks";
+import { useFetchAllTokenList } from "../../../state/user/hooks";
 import IPage from "../../../interfaces/page";
 import { NavLink, useParams } from "react-router-dom";
 import { isAddress } from "@ethersproject/address";
@@ -15,7 +15,7 @@ const ChartPage: React.FunctionComponent<IPage> = props => {
     const [pairAddress, setPairAddress]: any = useState(null)
     const { pair } = useParams();
 
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
     const defaultAssets = useAppSelector((state) => state.user.tokenList && state.user.tokenList[chainId])
 
     useEffect(() => {

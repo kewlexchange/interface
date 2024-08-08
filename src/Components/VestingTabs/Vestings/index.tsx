@@ -10,7 +10,7 @@ import { WETH9, Token, CurrencyAmount, Pair, Price, Trade, Currency, Percent, Ro
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useFanTokenWrapperContract, useKEWLVestingContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalSelectExchangePair } from '../../../hooks/useModals';
 import { useAppSelector } from '../../../state/hooks';
-import { fetchAllTokenList } from '../../../state/user/hooks';
+import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { getNativeCurrencyByChainId, getShordAccount, parseFloatWithDefault, unixTimeToDateTime } from '../../../utils';
 import { DoubleCurrencyIcon } from '../../DoubleCurrency';
 import UniwalletModal from '../../Modal/UniwalletModal';
@@ -65,7 +65,7 @@ const _SWAP_TAB = () => {
     const [claimAccount, setClaimAccount] = useState(account)
     const [vestings, setVestings] = useState([])
     const [isLoaded, setLoaded] = useState(false)
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
 
 
 

@@ -49,7 +49,7 @@ import useModal, {
     ModalInfo,
 } from "../../../hooks/useModals";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
-import { fetchAllTokenList } from "../../../state/user/hooks";
+import { useFetchAllTokenList } from "../../../state/user/hooks";
 import {
     getNativeCurrencyByChainId,
     parseFloatWithDefault,

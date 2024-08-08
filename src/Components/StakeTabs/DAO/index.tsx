@@ -9,7 +9,7 @@ import { ChainId, isSupportedChain } from '../../../constants/chains';
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract, useDomainContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo, ModalSelectExchangePair } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { fetchAllTokenList } from '../../../state/user/hooks';
+import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { getAssetIconByChainIdFromTokenList, getNativeCurrencyByChainId, parseFloatWithDefault, unixTimeToDateTime } from '../../../utils';
 import { Accordion, AccordionItem, Avatar, Button, Card, CardBody, CardFooter, CardHeader, Image, Slider, Table, TableBody, TableColumn, TableHeader } from '@nextui-org/react';
 import { formatUnits, parseEther, parseUnits } from '@ethersproject/units';
@@ -42,7 +42,7 @@ const _STAKE_TAB = () => {
     const [poolInfo, setPoolInfo]: any = useState(null);
     const [rewardInfo, setRewardInfo]: any = useState(null)
     const [isCNSRegistered, setCNSRegistered]: any = useState(false);
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
     const [pairInfo, setPairInfo]: any = useState(null);
     const [depositAmount, setDepositAmount] = useState(1)
 

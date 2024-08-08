@@ -10,7 +10,7 @@ import { WETH9, Token, CurrencyAmount, Pair, Price, Trade, Currency, Percent, Ro
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { fetchAllTokenList } from '../../../state/user/hooks';
+import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { getAssetIconByChainIdFromTokenList, getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../utils';
 import { DoubleCurrencyIcon } from '../../DoubleCurrency';
 import UniwalletModal from '../../Modal/UniwalletModal';
@@ -23,7 +23,7 @@ import { STAKE_ITEM } from './StakeItem';
 const _UNSTAKE_TAB = () => {
 
     const { connector, account, provider, chainId } = useWeb3React()
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
     const IMONDIAMOND = useDiamondContract(chainId, true);
     const EXCHANGE = useExchangeContract(chainId, true)
     const ERC20Contract = useERC20Contract()

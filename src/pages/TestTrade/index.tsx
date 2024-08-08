@@ -37,7 +37,7 @@ import {ETHER_ADDRESS, TradeType} from "../../constants/misc";
 import {Chart} from "../../Components/Chart";
 import {getChainInfoOrDefault} from "../../constants/chainInfo";
 import {useAppSelector} from "../../state/hooks";
-import {fetchAllTokenList} from "../../state/user/hooks";
+import {useFetchAllTokenList} from "../../state/user/hooks";
 
 const TestTrade: React.FunctionComponent<IPage> = props => {
     const { connector, account, provider, chainId } = useWeb3React()

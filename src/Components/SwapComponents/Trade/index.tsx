@@ -10,7 +10,7 @@ import { WETH9, Token, CurrencyAmount, Pair, Price, Trade, Currency, Percent, Ro
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useFanTokenWrapperContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalSelectExchangePair } from '../../../hooks/useModals';
 import { useAppSelector } from '../../../state/hooks';
-import { fetchAllTokenList } from '../../../state/user/hooks';
+import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../utils';
 import { DoubleCurrencyIcon } from '../../DoubleCurrency';
 import UniwalletModal from '../../Modal/UniwalletModal';
@@ -65,10 +65,7 @@ const _SWAP_TAB = () => {
     const userSlippageTolerance = useAppSelector((state) => state.user.userSlippageTolerance);
     const [allExchangePairs, setAllExchangePairs]: any = useState(null)
     const [isLoaded,setLoaded] = useState(false)
-    fetchAllTokenList(chainId, account)
-
-
-
+    useFetchAllTokenList(chainId, account)
 
     useEffect(() => {
         if (!chainId) { return; }
@@ -561,65 +558,51 @@ const _SWAP_TAB = () => {
             let _selectedBaseAddress = baseAsset.address === ETHER_ADDRESS ? props.pair.weth : baseAsset.address
             let _selectedQuoteAddress = quoteAsset.address === ETHER_ADDRESS ? props.pair.weth : quoteAsset.address
         
+            let selectedBase
+            let selectedQuote
 
-            const [selectedBase,selectedQuote] = _selectedBaseAddress == props.pair.token0 ? [props.pair.token0,props.pair.token1] : [props.pair.token1,props.pair.token0]
+            if(_selectedBaseAddress == props.pair.weth){
+                 [selectedBase,selectedQuote] = _selectedBaseAddress == props.pair.token0 ? [props.pair.token0,props.pair.token1] : [props.pair.token1,props.pair.token0]
+            }else if(_selectedQuoteAddress == props.pair.weth){
 
+                [selectedBase,selectedQuote] = _selectedQuoteAddress == props.pair.token0 ? [props.pair.token1,props.pair.token0] : [props.pair.token0,props.pair.token1]
+            }else{
+                [selectedBase,selectedQuote]  = [_selectedBaseAddress,_selectedQuoteAddress]
+            }
 
-
-        
-       
             let _baseAddress = selectedBase;
             let _quoteAddress = selectedQuote;
 
-           
+            console.log("base", _baseAddress, "quote", _quoteAddress)
 
 
-
-            console.log("base",baseAsset.address, _baseAddress)
-            console.log("quote",quoteAsset.address, _quoteAddress)
-
-        
-            
-            
             let _baseDecimals = props.pair.token0 == _baseAddress ? props.pair.token0Decimals : props.pair.token1Decimals
             let _quoteDecimals = props.pair.token1 == _quoteAddress ? props.pair.token1Decimals : props.pair.token0Decimals
      
-
-            console.log("base",_baseAddress,_baseDecimals)
-            console.log("quote",_quoteAddress,_quoteDecimals)
-
-
-            
             
             const baseToken = new Token(baseAsset.chainId, _baseAddress, _baseDecimals.toNumber(), baseAsset.symbol)
             const quoteToken = new Token(quoteAsset.chainId,_quoteAddress, _quoteDecimals.toNumber(), quoteAsset.symbol)
 
-
-
             const [baseReserve, quoteReserve] = _baseAddress == props.pair.token0 ? [props.pair.reserve0, props.pair.reserve1] : [props.pair.reserve1, props.pair.reserve0]
-
 
             const exchangePair = new Pair(
                 CurrencyAmount.fromRawAmount(baseToken, baseReserve),
                 CurrencyAmount.fromRawAmount(quoteToken, quoteReserve)
             )
 
-
-
-
             try{
 
                 const baseAmount: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(baseToken, JSBI.BigInt(ethers.utils.parseUnits(baseInputValue, _baseDecimals).toString()));
 
-            let _tradeInfo = new Trade(
-                new Route([exchangePair], baseToken, quoteToken),
-                CurrencyAmount.fromRawAmount(baseToken, baseAmount.quotient),
-                TradeType.EXACT_INPUT
-            )
+                let _tradeInfo = new Trade(
+                    new Route([exchangePair], baseToken, quoteToken),
+                    CurrencyAmount.fromRawAmount(baseToken, baseAmount.quotient),
+                    TradeType.EXACT_INPUT
+                )
         
-            setTradeInfo(_tradeInfo)
-            setBaseLiquidity(CurrencyAmount.fromRawAmount(baseToken, baseReserve).toSignificant(6))
-            setQuoteLiquidity(CurrencyAmount.fromRawAmount(quoteToken, quoteReserve).toSignificant(6))
+                setTradeInfo(_tradeInfo)
+                setBaseLiquidity(CurrencyAmount.fromRawAmount(baseToken, baseReserve).toSignificant(6))
+                setQuoteLiquidity(CurrencyAmount.fromRawAmount(quoteToken, quoteReserve).toSignificant(6))
             }catch(ex){
                 console.log("EXCEPTION",ex)
                 setIsTradable(false)
@@ -646,7 +629,6 @@ const _SWAP_TAB = () => {
                         <div className='rounded-lg bg-danger-500/30 text-danger text-xs p-2'>{getDexNameByRouterAddress(props.pair.router)}</div>
                         <div className='rounded-lg bg-green-600 animate-pulse bg-success-500/30 text-success  text-xs p-2 text-end'>{getOutputAmount() } {quoteAsset.symbol}</div>
                     </div>
-
                 </CardHeader>
                 <CardBody>
                     {

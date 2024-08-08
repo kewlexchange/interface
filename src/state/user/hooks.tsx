@@ -1,105 +1,65 @@
-import {useCallback, useEffect, useMemo} from 'react'
-import {shallowEqual, useDispatch} from 'react-redux'
+import { useCallback } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { useExchangeContract } from '../../hooks/useContract';
+import {  DEFAULT_CHAIN_ASSETS_URL, isSupportedChain } from '../../constants/chains';
+import { ethers } from 'ethers';
+import { CurrencyAmount, Token, WETH9 } from '../../entities';
+import { updateTokenList } from './reducer';
+import { ETHER_ADDRESS } from '../../constants/misc';
+import { getIconByChainId } from '../../utils';
+import { getChainInfoOrDefault } from '../../constants/chainInfo';
 
-import {useAppDispatch, useAppSelector} from "../hooks";
+export const useFetchAllTokenList = (chainId: number, account: string | null) => {
+    const dispatch = useAppDispatch();
+    const EXCHANGE = useExchangeContract(chainId, true);
+    const customTokens = useAppSelector(state => state.user.customTokenList && state.user.customTokenList[chainId]);
 
-import {useExchangeContract} from "../../hooks/useContract";
-import {getChainInfoOrDefault} from "../../constants/chainInfo";
-import {DEFAULT_CHAIN_ASSETS_URL, isSupportedChain} from "../../constants/chains";
-import {ethers} from "ethers";
-import {CurrencyAmount, Token, WETH9} from "../../entities";
-import {useWeb3React} from "@web3-react/core";
-import {updateTokenList} from "./reducer";
-import {ETHER_ADDRESS} from "../../constants/misc";
-import {getIconByChainId, getNativeCurrencyByChainId} from "../../utils";
-import { fetchAndUpdateAllTokenList } from '../../utils/fetchAllTokenList';
+    const fetchTokens = useCallback(async () => {
+        if (!isSupportedChain(chainId)) return;
 
-export const fetchAllTokenList = async (chainId,account) => {
+        const chainInfo = getChainInfoOrDefault(chainId);
+        let fetchURL = chainInfo.defaultListUrl[0] || DEFAULT_CHAIN_ASSETS_URL;
+        let userBalance = '0.0000';
 
-     const dispatch = useAppDispatch()
-    const EXCHANGE = useExchangeContract(chainId,true)
-    var customTokens = useAppSelector((state) => state.user.customTokenList && state.user.customTokenList[chainId])
+        const _defaultAssets = await (await fetch(fetchURL)).json();
+        let abiERC = ['function balanceOf(address user)'];
+        let tokenList = _defaultAssets?.tokens || [];
 
-    useEffect(()=>{
-        console.log("CHAINID",chainId)
-
-
-    const fetchData = async () =>{
-        if(!isSupportedChain(chainId)){
-            return;
-        }
-        const chainInfo = getChainInfoOrDefault(chainId)
-        let fetchURL = chainInfo.defaultListUrl[0]
-        if(fetchURL.length === 0){
-            fetchURL = DEFAULT_CHAIN_ASSETS_URL;
-        }
-
-        let userBalance = "0.0000"
-
-        const _defaultAssets = await (
-            await fetch(
-                fetchURL
-            )
-        ).json();
-        let abiERC = [
-            'function balanceOf(address user)'
-        ];
-
-
-
-        let tokenList = _defaultAssets?.tokens
-  
-        if(!tokenList){
-            return
-        }
-        if(customTokens){
+        if (customTokens) {
             tokenList = [...tokenList, ...customTokens];
         }
 
-        let abiInterfaceParam = new ethers.utils.Interface(abiERC)
-        let multicallParams = [];
-        tokenList.map((item,i)=>{
-            let updatedItem = { ...tokenList[i] }; // Önceki öğenin değiştirilebilir bir kopyasını oluştur
-            if(account){
-                multicallParams.push({
-                    target: updatedItem.address,
-                    callData: abiInterfaceParam.encodeFunctionData("balanceOf", [account])
-                })
-            }
-            updatedItem.balance = "0.0"
-            tokenList[i] = updatedItem;
-        })
+        let abiInterfaceParam = new ethers.utils.Interface(abiERC);
+        let multicallParams = tokenList.map(item => ({
+            target: item.address,
+            callData: abiInterfaceParam.encodeFunctionData('balanceOf', [account])
+        }));
 
-        if(account && EXCHANGE){
-            const [blockNum, multicallResult] = await EXCHANGE.callStatic.aggregate(multicallParams)
-            let index = 0;
-            for await (const encodedMulticallData of multicallResult) {
-                const decodedMulticallData = ethers.utils.defaultAbiCoder.decode( [
-                    "uint256 balance"],encodedMulticallData)
+        tokenList = tokenList.map(item => ({ ...item, balance: '0.0' }));
+
+        if (account && EXCHANGE) {
+            const [blockNum, multicallResult] = await EXCHANGE.callStatic.aggregate(multicallParams);
+            multicallResult.forEach((encodedMulticallData, index) => {
+                const decodedMulticallData = ethers.utils.defaultAbiCoder.decode(['uint256 balance'], encodedMulticallData);
                 let tokenInfo = tokenList[index];
-                tokenInfo.address = ethers.utils.getAddress(tokenInfo.address)
-                const tokenAddr = new Token(tokenInfo.chainId, tokenInfo.address, tokenInfo.decimals)
-                tokenList[index]["balance"]= CurrencyAmount.fromRawAmount(tokenAddr,decodedMulticallData.balance).toSignificant()
-                index++;
-            }
+                tokenInfo.address = ethers.utils.getAddress(tokenInfo.address);
+                const tokenAddr = new Token(tokenInfo.chainId, tokenInfo.address, tokenInfo.decimals);
+                tokenList[index]['balance'] = CurrencyAmount.fromRawAmount(tokenAddr, decodedMulticallData.balance).toSignificant();
+            });
 
-            let balanceInfo = await EXCHANGE.getEthBalance(account)
-            userBalance = CurrencyAmount.fromRawAmount(WETH9[chainId], balanceInfo).toSignificant(6)
-
+            let balanceInfo = await EXCHANGE.getEthBalance(account);
+            userBalance = CurrencyAmount.fromRawAmount(WETH9[chainId], balanceInfo).toSignificant(6);
         }
 
+        let nativeCurrency = {
+            chainId,
+            address: ETHER_ADDRESS,
+            balance: userBalance,
+            logoURI: getIconByChainId(chainId, true),
+            ...chainInfo.nativeCurrency
+        };
+        dispatch(updateTokenList({ chainId, tokens: [nativeCurrency, ...tokenList] }));
+    }, [chainId, account, dispatch, EXCHANGE, customTokens]);
 
-        let nativeCurrency ={"chainId":chainId,"address":ETHER_ADDRESS,balance:userBalance,logoURI:getIconByChainId(chainId,true),...chainInfo.nativeCurrency}
-        dispatch(updateTokenList({chainId:chainId,tokens:[nativeCurrency,...tokenList]}))
-       // dispatch(updateTokenList({chainId:chainId,tokens:_defaultAssets.tokens}))
-    }
-
-
-        fetchData()
-    },[chainId,account])
-
- 
-
-
-}
-
+    return { fetchTokens };
+};

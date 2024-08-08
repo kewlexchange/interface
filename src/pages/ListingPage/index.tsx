@@ -7,7 +7,7 @@ import { ChainId } from "../../constants/chains";
 import { useWeb3React } from "@web3-react/core";
 import useModal, { ModalError, ModalLoading, ModalNoProvider, ModalSuccessTransaction } from "../../hooks/useModals";
 import { BigNumber } from "ethers";
-import { fetchAllTokenList } from "../../state/user/hooks";
+import { useFetchAllTokenList } from "../../state/user/hooks";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { generateExplorerURLByChain } from "../../utils";
 
@@ -39,7 +39,7 @@ const ListingPage: React.FunctionComponent<IPage> = props => {
     const defaultAssets = useAppSelector((state) => state.user.tokenList && state.user.tokenList[chainId])
 
 
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
 
     
     useEffect(() => {

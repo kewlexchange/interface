@@ -2,7 +2,7 @@ import { Slider, Image, Badge, Card, CardBody, Tab, Tabs } from "@nextui-org/rea
 import IPage from "../../interfaces/page";
 import React, { useEffect, useState } from "react";
 import { PairTAB } from "../../Components/ExplorerTabs/PairsTab";
-import { fetchAllTokenList } from "../../state/user/hooks";
+import { useFetchAllTokenList } from "../../state/user/hooks";
 import { useWeb3React } from "@web3-react/core";
 import { useAppSelector } from "../../state/hooks";
 import { PricesTAB } from "../../Components/ExplorerTabs/PricesTab";
@@ -11,7 +11,7 @@ const ExplorerPage: React.FunctionComponent<IPage> = props => {
     const [amount, setAmount] = useState(1);
     const { connector, account, provider, chainId } = useWeb3React()
 
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
     const defaultAssets = useAppSelector((state) => state.user.tokenList && state.user.tokenList[chainId])
 
     useEffect(() => {

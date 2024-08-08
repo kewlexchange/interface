@@ -18,7 +18,7 @@ import { formatEther, parseEther } from "ethers/lib/utils";
 import useDebounce from "../../hooks/useDebounce";
 import { AnimationHeader } from "../../Components/AnimationHeader";
 import { UnlockStakePool } from "../../Components/UnlockStakePool";
-import { fetchAllTokenList } from "../../state/user/hooks";
+import { useFetchAllTokenList } from "../../state/user/hooks";
 import { useAppSelector } from "../../state/hooks";
 import { DoubleCurrencyIcon } from "../../Components/DoubleCurrency";
 
@@ -43,7 +43,7 @@ const FarmPage: React.FunctionComponent<IPage> = props => {
     const [transaction, setTransaction] = useState({ hash: '', summary: '', error: null })
     const { state: isNoProvider, toggle: toggleNoProvider } = useModal()
 
-    fetchAllTokenList(chainId, account)
+    useFetchAllTokenList(chainId, account)
 
     const defaultAssets = useAppSelector((state) => state.user.tokenList && state.user.tokenList[chainId])
 
