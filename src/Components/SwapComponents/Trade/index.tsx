@@ -65,7 +65,7 @@ const _SWAP_TAB = () => {
     const userSlippageTolerance = useAppSelector((state) => state.user.userSlippageTolerance);
     const [allExchangePairs, setAllExchangePairs]: any = useState(null)
     const [isLoaded,setLoaded] = useState(false)
-    useFetchAllTokenList(chainId, account)
+    const { fetchTokens } = useFetchAllTokenList(chainId, account);
 
     useEffect(() => {
         if (!chainId) { return; }
@@ -101,6 +101,10 @@ const _SWAP_TAB = () => {
     }
 
 
+    useEffect(()=>{
+        fetchTokens()
+    },[account])
+
 
     const resetSwap = async (isBase) => {
         setTradeInfo(null)
@@ -120,6 +124,7 @@ const _SWAP_TAB = () => {
         if (!chainId) { return }
         if (!baseAsset) { return }
         if (!quoteAsset) { return }
+    
 
         if (!isSupportedChain(chainId)) {
             return;
@@ -456,11 +461,12 @@ const _SWAP_TAB = () => {
     }
 
 
-    const handleSwapAssets = () => {
+    const handleSwapAssets = async () => {
         setPairInfo(null)
         const temp = baseAsset;
         setBaseAsset(quoteAsset);
         setQuoteAsset(temp)
+
 
     }
 
@@ -546,6 +552,9 @@ const _SWAP_TAB = () => {
            }).finally(async () => {
                toggleLoading();
            });
+
+           fetchTokens();
+
              
         }
         useEffect(() => {
