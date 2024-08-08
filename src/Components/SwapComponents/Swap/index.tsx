@@ -60,7 +60,7 @@ const _SWAP_TAB = () => {
     const userSlippageTolerance = useAppSelector((state) => state.user.userSlippageTolerance);
     const [allExchangePairs, setAllExchangePairs]: any = useState(null)
 
-    useFetchAllTokenList(chainId, account)
+    const { fetchTokens } = useFetchAllTokenList(chainId, account);
 
 
 
@@ -601,6 +601,8 @@ const _SWAP_TAB = () => {
                 }
                 break
         }
+
+        fetchTokens();
 
     }
 
