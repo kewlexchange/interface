@@ -228,7 +228,7 @@ const _EARN_TAB = () => {
     maxValue={parseFloat(formatUnits(poolEntry.rewardRatePerDay,props.asset.decimals))}
     color="success"
     showValueLabel={true}
-    valueLabel={parseFloat(formatUnits(poolEntry.rewardRatePerSecond,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
+    valueLabel={parseFloat(formatUnits(poolEntry.rewardRatePerSecond,props.asset.decimals)).toFixed(8) + " " + props.asset.symbol}
     className="w-full"
 />
 <Divider className='col-span-2' />
