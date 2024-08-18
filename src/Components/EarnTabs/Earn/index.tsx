@@ -208,6 +208,31 @@ const _EARN_TAB = () => {
 
                     <Divider className='col-span-2' />
 
+
+
+<Progress
+    label="Daily Reward"
+    size="sm"
+    value={parseFloat(formatUnits(poolEntry.rewardRatePerDay,props.asset.decimals))}
+    maxValue={parseFloat(formatUnits(poolEntry.totalRewards,props.asset.decimals))}
+    color="success"
+    showValueLabel={true}
+    className="w-full"
+    valueLabel={parseFloat(formatUnits(poolEntry.rewardRatePerDay,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
+/>
+
+<Progress
+    label="Reward Per Second"
+    size="sm"
+    value={parseFloat(formatUnits(poolEntry.rewardRatePerSecond,props.asset.decimals))}
+    maxValue={parseFloat(formatUnits(poolEntry.rewardRatePerDay,props.asset.decimals))}
+    color="success"
+    showValueLabel={true}
+    valueLabel={parseFloat(formatUnits(poolEntry.rewardRatePerSecond,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
+    className="w-full"
+/>
+<Divider className='col-span-2' />
+
                     <Progress
                         label="Total Reward"
                         size="sm"
