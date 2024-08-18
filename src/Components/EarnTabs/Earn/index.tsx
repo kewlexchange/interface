@@ -160,7 +160,7 @@ const _EARN_TAB = () => {
                 </CardBody>
 
                 {
-                    poolEntry &&    <CardFooter className='grid grid-cols-2 gap-4'>
+                    poolEntry &&    <CardFooter className='grid grid-cols-2 gap-2'>
                 
                   
          
