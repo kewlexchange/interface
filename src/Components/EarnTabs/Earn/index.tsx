@@ -161,98 +161,78 @@ const _EARN_TAB = () => {
 
                 {
                     poolEntry &&    <CardFooter className='grid grid-cols-2 gap-4'>
+                
+                  
+         
 
-
-                    <Progress
-                        label="Total Tradings"
-                        size="sm"
-                        value={parseFloat(formatUnits(poolEntry.totalTrades,props.asset.decimals))}
-                        maxValue={parseFloat(formatUnits(poolEntry.totalTrades,props.asset.decimals))}
-                        color="danger"
-                        showValueLabel={true}
-                        className="w-full"
-                        valueLabel={parseFloat(formatUnits(poolEntry.totalTrades,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
-
-                    />
-                    <Progress
-                        label="Your Tradings"
-                        size="sm"
-                        value={parseFloat(formatUnits(poolEntry.userTradeAmount,props.asset.decimals))}
-                        maxValue={parseFloat(formatUnits(poolEntry.totalTrades,props.asset.decimals))}
-                        color="success"
-                        showValueLabel={true}
-                        className="w-full"
-                        valueLabel={parseFloat(formatUnits(poolEntry.userTradeAmount,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
-                    />
-                    <Divider className='col-span-2' />
-                    <Progress
-                        label="Your Balance"
-                        size="sm"
-                        value={parseFloat(formatUnits(poolEntry.userBalance,props.asset.decimals))}
-                        maxValue={parseFloat(formatUnits(poolEntry.totalSupply,props.asset.decimals))}
-                        color="danger"
-                        showValueLabel={true}
-                        className="w-full"
-                        valueLabel={parseFloat(formatUnits(poolEntry.userBalance,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
-
-                    />
-                    <Progress
-                        label="Your Earnings"
-                        size="sm"
-                        value={0}
-                        maxValue={10000}
-                        color="success"
-                        showValueLabel={true}
-                        className="w-full"
-                    />
-
-                    <Divider className='col-span-2' />
+                  <Card>
+                        <CardHeader>
+                        Total Tradings
+                        </CardHeader>
+                        <CardBody>
+                        {parseFloat(formatUnits(poolEntry.totalTrades,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardHeader>
+                        Your Tradings
+                        </CardHeader>
+                        <CardBody>
+                        {parseFloat(formatUnits(poolEntry.userTradeAmount,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
+                        </CardBody>                    
+                    </Card>
 
 
 
-<Progress
-    label="Daily Reward"
-    size="sm"
-    value={parseFloat(formatUnits(poolEntry.rewardRatePerDay,props.asset.decimals))}
-    maxValue={parseFloat(formatUnits(poolEntry.totalRewards,props.asset.decimals))}
-    color="success"
-    showValueLabel={true}
-    className="w-full"
-    valueLabel={parseFloat(formatUnits(poolEntry.rewardRatePerDay,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
-/>
+                    <Card>
+                        <CardHeader>
+                        Your Balance
+                        </CardHeader>
+                        <CardBody>
+                        {parseFloat(formatUnits(poolEntry.userBalance,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardHeader>
+                        Your Earnings
+                        </CardHeader>
+                        <CardBody>
+                            Under Development                       
+                        </CardBody>
+                    </Card>
 
-<Progress
-    label="Reward Per Second"
-    size="sm"
-    value={parseFloat(formatUnits(poolEntry.rewardRatePerSecond,props.asset.decimals))}
-    maxValue={parseFloat(formatUnits(poolEntry.rewardRatePerDay,props.asset.decimals))}
-    color="success"
-    showValueLabel={true}
-    valueLabel={parseFloat(formatUnits(poolEntry.rewardRatePerSecond,props.asset.decimals)).toFixed(8) + " " + props.asset.symbol}
-    className="w-full"
-/>
-<Divider className='col-span-2' />
 
-                    <Progress
-                        label="Total Reward"
-                        size="sm"
-                        value={parseFloat(formatUnits(poolEntry.totalRewards,props.asset.decimals))}
-                        maxValue={parseFloat(formatUnits(poolEntry.totalRewards,props.asset.decimals))}
-                        color="success"
-                        showValueLabel={true}
-                        className="w-full"
-                        valueLabel={parseFloat(formatUnits(poolEntry.totalRewards,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
-                    />
+                    <Card>
+                        <CardHeader>
+                            Daily Reward
+                        </CardHeader>
+                        <CardBody>
+                            {parseFloat(formatUnits(poolEntry.rewardRatePerDay,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardHeader>
+                        Reward Per Second
+                        </CardHeader>
+                        <CardBody>
+                            {parseFloat(formatUnits(poolEntry.rewardRatePerSecond,props.asset.decimals)).toFixed(8) + " " + props.asset.symbol}                        </CardBody>
+                    </Card>
 
-                    <Progress
-                        label="Total Supply"
-                        size="sm"
-                        value={parseFloat(formatUnits(poolEntry.totalSupply,props.asset.decimals))}
-                        color="success"
-                        showValueLabel={true}
-                        valueLabel={parseFloat(formatUnits(poolEntry.totalSupply,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
-                        className="w-full"
-                    />
+
+
+                    <Card>
+                        <CardHeader>
+                        Total Reward
+                        </CardHeader>
+                        <CardBody>
+                        {parseFloat(formatUnits(poolEntry.totalRewards,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}                        </CardBody>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                        Total Supply
+                        </CardHeader>
+                        <CardBody>
+                        {parseFloat(formatUnits(poolEntry.totalSupply,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}                        </CardBody>
+                    </Card>
 
 
 
