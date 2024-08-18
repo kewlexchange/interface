@@ -212,10 +212,11 @@ const _EARN_TAB = () => {
                         label="Total Reward"
                         size="sm"
                         value={parseFloat(formatUnits(poolEntry.totalRewards,props.asset.decimals))}
-                        maxValue={parseFloat(formatUnits(poolEntry.totalSupply,props.asset.decimals))}
+                        maxValue={parseFloat(formatUnits(poolEntry.totalRewards,props.asset.decimals))}
                         color="success"
                         showValueLabel={true}
                         className="w-full"
+                        valueLabel={parseFloat(formatUnits(poolEntry.totalRewards,props.asset.decimals)).toFixed(4) + " " + props.asset.symbol}
                     />
 
                     <Progress
