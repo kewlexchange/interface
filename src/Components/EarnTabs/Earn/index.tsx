@@ -195,11 +195,9 @@ const _EARN_TAB = () => {
                         Your Earnings
                         </CardHeader>
                         <CardBody>
-                            Under Development                       
+                        {parseFloat(formatUnits(poolEntry.totalUserRewards,props.asset.decimals)).toFixed(8) + " " + props.asset.symbol}                        
                         </CardBody>
                     </Card>
-
-
                     <Card>
                         <CardHeader>
                             Daily Reward
