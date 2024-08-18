@@ -144,9 +144,13 @@ const _SWAP_TAB = () => {
     }
 
     const  handleClaim = async(index:any) =>{
-        setTransaction({ hash: '', summary: '', error: {message:`Invalid Action!`} });
-        toggleError();
-        return;
+
+        if(vestings[index].locker != account){
+            setTransaction({ hash: '', summary: '', error: {message:`Invalid Action!`} });
+            toggleError();
+            return;
+        }
+ 
         toggleLoading();
         await KEWLVESTING.unlockTokens(index).then(async (tx) => {
             await tx.wait();

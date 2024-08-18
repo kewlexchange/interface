@@ -116,11 +116,18 @@ const _MRLIDO = (props: { IDOParams, name }) => {
 
 
 
+        let userAddresses = [];
         const sortedGroupedTransactions = Object.entries(groupedTransactions)
             .sort(([, a], [, b]) => b.depositAmount.sub(a.depositAmount))
-            .map(([user, values]) => ({ user, ...values }));
+            .map(([user, values]) => {
+                userAddresses.push(user); // user adresini userAddresses'e ekle
+                return { user, ...values };
+            });
+        
 
         setContributors(sortedGroupedTransactions)
+
+        console.log(userAddresses)
         setIsLoaded(true)
 
     }

@@ -12,6 +12,7 @@ import {MORPH_TAB} from "../../Components/MetamorphTabs/MorphTab";
 import {BURN_TAB} from "../../Components/MetamorphTabs/BurnTab";
 import { WRAP_TAB } from "../../Components/SwapComponents/Wrap";
 import { TRADE_TAB } from "../../Components/SwapComponents/Trade";
+import { ARBITRAGE_TAB } from "../../Components/SwapComponents/Arbitrage";
 
 
 const SwapPage: React.FunctionComponent<IPage> = props => {
@@ -31,10 +32,14 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                     <Card  fullWidth shadow="sm" className={" flex gap-2 flex-col w-full"}>
                         <CardBody>
                         <div className="w-full max-w-full">
-                            <Tabs color={"danger"} aria-label="Swap Tabs">
+                            <Tabs variant="solid" color={"danger"} aria-label="Swap Tabs">
                             <Tab key={"trade"} title={"Trade"}>
                                     <TRADE_TAB/>
                                 </Tab>
+{/*                                 
+                                <Tab key={"arbitrage"} title={"Arbitrage"}>
+                                    <ARBITRAGE_TAB/>
+                                </Tab> */}
                                 
                                 <Tab key="swap" title="Swap">
                                     <SWAP_TAB />
@@ -43,6 +48,7 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                 <Tab key="pools" title="Pools">
                                     <POOL_TAB />
                                 </Tab>
+
                                 <Tab key={"wrap"} title="Wrap">
                                     <WRAP_TAB/>
                                 </Tab>
@@ -57,7 +63,8 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                     </div>
 
                                 </Tab>
-                                <Tab key="settings" title="Settings">
+
+                                <Tab key="settings"  title="Settings">
                                     <SETTINGS_TAB />
                                 </Tab>
                             </Tabs>

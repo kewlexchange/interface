@@ -14,6 +14,7 @@ import { FARM_TAB } from "../../Components/StakeTabs/Farm";
 import { DAO_TAB } from "../../Components/StakeTabs/DAO";
 import { CREATE_STAKE_POOL_TAB } from "../../Components/EarnTabs/Create";
 import { STAKE_POOLS_TAB } from "../../Components/EarnTabs/Stake";
+import { EARN_TAB } from "../../Components/EarnTabs/Earn";
 
 
 const StakePage: React.FunctionComponent<IPage> = props => {
@@ -36,14 +37,9 @@ const StakePage: React.FunctionComponent<IPage> = props => {
                         <div className="w-full max-w-full">
 
                             <Tabs color={"danger"} aria-label="Stake Tabs">
-                                <Tab key="stake" title="Stake Pools">
-                                    <STAKE_POOLS_TAB/>
+                                <Tab key="trade" title="Earnings">
+                                    <EARN_TAB/>
                                 </Tab>
-                          
-                                <Tab key="create" title="Create Pool">
-                                    <CREATE_STAKE_POOL_TAB/>
-                                </Tab>
-                               
                             </Tabs>
 
                         </div>
