@@ -19,6 +19,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
 
             },
             GOERLI:{
@@ -40,6 +41,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             SEPOLIA:{
                 DIAMOND:"",
@@ -60,6 +62,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             ROPSTEN:{
                 DIAMOND:"",
@@ -80,6 +83,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             KOVAN:{
                 DIAMOND:"",
@@ -99,6 +103,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             RINKEBY:{
                 DIAMOND:"",
@@ -119,6 +124,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
 
             }
         },
@@ -142,6 +148,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             TEST:{
                 DIAMOND:"",
@@ -162,6 +169,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             }
         },
         ARB:{
@@ -185,6 +193,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"0x946D9E247877dd68550Bf0dAa36C2ceAA7ABd50A",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             TEST:{
                 DIAMOND:"",
@@ -204,6 +213,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             }
         },
         KCC:{
@@ -226,6 +236,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
 
             }
         },
@@ -249,6 +260,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             TEST:{
                 DIAMOND:"",
@@ -269,6 +281,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             }
         },
         MATIC:{
@@ -291,6 +304,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             MUMBAI:{
                 DIAMOND:"",
@@ -311,6 +325,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             }
         },
         CHZ:{
@@ -349,7 +364,8 @@ export const CONTRACT_ADRESSES = {
                 VESTING:"0x75093a450Bc16c050D69F1b3E9a92ed96be588Dd",
                 PREDICTIONS:"0xa91F280720B15801b62E8cFBdBdbe78EC994Dd1B",
                 REFLECTOR:"",
-                KEWLSTAKE:""
+                KEWLSTAKE:"",
+                TRADETOEARN:"0x00BE3fD3580909662188474260311Bd34E595602"
             },
             TEST:{
                 DIAMOND:"",
@@ -373,6 +389,7 @@ export const CONTRACT_ADRESSES = {
                 PREDICTIONS:"0xB0Bc7E3c72fC7406dd098484D20382d7DAD517e7",
                 REFLECTOR:"",
                 KEWLSTAKE:"0x71b5Ea15483acF93E31FB103D8306E631FbFd382",
+                TRADETOEARN:""
             }
         },
         AVAX:{
@@ -395,6 +412,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             FUJI:{
                 DIAMOND:"",
@@ -415,6 +433,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             }
         },
         BITCI:{
@@ -437,6 +456,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             TEST:{
                 DIAMOND:"0x8Cf2a0197b5E32A1F3E8A92592db6792E20ffA79",
@@ -457,6 +477,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             }
         },
         OE:{
@@ -479,6 +500,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             },
             KOVAN:{
                 DIAMOND:"",
@@ -499,6 +521,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             }
         },
         LOCAL:{
@@ -521,6 +544,7 @@ export const CONTRACT_ADRESSES = {
                 MIGRATOR:"",
                 LISTING:"",
                 REFLECTOR:"",
+                TRADETOEARN:""
             }
         }
 }
