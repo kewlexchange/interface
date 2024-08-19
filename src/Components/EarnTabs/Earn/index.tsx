@@ -96,7 +96,8 @@ const _EARN_TAB = () => {
             "0x2eBEc8E89BB4B9C3681BE4eAA85C391F1cd717cE",
             "0xfed7A6423cdeBb4c05552DC888de5acC657444F4",
             "0x68364d82A628b2AaF691d5a6605030f6Dff4436E",
-            "0x9FAAE77622C49a01fc5817548D4b8f5C2763D9A5"
+            "0x9FAAE77622C49a01fc5817548D4b8f5C2763D9A5",
+            "0x60cfC65BA14C2f8B111Fc7B152bB11486FDEa822"
         ]
 
         const _pools = await TRADETOEARN.get(_tokens,account);
@@ -110,7 +111,7 @@ const _EARN_TAB = () => {
 
 
     function isAllowedAsset(asset: any): boolean {
-        const wrappedSymbols = ['CHZINU','KWL','FAFO','DSWAP','CHSQUAD'];
+        const wrappedSymbols = ['CHZINU','KWL','FAFO','DSWAP','CHSQUAD','FANFAN'];
         return wrappedSymbols.includes(asset.toString().toUpperCase());
     }
 
