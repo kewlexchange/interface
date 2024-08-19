@@ -110,7 +110,7 @@ const _EARN_TAB = () => {
 
 
     function isAllowedAsset(asset: any): boolean {
-        const wrappedSymbols = ['CHZINU','KWL','FAFO','SUCK','DSWAP','CHSQUAD'];
+        const wrappedSymbols = ['CHZINU','KWL','FAFO','DSWAP','CHSQUAD'];
         return wrappedSymbols.includes(asset.toString().toUpperCase());
     }
 
