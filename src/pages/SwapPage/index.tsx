@@ -33,7 +33,7 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                         <CardBody>
                         <div className="w-full max-w-full">
                             <Tabs variant="solid" color={"danger"} aria-label="Swap Tabs">
-                            <Tab key={"trade"} title={"Trade"}>
+                            <Tab key={"trade"} title={"Fusion"}>
                                     <TRADE_TAB/>
                                 </Tab>
 {/*                                 
