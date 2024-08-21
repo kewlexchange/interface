@@ -29,13 +29,15 @@ import { isIMON, isCHZDomains } from './hooks/useDomains';
 import Head from './Components/Head/imon';
 import { Account } from './Components/Account';
 import { ThemeSwitch } from './Components/ThemeSwitch';
-import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button, Dropdown, DropdownTrigger, DropdownItem, Avatar, DropdownMenu, DropdownSection, User, Badge } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button, Dropdown, DropdownTrigger, DropdownItem, Avatar, DropdownMenu, DropdownSection, User, Badge, Card, CardBody, CardHeader } from "@nextui-org/react";
 import { Network } from './Components/Network';
 import { DropdownNetwork } from './Components/DropdownNetwork';
 import { LandingBG } from './Components/Landing';
 
+
 const ReactAudioPlayerEx = process.env.NODE_ENV === 'production' ? (ReactAudioPlayer as any).default : ReactAudioPlayer;
 const App = () => {
+
   const { state: isConnect, toggle: toggleConnectModal } = useModal()
   const { state: isNoProvider, toggle: toggleNoProvider } = useModal()
   const { state: isShowWallet, toggle: toggleWalletModal } = useModal()
@@ -50,8 +52,6 @@ const App = () => {
   const audioElement = useRef(null)
   const [showBalance, setShowBalance] = useState(true)
   const { t, i18n } = useTranslation(['home']);
-
-
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -218,7 +218,7 @@ const App = () => {
             </NavbarItem>
 
 
-  
+
             <NavbarItem className='flex flex-row items-center justify-center'>
               <Link color="foreground" as={NavLink} to={"/cns"}>
 
@@ -234,7 +234,7 @@ const App = () => {
 
 
 
-  
+
             <NavbarItem className='flex flex-row items-center justify-center'>
               <Link color="foreground" as={NavLink} to={"/explorer"}>
 
@@ -296,7 +296,7 @@ const App = () => {
                 </DropdownItem>
 
 
-           {/*      <DropdownItem hidden as={NavLink} to={"/migrate"}
+                {/*      <DropdownItem hidden as={NavLink} to={"/migrate"}
                   key="migrate"
                   description="Convert your IMON Tokens to KWL Tokens"
                 >
@@ -332,7 +332,7 @@ const App = () => {
 
                 <Dropdown
                   showArrow
-                  
+
                   radius="sm"
                   classNames={{
                     base: "before:bg-default-200", // change arrow background
@@ -433,14 +433,14 @@ const App = () => {
             </NavbarMenuItem>
 
 
-             <NavbarMenuItem className='flex flex-row items-center justify-start'>
+            <NavbarMenuItem className='flex flex-row items-center justify-start'>
               <Link onClick={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/earn"}>
 
                 <span className='text-3xl'>{t("Earn")}</span></Link>
-            </NavbarMenuItem> 
+            </NavbarMenuItem>
 
 
 
@@ -504,7 +504,7 @@ const App = () => {
 
 
 
-         {/*    <NavbarMenuItem className='flex flex-row items-center justify-start'>
+            {/*    <NavbarMenuItem className='flex flex-row items-center justify-start'>
               <Link onClick={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
@@ -528,27 +528,42 @@ const App = () => {
         </Navbar>
 
 
-        <div className={"pb-[70px]"}>
-          <Routes>
-            {
-              routes.map((route, index) => {
-                return (
-                  <Route key={`route${index}`} path={route.path} element={<route.component title={route.title} />} />
-                );
-              })}
-          </Routes>
+        <div className={"pb-[70px] flex flex-col items-center justify-center w-screen h-full"}>
+       
+       
+        <Routes>
+  {routes.map((route, index) => (
+    <Route
+      key={`route${index}`}
+      path={route.path}
+      element={
+        !route.full ? (
+          <Card  shadow='none' fullWidth className='h-full'>
+            <CardBody>
+              <route.component title={route.title} />
+            </CardBody>
+          </Card>
+        ) : (
+          <route.component title={route.title} />
+        )
+      }
+    />
+  ))}
+</Routes>
+
+
         </div>
-    
 
 
 
-      
+
+
         <div className='flex flex-col items-center justify-center  fixed bottom-0 w-full backdrop-blur-sm'>
           <div className=' footer w-full flex items-center justify-between text-sm px-6'>
             <div className={"font-semibold"}>
               © 2024 - KEWL [KEWL.EXCHANGE]
             </div>
-       
+
             <div className='flex items-center font-semibold justify-end gap-x-1'>
               <div className='w-2 h-2  bg-green-600 animate-pulse rounded-full mt-0.5'></div>
               {blockNumber}
