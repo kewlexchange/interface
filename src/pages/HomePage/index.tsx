@@ -194,7 +194,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                         </HighlighterItem>
                         <HighlighterItem>
                             <div className="relative w-full h-full bg-zinc-900 rounded-[inherit] z-20 overflow-hidden">
-                                <Link className="w-full" as={NavLink} to={"/euro2024"}>
+                                <Link className="w-full" as={NavLink} to={"/explorer"}>
 
                                     <div className="flex flex-col">
                                         {/* Radial gradient */}
@@ -209,7 +209,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                                         <div className="px-4 py-8">
                                             <article className="relative w-full h-full">
                                                 <h2 className="sm:text-4xl text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
-                                                    {t("EURO 2024")}
+                                                    {t("Explorer")}
                                                 </h2>
                                             </article>
 

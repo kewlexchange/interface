@@ -29,7 +29,7 @@ import { isIMON, isCHZDomains } from './hooks/useDomains';
 import Head from './Components/Head/imon';
 import { Account } from './Components/Account';
 import { ThemeSwitch } from './Components/ThemeSwitch';
-import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button, Dropdown, DropdownTrigger, DropdownItem, Avatar, DropdownMenu, DropdownSection, User, Badge, Card, CardBody, CardHeader } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button, Dropdown, DropdownTrigger, DropdownItem, Avatar, DropdownMenu, DropdownSection, User, Badge, Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import { Network } from './Components/Network';
 import { DropdownNetwork } from './Components/DropdownNetwork';
 import { LandingBG } from './Components/Landing';
@@ -189,141 +189,23 @@ const App = () => {
 
           onMenuOpenChange={setIsMenuOpen}
         >
-          <NavbarContent className='sm:hidden' justify="start">
-            <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
-          </NavbarContent>
+         
+          <NavbarContent  justify="start">
+          <NavbarItem>
 
-          <NavbarContent className="sm:hidden pr-3" justify="center">
-            <NavbarBrand as={NavLink} to={"/"}>
+          <NavbarBrand as={NavLink} to={"/"}>
               <img className={"h-[45px] w-[45px]"} alt={"Intelligent Monsters Logo"} src={ICON_LOGO} />
             </NavbarBrand>
+            </NavbarItem>
+   
+            <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
+            
           </NavbarContent>
 
-          <NavbarContent className="hidden sm:flex gap-4" justify="center">
-            <NavbarItem>
-              <NavbarBrand className='flex flex-row gap-2' as={NavLink} to={"/"}>
-                <img className={"h-[45px] w-[45px]"} alt={"Intelligent Monsters Logo"} src={ICON_LOGO} />
-              </NavbarBrand>
-            </NavbarItem>
-            <NavbarItem className='flex flex-row items-center justify-center'>
-              <Link color="foreground" as={NavLink} to={"/swap"} >
+      
+    
 
-                <span>{t("Swap")}</span></Link>
-            </NavbarItem>
-
-            <NavbarItem className='flex flex-row items-center justify-center'>
-              <Link color="foreground" as={NavLink} to={"/nfts"}>
-
-                <span>{t("NFTs")}</span></Link>
-            </NavbarItem>
-
-
-
-            <NavbarItem className='flex flex-row items-center justify-center'>
-              <Link color="foreground" as={NavLink} to={"/cns"}>
-
-                <span>{t("Domains")}</span></Link>
-            </NavbarItem>
-
-
-            <NavbarItem className='flex flex-row items-center justify-center'>
-              <Link color="foreground" as={NavLink} to={"/launchpad"}>
-
-                <span>{t("Launchpad")}</span></Link>
-            </NavbarItem>
-
-
-
-
-            <NavbarItem className='flex flex-row items-center justify-center'>
-              <Link color="foreground" as={NavLink} to={"/explorer"}>
-
-                <span>{t("Explorer")}</span></Link>
-            </NavbarItem>
-
-
-            <Dropdown>
-              <NavbarItem>
-                <DropdownTrigger>
-                  <Button
-                    endContent={
-                      <span translate={"no"} className="material-symbols-outlined">
-                        expand_more
-                      </span>
-                    }
-                    size={"lg"}
-                    disableRipple
-                    className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-                    radius="sm"
-                    variant="light"
-                  >
-                    More
-                  </Button>
-                </DropdownTrigger>
-              </NavbarItem>
-              <DropdownMenu
-                aria-label="IMON Tools"
-                className="w-[340px]"
-                itemClasses={{
-                  base: "gap-4",
-                }}
-              >
-
-
-
-
-                <DropdownItem as={NavLink} to={"/listing"}
-                  key="listing"
-                  description="Would you like your token to be listed on our KEWL Exchange? "
-                >
-                  {t("Apply For Listing")}
-                </DropdownItem>
-
-
-                <DropdownItem as={NavLink} to={"/metamorph"}
-                  key="metamorph"
-                  description="Seamless ERC20 to ERC1155 transformation and back to ERC20 for enhanced user flexibility"
-                >
-                  {t("Metamorph")}
-                </DropdownItem>
-
-
-                <DropdownItem as={NavLink} to={"/vesting"}
-                  key="vesting"
-                  description="Project owners can lock their team tokens for as long as they want with vesting."
-                >
-                  {t("Vesting")}
-                </DropdownItem>
-
-
-                {/*      <DropdownItem hidden as={NavLink} to={"/migrate"}
-                  key="migrate"
-                  description="Convert your IMON Tokens to KWL Tokens"
-                >
-                  {t("IMON to KWL Migrator")}
-                </DropdownItem>
-
-                <DropdownItem hidden as={NavLink} to={"/ai"}
-                  key="ai"
-                  description="Have artificial intelligence perform technical and fundamental analysis."
-                >
-                  {t("Artifical Intelligence")}
-                </DropdownItem>
-
-                <DropdownItem hidden as={NavLink} to={"/platformearnings"}
-                  key="platform"
-                  description="Detailed information about KEWL Platform's revenues"
-                >
-                  {t("Platform Revenues")}
-                </DropdownItem> */}
-              </DropdownMenu>
-
-
-            </Dropdown>
-
-
-
-          </NavbarContent>
+ 
 
           <NavbarContent justify="end">
 
@@ -429,7 +311,7 @@ const App = () => {
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/nfts"}>
 
-                <span className='text-3xl'>{t("NFTs")}</span></Link>
+                <span className='text-3xl'>{t("NFT Marketplace")}</span></Link>
             </NavbarMenuItem>
 
 
@@ -441,18 +323,6 @@ const App = () => {
 
                 <span className='text-3xl'>{t("Earn")}</span></Link>
             </NavbarMenuItem>
-
-
-
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onClick={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/euro2024"}>
-
-                <span className='text-3xl'>{t("EURO 2024")}</span></Link>
-            </NavbarMenuItem>
-
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
               <Link onClick={(e) => {
@@ -472,6 +342,7 @@ const App = () => {
 
                 <span className='text-3xl'>{t("Launchpad")}</span></Link>
             </NavbarMenuItem>
+
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
               <Link onClick={(e) => {
@@ -499,29 +370,12 @@ const App = () => {
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/explorer"}>
 
-                <span className='text-3xl'>{t("Pair Explorer")}</span></Link>
+                <span className='text-3xl'>{t("Explorer")}</span></Link>
             </NavbarMenuItem>
 
 
 
-            {/*    <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onClick={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/migrate"}>
 
-                <span className='text-3xl'>{t("IMON to KWL Migrator")}</span></Link>
-            </NavbarMenuItem>
-
-
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onClick={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/ai"}>
-
-                <span className='text-3xl'>{t("Artifical Intelligence")}</span></Link>
-            </NavbarMenuItem> */}
 
 
           </NavbarMenu>
