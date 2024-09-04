@@ -46,14 +46,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                     </h1>
 
 
-                    <div className="w-full flex items-center justify-center p-2">
-
-<img  style={{
-      filter:
-        'brightness(0) saturate(100%) invert(18%) sepia(100%) saturate(7207%) hue-rotate(337deg) brightness(104%) contrast(115%)'
-    }} className="w-[300px]" src="https://docs.chiliz.com/~gitbook/image?url=https%3A%2F%2F3400301555-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F4L7rBH2rmyoBTn93MSdx%252Fuploads%252Fft9rTTVhyWvCRmjjkXZ2%252FWhite%25402x.png%3Falt%3Dmedia%26token%3D4998ab69-fc28-4dbf-894b-de263a277bb6&width=768&dpr=4&quality=100&sign=3d90ba46&sv=1"/>
-</div>
-
+  
 
                     <div className="hidden w-full h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
                     <div className="my-16 text-center animate-fade-in">
@@ -62,8 +55,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                         </h2>
                     </div>
 
-
-
+  
                     <HighlightGroup className="z-0 grid gap-4 grid-cols-2 sm:grid-cols-3 group">
 
 
@@ -232,6 +224,16 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                         </HighlighterItem>
 
                     </HighlightGroup>
+
+                    <div className="w-full flex items-center justify-center p-5">
+
+<img  style={{
+      filter:
+        'brightness(0) saturate(100%) invert(18%) sepia(100%) saturate(7207%) hue-rotate(337deg) brightness(104%) contrast(115%)'
+    }} className="w-[300px]" src="https://docs.chiliz.com/~gitbook/image?url=https%3A%2F%2F3400301555-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F4L7rBH2rmyoBTn93MSdx%252Fuploads%252Fft9rTTVhyWvCRmjjkXZ2%252FWhite%25402x.png%3Falt%3Dmedia%26token%3D4998ab69-fc28-4dbf-894b-de263a277bb6&width=768&dpr=4&quality=100&sign=3d90ba46&sv=1"/>
+</div>
+
+
 
                 </div>
 
