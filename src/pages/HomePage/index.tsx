@@ -34,7 +34,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
     return (
 
         <>
-            <div className="p-5 w-full h-screen py-[50px]  overflow-hidden dark:bg-gradient-to-tl dark:from-black dark:via-zinc-600/20 dark:to-black">
+            <div className="p-5 w-full  pt-[50px]  overflow-hidden dark:bg-gradient-to-tl dark:from-black dark:via-zinc-600/20 dark:to-black">
 
 
                 <div className="w-full flex flex-col items-center justify-center ">
@@ -234,13 +234,24 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                         <div className="w-full text-center">
                             <h1 className={"text-3xl"}>Community</h1>
                         </div>
+
+                    
                         <div className="w-full text-center mt-5 ">Get involved in our community. Everyone is welcome!</div>
+
+
+                        <div className="w-full flex items-center justify-center p-2">
+
+  <img  style={{
+        filter:
+          'brightness(0) saturate(100%) invert(18%) sepia(100%) saturate(7207%) hue-rotate(337deg) brightness(104%) contrast(115%)'
+      }} className="w-[300px]" src="https://docs.chiliz.com/~gitbook/image?url=https%3A%2F%2F3400301555-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F4L7rBH2rmyoBTn93MSdx%252Fuploads%252Fft9rTTVhyWvCRmjjkXZ2%252FWhite%25402x.png%3Falt%3Dmedia%26token%3D4998ab69-fc28-4dbf-894b-de263a277bb6&width=768&dpr=4&quality=100&sign=3d90ba46&sv=1"/>
+</div>
 
 
 
 
                         <SocialLinks className={"w-full my-auto"} />
-                        <div className='w-full flex items-center justify-center py-5 my-5'>
+                        <div className='w-full flex items-center justify-center py-5 my-5 mb-[50px]'>
                             <a target="_blank" href="https://dorahacks.io/buidl/13943"><img src="https://cdn.dorahacks.io/images/buidl-embed/colored-simple.png" height="33" width="84" /></a>
                         </div>
                     </div>

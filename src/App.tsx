@@ -298,11 +298,14 @@ const App = () => {
           <NavbarMenu className='z-[99999]'>
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
+              
+              
               <Link onClick={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/swap"} >
-                <span className='text-3xl'>{t("Swap")}</span></Link>
+                <span className='text-3xl'>{t("Swap")}</span>
+                </Link>
             </NavbarMenuItem>
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
@@ -411,7 +414,7 @@ const App = () => {
 
 
 
-
+        
         <div className='flex flex-col items-center justify-center  fixed bottom-0 w-full backdrop-blur-sm'>
           <div className=' footer w-full flex items-center justify-between text-sm px-6'>
             <div className={"font-semibold"}>

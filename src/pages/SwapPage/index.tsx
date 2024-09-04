@@ -36,11 +36,11 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                             <Tab key={"trade"} title={"Fusion"}>
                                     <TRADE_TAB/>
                                 </Tab>
-{/*                                 
-                                <Tab key={"arbitrage"} title={"Arbitrage"}>
+å                              
+                                {/* <Tab key={"arbitrage"} title={"Arbitrage"}>
                                     <ARBITRAGE_TAB/>
-                                </Tab> */}
-                                
+                                </Tab> 
+                                 */}
                                 <Tab key="swap" title="Swap">
                                     <SWAP_TAB />
                                 </Tab>
