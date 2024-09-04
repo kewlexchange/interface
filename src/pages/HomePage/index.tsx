@@ -225,14 +225,18 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
                     </HighlightGroup>
 
-                    <div className="w-full flex items-center justify-center p-5">
 
-<img  style={{
-      filter:
-        'brightness(0) saturate(100%) invert(18%) sepia(100%) saturate(7207%) hue-rotate(337deg) brightness(104%) contrast(115%)'
-    }} className="w-[300px]" src="https://docs.chiliz.com/~gitbook/image?url=https%3A%2F%2F3400301555-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F4L7rBH2rmyoBTn93MSdx%252Fuploads%252Fft9rTTVhyWvCRmjjkXZ2%252FWhite%25402x.png%3Falt%3Dmedia%26token%3D4998ab69-fc28-4dbf-894b-de263a277bb6&width=768&dpr=4&quality=100&sign=3d90ba46&sv=1"/>
+                    <HighlightGroup className="w-full p-5 flex flex-col items-center justify-center group">
+
+<HighlighterItem>
+<div className="w-full flex items-center justify-center p-5">
+
+<img  className="w-[300px]" src="https://docs.chiliz.com/~gitbook/image?url=https%3A%2F%2F3400301555-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F4L7rBH2rmyoBTn93MSdx%252Fuploads%252Fft9rTTVhyWvCRmjjkXZ2%252FWhite%25402x.png%3Falt%3Dmedia%26token%3D4998ab69-fc28-4dbf-894b-de263a277bb6&width=768&dpr=4&quality=100&sign=3d90ba46&sv=1"/>
 </div>
 
+</HighlighterItem>
+</HighlightGroup>
+     
 
 
                 </div>
