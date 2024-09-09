@@ -47,7 +47,7 @@ const WrapPage: React.FunctionComponent<IPage> = props => {
             toggleError();
             return;
         }
-        const WETH9Token = await WETH9Contract(WETH9[chainId].address);
+        const WETH9Token = await WETH9Contract("0x721EF6871f1c4Efe730Dce047D40D1743B886946");
         toggleLoading();
         await WETH9Token.deposit({value:parseEther(amount)}).then(async (tx)=>{
             await tx.wait();
@@ -79,7 +79,7 @@ const WrapPage: React.FunctionComponent<IPage> = props => {
             toggleError();
             return;
         }
-        const WETH9Token = await WETH9Contract(WETH9[chainId].address);
+        const WETH9Token = await WETH9Contract("0x721EF6871f1c4Efe730Dce047D40D1743B886946");
         toggleLoading();
         await WETH9Token.withdraw(parseEther(amount)).then(async (tx)=>{
             await tx.wait();
@@ -98,7 +98,7 @@ const WrapPage: React.FunctionComponent<IPage> = props => {
     const initDefaults = async () => {
         if(!EXCHANGE){return;}
         if(!account){return;}
-        const _weth9Address = WETH9[chainId].address;
+        const _weth9Address = "0x721EF6871f1c4Efe730Dce047D40D1743B886946";
         setWETH9Address(_weth9Address);
         let abiERC = [
             'function allowance(address owner, address spender)',
