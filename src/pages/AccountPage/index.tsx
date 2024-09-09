@@ -83,7 +83,7 @@ const AccountPage: React.FunctionComponent<IPage> = props => {
                         <Tab key="nfts" title="NFTs">
                             <NFTBalances account={account}/>
                         </Tab>
-                        <Tab key="wchz" title="WCHZ">
+                        <Tab key="wchz" title="KCHZ">
                             <WrapTab account={account}/>
                         </Tab>
                     </Tabs>
