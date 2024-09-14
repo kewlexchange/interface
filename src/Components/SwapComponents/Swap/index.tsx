@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useMemo, useState } from 'react';
-import { DEFAULT_TOKEN_LOGO, ETHER_ADDRESS, TradeType } from '../../../constants/misc';
+import { DEFAULT_TOKEN_LOGO, ETHER_ADDRESS, isLPAddressBurned, TradeType, WCHZ_COMMUNITY_ADDRESS } from '../../../constants/misc';
 import { ethers } from 'ethers';
 import { useWeb3React } from '@web3-react/core';
 import JSBI from 'jsbi';
@@ -120,8 +120,22 @@ const _SWAP_TAB = () => {
             return;
         }
 
-        let _baseAddress = baseAsset.address === ETHER_ADDRESS ? WETH9[chainId].address : baseAsset.address
-        let _quoteAddress = quoteAsset.address === ETHER_ADDRESS ? WETH9[chainId].address : quoteAsset.address
+
+        var WRAPPED_ASSET = WETH9[chainId].address;
+
+
+        if(isLPAddressBurned(baseAsset.address )){
+            WRAPPED_ASSET = WCHZ_COMMUNITY_ADDRESS
+        }
+
+        if(isLPAddressBurned(quoteAsset.address )){
+            WRAPPED_ASSET = WCHZ_COMMUNITY_ADDRESS
+        }
+
+
+
+        let _baseAddress = baseAsset.address === ETHER_ADDRESS ? WRAPPED_ASSET : baseAsset.address
+        let _quoteAddress = quoteAsset.address === ETHER_ADDRESS ? WRAPPED_ASSET : quoteAsset.address
 
         var _baseTokenBalance : any = 0;
         var _quoteTokenBalance : any = 0;

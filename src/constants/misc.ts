@@ -3,6 +3,7 @@ import JSBI from 'jsbi'
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 export const ETHER_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+export const WCHZ_COMMUNITY_ADDRESS = '0x721EF6871f1c4Efe730Dce047D40D1743B886946'
 export const DEFAULT_TOKEN_LOGO = "https://www.kewl.exchange/images/coins/skull.svg"
 // TODO(WEB-1984): Convert the deadline to minutes and remove unecessary conversions from
 // seconds to minutes in the codebase.
@@ -97,3 +98,12 @@ export const DECENTRALIZED_EXCHANGES = [
         weth:"0x721EF6871f1c4Efe730Dce047D40D1743B886946"
     }
 ]
+
+
+export const LP_BURNED_ASSETS = [
+    "0x75D28E4c65aCD2EB6efCB0D200869E89C2c1ef1f"
+]
+
+export const isLPAddressBurned = (address) => {
+    return LP_BURNED_ASSETS.includes(address);
+}
