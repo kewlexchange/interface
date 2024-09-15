@@ -39,24 +39,48 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
                 <div className="w-full flex flex-col items-center justify-center ">
 
-                    <div className="hidden w-full h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-                    <h1 className="flex flex-col items-center justify-center z-10 text-4xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
-                        <div className="w-full sm:text-7xl whitespace-nowrap text-3xl my-5 homeshimmer"><span className={"font-bold"}>KEWL.</span>EXCHANGE</div>
+                
 
-                    </h1>
+                    <HighlightGroup className="z-0 py-5 grid gap-4 grid-cols-2 sm:grid-cols-3 group">
 
 
-  
+                        <HighlighterItem className="col-span-2 sm:col-span-3">
+                            <div className="relative w-full h-full bg-zinc-900 rounded-[inherit] z-20 overflow-hidden">
 
-                    <div className="hidden w-full h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-                    <div className="my-16 text-center animate-fade-in">
-                        <h2 className="text-sm text-zinc-500 ">
-                            Join the fully community-driven revolution of decentralized finance on the blockchain with the power of revolutionary technology.
-                        </h2>
-                    </div>
+                                <div className="flex flex-col w-full ">
+                                    <div
+                                        className="absolute bottom-0 w-1/2 pointer-events-none -translate-x-1/2 translate-y-1/2 left-1/2 -z-10 aspect-square"
+                                        aria-hidden="true"
+                                    >
+                                        <div className="absolute inset-0 translate-z-0 bg-zinc-800 rounded-full blur-[80px]" />
+                                    </div>
 
-  
-                    <HighlightGroup className="z-0 grid gap-4 grid-cols-2 sm:grid-cols-3 group">
+                                    <div className="px-4 py-8  w-full text-center items-center flex">
+                                        <article className="relative w-full h-full">
+
+                                            <div className=" w-full h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+                                            <h1 className="flex flex-col items-center justify-center z-10 text-4xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
+                                                <div className="w-full sm:text-7xl whitespace-nowrap text-3xl my-5 homeshimmer"><span className={"font-bold"}>KEWL.</span>EXCHANGE</div>
+
+                                            </h1>
+
+
+
+                                            <div className=" w-full h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+
+
+
+                                        </article>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                        </HighlighterItem>
 
 
                         <HighlighterItem>
@@ -223,20 +247,38 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                             </div>
                         </HighlighterItem>
 
+                        <HighlighterItem className="col-span-2 sm:col-span-3">
+                            <div className="relative w-full h-full bg-zinc-900 rounded-[inherit] z-20 overflow-hidden">
+
+                                <div className="flex flex-col w-full ">
+                                    <div
+                                        className="absolute bottom-0 w-1/2 pointer-events-none -translate-x-1/2 translate-y-1/2 left-1/2 -z-10 aspect-square"
+                                        aria-hidden="true"
+                                    >
+                                        <div className="absolute inset-0 translate-z-0 bg-zinc-800 rounded-full blur-[80px]" />
+                                    </div>
+
+                                    <div className="px-4 py-8  w-full">
+                                        <article className="relative w-full h-full">
+                                            <div className="w-full flex items-center justify-center p-5">
+
+                                                <img className="w-[300px]" src="https://docs.chiliz.com/~gitbook/image?url=https%3A%2F%2F3400301555-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F4L7rBH2rmyoBTn93MSdx%252Fuploads%252Fft9rTTVhyWvCRmjjkXZ2%252FWhite%25402x.png%3Falt%3Dmedia%26token%3D4998ab69-fc28-4dbf-894b-de263a277bb6&width=768&dpr=4&quality=100&sign=3d90ba46&sv=1" />
+                                            </div>
+                                        </article>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                        </HighlighterItem>
+
                     </HighlightGroup>
 
 
-                    <HighlightGroup className="w-full p-5 flex flex-col items-center justify-center group">
-
-<HighlighterItem>
-<div className="w-full flex items-center justify-center p-5">
-
-<img  className="w-[300px]" src="https://docs.chiliz.com/~gitbook/image?url=https%3A%2F%2F3400301555-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F4L7rBH2rmyoBTn93MSdx%252Fuploads%252Fft9rTTVhyWvCRmjjkXZ2%252FWhite%25402x.png%3Falt%3Dmedia%26token%3D4998ab69-fc28-4dbf-894b-de263a277bb6&width=768&dpr=4&quality=100&sign=3d90ba46&sv=1"/>
-</div>
-
-</HighlighterItem>
-</HighlightGroup>
-     
 
 
                 </div>
@@ -251,17 +293,19 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                             <h1 className={"text-3xl"}>Community</h1>
                         </div>
 
-                    
+
                         <div className="w-full text-center mt-5 ">Get involved in our community. Everyone is welcome!</div>
 
 
-
+                        <div className="py-3 text-center animate-fade-in">
+                            <h2 className="text-sm text-zinc-500 ">
+                                Join the fully community-driven revolution of decentralized finance on the blockchain with the power of revolutionary technology.
+                            </h2>
+                        </div>
 
 
                         <SocialLinks className={"w-full my-auto"} />
-                        <div className='w-full flex items-center justify-center py-5 my-5 mb-[50px]'>
-                            <a target="_blank" href="https://dorahacks.io/buidl/13943"><img src="https://cdn.dorahacks.io/images/buidl-embed/colored-simple.png" height="33" width="84" /></a>
-                        </div>
+
                     </div>
                 </div>
 
