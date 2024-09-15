@@ -41,7 +41,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
                 
 
-                    <HighlightGroup className="z-0 py-5 grid gap-4 grid-cols-2 sm:grid-cols-3 group">
+                    <HighlightGroup className="z-0 py-5 grid gap-2 grid-cols-2 sm:grid-cols-3 group">
 
 
                         <HighlighterItem className="col-span-2 sm:col-span-3">
@@ -128,7 +128,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
                                             <article className="relative w-full h-full">
                                                 <h2 className="sm:text-4xl text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
-                                                    {t("NFT Market")}
+                                                    {t("NFTs")}
                                                 </h2>
                                             </article>
 
