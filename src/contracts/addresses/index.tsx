@@ -445,7 +445,7 @@ export const CONTRACT_ADRESSES = {
                 MARKET:"0x273F0A2E03447177f246462D0EB9A1e63E718edD",
                 CHILIMON:"0x7c105bB104606d65ac48362b71fF7741a84F6A3E",
                 PLINKO:"0xC40B95A3DF2CF3c5D0d4BfA16C7a080C4a824b98",
-                DOMAIN:"0x1C55a6e9A736C6d86d9ff1ba4700e64583c18f50",
+                DOMAIN:"0x634de66c9A61fAE823328277096A78CAdceDfe80",
                 STAKE:"",
                 LAUNCHPAD:"",
                 IMON404:"",
