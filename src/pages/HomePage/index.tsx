@@ -33,11 +33,11 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
     return (
 
-        <>
+        <div className="w-screen h-screen overflow-hidden dark:bg-gradient-to-tl dark:from-black dark:via-zinc-600/20 dark:to-black">
              <div className={"w-full  swap"}>
                 <div className={"min-w-xl max-w-xl w-full sm:w-full mx-auto flex flex-col gap-5"}>
                    
-            <div className="sm:p-2 w-full   overflow-hidden dark:bg-gradient-to-tl dark:from-black dark:via-zinc-600/20 dark:to-black">
+            <div className="sm:p-2 w-full  ">
 
 
                 <div className="w-full flex flex-col items-center justify-center ">
@@ -62,7 +62,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                                         <article className="relative w-full h-full">
 
                                             <div className=" w-full h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-                                            <h1 className="flex flex-col items-center justify-center z-10 text-4xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
+                                            <h1 className="flex flex-col items-center justify-center z-10 text-3x text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text ">
                                                 <div className="w-full sm:text-6xl whitespace-nowrap text-3xl my-5 homeshimmer"><span className={"font-bold"}>KEWL.</span>EXCHANGE</div>
 
                                             </h1>
@@ -103,7 +103,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                                         <div className="px-4 py-8">
 
                                             <article className="relative w-full h-full">
-                                                <h2 className="sm:text-4xl text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
+                                                <h2 className="sm:text-3xl text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
                                                     {t("Swap")}
                                                 </h2>
                                             </article>
@@ -130,7 +130,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                                         <div className="px-4 py-8">
 
                                             <article className="relative w-full h-full">
-                                                <h2 className="sm:text-4xl text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
+                                                <h2 className="sm:text-3x text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
                                                     {t("NFTs")}
                                                 </h2>
                                             </article>
@@ -157,7 +157,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                                         <div className="px-4 py-8">
 
                                             <article className="relative w-full h-full">
-                                                <h2 className="sm:text-4xl text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
+                                                <h2 className="sm:text-3x text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
                                                     {t("Earn")}
                                                 </h2>
                                             </article>
@@ -184,7 +184,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                                         <div className="px-4 py-8">
 
                                             <article className="relative w-full h-full">
-                                                <h2 className="sm:text-4xl text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
+                                                <h2 className="sm:text-3x text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
                                                     {t("Domains")}
                                                 </h2>
                                             </article>
@@ -210,7 +210,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
                                         <div className="px-4 py-8">
                                             <article className="relative w-full h-full">
-                                                <h2 className="sm:text-4xl text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
+                                                <h2 className="sm:text-3x text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
                                                     {t("Launchpad")}
                                                 </h2>
                                             </article>
@@ -237,7 +237,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
                                         <div className="px-4 py-8">
                                             <article className="relative w-full h-full">
-                                                <h2 className="sm:text-4xl text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
+                                                <h2 className="sm:text-3x text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
                                                     {t("Explorer")}
                                                 </h2>
                                             </article>
@@ -319,7 +319,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 </div>
 
 
-        </>
+        </div>
 
 
 
