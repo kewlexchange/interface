@@ -103,8 +103,8 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                                         <div className="px-4 py-8">
 
                                             <article className="relative w-full h-full">
-                                                <h2 className="sm:text-3xl text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
-                                                    {t("Swap")}
+                                            <h2 className="sm:text-3x text-2xl inline-flex items-baseline font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
+                                            {t("Swap")}
                                                 </h2>
                                             </article>
 
