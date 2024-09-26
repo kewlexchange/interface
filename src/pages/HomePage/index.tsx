@@ -33,7 +33,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
     return (
 
-        <div className="w-screen h-screen overflow-hidden dark:bg-gradient-to-tl dark:from-black dark:via-zinc-600/20 dark:to-black">
+        <div className="w-screen h-screen  overflow-y-scroll dark:bg-gradient-to-tl dark:from-black dark:via-zinc-600/20 dark:to-black">
              <div className={"w-full  swap"}>
                 <div className={"min-w-xl max-w-xl w-full sm:w-full mx-auto flex flex-col gap-5"}>
                    
@@ -291,7 +291,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
 
 
-                    <div className="container w-full flex flex-col gap-2 items-center text-center justify-center py-10 ">
+                    <div className="container w-full flex flex-col gap-2 items-center text-center justify-center py-1 mb-10 ">
                         <div className="w-full text-center">
                             <h1 className={"text-3xl"}>Community</h1>
                         </div>
