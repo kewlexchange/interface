@@ -31,7 +31,7 @@ const NFTs: React.FunctionComponent<IPage> = props => {
 
                 <Card className={" flex gap-2 flex-col p-2 w-full"}>
                     <div className="w-full max-w-full">
-                        <Tabs color={"danger"} aria-label="NFT Market Tabs">
+                        <Tabs color={"default"} aria-label="NFT Market Tabs">
                             <Tab key="collections" title="Collections">
                                 <NFT_MARKET_COLLECTION_TAB/>
                             </Tab>

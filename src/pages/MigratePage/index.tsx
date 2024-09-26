@@ -247,11 +247,11 @@ const MigratePage: React.FunctionComponent<IPage> = props => {
 
                     <Button onClick={()=>{
                             handleUnlock();
-                        }} color="danger" size="lg" className="w-full">1 - Unlock</Button>
+                        }} color="default" size="lg" className="w-full">1 - Unlock</Button>
 
                         <Button onClick={()=>{
                             handleMigrate();
-                        }} color="danger" size="lg" className="w-full">2 - Migrate IMON to KWL</Button>
+                        }} color="default" size="lg" className="w-full">2 - Migrate IMON to KWL</Button>
 
                     </CardFooter>
                 </Card>

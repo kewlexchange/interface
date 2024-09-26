@@ -606,7 +606,7 @@ const _SWAP_TAB = () => {
                                 isAllowanceRequired() === true &&
                                 <Button className={"w-full"} onClick={() => {
                                     handleApprove(baseAsset.address);
-                                }} color="danger">
+                                }} color="default">
                                     Unlock {baseAsset.symbol}
                                 </Button>
                             }
@@ -618,11 +618,11 @@ const _SWAP_TAB = () => {
 
                         {
                             baseAsset && quoteAsset && quoteAsset.symbol == `W${baseAsset.symbol}` ?
-                                baseAsset && quoteAsset && <Button color={"danger"} variant='solid' fullWidth onClick={() => {
+                                baseAsset && quoteAsset && <Button color={"default"} variant='solid' fullWidth onClick={() => {
                                     handleWrap()
                                 }}> Wrap {baseAsset.symbol} to {quoteAsset.symbol}  </Button>
                                 :
-                                baseAsset && quoteAsset && <Button color={"danger"} variant='solid' fullWidth onClick={() => {
+                                baseAsset && quoteAsset && <Button color={"default"} variant='solid' fullWidth onClick={() => {
                                     handleUnWrap()
                                 }}> Unwrap {baseAsset.symbol} to {quoteAsset.symbol} </Button>
 

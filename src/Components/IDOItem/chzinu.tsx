@@ -402,7 +402,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
 
 
                         <Card className='p-2'>
-                            <Tabs selectedKey={"claim"} size={"lg"} color='warning' aria-label="Tabs sizes">
+                            <Tabs selectedKey={"claim"} size={"lg"} color='default' aria-label="Tabs sizes">
                                 <Tab isDisabled={true} key="contribute" title="Invest">
                                     <Card className='w-full flex flex-col gap-2'>
                                         <CardHeader className="flex justify-between items-start">
@@ -440,7 +440,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
                                                     showTooltip={true}
 
                                                     step={1}
-                                                    color="warning"
+                                                    color="default"
                                                     showSteps={false}
                                                     maxValue={userBalance}
                                                     minValue={0}
@@ -455,7 +455,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
                                                         setDepositAmount(e.target.value)
                                                     }}
                                                     min={0}
-                                                    color={"warning"}
+                                                    color={"default"}
                                                     variant='flat'
                                                     label="Deposit Amount"
 
@@ -473,11 +473,11 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
                                                 <div className="w-full flex flex-col gap-2">
                                                 <Switch onValueChange={(val)=>{
                                                     setAcceptAggrement(val)
-                                                }} color={"danger"} size="lg">I acknowledge that CHZINU is a MEME token and understand that I am solely responsible for any potential losses incurred.</Switch>
+                                                }} color={"default"} size="lg">I acknowledge that CHZINU is a MEME token and understand that I am solely responsible for any potential losses incurred.</Switch>
 
                                                     <Button isDisabled={!acceptAggrement} onClick={() => {
                                                         handleContribute();
-                                                    }} variant='shadow' size='lg' className='w-full' color='warning'>Invest Now</Button>
+                                                    }} variant='shadow' size='lg' className='w-full' color='default'>Invest Now</Button>
                                                 </div>
 
 
@@ -550,7 +550,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
                                                 <div className="w-full">
                                                     <Button onClick={() => {
                                                         handleRefund();
-                                                    }} isDisabled={userInfo && userInfo.isRefunded} variant='shadow' size='lg' className='w-full' color='danger'>Refund</Button>
+                                                    }} isDisabled={userInfo && userInfo.isRefunded} variant='shadow' size='lg' className='w-full' color='default'>Refund</Button>
                                                 </div>
 
 
@@ -632,7 +632,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
                                                       account && ethers.utils.getAddress(account) == ethers.utils.getAddress("0xFba3C1F60DdE14a202F9b67A8b0F76b9ee6e9646") && <>
                                                           <Button onClick={() => {
                                                         handleClaimFunds()
-                                                    }} variant='shadow' size='lg' className='w-full' color='danger'>Claim Funds</Button>
+                                                    }} variant='shadow' size='lg' className='w-full' color='default'>Claim Funds</Button>
                                                       </>
 
                                                     }
@@ -654,7 +654,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
 
                         <Table
                         isHeaderSticky
-                        color={"danger"}
+                        color={"default"}
                         disallowEmptySelection
                         selectionMode="single"
                         aria-label="Example static collection table">
@@ -668,7 +668,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
             emptyContent={isLoaded ? "No Transactions Found!" : "Loading... Please Wait!"}
             isLoading={!isLoaded}
             items={contributors}
-            loadingContent={<Spinner color="danger" />}
+            loadingContent={<Spinner color="default" />}
             className="flex flex-col gap-2">
             {(collection) => (
             

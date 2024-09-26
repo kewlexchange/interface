@@ -97,7 +97,7 @@ const _Earnings: React.FC = () => {
             <Table
                 removeWrapper
                 isHeaderSticky
-                color={"danger"}
+                color={"default"}
                 disallowEmptySelection
                 selectionMode="single"
                 aria-label="Example static collection table" >
@@ -114,7 +114,7 @@ const _Earnings: React.FC = () => {
                     emptyContent={isLoaded ? "No Players Found!" : "Loading... Please Wait!"}
                     isLoading={!isLoaded}
                     items={gameList}
-                    loadingContent={<Spinner color="danger" />}
+                    loadingContent={<Spinner color="default" />}
                     className="flex flex-col gap-2">
                     {(collection) => (
                         <TableRow  key={`${BigNumber.from(collection.gameId).toNumber()}`}>
@@ -126,7 +126,7 @@ const _Earnings: React.FC = () => {
                             <TableCell>{formatEther(collection.rewardAmount)} {getNativeCurrencyByChainId(chainId)}</TableCell>
                             <TableCell>{formatEther(collection.rewardMultiplier)}</TableCell>
                             <TableCell>{unixTimeToDateTime(collection.claimedAt)}</TableCell>
-                            <TableCell><Button isDisabled={collection.claimed} color={"danger"} variant={"solid"} size={"sm"}>Claim</Button></TableCell>
+                            <TableCell><Button isDisabled={collection.claimed} color={"default"} variant={"solid"} size={"sm"}>Claim</Button></TableCell>
                         </TableRow>
                     )}
 

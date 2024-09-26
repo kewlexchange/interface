@@ -129,8 +129,8 @@ const _STAKE_POOL_TAB = () => {
                     <span>0.00000000</span>
                 </div>
                 <div className='w-full flex flex-row gap-2 items-center justify-center'>
-                   <Button fullWidth radius='full' size='sm' variant='solid' color='danger'>Unstake</Button>
-                   <Button fullWidth radius='full' size='sm' variant='solid' color='danger'>Harvest</Button>
+                   <Button fullWidth radius='full' size='sm' variant='solid' color='default'>Unstake</Button>
+                   <Button fullWidth radius='full' size='sm' variant='solid' color='default'>Harvest</Button>
                 </div>
             </div>
             </CardBody>
@@ -212,7 +212,7 @@ const _STAKE_POOL_TAB = () => {
                     <div className="swap-inputs mb-2">
                         <div className="input sm:order-3">
                             {
-                                <Button className="token-selector px-2" radius='full' variant="solid" color="danger" onClick={() => {
+                                <Button className="token-selector px-2" radius='full' variant="solid" color="default" onClick={() => {
                                     setIsBase(false)
                                     toggleSelectToken()
                                 }}
@@ -273,7 +273,7 @@ const _STAKE_POOL_TAB = () => {
 
                 {
                     !isLoading ? <>
-                        <Spinner label="Loading..." color="danger" labelColor="danger" />
+                        <Spinner label="Loading..." color="default" labelColor="default" />
                     </> : <>
                         <Accordion fullWidth variant="splitted">
 

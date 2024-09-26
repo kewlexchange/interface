@@ -268,7 +268,7 @@ const _DOMAIN_REGISTER_TAB = () => {
 
                             {currentTLD && domainName.length > 0 &&
                                 <div className="w-full">
-                                    <Button color='danger' onClick={() => {
+                                    <Button color='default' onClick={() => {
                                         handleSaveSettings()
                                     }} className="w-full">Register Now</Button>
                                 </div>

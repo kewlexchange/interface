@@ -147,20 +147,20 @@ const _SETTINGS_TAB = () => {
                                         <Button onClick={() => {
                                             setSlippageInput('')
                                             setRawSlippage(10)
-                                        }} color={(rawSlippage === 10 ? "danger" : "default")}>0.1%</Button>
+                                        }} color={(rawSlippage === 10 ? "default" : "default")}>0.1%</Button>
                                         <Button onClick={() => {
                                             setSlippageInput('')
                                             setRawSlippage(50)
-                                        }} color={(rawSlippage === 50 ? "danger" : "default")}>0.5%</Button>
+                                        }} color={(rawSlippage === 50 ? "default" : "default")}>0.5%</Button>
                                         <Button onClick={() => {
                                             setSlippageInput('')
                                             setRawSlippage(100)
-                                        }} color={(rawSlippage === 100 ? "danger" : "default")}>1%</Button>
+                                        }} color={(rawSlippage === 100 ? "default" : "default")}>1%</Button>
             
                                         <Button onClick={() => {
                                             setSlippageInput('')
                                             setRawSlippage(200)
-                                        }} color={(rawSlippage === 200 ? "danger" : "default")}>2%</Button>
+                                        }} color={(rawSlippage === 200 ? "default" : "default")}>2%</Button>
                                         </ButtonGroup>
                                     }
                                     ref={inputRef as any}
@@ -218,14 +218,14 @@ const _SETTINGS_TAB = () => {
                         <span className="text-pink-960">Taxes Contracts</span>
                         <small>Allow trading of tokens that incur tax.</small>
                         <div className="w-full gap-2 flex flex-row items-center justify-start">
-                        <Switch isSelected={taxesStatus} onValueChange={setTaxesStatus} color="danger">{taxesStatus? "On" : "Off"}</Switch>
+                        <Switch isSelected={taxesStatus} onValueChange={setTaxesStatus} color="default">{taxesStatus? "On" : "Off"}</Switch>
                         </div>
                     </Card>
 
                     <div className="w-full">
                         <Button className={"w-full"} onClick={() => {
                             handleSaveSettings()
-                        }} color="danger">
+                        }} color="default">
                             Save Settings
                         </Button>
 

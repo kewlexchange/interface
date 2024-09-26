@@ -309,7 +309,7 @@ const _DomainItem = (props: { domainEntry, itemType, contractAddress, tokenId, s
                                 <AccordionItem key="manager" aria-label="Manager" title="Manager">
                                     <div className='w-full flex flex-col gap-2'>
                                         <Input variant='bordered' defaultValue={props.domainEntry.domainInfo.manager} size={"lg"} type="text" label="Manager" placeholder="0x..." />
-                                        <Button color='danger' className='w-full'>Save</Button>
+                                        <Button color='default' className='w-full'>Save</Button>
                                     </div>
                                 </AccordionItem>
                             </Accordion>
@@ -335,7 +335,7 @@ const _DomainItem = (props: { domainEntry, itemType, contractAddress, tokenId, s
                                 <AccordionItem key="avatar" aria-label="Avatar" title="Avatar">
                                     <div className='w-full flex flex-col gap-2'>
                                         <Input variant='bordered' defaultValue={props.domainEntry.domainInfo.avatar} size={"lg"} type="text" label="Avatar" placeholder="ipfs://hash..." />
-                                        <Button color='danger' className='w-full'>Save</Button>
+                                        <Button color='default' className='w-full'>Save</Button>
                                     </div>
                                 </AccordionItem>
                             </Accordion>
@@ -350,7 +350,7 @@ const _DomainItem = (props: { domainEntry, itemType, contractAddress, tokenId, s
                                             className="w-full"
                                             defaultValue={props.domainEntry.domainInfo.description}
                                         />
-                                        <Button color='danger' className='w-full'>Save</Button>
+                                        <Button color='default' className='w-full'>Save</Button>
                                     </div>
                                 </AccordionItem>
                             </Accordion>
@@ -379,7 +379,7 @@ const _DomainItem = (props: { domainEntry, itemType, contractAddress, tokenId, s
 
                                         <Input type="text" variant={"bordered"} label="IP Address" placeholder="127.0.0.1" />
 
-                                        <Button color='danger' className='w-full'>Save</Button>
+                                        <Button color='default' className='w-full'>Save</Button>
                                     </div>
                                 </AccordionItem>
                             </Accordion>
@@ -406,7 +406,7 @@ const _DomainItem = (props: { domainEntry, itemType, contractAddress, tokenId, s
 
                                         <Input type="text" variant={"bordered"} label="Address" placeholder="" />
 
-                                        <Button color='danger' className='w-full'>Save</Button>
+                                        <Button color='default' className='w-full'>Save</Button>
 
 
                                         <Table aria-label="Address List">
@@ -454,14 +454,14 @@ const _DomainItem = (props: { domainEntry, itemType, contractAddress, tokenId, s
                                         <Chrome color={hsva} onChange={(color) => setHsva({ ...hsva, ...color.hsva })} />
 
 
-                                        <Button color='danger' className='w-full'>Save</Button>
+                                        <Button color='default' className='w-full'>Save</Button>
                                     </div>
                                 </AccordionItem>
                             </Accordion>
 
 
                             <div className='w-full'>
-                                <Button size={"lg"} color={"danger"} onClick={() => {
+                                <Button size={"lg"} color={"default"} onClick={() => {
                                     handleSetAsPrimaryName();
                                 }} className=''>
                                     Set as primary name

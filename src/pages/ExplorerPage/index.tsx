@@ -21,7 +21,7 @@ const ExplorerPage: React.FunctionComponent<IPage> = props => {
 
         <>
             <div className={" p-2  w-full"}>
-            <Tabs color="danger" aria-label="Options">
+            <Tabs color="default" aria-label="Options">
                         <Tab key={"prices"} title={"RADAR"}>
                             <PricesTAB tokens={defaultAssets}/>
                         </Tab>

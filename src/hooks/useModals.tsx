@@ -104,7 +104,7 @@ export const ModalError = ({ isShowing, hide, error }) => {
                         <p className='text-xs'>
                             Transaction attempt failed with an Error
                         </p>
-                        <Button color="danger" size="lg" className={"w-full"} onClick={() => {
+                        <Button color="default" size="lg" className={"w-full"} onClick={() => {
                             hide();
                         }
                         }>
@@ -131,7 +131,7 @@ export const ModalInfo = ({ isShowing, hide, error }) => {
                         <textarea defaultValue={error?.data ? error.data?.message : error?.message} rows={5} cols={5} className={"w-full h-20 rounded-xl p-2 "} />
 
 
-                        <Button color="danger" size="lg" className={"w-full"} onClick={() => {
+                        <Button color="default" size="lg" className={"w-full"} onClick={() => {
                             hide();
                         }
                         }>
@@ -157,7 +157,7 @@ export const ModalSuccessTransaction = ({ isShowing, hide, transaction }) => {
                         <p>Transaction has been completed.</p>
                         <a className={"my-2 text-blue-500"} href={generateTxLink(chainId, transaction.hash)} target={"_blank"}>View on Explorer</a>
 
-                        <Button color="danger" size="lg" className={"w-full"} onClick={() => {
+                        <Button color="default" size="lg" className={"w-full"} onClick={() => {
                             hide();
                         }
                         }>
@@ -269,7 +269,7 @@ export const ModalSellNFT = ({ isShowing, hide, contractAddress, tokenId, tokenT
                             </div>
                             <div className="w-full flex flex-col items-center justify-center">
                                 {
-                                    <Button variant="solid" color="danger" onClick={() => {
+                                    <Button variant="solid" color="default" onClick={() => {
                                         handleSell(defaultPrice, userBalance)
                                     }} className=" w-full">Sell</Button>
                                 }
@@ -347,7 +347,7 @@ export const ModalTransferNFT = ({ isShowing, hide, contractAddress, tokenId, to
                                 onChange={(e) => {
                                     handleAmountChanged(e)
                                 }}
-                                color="danger"
+                                color="default"
                                 label="NFT Amount"
                                 showSteps={true}
                                 maxValue={parseInt(userNFTBalance)}
@@ -365,7 +365,7 @@ export const ModalTransferNFT = ({ isShowing, hide, contractAddress, tokenId, to
                     </div>
                     <div className="w-full flex flex-col items-center justify-center">
                         {
-                            <Button size="lg" color="danger" onClick={() => {
+                            <Button size="lg" color="default" onClick={() => {
                                 handleTransfer(userAmount, receiverAddress)
                             }} className=" my-2 w-full">Transfer</Button>
                         }
@@ -715,7 +715,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                 <Card shadow="sm" fullWidth={true}>
 
                     <CardBody>
-                        <Tabs color="danger" aria-label="Options">
+                        <Tabs color="default" aria-label="Options">
                             <Tab key="tokens" title="Tokens">
                                 <Card shadow="sm">
                                     <CardHeader>
@@ -826,11 +826,11 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                                             <span>External tokens are likely added for testing purposes or as potential scams. Please conduct your own research. Otherwise, you may risk losing your assets. Please refrain from making purchases.</span>
                                         </div>
                                         <div className="w-full flex flex-row items-center justify-between">
-                                        <Switch  isSelected={isSelected} onValueChange={setIsSelected} defaultSelected color="danger">I understand. I promise not to buy, I swear to God.</Switch>
+                                        <Switch  isSelected={isSelected} onValueChange={setIsSelected} defaultSelected color="default">I understand. I promise not to buy, I swear to God.</Switch>
 
                                             <Button isDisabled={!isSelected} onClick={() => {
                                                 handleImportToken()
-                                            }} size="lg" color="danger">Import Token</Button>
+                                            }} size="lg" color="default">Import Token</Button>
                                         </div>
 
                                     
@@ -1155,7 +1155,7 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
                 <Card shadow="sm" fullWidth={true}>
 
                     <CardBody>
-                        <Tabs color="danger" aria-label="Options">
+                        <Tabs color="default" aria-label="Options">
                             <Tab key="tokens" title="Tokens">
                                 <Card shadow="sm">
                                     <CardHeader>
@@ -1230,11 +1230,11 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
                                             <span>External tokens are likely added for testing purposes or as potential scams. Please conduct your own research. Otherwise, you may risk losing your assets. Please refrain from making purchases.</span>
                                         </div>
                                         <div className="w-full flex flex-row items-center justify-between">
-                                        <Switch  isSelected={isSelected} onValueChange={setIsSelected} defaultSelected color="danger">I understand. I promise not to buy, I swear to God.</Switch>
+                                        <Switch  isSelected={isSelected} onValueChange={setIsSelected} defaultSelected color="default">I understand. I promise not to buy, I swear to God.</Switch>
 
                                             <Button isDisabled={!isSelected} onClick={() => {
                                                 handleImportToken()
-                                            }} size="lg" color="danger">Import Token</Button>
+                                            }} size="lg" color="default">Import Token</Button>
                                         </div>
 
                                     

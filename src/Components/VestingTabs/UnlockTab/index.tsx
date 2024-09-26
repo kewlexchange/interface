@@ -288,7 +288,7 @@ const _SWAP_TAB = () => {
                     <div className="w-full flex flex-col items-center justify-center">
                        <Button onClick={()=>{
                         handleLockTokens();
-                       }} size='lg' fullWidth color='danger'>Lock Tokens</Button>
+                       }} size='lg' fullWidth color='default'>Lock Tokens</Button>
                     </div>
                 </div>
             </div>

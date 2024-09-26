@@ -193,7 +193,7 @@ const ListingPage: React.FunctionComponent<IPage> = props => {
                 <div className={"min-w-xl max-w-xl w-full sm:w-full mx-auto flex flex-col gap-5 my-5"}>
                     <Card className={" flex gap-2 flex-col p-2 w-full"}>
                         <div className="w-full max-w-full">
-                            <Tabs color={"danger"} aria-label="Listing Tabs">
+                            <Tabs color={"default"} aria-label="Listing Tabs">
 
                                 <Tab key="listings" title="Upcoming Listings">
 
@@ -205,7 +205,7 @@ const ListingPage: React.FunctionComponent<IPage> = props => {
                                              window.open(explorerURL, "_blank");
                                         }}
                                         isHeaderSticky
-                                        color={"danger"}
+                                        color={"default"}
                                         disallowEmptySelection
                                         selectionMode="single"
                                         removeWrapper aria-label="Example static collection table">
@@ -216,7 +216,7 @@ const ListingPage: React.FunctionComponent<IPage> = props => {
                                         </TableHeader>
                                         <TableBody
                                             items={listingRequests}
-                                            loadingContent={<Spinner color="danger" />}
+                                            loadingContent={<Spinner color="default" />}
                                             className="flex flex-col gap-2"
 
                                             emptyContent={isLoaded ? "No Listings Request Found!" : "Loading... Please Wait!"}
@@ -247,7 +247,7 @@ const ListingPage: React.FunctionComponent<IPage> = props => {
                                                        
 
                                                         <div className='w-full p-2 rounded-lg bg-danger-500/10 text-danger-500 flex flex-row gap-2 p-2 items-center justify-start'>
-                                                            <Spinner size='sm' color="danger" />
+                                                            <Spinner size='sm' color="default" />
                                                             <span>{ isCancelled(collection.assetInfo?.token) ? "Cancelled": "Processing..."}</span>
                                                         </div>}</TableCell>
 
@@ -286,7 +286,7 @@ const ListingPage: React.FunctionComponent<IPage> = props => {
                                                 }}
                                                 size="lg"
                                                 step={1000}
-                                                color="danger"
+                                                color="default"
                                                 label="Donation Amount"
                                                 showSteps={false}
                                                 getValue={(donation) => `${donation} CHZ`}
@@ -297,7 +297,7 @@ const ListingPage: React.FunctionComponent<IPage> = props => {
                                             />
                                             <Button onClick={() => {
                                                 handleListingRequest()
-                                            }} fullWidth size="lg" color="danger">Donate For Listing</Button>
+                                            }} fullWidth size="lg" color="default">Donate For Listing</Button>
                                         </CardFooter>
                                     </Card>
                                 </Tab>

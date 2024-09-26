@@ -84,7 +84,7 @@ const _BRIDGE_STATUS_TAB = () => {
                     window.open(explorerURL, "_blank");
                 }}
                  isHeaderSticky
-                 color={"danger"}
+                 color={"default"}
                  disallowEmptySelection
                  selectionMode="single"
              removeWrapper aria-label="Example static collection table">
@@ -97,7 +97,7 @@ const _BRIDGE_STATUS_TAB = () => {
       </TableHeader>
       <TableBody 
                   items={bridgeTransfers}
-                  loadingContent={<Spinner color="danger" />}
+                  loadingContent={<Spinner color="default" />}
                   className="flex flex-col gap-2"
 
            emptyContent={isLoaded ? "No Transactions Found!" : "Loading... Please Wait!"}
@@ -125,7 +125,7 @@ const _BRIDGE_STATUS_TAB = () => {
                 : 
                 
                 <div className='w-full p-2 rounded-lg bg-danger-500/10 text-danger-500 flex flex-row gap-2 p-2 items-center justify-start'>
-                <Spinner size='sm' color="danger" />
+                <Spinner size='sm' color="default" />
                 <span>Processing...</span>
                 </div>}</TableCell>
 

@@ -994,7 +994,7 @@ const _ARBITRAGE_TAB = () => {
 
                 <Button onClick={() => {
                     handleSwapAll();
-                }} color='danger' fullWidth>Swap All</Button>
+                }} color='default' fullWidth>Swap All</Button>
             </div>
         );
     }
@@ -1052,7 +1052,7 @@ const _ARBITRAGE_TAB = () => {
                                 </Button>
                             }
 
-                            <Button isIconOnly size='lg' radius='full' color='danger' variant='solid' onClick={() => {
+                            <Button isIconOnly size='lg' radius='full' color='default' variant='solid' onClick={() => {
                                 handleSwapAssets()
                             }} className=" anim "
                             >
@@ -1127,7 +1127,7 @@ const _ARBITRAGE_TAB = () => {
                                 isAllowanceRequired() === true &&
                                 <Button className={"w-full"} onClick={() => {
                                     handleApprove(baseAsset.address);
-                                }} color="danger">
+                                }} color="default">
                                     Unlock {baseAsset.symbol}
                                 </Button>
                             }
@@ -1142,13 +1142,13 @@ const _ARBITRAGE_TAB = () => {
                             account ? isAllowanceRequired() === false && pairInfo && pairInfo.valid && hasLiquidity &&
                                 <Button className={"w-full"} onClick={() => {
                                     handleSwap()
-                                }} color="danger">
+                                }} color="default">
                                     Swap
                                 </Button>
                                 :
                                 <Button className={"w-full"} onClick={() => {
                                     toggleConnectModal()
-                                }} color="danger">
+                                }} color="default">
                                     Connect
                                 </Button>
                         }

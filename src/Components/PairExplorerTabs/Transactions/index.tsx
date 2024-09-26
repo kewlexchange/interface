@@ -38,7 +38,7 @@ const _TransactionsTAB = (props: { pair }) => {
 
     return (
         <>
-            <Table color='danger'
+            <Table color='default'
               onRowAction={(key : any) => {
                  //   navigate(`${key}`)
             }}
@@ -54,7 +54,7 @@ const _TransactionsTAB = (props: { pair }) => {
                 <TableBody emptyContent={isLoaded ? "No Pairs Found!" : "Loading... Please Wait!"}
                     isLoading={!isLoaded}
                     items={transactions}
-                    loadingContent={<Spinner color="danger" />}>
+                    loadingContent={<Spinner color="default" />}>
                     {(transaction) => (
 
                         <TableRow key={`/explorer/${props.pair}`}>

@@ -112,7 +112,7 @@ const ChiliAtorPage: React.FunctionComponent<IPage> = props => {
             <ModalConnect isShowing={isConnect} hide={toggleConnectModal} />
 
 
-            <Tabs color={"danger"}>
+            <Tabs color={"default"}>
                 <Tab title="Game">
                     <Card>
                         <CardBody>

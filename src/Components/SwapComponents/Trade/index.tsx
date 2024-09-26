@@ -643,7 +643,7 @@ const _SWAP_TAB = () => {
                     {
                         tradeInfo && <div className={"w-full flex flex-col rounded-lg border border-default-100 p-2 text-center gap-2"}>
 
-                            <div className='flex flex-col gap-2'>
+                            <div className='grid grid-cols-2 gap-2'>
                                 <div className='w-full items-start justify-center flex flex-col'>
                                     <span className={"text-left text-xs w-full"}>Liquidity</span>
 
@@ -694,7 +694,7 @@ const _SWAP_TAB = () => {
                 <CardFooter>
                     <Button variant='solid' onClick={()=>{
                         handleSwap()
-                    }} fullWidth size='sm' color='danger'>Swap</Button>
+                    }} fullWidth size='sm' color='default'>Swap</Button>
                 </CardFooter>
 
             </Card>
@@ -759,7 +759,7 @@ const _SWAP_TAB = () => {
         return (
 
             <div className='flex flex-col gap-2 w-full'>
-            <div className='w-full grid grid-cols-2 gap-2'>
+            <div className='w-full flex flex-col gap-2'>
                 {
                     tradingPairs.map((pair: any, index) => (
 
@@ -773,7 +773,7 @@ const _SWAP_TAB = () => {
             </div>
             <Button onClick={()=>{
                 handleSwapAll();
-            }} color='danger' fullWidth>Swap All</Button>
+            }} color='default' fullWidth>Swap All</Button>
             </div>
         );
     }
@@ -833,7 +833,7 @@ const _SWAP_TAB = () => {
 
                             }
 
-                            <Button isIconOnly size='lg' radius='full' color='danger' variant='solid' onClick={() => {
+                            <Button isIconOnly size='lg' radius='full' color='default' variant='solid' onClick={() => {
                                 handleSwapAssets()
                             }} className=" anim "
                             >
@@ -909,7 +909,7 @@ const _SWAP_TAB = () => {
                                 isAllowanceRequired() === true &&
                                 <Button className={"w-full"} onClick={() => {
                                     handleApprove(baseAsset.address);
-                                }} color="danger">
+                                }} color="default">
                                     Unlock {baseAsset.symbol}
                                 </Button>
                             }
@@ -924,13 +924,13 @@ const _SWAP_TAB = () => {
                             account ? isAllowanceRequired() === false && pairInfo && pairInfo.valid && hasLiquidity &&
                                 <Button className={"w-full"} onClick={() => {
                                     handleSwap()
-                                }} color="danger">
+                                }} color="default">
                                     Swap
                                 </Button>
                                 :
                                 <Button className={"w-full"} onClick={() => {
                                     toggleConnectModal()
-                                }} color="danger">
+                                }} color="default">
                                     Connect
                                 </Button>
                         }

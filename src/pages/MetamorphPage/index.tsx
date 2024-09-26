@@ -65,7 +65,7 @@ const MetamorphPage: React.FunctionComponent<IPage> = props => {
                 <div className=" grid  grid-cols-1  gap-8 rounded-lg">
 
                 <Card className={" flex gap-2 flex-col p-2 w-full"}>
-                    <Tabs color={"danger"} aria-label="Swap Tabs">
+                    <Tabs color={"default"} aria-label="Swap Tabs">
                                 <Tab key="swap" title="Morph Token to NFT">
                                     <MORPH_TAB/>
                              

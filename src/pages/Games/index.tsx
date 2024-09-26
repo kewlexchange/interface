@@ -52,7 +52,7 @@ const GamesPage: React.FunctionComponent<IPage> = props => {
                         </div>
                     </CardBody>
                     <CardFooter className="flex hidden items-center justify-end">
-                    <Button size={"sm"} variant="shadow" color={isIMON() ? "danger" : "secondary"} as={NavLink} to="/games/chiliator">Play Now</Button>
+                    <Button size={"sm"} variant="shadow" color={isIMON() ? "default" : "secondary"} as={NavLink} to="/games/chiliator">Play Now</Button>
 
                     </CardFooter>
 
@@ -83,7 +83,7 @@ const GamesPage: React.FunctionComponent<IPage> = props => {
                         </div>
                         </CardBody>
                         <CardFooter className="flex hidden items-center justify-end">
-                        <Button size={"sm"} variant="shadow" color={isIMON() ? "danger" : "secondary"} as={NavLink} to="/games/plinko">Play Now</Button>
+                        <Button size={"sm"} variant="shadow" color={isIMON() ? "default" : "secondary"} as={NavLink} to="/games/plinko">Play Now</Button>
 
                         </CardFooter>
 

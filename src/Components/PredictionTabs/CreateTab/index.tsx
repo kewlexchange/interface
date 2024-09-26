@@ -326,7 +326,7 @@ const _SWAP_TAB = () => {
                                 <CardFooter>
                                     <Button onClick={()=>{
                                         handleCreateMatch();
-                                    }} color='danger' fullWidth size='lg'>Create Match</Button>
+                                    }} color='default' fullWidth size='lg'>Create Match</Button>
                                 </CardFooter>
 
 

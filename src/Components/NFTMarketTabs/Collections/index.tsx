@@ -104,7 +104,7 @@ const _NFT_MARKET_COLLECTION_TAB = () => {
         <Table
         removeWrapper
         isHeaderSticky
-        color={"danger"}
+        color={"default"}
         disallowEmptySelection
         selectionMode="single"
         topContentPlacement="outside"
@@ -127,7 +127,7 @@ const _NFT_MARKET_COLLECTION_TAB = () => {
             emptyContent={isLoaded ? "No NFTs Found!" : "Loading... Please Wait!"}
             isLoading={!isLoaded}
             items={collections ? collections : []}
-            loadingContent={<Spinner color="danger" />}
+            loadingContent={<Spinner color="default" />}
             className="flex flex-col gap-2">
             {(collection) => (
                 collection.items.length > 0 &&

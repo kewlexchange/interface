@@ -293,7 +293,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
 
 
 
-                        <Tabs onSelectionChange={setSelected} selectedKey={selected} size={"md"} color='warning' aria-label="Tabs sizes">
+                        <Tabs onSelectionChange={setSelected} selectedKey={selected} size={"md"} color='default' aria-label="Tabs sizes">
                             <Tab key={"info"} title={"Info"}>
                                 <Card fullWidth shadow='none' >
                                     <CardHeader className="justify-between">
@@ -453,7 +453,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                                 showTooltip={true}
 
                                                 step={1}
-                                                color="warning"
+                                                color="default"
                                                 showSteps={false}
                                                 maxValue={20000}
                                                 minValue={1}
@@ -468,7 +468,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                                     setDepositAmount(e.target.value)
                                                 }}
                                                 min={0}
-                                                color={"warning"}
+                                                color={"default"}
                                                 variant='flat'
                                                 label="Deposit Amount"
 
@@ -486,11 +486,11 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                             <div className="w-full flex flex-col gap-2">
                                                 <Switch onValueChange={(val) => {
                                                     setAcceptAggrement(val)
-                                                }} color={"danger"} size="lg">I acknowledge that MRL is a MEME token and understand that I am solely responsible for any potential losses incurred.</Switch>
+                                                }} color={"default"} size="lg">I acknowledge that MRL is a MEME token and understand that I am solely responsible for any potential losses incurred.</Switch>
 
                                                 <Button isDisabled={!acceptAggrement} onClick={() => {
                                                     handleContribute();
-                                                }} variant='shadow' size='lg' className='w-full' color='warning'>Invest Now</Button>
+                                                }} variant='shadow' size='lg' className='w-full' color='default'>Invest Now</Button>
                                             </div>
 
 
@@ -561,7 +561,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                             <div className="w-full">
                                                 <Button onClick={() => {
                                                     handleRefund();
-                                                }} isDisabled={userInfo && userInfo.isRefunded} variant='shadow' size='lg' className='w-full' color='danger'>Refund</Button>
+                                                }} isDisabled={userInfo && userInfo.isRefunded} variant='shadow' size='lg' className='w-full' color='default'>Refund</Button>
                                             </div>
 
 
@@ -656,7 +656,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                 <Table
                                 removeWrapper
                                     isHeaderSticky
-                                    color={"danger"}
+                                    color={"default"}
                                     disallowEmptySelection
                                     shadow='none'
                                     selectionMode="single"
@@ -671,7 +671,7 @@ const _MRLIDO = (props: { IDOParams, name }) => {
                                         emptyContent={isLoaded ? "No Transactions Found!" : "Loading... Please Wait!"}
                                         isLoading={!isLoaded}
                                         items={contributors}
-                                        loadingContent={<Spinner color="danger" />}
+                                        loadingContent={<Spinner color="default" />}
                                         className="flex flex-col gap-2">
                                         {(collection) => (
 

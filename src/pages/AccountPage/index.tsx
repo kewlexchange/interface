@@ -76,7 +76,7 @@ const AccountPage: React.FunctionComponent<IPage> = props => {
                 <div className={"min-w-xl max-w-xl w-full sm:w-full mx-auto flex flex-col gap-5 my-5"}>
 
                 <Card  className="flex rounded-xl p-2  w-full flex-col">
-                    <Tabs color="danger" aria-label="Wallet">
+                    <Tabs color="default" aria-label="Wallet">
                         <Tab key="tokens" title="Tokens">
                             <TokenBalances account={account}/>
                         </Tab>

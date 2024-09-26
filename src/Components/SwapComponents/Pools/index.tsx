@@ -840,7 +840,7 @@ const _POOL_TAB = () => {
                             baseAsset && quoteAsset && baseAsset.address !== ETHER_ADDRESS && hasBaseAllowance === false &&
                             <Button className={"w-full"} onClick={() => {
                                 handleApprove(baseAsset.address);
-                            }} color="danger">
+                            }} color="default">
                                 Unlock {baseAsset.symbol}
                             </Button>
                         }
@@ -848,7 +848,7 @@ const _POOL_TAB = () => {
                             baseAsset && quoteAsset && quoteAsset.address !== ETHER_ADDRESS && hasQuoteAllowance === false &&
                             <Button className={"w-full"} onClick={() => {
                                 handleApprove(quoteAsset.address);
-                            }} color="danger">
+                            }} color="default">
                                 Unlock {quoteAsset.symbol}
                             </Button>
                         }
@@ -860,12 +860,12 @@ const _POOL_TAB = () => {
                     <div className={"w-full grid grid-cols-2 gap-2"}>
                         <Button className={"w-full"} onClick={() => {
                             handleAddLiquidity()
-                        }} color="danger">
+                        }} color="default">
                             Add Liquidity
                         </Button>
                         <Button className={"w-full"} onClick={() => {
                             handleRemoveLiquidity()
-                        }} color="danger">
+                        }} color="default">
                             Remove Liquidity
                         </Button>
                     </div>

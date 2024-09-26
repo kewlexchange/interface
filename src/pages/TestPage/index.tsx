@@ -20,7 +20,7 @@ const TestPage: React.FunctionComponent<IPage> = props => {
         size="lg"
         step={1}
         label={"Enter your mint amount"}
-        color="danger"
+        color="default"
         showSteps={true} 
         maxValue={10000} 
         minValue={1} 
@@ -31,7 +31,7 @@ const TestPage: React.FunctionComponent<IPage> = props => {
 
                 <div className="w-full grid grid-cols-6 gap-2">
                 {Array.from({ length: amount }, (_, i) => (
-                    <Badge   key={i}  content={i + 1} color="danger" placement="top-right">
+                    <Badge   key={i}  content={i + 1} color="default" placement="top-right">
                     <div className="grid grid-cols-2 gap-2 p-2 border rounded-xl">
 
                     <Image src={`https://ipfs.io/ipfs/QmfRFsQC4XqYr8kpyM3XnGDVzgiN6LVQaGHRJBV6i6HCdf/${i}.jpg`} />

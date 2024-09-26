@@ -500,7 +500,7 @@ const _FARM_TAB = () => {
     
                                 isCNSRegistered && baseAsset && baseAsset.address !== ETHER_ADDRESS && <Button onClick={() => {
                                         handleUnlock()
-                                    }} color='danger' size='lg' className='w-full' variant='solid'>Unlock</Button>
+                                    }} color='default' size='lg' className='w-full' variant='solid'>Unlock</Button>
     
                                 }
     
@@ -508,7 +508,7 @@ const _FARM_TAB = () => {
                                 {
                                     isCNSRegistered && <Button onClick={() => {
                                         handleStake()
-                                    }} color='danger' size='lg' className='w-full' variant='solid'>Stake</Button>
+                                    }} color='default' size='lg' className='w-full' variant='solid'>Stake</Button>
                                 }
     
     
@@ -519,7 +519,7 @@ const _FARM_TAB = () => {
                                     <div className='w-full gap-2 p-2 flex flex-col'>
                                     <span className={"text-center bg-danger-500/10 text-danger-500 rounded-lg col-span-2 p-2"}>
                                             To participate in the farm pool and receive rewards, you need to register with the IMON Name Service (CNS).                                            </span>
-                                        <Button as={NavLink} to={"/cns"} color='danger' size='lg' className='w-full' variant='solid'>Register CNS</Button>
+                                        <Button as={NavLink} to={"/cns"} color='default' size='lg' className='w-full' variant='solid'>Register CNS</Button>
     
                                     </div>
                                 }

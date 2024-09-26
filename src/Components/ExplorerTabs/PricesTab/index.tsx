@@ -78,7 +78,7 @@ const _PricesTAB = (props: { tokens: any }) => {
 
     return (
         <>
-            <Table removeWrapper  isHeaderSticky color='danger'
+            <Table removeWrapper  isHeaderSticky color='default'
                 classNames={{
                     base: "max-h-[600px] overflow-scroll",
                     table: "min-h-[420px]",
@@ -96,7 +96,7 @@ const _PricesTAB = (props: { tokens: any }) => {
                 <TableBody emptyContent={isLoaded ? "No Pairs Found!" : "Loading... Please Wait!"}
                     isLoading={!isLoaded}
                     items={allExchangePairs}
-                    loadingContent={<Spinner color="danger" />}>
+                    loadingContent={<Spinner color="default" />}>
                     {(pair: any) => (
                        getIconPath(pair.ticker) != "" && <TableRow key={pair.ticker}>
 

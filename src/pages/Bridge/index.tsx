@@ -38,7 +38,7 @@ const BridgePage: React.FunctionComponent<IPage> = props => {
 
                         <div className="w-full max-w-full">
 
-                            <Tabs color={"danger"} aria-label="Bridge Page">
+                            <Tabs color={"default"} aria-label="Bridge Page">
 
                                 <Tab key="bridge" title="Bridge">
                                     <BRIDGE_TAB/>

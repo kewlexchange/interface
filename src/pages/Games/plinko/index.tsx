@@ -469,7 +469,7 @@ useEffect(() => {
                                                             </div>
                                                         </div>
 
-                                                        <Button size="sm" variant="flat" color={"danger"} className="col-span-3" onClick={()=>{
+                                                        <Button size="sm" variant="flat" color={"default"} className="col-span-3" onClick={()=>{
                                                             onPlay(game);
                                                             
                                                         }}>Replay</Button>

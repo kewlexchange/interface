@@ -35,7 +35,7 @@ const OldStakePage: React.FunctionComponent<IPage> = props => {
 
                         <div className="w-full max-w-full">
 
-                            <Tabs color={"danger"} aria-label="Swap Tabs">
+                            <Tabs color={"default"} aria-label="Swap Tabs">
                                 <Tab key="farm" title="Farm">
                                      <FARM_TAB /> 
                                 </Tab>

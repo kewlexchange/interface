@@ -190,7 +190,7 @@ const NFTDetails: React.FunctionComponent<IPage> = props => {
                                                         }}
                                                         size="lg"
                                                         step={1}
-                                                        color="danger"
+                                                        color="default"
                                                         label="Amount"
                                                         showSteps={false}
                                                         maxValue={BigNumber.from(nftItem.remaining_amount).toNumber()}
@@ -220,7 +220,7 @@ const NFTDetails: React.FunctionComponent<IPage> = props => {
                                             <CardFooter>
                                                 <div className="w-full flex flex-col items-center justify-center">
                                                     {account && nftItem && !nftItem.is_cancelled && account && nftItem && !nftItem.is_completed &&
-                                                        <Button color="danger" size="lg" onClick={() => {
+                                                        <Button color="default" size="lg" onClick={() => {
                                                             handleBuy()
                                                         }} className="w-full">Buy Now</Button>
                                                     }
@@ -239,7 +239,7 @@ const NFTDetails: React.FunctionComponent<IPage> = props => {
                                 <div className="max-w-xl min-w-xl sm:w-full sm:max-w-full rounded-xl  p-2">
                                     <Button onClick={() => {
                                         handleCancel()
-                                    }} color="danger" size="lg" className={"w-full"}>Cancel</Button>
+                                    }} color="default" size="lg" className={"w-full"}>Cancel</Button>
                                 </div>}
 
 

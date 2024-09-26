@@ -192,13 +192,13 @@ export const WrapTab = (props: {account})=> {
                                 </div>
                         </div>
                         <div className={"w-full flex flex-row items-center justify-center gap-2"}>
-                    <Button size='lg' color='danger' onClick={()=>{
+                    <Button size='lg' color='default' onClick={()=>{
                         handleWrap();
                     }} className={"w-full flex flex-row items-center justify-center"}>
                         <span>Wrap</span>
                         <span className={"text-xs"}>{getNativeCurrencyByChainId(chainId)} to W{getNativeCurrencyByChainId(chainId)}</span>
                         </Button>
-                    <Button size='lg' color='danger' onClick={()=>{
+                    <Button size='lg' color='default' onClick={()=>{
                         handleUnwrap();
                     }} className={" flex w-full flex-row items-center justify-center"}>
                         <span>Unwrap</span>

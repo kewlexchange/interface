@@ -305,7 +305,7 @@ const Domain = () => {
     </Dropdown>
     
               </> : <>
-              <Button variant='solid' color='danger' onClick={async () => {
+              <Button variant='solid' color='default' onClick={async () => {
                   await handleConnect();
                 }}>Connect</Button>
               </>

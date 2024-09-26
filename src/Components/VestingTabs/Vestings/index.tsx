@@ -190,7 +190,7 @@ const _SWAP_TAB = () => {
 
             <div className="flex flex-col gap-2 rounded-xl w-full">
 
-                <Table removeWrapper color={"danger"} selectionMode="single"
+                <Table removeWrapper color={"default"} selectionMode="single"
                 >
                     <TableHeader>
                         <TableColumn>Asset</TableColumn>
@@ -199,7 +199,7 @@ const _SWAP_TAB = () => {
                     <TableBody emptyContent={isLoaded ? "No Vestings Found!" : "Loading... Please Wait!"}
                         isLoading={!isLoaded}
                         items={vestings}
-                        loadingContent={<Spinner color="danger" />}>
+                        loadingContent={<Spinner color="default" />}>
 
                         {(vestingInfo) => (
                             <TableRow key={vestingInfo.vesting}>
@@ -246,7 +246,7 @@ const _SWAP_TAB = () => {
 
                                             {
                                                   !vestingInfo.isValid ? <>
-                                                   <Button fullWidth size="sm" color="warning" variant="flat">
+                                                   <Button fullWidth size="sm" color="default" variant="flat">
                                                     Already Claimed
                                                     </Button>
                                                   </> : <>
@@ -260,7 +260,7 @@ const _SWAP_TAB = () => {
 
                                            
                                         </> : <>
-                                        <Button fullWidth size="sm" color="danger" variant="flat">
+                                        <Button fullWidth size="sm" color="default" variant="flat">
                                         Locked
                                     </Button>
                                         </>

@@ -45,7 +45,7 @@ const ChartPage: React.FunctionComponent<IPage> = props => {
                 <Card className="w-full p-2 flex flex-col gap-2">
 
                   
-                    <Tabs color={"danger"} aria-label="Options">
+                    <Tabs color={"default"} aria-label="Options">
                         <Tab key="chart" title="Chart">
                         
                                 {

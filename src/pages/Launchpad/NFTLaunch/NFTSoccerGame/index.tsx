@@ -147,7 +147,7 @@ const NFTSoccerGame: React.FunctionComponent<IPage> = props => {
         size="lg"
         step={1}
         label={"Enter your mint amount"}
-        color="danger"
+        color="default"
         showSteps={true} 
         maxValue={10} 
         minValue={1} 
@@ -166,7 +166,7 @@ const NFTSoccerGame: React.FunctionComponent<IPage> = props => {
                                 handleMint();
                             }
                              
-                            }} color="danger" variant="solid">
+                            }} color="default" variant="solid">
                                 Mint
                             </Button>
                     </div>

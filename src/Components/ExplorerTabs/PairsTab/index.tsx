@@ -88,7 +88,7 @@ const _PairTAB = (props: { exchange, tokens }) => {
 
     return (
         <>
-            <Table removeWrapper isStriped isHeaderSticky color='danger'
+            <Table removeWrapper isStriped isHeaderSticky color='default'
                 onRowAction={(key: any) => {
                     navigate(`${key}`)
                 }}
@@ -109,7 +109,7 @@ const _PairTAB = (props: { exchange, tokens }) => {
                 <TableBody emptyContent={isLoaded ? "No Pairs Found!" : "Loading... Please Wait!"}
                     isLoading={!isLoaded}
                     items={allExchangePairs}
-                    loadingContent={<Spinner color="danger" />}>
+                    loadingContent={<Spinner color="default" />}>
                     {(pair: any) => (
 
 

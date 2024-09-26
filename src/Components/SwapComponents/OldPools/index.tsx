@@ -827,7 +827,7 @@ const _OLD_POOL_TAB = () => {
                    
                         <Button className={"w-full"} onClick={() => {
                             handleRemoveLiquidity()
-                        }} color="danger">
+                        }} color="default">
                             Remove Liquidity
                         </Button>
                     </div>

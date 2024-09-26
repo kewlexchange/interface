@@ -29,7 +29,7 @@ const OldSwapPage: React.FunctionComponent<IPage> = props => {
                 <div className={"min-w-xl max-w-xl w-full sm:w-full mx-auto flex flex-col gap-5 my-5"}>
                     <Card  className={" flex gap-2 flex-col p-2 w-full"}>
                         <div className="w-full max-w-full">
-                            <Tabs color={"danger"} aria-label="Swap Tabs">
+                            <Tabs color={"default"} aria-label="Swap Tabs">
                            
                                 <Tab key="pools" title="Pools">
                                     <OLD_POOL_TAB />

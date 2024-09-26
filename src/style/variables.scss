@@ -139,7 +139,7 @@ $theme-colors: map-merge(
     "secondary":  $secondary,
     "success":    $success,
     "info":       $info,
-    "warning":    $warning,
+    "default":    $warning,
     "danger":     $danger,
     "light":      $light,
     "dark":       $dark
@@ -155,7 +155,7 @@ $theme-colors--night: map-merge(
     "secondary":  $secondary--night,
     "success":    $success--night,
     "info":       $info--night,
-    "warning":    $warning--night,
+    "default":    $warning--night,
     "danger":     $danger--night,
     "light":      $light--night,
     "dark":       $dark--night

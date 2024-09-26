@@ -135,13 +135,13 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
                     <div className='grid grid-cols-3 gap-2 my-5'>
                             <Button onClick={()=>{
                                 harvest(props.stakeItem.stakingId)
-                            }} color='danger'>Harvest</Button>
+                            }} color='default'>Harvest</Button>
                             <Button onClick={()=>{
                                 unstake(props.stakeItem.stakingId)
-                            }} color='danger'>Unstake</Button>
+                            }} color='default'>Unstake</Button>
                               <Button onClick={()=>{
                                 reload()
-                            }} color='danger'>Refresh</Button>
+                            }} color='default'>Refresh</Button>
                         </div>
                 </div>
      

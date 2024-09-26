@@ -156,7 +156,7 @@ const _EARN_TAB = () => {
                         }}
                     />
 
-                    <Button color='danger' size='md' radius='sm' variant='solid'>
+                    <Button color='default' size='md' radius='sm' variant='solid'>
                         Claim
                     </Button>
 

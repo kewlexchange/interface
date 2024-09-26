@@ -94,7 +94,7 @@ const PredictionsPage: React.FunctionComponent<IPage> = props => {
                     <Card  className={" flex gap-2 flex-col w-full"}>
                         <CardBody>
                         <div className="w-full max-w-full">
-                            <Tabs color={"danger"} aria-label="Swap Tabs">
+                            <Tabs color={"default"} aria-label="Swap Tabs">
                                 <Tab key="predictions" title="Match Predictions">
                                     <BET_TAB />
                                 </Tab>

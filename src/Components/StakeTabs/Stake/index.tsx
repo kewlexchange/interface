@@ -359,7 +359,7 @@ const _STAKE_TAB = () => {
 
                         isCNSRegistered && baseAsset && baseAsset.address !== ETHER_ADDRESS && <Button onClick={() => {
                                     handleUnlock()
-                                }} color='danger' size='lg' className='w-full' variant='solid'>Unlock</Button>
+                                }} color='default' size='lg' className='w-full' variant='solid'>Unlock</Button>
 
                             }
 
@@ -367,7 +367,7 @@ const _STAKE_TAB = () => {
                             {
                                 isCNSRegistered && <Button onClick={() => {
                                     handleStake()
-                                }} color='danger' size='lg' className='w-full' variant='solid'>Stake</Button>
+                                }} color='default' size='lg' className='w-full' variant='solid'>Stake</Button>
                             }
 
 
@@ -378,7 +378,7 @@ const _STAKE_TAB = () => {
                                 <div className='w-full gap-2 p-2 flex flex-col'>
                                     <span>
                                         To participate in the stake pool and receive rewards, you need to register with the IMON Name Service (CNS).                                            </span>
-                                    <Button as={NavLink} to={"/cns"} color='danger' size='lg' className='w-full' variant='solid'>Register CNS</Button>
+                                    <Button as={NavLink} to={"/cns"} color='default' size='lg' className='w-full' variant='solid'>Register CNS</Button>
 
                                 </div>
                             }

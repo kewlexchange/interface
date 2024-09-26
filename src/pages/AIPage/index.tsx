@@ -835,7 +835,7 @@ const AIPage: React.FunctionComponent<IPage> = props => {
 
                             </div>
                             <div className="flex items-center justify-center">
-                                <Button color="danger" onClick={() => {
+                                <Button color="default" onClick={() => {
                                     handleSendMessage()
                                 }} className="btn btn-primary w-[50%] rounded-lg p-2">
                                     Ask IMON

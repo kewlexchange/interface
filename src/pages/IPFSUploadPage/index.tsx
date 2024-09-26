@@ -668,7 +668,7 @@ const IPFSUploadPage: React.FunctionComponent<IPage> = props => {
                                         </div>
                                         <div className="flex flex-col gap-2 rounded-lg p-2">
                                             <span>Remove</span>
-                                            <Button size="md" color="warning" onClick={() => remove(index)}>
+                                            <Button size="md" color="default" onClick={() => remove(index)}>
                                                 Remove
                                             </Button>
                                         </div>

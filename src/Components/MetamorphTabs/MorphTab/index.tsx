@@ -234,7 +234,7 @@ const _MORPH_TAB = () => {
                         {
                              isAllowanceRequired() === true  && <Button className={"w-full"} onClick={() => {
                                 handleApprove(baseAsset.address)
-                            }} color="danger">
+                            }} color="default">
                                 Unlock
                             </Button>
                         }
@@ -242,7 +242,7 @@ const _MORPH_TAB = () => {
                        {
                             isAllowanceRequired() === false  && <Button className={"w-full"} onClick={() => {
                                 handleTokenToNFT()
-                            }} color="danger">
+                            }} color="default">
                                 Morph Token to NFT
                             </Button>
                        }

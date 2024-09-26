@@ -287,7 +287,7 @@ const _STAKE_TAB = () => {
                                             <Slider
                                                 label="Vote Amount"
                                                 size="lg"
-                                                color="danger"
+                                                color="default"
                                                 step={1}
                                                 showSteps={false}
                                                 minValue={1}
@@ -311,7 +311,7 @@ const _STAKE_TAB = () => {
                                         }} color='success' size='lg' className='w-full text-white' variant='solid'>Increase Rewards</Button>
                                         <Button onClick={() => {
                                              handleVote(false)
-                                        }} color='danger' size='lg' className='w-full' variant='solid'>Decrease Rewards</Button>
+                                        }} color='default' size='lg' className='w-full' variant='solid'>Decrease Rewards</Button>
                                     </div>
                                 </CardFooter>
                             </Card>

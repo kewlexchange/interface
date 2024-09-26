@@ -22,7 +22,7 @@ const RegisterDomainPage: React.FunctionComponent<IPage> = props => {
 
                         <div className="w-full">
 
-                            <Tabs color={"danger"} aria-label="Swap Tabs">
+                            <Tabs color={"default"} aria-label="Swap Tabs">
                                 <Tab key="swap" title="Register">
                                     <DOMAIN_REGISTER_TAB />
                                 </Tab>

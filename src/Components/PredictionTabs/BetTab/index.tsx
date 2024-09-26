@@ -343,7 +343,7 @@ const _SWAP_TAB = () => {
 
         return (
             <>
-                {data && <Table removeWrapper color={"danger"} selectionMode="single">
+                {data && <Table removeWrapper color={"default"} selectionMode="single">
                     <TableHeader>
                         <TableColumn>Whale</TableColumn>
                         <TableColumn>Amount</TableColumn>
@@ -351,7 +351,7 @@ const _SWAP_TAB = () => {
                     </TableHeader>
                     <TableBody emptyContent={"No Predictions Found!"}
                         items={data.data}
-                        loadingContent={<Spinner color="danger" />}>
+                        loadingContent={<Spinner color="default" />}>
 
                         {(bettorInfo: any) => (
                             <TableRow key={bettorInfo.bettorId}>
@@ -368,7 +368,7 @@ const _SWAP_TAB = () => {
                                         bettorInfo && !bettorInfo.claimed ? <>
                                             <Button onClick={() => {
                                                 handleClaim(bettorInfo, data.match, data.side)
-                                            }} size='sm' color='danger'>Claim</Button>
+                                            }} size='sm' color='default'>Claim</Button>
                                         </> : <>
                                             Claimed
                                         </>
@@ -577,7 +577,7 @@ const _SWAP_TAB = () => {
                                     <ButtonGroup size='lg' variant='shadow' fullWidth>
                                         <Button className='uppercase' onClick={() => {
                                             handleDeposit(0)
-                                        }} color='danger' size='lg'>{matchEntry?.home.name}</Button>
+                                        }} color='default' size='lg'>{matchEntry?.home.name}</Button>
                                         <Button onClick={() => {
                                             handleDeposit(2)
                                         }} className='uppercase' color='default' size='lg'>{matchEntry?.draw.name}</Button>
@@ -632,7 +632,7 @@ const _SWAP_TAB = () => {
                                                                     matchEntry.expired ? <>
                                                                         {BigNumber.from(matchEntry.home.score).toNumber()}
                                                                     </> :
-                                                                        <Spinner size='sm' color="danger" />
+                                                                        <Spinner size='sm' color="default" />
                                                                 }
                                                             </TableCell>
                                                             <TableCell>{BigNumber.from(matchEntry.home.betCount).toNumber()}</TableCell>
@@ -646,7 +646,7 @@ const _SWAP_TAB = () => {
                                                                     matchEntry.expired ? <>
                                                                         {BigNumber.from(matchEntry.away.score).toNumber()}
                                                                     </> :
-                                                                        <Spinner size='sm' color="danger" />
+                                                                        <Spinner size='sm' color="default" />
                                                                 }
 
                                                             </TableCell>
@@ -661,7 +661,7 @@ const _SWAP_TAB = () => {
                                                                     matchEntry.expired ? <>
 
                                                                     </> :
-                                                                        <Spinner size='sm' color="danger" />
+                                                                        <Spinner size='sm' color="default" />
                                                                 }
                                                             </TableCell>
                                                             <TableCell>{BigNumber.from(matchEntry.draw.betCount).toNumber()}</TableCell>

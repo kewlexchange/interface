@@ -390,7 +390,7 @@ const _BRIDGE_TAB = () => {
                             {
                              isCNSRegistered && <Button onClick={()=>{
                                 handleTransferAssets();
-                             }} className='w-full' size='lg' color='danger'>Transfer</Button>
+                             }} className='w-full' size='lg' color='default'>Transfer</Button>
                             }
                             
 
@@ -406,7 +406,7 @@ const _BRIDGE_TAB = () => {
                                     <div className='bg-danger-500/10 text-danger-500 rounded-lg w-full p-2'>
                                     <span>In order to execute transfer transactions through the IMONLINE Bridge, it is required to register with the IMON Name Service (CNS).</span>
                                     </div>
-                                    <Button as={NavLink} to={"/cns"} color='danger' size='lg' className='w-full' variant='solid'>Register CNS</Button>
+                                    <Button as={NavLink} to={"/cns"} color='default' size='lg' className='w-full' variant='solid'>Register CNS</Button>
 
                                 </div>
                             }

@@ -484,7 +484,7 @@ const _IDOItem = (props: { IDOParams, name }) => {
                                                 <div className="w-full">
                                                     <Button onClick={() => {
                                                         handleRefund();
-                                                    }} isDisabled={userInfo && userInfo.isRefunded} variant='shadow' size='lg' className='w-full' color='danger'>Refund</Button>
+                                                    }} isDisabled={userInfo && userInfo.isRefunded} variant='shadow' size='lg' className='w-full' color='default'>Refund</Button>
                                                 </div>
 
 
@@ -580,7 +580,7 @@ const _IDOItem = (props: { IDOParams, name }) => {
 
                         <Table
                         isHeaderSticky
-                        color={"danger"}
+                        color={"default"}
                         disallowEmptySelection
                         selectionMode="single"
                         aria-label="Example static collection table">
@@ -594,7 +594,7 @@ const _IDOItem = (props: { IDOParams, name }) => {
             emptyContent={isLoaded ? "No Transactions Found!" : "Loading... Please Wait!"}
             isLoading={!isLoaded}
             items={contributors}
-            loadingContent={<Spinner color="danger" />}
+            loadingContent={<Spinner color="default" />}
             className="flex flex-col gap-2">
             {(collection) => (
             

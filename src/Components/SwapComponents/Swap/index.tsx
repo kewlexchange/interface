@@ -878,7 +878,7 @@ const _SWAP_TAB = () => {
                                 isAllowanceRequired() === true &&
                                 <Button className={"w-full"} onClick={() => {
                                     handleApprove(baseAsset.address);
-                                }} color="danger">
+                                }} color="default">
                                     Unlock {baseAsset.symbol}
                                 </Button>
                             }
@@ -893,13 +893,13 @@ const _SWAP_TAB = () => {
                             account ? isAllowanceRequired() === false && pairInfo && pairInfo.valid && hasLiquidity &&
                                 <Button className={"w-full"} onClick={() => {
                                     handleSwap()
-                                }} color="danger">
+                                }} color="default">
                                     Swap
                                 </Button>
                                 :
                                 <Button className={"w-full"} onClick={() => {
                                     toggleConnectModal()
-                                }} color="danger">
+                                }} color="default">
                                     Connect
                                 </Button>
                         }

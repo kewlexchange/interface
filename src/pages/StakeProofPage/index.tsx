@@ -102,7 +102,7 @@ const StakeProofPage: React.FunctionComponent<IPage> = props => {
 
                     <Table
                         isHeaderSticky
-                        color={"danger"}
+                        color={"default"}
                         disallowEmptySelection
                         selectionMode="single"
                         aria-label="Example static collection table">
@@ -117,7 +117,7 @@ const StakeProofPage: React.FunctionComponent<IPage> = props => {
             emptyContent={isLoaded ? "No Transactions Found!" : "Loading... Please Wait!"}
             isLoading={!isLoaded}
             items={userTxList}
-            loadingContent={<Spinner color="danger" />}
+            loadingContent={<Spinner color="default" />}
             className="flex flex-col gap-2">
             {(collection) => (
             

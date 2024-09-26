@@ -81,7 +81,7 @@ const _Players: React.FC = () => {
                 <Table
                     removeWrapper
                     isHeaderSticky
-                    color={"danger"}
+                    color={"default"}
                     disallowEmptySelection
                     selectionMode="single"
                     aria-label="Example static collection table" >
@@ -93,7 +93,7 @@ const _Players: React.FC = () => {
                         emptyContent={isLoaded ? "No Players Found!" : "Loading... Please Wait!"}
                         isLoading={!isLoaded}
                         items={tableItems}
-                        loadingContent={<Spinner color="danger" />}
+                        loadingContent={<Spinner color="default" />}
                         className="flex flex-col gap-2">
                         {(collection) => (
 

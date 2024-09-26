@@ -144,7 +144,7 @@ const NFTLaunch: React.FunctionComponent<IPage> = props => {
                             size="lg"
                             step={1}
                             label={"Enter your mint amount"}
-                            color="danger"
+                            color="default"
                             showSteps={true}
                             maxValue={30}
                             minValue={1}
@@ -161,7 +161,7 @@ const NFTLaunch: React.FunctionComponent<IPage> = props => {
                                 handleMint();
                             }
 
-                        }} color="danger" variant="solid">
+                        }} color="default" variant="solid">
                             Mint
                         </Button>
                     </div>

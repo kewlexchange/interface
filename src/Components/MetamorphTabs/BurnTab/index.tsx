@@ -311,10 +311,10 @@ const _BURN_TAB = () => {
             <CardFooter className='flex flex-row gap-2 w-full'>
                 <Button onClick={()=>{
                     handleNFTToToken(props.token)
-                }} size='sm' color='danger'>Convert NFT to Token</Button>
+                }} size='sm' color='default'>Convert NFT to Token</Button>
                 <Button as={NavLink} to={"/account"} onClick={()=>{
                    
-                }} size='sm' color='danger'>Sell On NFT Marketplace</Button>
+                }} size='sm' color='default'>Sell On NFT Marketplace</Button>
             </CardFooter>
         </Card>
         )
@@ -347,7 +347,7 @@ const _BURN_TAB = () => {
                     <div className="w-full rounded-xl pb-0 flex gap-2 flex-col">
                         {
                             isLoading && <div className='w-full flex flex-col items-center justifty-center'>
-                            <Spinner color='danger'>Loading... Please wait...</Spinner>
+                            <Spinner color='default'>Loading... Please wait...</Spinner>
                             </div>
                         }
                     

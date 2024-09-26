@@ -525,12 +525,12 @@ const _CREATE_STAKE_POOL_TAB = () => {
                 <Button onClick={()=>{
                             // unlock
                             handleUnlock()
-                        }} size='lg' fullWidth color='danger' variant='solid'>Unlock</Button>
+                        }} size='lg' fullWidth color='default' variant='solid'>Unlock</Button>
                 <Button onClick={()=>{
                             // stake
 
                             handleCreatePool()
-                        }} size='lg' fullWidth color='danger' variant='solid'>Create Pool</Button>
+                        }} size='lg' fullWidth color='default' variant='solid'>Create Pool</Button>
             </div>
 
         </>

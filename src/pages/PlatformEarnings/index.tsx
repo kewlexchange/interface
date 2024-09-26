@@ -23,7 +23,7 @@ const PlatformEarningsPage: React.FunctionComponent<IPage> = props => {
                     <CardBody>
                         <div className="w-full max-w-full">
 
-                            <Tabs color={"danger"} aria-label="Platform Earnings">
+                            <Tabs color={"default"} aria-label="Platform Earnings">
                                 <Tab key="swap" title="Swap">
                                     <p>Under Development</p>
                                 </Tab>

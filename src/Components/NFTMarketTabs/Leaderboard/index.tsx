@@ -147,7 +147,7 @@ const _NFT_MARKET_LEADERBOARD_TAB = () => {
         <Table
         removeWrapper
         isHeaderSticky
-        color={"danger"}
+        color={"default"}
         disallowEmptySelection
         selectionMode="single"
         aria-label="Example static collection table" >
@@ -161,7 +161,7 @@ const _NFT_MARKET_LEADERBOARD_TAB = () => {
             emptyContent={isLoaded ? "No Transactions Found!" : "Loading... Please Wait!"}
             isLoading={!isLoaded}
             items={transactions}
-            loadingContent={<Spinner color="danger" />}
+            loadingContent={<Spinner color="default" />}
             className="flex flex-col gap-2">
             {(collection) => (
             
