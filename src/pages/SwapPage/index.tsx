@@ -32,7 +32,7 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                     <Card fullWidth  shadow="sm" className={" flex gap-2 flex-col w-full"}>
                         <CardBody>
                             <div className="w-full max-w-full">
-                                <Tabs classNames={{
+                                <Tabs fullWidth classNames={{
                                     tabContent:'h-full',
                                     tab:"h-[50px] "
                                 }} variant="solid" color={"default"} aria-label="Swap Tabs">
