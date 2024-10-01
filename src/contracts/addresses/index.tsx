@@ -365,7 +365,8 @@ export const CONTRACT_ADRESSES = {
                 PREDICTIONS:"0xa91F280720B15801b62E8cFBdBdbe78EC994Dd1B",
                 REFLECTOR:"",
                 KEWLSTAKE:"",
-                TRADETOEARN:"0x00BE3fD3580909662188474260311Bd34E595602"
+                TRADETOEARN:"0x00BE3fD3580909662188474260311Bd34E595602",
+                PEPPER:"0x60F397acBCfB8f4e3234C659A3E10867e6fA6b67"
             },
             TEST:{
                 DIAMOND:"",
@@ -389,7 +390,9 @@ export const CONTRACT_ADRESSES = {
                 PREDICTIONS:"0xB0Bc7E3c72fC7406dd098484D20382d7DAD517e7",
                 REFLECTOR:"",
                 KEWLSTAKE:"0x71b5Ea15483acF93E31FB103D8306E631FbFd382",
-                TRADETOEARN:""
+                TRADETOEARN:"",
+                PEPPER:""
+
             }
         },
         AVAX:{

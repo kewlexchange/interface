@@ -85,6 +85,37 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
                         </HighlighterItem>
 
+                        <HighlighterItem className="col-span-2 sm:col-span-3">
+                     
+                            <div className="relative w-full h-full bg-zinc-900 rounded-[inherit] z-20 overflow-hidden">
+                            <Link className="w-full" as={NavLink} to={`/pepper`}>
+                                <div className="flex flex-col w-full ">
+                                    <div
+                                        className="absolute bottom-0 w-1/2 pointer-events-none -translate-x-1/2 translate-y-1/2 left-1/2 -z-10 aspect-square"
+                                        aria-hidden="true"
+                                    >
+                                        <div className="absolute inset-0 translate-z-0 bg-zinc-800 rounded-full blur-[80px]" />
+                                    </div>
+
+                                    <div className="px-4 py-6  w-full">
+                                        <article className=" w-full h-full">
+                                            <div className="w-full flex items-center justify-center p-5">
+                                                <img  src="/images/pepper.webp" />
+                                            </div>
+                                        </article>
+
+
+                                    </div>
+
+                                </div>
+                                </Link>
+                            </div>
+                       
+
+
+
+                        </HighlighterItem>
+
 
                         <HighlighterItem>
 

@@ -37,6 +37,7 @@ import PREDICTIONS_ABI from "../contracts/abis/PREDICTIONS.json"
 import KEWLSTAKE_ABI from "../contracts/abis/KEWLSTAKE.json"
 import TRADETOEARN_ABI from "../contracts/abis/KEWLTRADETOEARN.json"
 import {CONTRACT_ADRESSES} from "../contracts/addresses";
+import PEPPER_ABI from "../contracts/abis/PEPPER.json"
 import {BLOCKCHAINS, DEFAULT_CHAIN_INFO, isSupportedChain} from "../constants/chains";
 import {BigNumber} from "@ethersproject/bignumber";
 import { ethers } from 'ethers';
@@ -311,6 +312,11 @@ export function useKEWLVestingContract(chainId?:any, withSignerIfPossible?: bool
 export function useKEWLPredictionContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
     let contracts = useFindDiamondByChainId(chainId);
     return useContract(contracts?.PREDICTIONS, PREDICTIONS_ABI.abi, withSignerIfPossible)
+}
+
+export function usePEPPERContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
+    let contracts = useFindDiamondByChainId(chainId);
+    return useContract(contracts?.PEPPER, PEPPER_ABI.abi, withSignerIfPossible)
 }
 
 
