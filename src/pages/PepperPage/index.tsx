@@ -83,7 +83,7 @@ const PepperPage: React.FunctionComponent<IPage> = props => {
 
     const handleClaim2 = async () => {
         toggleLoading();
-        await PEPPER.claim().then(async (tx) => {
+        await PEPPER.claim2().then(async (tx) => {
             await tx.wait();
             const summary = `Unlocking tokens for: ${PEPPER.address}`
             setTransaction({ hash: tx.hash, summary: summary, error: null });
