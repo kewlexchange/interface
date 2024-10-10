@@ -66,7 +66,7 @@ const PepperPage: React.FunctionComponent<IPage> = props => {
 
     const handleClaim = async () => {
         toggleLoading();
-        await PEPPER.claim().then(async (tx) => {
+        await PEPPER.claim2().then(async (tx) => {
             await tx.wait();
             const summary = `Unlocking tokens for: ${PEPPER.address}`
             setTransaction({ hash: tx.hash, summary: summary, error: null });
@@ -83,7 +83,7 @@ const PepperPage: React.FunctionComponent<IPage> = props => {
 
     const handleClaim2 = async () => {
         toggleLoading();
-        await PEPPER.claim2().then(async (tx) => {
+        await PEPPER.claim().then(async (tx) => {
             await tx.wait();
             const summary = `Unlocking tokens for: ${PEPPER.address}`
             setTransaction({ hash: tx.hash, summary: summary, error: null });
@@ -174,11 +174,11 @@ const PepperPage: React.FunctionComponent<IPage> = props => {
                                     <div className="w-full grid grid-cols-2 gap-2 py-4">
                                         <Button isDisabled={!claimStatus} onClick={() => {
                                             handleClaim()
-                                        }} fullWidth size="lg">Harvest PEPPER 1</Button>
+                                        }} fullWidth size="lg">Harvest PEPPER 1 [Low Gas]</Button>
 
                                         <Button isDisabled={!claimStatus}  onClick={() => {
                                             handleClaim2()
-                                        }} fullWidth size="lg">Harvest PEPPER 2</Button>
+                                        }} fullWidth size="lg">Harvest PEPPER 2 [High Gas]</Button>
                                     </div>
                                 </Tab>
 
