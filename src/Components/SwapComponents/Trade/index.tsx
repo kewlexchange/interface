@@ -768,16 +768,15 @@ const _SWAP_TAB = () => {
 
             <div className='flex flex-col gap-2 w-full'>
             <div className='w-full flex flex-col gap-2'>
-                {
-                    tradingPairs.map((pair: any, index) => (
-
-
-                        pair.valid && <PairInfo key={index} pair={pair} />
-
-
-
-                    ))
-                }
+            {
+    tradingPairs
+        .filter((pair, index, self) => 
+            index === self.findIndex((p) => p.pair === pair.pair) // Aynı pair.pair değerini ilk kez görenler geçer
+        )
+        .map((pair: any) => (
+            pair.valid && <PairInfo key={pair.pair} pair={pair} />
+        ))
+}
             </div>
             <Button onClick={()=>{
                 handleSwapAll();
