@@ -726,10 +726,18 @@ const _SWAP_TAB = () => {
                         pair:pair.pair,
                         input:INPUT_TOKEN
                    }
-                   allSwapParams.push(swapParam);
+
+                   if (!allSwapParams.some(param => param.pair === pair.pair)) {
+                    allSwapParams.push(swapParam);
+                }
+                  // allSwapParams.push(swapParam);
                 }
             });
+
+            console.log("params",allSwapParams)
             
+  
+
             let overrides = {
                  value : IS_NATIVE ? DEPOSIT_AMOUNT.mul(allSwapParams.length) : ethers.constants.Zero,
             }    
