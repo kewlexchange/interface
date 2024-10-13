@@ -715,8 +715,13 @@ const _SWAP_TAB = () => {
             let allSwapParams = [];
             let IS_NATIVE = baseAsset.address == ETHER_ADDRESS
 
+            console.log("tradingPairs",tradingPairs)
+
             tradingPairs.forEach((pair) => {
-                if (pair.valid) {
+                if (pair.valid && ((pair.reserve0.gt(DEPOSIT_AMOUNT) && pair.reserve1.gt(DEPOSIT_AMOUNT))) ) {
+
+                    console.log("Conditions",pair.reserve0 ,pair.reserve1,pair.reserve0 > DEPOSIT_AMOUNT && pair.reserve1 > DEPOSIT_AMOUNT)
+                    console.log("pair",pair)
                     
                     let INPUT_TOKEN = baseAsset.address === ETHER_ADDRESS ? pair.weth : baseAsset.address;
                     let swapParam = {
@@ -728,6 +733,7 @@ const _SWAP_TAB = () => {
                    }
 
                    if (!allSwapParams.some(param => param.pair === pair.pair)) {
+                    
                     allSwapParams.push(swapParam);
                 }
                   // allSwapParams.push(swapParam);
