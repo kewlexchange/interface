@@ -33,9 +33,9 @@ export enum ChainId {
   CHILIZ_SPICY_TESTNET = 88882
 }
 
-export const DEFAULT_CHAIN_ASSETS_URL = "https://raw.githubusercontent.com/imonai/nfts/main/chiliz/index.json"
-export const DEFAULT_CHAIN_NFT_URL = "https://raw.githubusercontent.com/imonai/nfts/main/chiliz/nfts.json"
-export const DEFAULT_BITCI_CHAIN_NFT_URL = "https://raw.githubusercontent.com/imonai/nfts/main/bitci/nfts.json"
+export const DEFAULT_CHAIN_ASSETS_URL = "https://raw.githubusercontent.com/kewlexchange/nfts/main/chiliz/index.json"
+export const DEFAULT_CHAIN_NFT_URL = "https://raw.githubusercontent.com/kewlexchange/nfts/main/chiliz/nfts.json"
+export const DEFAULT_BITCI_CHAIN_NFT_URL = "https://raw.githubusercontent.com/kewlexchange/nfts/main/bitci/nfts.json"
 
 export declare const SUPPORTED_CHAINS: readonly [ChainId.CHILIZ_MAINNET,ChainId.CHILIZ_SPICY_TESTNET, ChainId.BITCI,ChainId.BITCI_TEST];
 export declare type SupportedChainsType = typeof SUPPORTED_CHAINS[number];
