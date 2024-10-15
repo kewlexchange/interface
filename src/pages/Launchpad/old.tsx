@@ -68,7 +68,7 @@ const OldLaunchpadPage: React.FunctionComponent<IPage> = props => {
                     <span>IMON helps everyone to create their own tokens and token sales in few seconds. Tokens created on IMON will be verified and published on explorer websites.</span>
                     <div className={"w-full flex items-center justify-center gap-2"}>
                         <NavLink to={"/launchpad/create"} className={"btn btn-primary"}>Create Now</NavLink>
-                        <NavLink  target="_blank" to={"https://docs.imon.ai/our-products/launchpad"} className={"btn btn-primary"}>Learn More
+                        <NavLink  target="_blank" to={"https://docs.kewl.exchange/our-products/launchpad"} className={"btn btn-primary"}>Learn More
                         <span translate={"no"} className="material-symbols-outlined">
                         north_east
                     </span>
