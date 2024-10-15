@@ -171,12 +171,12 @@ const PepperPage: React.FunctionComponent<IPage> = props => {
                                         </div>
                                     </div>
 
-                                    <div className="w-full grid grid-cols-2 gap-2 py-4">
-                                        <Button isDisabled={!claimStatus} onClick={() => {
+                                    <div className="w-full grid sm:grid-cols-2 grid-cols-1 gap-2 py-4">
+                                        <Button color="success" isDisabled={!claimStatus} onClick={() => {
                                             handleClaim()
                                         }} fullWidth size="lg">Harvest PEPPER 1 [Low Gas]</Button>
 
-                                        <Button isDisabled={!claimStatus}  onClick={() => {
+                                        <Button color="danger" isDisabled={!claimStatus}  onClick={() => {
                                             handleClaim2()
                                         }} fullWidth size="lg">Harvest PEPPER 2 [High Gas]</Button>
                                     </div>
