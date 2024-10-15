@@ -20,7 +20,7 @@ const _TransactionsTAB = (props: { pair }) => {
 
     const initTransactions = async () => {
         setLoaded(false)
-        const _transactions = await (await fetch(`https://api.imon.ai/transactions?pair=${props.pair}&chain=${chainId}`)).json();
+        const _transactions = await (await fetch(`https://api.kewl.exchange/transactions?pair=${props.pair}&chain=${chainId}`)).json();
     
         if(_transactions){
             setTransactions(_transactions)
