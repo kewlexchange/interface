@@ -14,7 +14,7 @@ import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../utils';
 import { DoubleCurrencyIcon } from '../../DoubleCurrency';
 import UniwalletModal from '../../Modal/UniwalletModal';
-import { Accordion, AccordionItem, Avatar, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Image, ScrollShadow } from '@nextui-org/react';
+import { Accordion, AccordionItem, Avatar, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Image, ScrollShadow, Switch } from '@nextui-org/react';
 import { formatEther, parseEther } from '@ethersproject/units';
 import { Chart } from '../../Chart';
 import { BLACK_LIST } from '../../../constants/blacklist';
@@ -709,6 +709,7 @@ const _SWAP_TAB = () => {
 
     const TradeContainer = () => {
 
+        const [acceptAggrement, setAcceptAggrement] = useState(false)
 
 
         const handleSwapAll =  async  () => {
@@ -787,7 +788,17 @@ const _SWAP_TAB = () => {
         ))
 }
             </div>
-            <Button onClick={()=>{
+
+            <span className='text-danger bg-danger/30 p-2 rounded-lg w-full text-center'>
+            SWAP ALL option will execute the swap transaction regardless of the PRICE IMPACT. You may incur losses while performing this transaction.
+            </span>
+
+            <Switch className='w-full' onValueChange={(val)=>{
+                setAcceptAggrement(val)
+            }}>
+            I acknowledge that I may incur losses based on the PRICE IMPACT values.
+        </Switch>
+            <Button isDisabled={!acceptAggrement} onClick={()=>{
                 handleSwapAll();
             }} color='default' fullWidth>Swap All</Button>
             </div>
