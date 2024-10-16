@@ -245,9 +245,9 @@ const _SWAP_TAB = () => {
 
 
 
-        if (parseFloat(tradeInfo.priceImpact.toFixed(2)) > 15) {
-            // displayError("A swap of this size may have a high price impact, given the current liquidity in the pool. There may be a large difference between the amount of your input token and what you will receive in the output token");
-            //  return
+        if (parseFloat(tradeInfo.priceImpact.toFixed(2)) > 5) {
+             displayError("A swap of this size may have a high price impact, given the current liquidity in the pool. There may be a large difference between the amount of your input token and what you will receive in the output token");
+              return
         }
 
 
@@ -692,9 +692,12 @@ const _SWAP_TAB = () => {
                     }
                 </CardBody>
                 <CardFooter>
-                    <Button variant='solid' onClick={()=>{
-                        handleSwap()
-                    }} fullWidth size='sm' color='default'>Swap</Button>
+                    {
+                        tradeInfo &&  <Button isDisabled={parseFloat(tradeInfo.priceImpact.toFixed(2)) > 5} variant='solid' onClick={()=>{
+                            handleSwap()
+                        }} fullWidth size='sm' color='default'>Swap</Button>
+                    }
+                   
                 </CardFooter>
 
             </Card>
