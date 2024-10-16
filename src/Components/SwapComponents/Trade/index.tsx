@@ -789,7 +789,7 @@ const _SWAP_TAB = () => {
 }
             </div>
 
-            <span className='text-danger bg-danger/30 p-2 rounded-lg w-full text-center'>
+            <span className='text-center bg-danger-500/10 text-danger-500 text-sm p-2 rounded-lg w-full text-center'>
             SWAP ALL option will execute the swap transaction regardless of the PRICE IMPACT. You may incur losses while performing this transaction.
             </span>
 
@@ -800,7 +800,7 @@ const _SWAP_TAB = () => {
         </Switch>
             <Button isDisabled={!acceptAggrement} onClick={()=>{
                 handleSwapAll();
-            }} color='default' fullWidth>Swap All</Button>
+            }} color={acceptAggrement ? 'success' : 'default'} fullWidth>Swap All</Button>
             </div>
         );
     }
