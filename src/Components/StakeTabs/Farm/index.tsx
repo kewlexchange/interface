@@ -6,13 +6,13 @@ import JSBI from 'jsbi';
 import moment from 'moment';
 import { Route as ReactRoute, NavLink } from 'react-router-dom';
 import { ChainId, isSupportedChain } from '../../../constants/chains';
-import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract, useDomainContract } from '../../../hooks/useContract';
+import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract, useDomainContract, useKEWLFarmContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo, ModalSelectExchangePair } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { getAssetIconByChainIdFromTokenList, getNativeCurrencyByChainId, parseFloatWithDefault, truncateDecimals, unixTimeToDateTime } from '../../../utils';
 import { Accordion, AccordionItem, Avatar, Button, Card } from '@nextui-org/react';
-import { formatUnits, parseEther, parseUnits } from '@ethersproject/units';
+import { formatEther, formatUnits, parseEther, parseUnits } from '@ethersproject/units';
 import { CurrencyAmount, Pair, Token, WETH9 } from '../../../entities';
 import { DoubleCurrencyIcon } from '../../DoubleCurrency';
 
@@ -20,7 +20,7 @@ const _FARM_TAB = () => {
     const { connector, account, provider, chainId } = useWeb3React()
     const IMONDIAMOND = useDiamondContract(chainId, true);
     const EXCHANGE = useExchangeContract(chainId, true)
-    const IMON_STAKE_CONTRACT = useStakeContract(chainId, true);
+    const IMON_STAKE_CONTRACT = useKEWLFarmContract(chainId, true);
     const CNS_DOMAIN_CONTRACT = useDomainContract(chainId, true);
 
     const ERC20Contract = useERC20Contract()
@@ -47,6 +47,9 @@ const _FARM_TAB = () => {
     const PAIRContract = usePAIRContract()
     const [baseLiquidity, setBaseLiquidity] = useState("0")
     const [quoteLiquidity, setQuoteLiquidity] = useState("0")
+
+    const [userBaseLiquidity, setUserBaseLiquidity] = useState("0")
+    const [quserQuoteLiquidity, setUserQuoteLiquidity] = useState("0")
 
     useFetchAllTokenList(chainId, account)
 
@@ -200,10 +203,6 @@ const _FARM_TAB = () => {
             toggleError();
             return
         }
-
-        setTransaction({ hash: '', summary: '', error: { message: "Under Development" } });
-        toggleError();
-        return
         
         if (!baseInputValue) { return }
         if (!baseAsset) { return }
@@ -249,9 +248,6 @@ const _FARM_TAB = () => {
         }
 
 
-        setTransaction({ hash: '', summary: '', error: { message: "Under Development" } });
-        toggleError();
-        return
     
 
 
@@ -297,19 +293,46 @@ const _FARM_TAB = () => {
 
     }
 
-
     const calculateAPY = (_poolInfo, _rewardInfo) => {
-        const secondsInDay = 86400 * 365 * 3;
-        const dailyReward = _rewardInfo.reward_per_second * secondsInDay;
-        const dailyRewardPerStaker = dailyReward * (_poolInfo.totalDeposit / _rewardInfo.accumulated_token_per_share);
-        const apy = dailyRewardPerStaker / _poolInfo.totalDeposit;
-        console.log("APY", apy);
-        return apy;
-    }
+        
 
+
+        const totalReward = parseFloat(formatEther(_rewardInfo.total_reward_amount)); // toplam ödül
+        const durationDays = 90; // 3 ay = 90 gün
+        const annualDays = 365; // bir yıl = 365 gün
+        const totalValue = parseFloat(formatEther(_poolInfo.totalDeposit.sub(_poolInfo.totalWithdraw))); // örnek toplam değer (yatırım miktarı)
+
+        const apr = (totalReward / totalValue) * (annualDays / durationDays) * 100;
+
+        return apr
+        
+    }
     const initExchangePairs = async () => {
         const _exchangePairs = await EXCHANGE.getAllPairs();
-        setAllExchangePairs(_exchangePairs);
+
+        let bannedList = ["CHZWIF","TRUMPFUN","MMW","KING","CHADZ","CATCHI","MC"]
+   
+        
+        let validPairs = [
+            { base: "KWL", quote: "WCHZ" },
+            { base: "KWL", quote: "PEPPER" }
+        ];
+        
+        const filteredPairs = _exchangePairs
+        .filter(({ base, quote }) => {
+            const isBaseMatch = validPairs.some(pair =>
+                (pair.base === base.symbol.toUpperCase() && pair.quote === quote.symbol.toUpperCase()) ||
+                (pair.base === quote.symbol.toUpperCase() && pair.quote === base.symbol.toUpperCase())
+            );
+            
+            const isBanned = bannedList.includes(base.symbol.toUpperCase()) || bannedList.includes(quote.symbol.toUpperCase());
+        
+          return isBaseMatch && (!isBanned) ;
+        }).slice().reverse();
+    
+        console.log(filteredPairs)
+
+        setAllExchangePairs(filteredPairs);
         initDefaults();
     }
     useEffect(() => {
@@ -333,9 +356,7 @@ const _FARM_TAB = () => {
 
             <ModalSelectExchangePair disableToken={!isBase ? baseAsset : quoteAsset} hide={toggleSelectToken} isShowing={isSelectToken} onSelect={onSelectToken} isClosable={true} tokenList={defaultAssets} onSelectPair={handleSelectPair} allExchangePairs={allExchangePairs} />
 
-
             {
-
                 <div className="w-full rounded-xl pb-0">
                     <div className="rounded-xl pb-0 flex gap-2 flex-col">
                         <div className="swap-inputs">
@@ -343,13 +364,11 @@ const _FARM_TAB = () => {
 
 
                             {
-                           
-
-                            <Button className="token-selector min-w-[200px]" radius='full' variant="flat" color="default" onClick={() => {
+                            <Button className="px-2 token-selector min-w-[200px]" radius='full' variant="flat" color="default" onClick={() => {
                                 setIsBase(true)
                                 toggleSelectToken()
                             }} startContent={
-                                <DoubleCurrencyIcon baseIcon={baseAsset?.logoURI} quoteIcon={quoteAsset?.logoURI}/>
+                                <DoubleCurrencyIcon baseIcon={baseAsset?.logoURI ? baseAsset?.logoURI : "https://raw.githubusercontent.com/kewlexchange/assets/main/chiliz/tokens/0x677f7e16c7dd57be1d4c8ad1244883214953dc47/logo.svg"} quoteIcon={quoteAsset?.logoURI ? quoteAsset?.logoURI : "https://raw.githubusercontent.com/kewlexchange/assets/main/chiliz/tokens/0xed5740209fcf6974d6f3a5f11e295b5e468ac27c/logo.svg"}/>
                             }
                                 endContent={
                                     <span translate={"no"} className="material-symbols-outlined ">
@@ -357,13 +376,14 @@ const _FARM_TAB = () => {
                                     </span>
                                 }
                             >
-                                     {
+                                    <span className='w-full'> {
                                                 pairInfo ? <>
                                                 {baseAsset?.symbol}x{quoteAsset?.symbol}
                                                 </>:<>
                                                     Please Select
                                                 </>
                                             }
+                                    </span>
                             </Button>
 
                         }

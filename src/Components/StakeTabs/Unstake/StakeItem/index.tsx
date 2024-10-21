@@ -2,7 +2,7 @@ import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { ethers } from 'ethers';
 import { useWeb3React } from '@web3-react/core';
 
-import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract } from '../../../../hooks/useContract';
+import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract, useKEWLFarmContract } from '../../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo } from '../../../../hooks/useModals';
 import { Button, Card, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, User } from '@nextui-org/react';
 import { getAssetIconByChainIdFromTokenList, getNFTItemType, unixTimeToDateTime } from '../../../../utils';
@@ -20,7 +20,7 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
     const { state: isErrorShowing, toggle: toggleError } = useModal()
     const [transaction, setTransaction] = useState({ hash: '', summary: '', error: null })
     const [isLoaded,setLoaded] = useState(false)
-    const IMON_STAKE_CONTRACT = useStakeContract(chainId, true);
+    const IMON_STAKE_CONTRACT = useKEWLFarmContract(chainId, true);
     const [rewardInfo,setRewardInfo] : any = useState(null);
 
 

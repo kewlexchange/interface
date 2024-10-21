@@ -38,6 +38,7 @@ import KEWLSTAKE_ABI from "../contracts/abis/KEWLSTAKE.json"
 import TRADETOEARN_ABI from "../contracts/abis/KEWLTRADETOEARN.json"
 import {CONTRACT_ADRESSES} from "../contracts/addresses";
 import PEPPER_ABI from "../contracts/abis/PEPPER.json"
+import KEWLFARM_ABI from "../contracts/abis/KEWLFARM.json"
 import {BLOCKCHAINS, DEFAULT_CHAIN_INFO, isSupportedChain} from "../constants/chains";
 import {BigNumber} from "@ethersproject/bignumber";
 import { ethers } from 'ethers';
@@ -319,7 +320,10 @@ export function usePEPPERContract(chainId?:any, withSignerIfPossible?: boolean):
     return useContract(contracts?.PEPPER, PEPPER_ABI.abi, withSignerIfPossible)
 }
 
-
+export function useKEWLFarmContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
+    let contracts = useFindDiamondByChainId(chainId);
+    return useContract(contracts?.KEWLFARM, KEWLFARM_ABI.abi, withSignerIfPossible)
+}
 
 export function useIMONTokenContract(chainId?:any, withSignerIfPossible?: boolean): Contract | null {
     let contracts = useFindDiamondByChainId(chainId);

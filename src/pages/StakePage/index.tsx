@@ -37,9 +37,17 @@ const StakePage: React.FunctionComponent<IPage> = props => {
                         <div className="w-full max-w-full">
 
                             <Tabs color={"default"} aria-label="Stake Tabs">
-                                <Tab key="trade" title="Earnings">
+                                <Tab  key="farm" title="Farming">
+                                <FARM_TAB /> 
+                               
+                                </Tab>
+                                <Tab key="unstake" title="Unstake">
+                                <UNSTAKE_TAB/>
+                                </Tab>
+                                <Tab key="trade" title="Trading Rewards">
                                     <EARN_TAB/>
                                 </Tab>
+
                             </Tabs>
 
                         </div>

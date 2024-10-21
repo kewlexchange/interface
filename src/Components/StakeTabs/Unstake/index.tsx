@@ -7,7 +7,7 @@ import moment from 'moment';
 import { Route as ReactRoute, NavLink } from 'react-router-dom';
 import { isSupportedChain } from '../../../constants/chains';
 import { WETH9, Token, CurrencyAmount, Pair, Price, Trade, Currency, Percent, Route } from '../../../entities';
-import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract } from '../../../hooks/useContract';
+import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract, useKEWLFarmContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import { useFetchAllTokenList } from '../../../state/user/hooks';
@@ -32,7 +32,7 @@ const _UNSTAKE_TAB = () => {
     const { state: isErrorShowing, toggle: toggleError } = useModal()
     const [transaction, setTransaction] = useState({ hash: '', summary: '', error: null })
     const [isLoaded,setLoaded] = useState(false)
-    const IMON_STAKE_CONTRACT = useStakeContract(chainId, true);
+    const IMON_STAKE_CONTRACT = useKEWLFarmContract(chainId, true);
     const [userStakings,setUserStaknigs] : any = useState(null);
     const [rewardPools,setRewardPools] : any = useState(null)
     const [nftContract,setNFTContract] : any = useState(null)
@@ -152,11 +152,7 @@ const _UNSTAKE_TAB = () => {
                  }
 
                 <div className='w-full flex flex-col gap-2'>
-                    <div className='w-full w-full p-2 rounded-lg bg-danger-500/30  text-center text-danger-500'>
-                        <span >
-                        If you withdraw seven days prior to your entry into the IMON Reward Pools, you will not be eligible for rewards.
-                        </span>
-                    </div>
+              
                 <Accordion  isCompact={true} variant="light"  selectionMode="multiple">
 
                     

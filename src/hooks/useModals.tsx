@@ -1468,33 +1468,30 @@ export const ModalSelectExchangePair = ({ isShowing, disableToken, hide, tokenLi
 
                         <ScrollShadow orientation="horizontal" className="w-full max-h-[400px]">
 
-                            <Listbox className="w-full" variant="flat" aria-label="Listbox menu with sections">
+                            <div className="w-full grid  grid-cols-1 sm:grid-cols-3 p-2 gap-4">
                                 {
-                                    allExchangePairs && <ListboxSection>
-                                        {
+                                    allExchangePairs && 
 
 
                                             allExchangePairs.map((exchangeItem, exchangeIndex) => {
                                                 return (
                                                     canDisplay(exchangeItem.pair) &&
-                                                    <ListboxItem
-                                                        startContent={
-                                                            <DoubleCurrencyIcon baseIcon={getIconPath(exchangeItem.base.symbol)} quoteIcon={getIconPath(exchangeItem.quote.symbol)} />
-                                                        }
+                                                    <Button  size="lg" variant="flat"
+                                                        
                                                         key={`exchangeItem${exchangeIndex}`} onClick={() => {
                                                             handleSelectPair(exchangeItem)
-                                                        }} className="w-full">
+                                                        }} className="w-full flex flex-col gap-2 h-[100px]">
+                                                            <DoubleCurrencyIcon baseIcon={getIconPath(exchangeItem.base.symbol)} quoteIcon={getIconPath(exchangeItem.quote.symbol)} />
                                                         <span className={"sm:text-sm"}>{exchangeItem.base.symbol} x {exchangeItem.quote.symbol}</span>
-                                                    </ListboxItem>
+                                                    </Button>
                                                 )
                                             })
 
                                         }
-                                    </ListboxSection>
-                                }
+                                 
+                              
 
-
-                            </Listbox>
+                            </div>
                         </ScrollShadow>
 
 

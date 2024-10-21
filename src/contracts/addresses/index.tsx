@@ -366,7 +366,8 @@ export const CONTRACT_ADRESSES = {
                 REFLECTOR:"",
                 KEWLSTAKE:"",
                 TRADETOEARN:"0x00BE3fD3580909662188474260311Bd34E595602",
-                PEPPER:"0x60F397acBCfB8f4e3234C659A3E10867e6fA6b67"
+                PEPPER:"0x60F397acBCfB8f4e3234C659A3E10867e6fA6b67",
+                KEWLFARM:"0x3852f3074dB81Eb7dc28c1Beaf2967afD50603Ae"
             },
             TEST:{
                 DIAMOND:"",
@@ -391,7 +392,8 @@ export const CONTRACT_ADRESSES = {
                 REFLECTOR:"",
                 KEWLSTAKE:"0x71b5Ea15483acF93E31FB103D8306E631FbFd382",
                 TRADETOEARN:"",
-                PEPPER:""
+                PEPPER:"",
+                KEWLFARM:""
 
             }
         },
