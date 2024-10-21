@@ -41,7 +41,7 @@ const StakePage: React.FunctionComponent<IPage> = props => {
                                 <FARM_TAB /> 
                                
                                 </Tab>
-                                <Tab key="unstake" title="Unstake">
+                                <Tab key="unstake" title="Harvest & Unstake">
                                 <UNSTAKE_TAB/>
                                 </Tab>
                                 <Tab key="trade" title="Trading Rewards">
