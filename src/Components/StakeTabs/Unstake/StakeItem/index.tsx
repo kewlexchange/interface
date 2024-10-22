@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core';
 
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useStakeContract, useKEWLFarmContract } from '../../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo } from '../../../../hooks/useModals';
-import { Button, Card, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, User } from '@nextui-org/react';
+import { Button, Card, Spinner, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, User } from '@nextui-org/react';
 import { getAssetIconByChainIdFromTokenList, getNFTItemType, unixTimeToDateTime } from '../../../../utils';
 import { NFT } from '../../../NFT';
 
@@ -12,9 +12,6 @@ import { NFT } from '../../../NFT';
 const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,stakeItem : any,rewardPools : any}) => {
 
     const { connector, account, provider, chainId } = useWeb3React()
-    const IMONDIAMOND = useDiamondContract(chainId, true);
-    const EXCHANGE = useExchangeContract(chainId, true)
-    const ERC20Contract = useERC20Contract()
     const { state: isTransactionSuccess, toggle: toggleTransactionSuccess } = useModal();
     const { state: isShowLoading, toggle: toggleLoading } = useModal();
     const { state: isErrorShowing, toggle: toggleError } = useModal()
@@ -28,8 +25,11 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
         if(!props.stakeItem){
             return
         }
+
+        console.log("props.user",props.userAccount,props.stakeItem.stakingId)
         const _rewardInfo = await IMON_STAKE_CONTRACT.getUserRewardInfo(props.userAccount,props.stakeItem.stakingId);
         setRewardInfo(_rewardInfo);
+        console.log("ersan")
         console.log("rewardInfo",_rewardInfo);
         console.log(props.rewardPools)
 
@@ -37,7 +37,7 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
 
     }
 
-    const unstake = async (stakingId) => {
+    const unstake = async (stakingId:any) => {
         toggleLoading();
         await IMON_STAKE_CONTRACT.unstake(stakingId).then(async (tx) => {
             await tx.wait();
@@ -53,9 +53,9 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
         });
     }
 
-    const harvest = async (stakingId) => {
+    const harvest = async (stakingId:any) => {
         toggleLoading();
-        await IMON_STAKE_CONTRACT.harvest(stakingId).then(async (tx) => {
+        await IMON_STAKE_CONTRACT.harvest(stakingId).then(async (tx:any) => {
             await tx.wait();
             const summary = `Harvest : ${tx.hash}`
             setTransaction({ hash: tx.hash, summary: summary, error: null });
@@ -104,9 +104,6 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
                             <span className='font-bold'>{unixTimeToDateTime(props.stakeItem.unlockedAt)}</span>
                         </Card>
                         </div>
-
-     
-       
                     </div>
                     <div className="w-full">
                     <Table removeWrapper shadow='none'>
@@ -126,7 +123,10 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
                                   }}
                                 />
                                </TableCell>
-                            <TableCell>{ethers.utils.formatUnits(reward.amount,props.rewardPools[index].decimals)}</TableCell>
+                            <TableCell>
+                                <Spinner></Spinner>
+                                {/* {ethers.utils.formatUnits(reward.amount,props.rewardPools[index].decimals)} */}
+                                </TableCell>
                           </TableRow>
                         })   
                     }</TableBody>
