@@ -124,8 +124,7 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
                                 />
                                </TableCell>
                             <TableCell>
-                                <Spinner></Spinner>
-                                {/* {ethers.utils.formatUnits(reward.amount,props.rewardPools[index].decimals)} */}
+                                 {ethers.utils.formatUnits(reward.amount,props.rewardPools[index].decimals)} 
                                 </TableCell>
                           </TableRow>
                         })   
