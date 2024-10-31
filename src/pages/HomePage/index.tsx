@@ -85,37 +85,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
                         </HighlighterItem>
 
-                        <HighlighterItem className="col-span-2 sm:col-span-3">
-                     
-                            <div className="relative w-full h-full bg-zinc-900 rounded-[inherit] z-20 overflow-hidden">
-                            <Link className="w-full" as={NavLink} to={`/pepper`}>
-                                <div className="flex flex-col w-full ">
-                                    <div
-                                        className="absolute bottom-0 w-1/2 pointer-events-none -translate-x-1/2 translate-y-1/2 left-1/2 -z-10 aspect-square"
-                                        aria-hidden="true"
-                                    >
-                                        <div className="absolute inset-0 translate-z-0 bg-zinc-800 rounded-full blur-[80px]" />
-                                    </div>
-
-                                    <div className="px-4 py-6  w-full">
-                                        <article className=" w-full h-full">
-                                            <div className="w-full flex items-center justify-center p-5">
-                                                <img  src="/images/pepper.webp" />
-                                            </div>
-                                        </article>
-
-
-                                    </div>
-
-                                </div>
-                                </Link>
-                            </div>
-                       
-
-
-
-                        </HighlighterItem>
-
+                
 
                         <HighlighterItem>
 
@@ -281,34 +251,6 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                             </div>
                         </HighlighterItem>
 
-                        <HighlighterItem className="col-span-2 sm:col-span-3">
-                            <div className="relative w-full h-full bg-zinc-900 rounded-[inherit] z-20 overflow-hidden">
-
-                                <div className="flex flex-col w-full ">
-                                    <div
-                                        className="absolute bottom-0 w-1/2 pointer-events-none -translate-x-1/2 translate-y-1/2 left-1/2 -z-10 aspect-square"
-                                        aria-hidden="true"
-                                    >
-                                        <div className="absolute inset-0 translate-z-0 bg-zinc-800 rounded-full blur-[80px]" />
-                                    </div>
-
-                                    <div className="px-4 py-8  w-full">
-                                        <article className="relative w-full h-full">
-                                            <div className="w-full flex items-center justify-center p-5">
-
-                                                <img className="w-[300px]" src="https://docs.chiliz.com/~gitbook/image?url=https%3A%2F%2F3400301555-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F4L7rBH2rmyoBTn93MSdx%252Fuploads%252Fft9rTTVhyWvCRmjjkXZ2%252FWhite%25402x.png%3Falt%3Dmedia%26token%3D4998ab69-fc28-4dbf-894b-de263a277bb6&width=768&dpr=4&quality=100&sign=3d90ba46&sv=1" />
-                                            </div>
-                                        </article>
-
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-
-                        </HighlighterItem>
 
                     </HighlightGroup>
 

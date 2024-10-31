@@ -32,9 +32,6 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
         console.log("ersan")
         console.log("rewardInfo",_rewardInfo);
         console.log(props.rewardPools)
-
-    
-
     }
 
     const unstake = async (stakingId:any) => {
@@ -99,10 +96,7 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
                             <span>Joined At</span>
                             <span className='font-bold'>{unixTimeToDateTime(props.stakeItem.joinedAt)}</span>
                         </Card>
-                        <Card shadow='none' className='flex flex-row gap-2 rounded-xl items-center justify-between'>
-                            <span>Unlock Time</span>
-                            <span className='font-bold'>{unixTimeToDateTime(props.stakeItem.unlockedAt)}</span>
-                        </Card>
+                     
                         </div>
                     </div>
                     <div className="w-full">
@@ -132,10 +126,10 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
                     </Table>
                     </div>
                     <div className='grid grid-cols-3 gap-2 my-5'>
-                            <Button isDisabled={true}  onClick={()=>{
+                            <Button  onClick={()=>{
                                 harvest(props.stakeItem.stakingId)
                             }} color='success'>Harvest</Button>
-                            <Button isDisabled={true} onClick={()=>{
+                            <Button onClick={()=>{
                                 unstake(props.stakeItem.stakingId)
                             }} color='danger'>Unstake</Button>
                               <Button onClick={()=>{

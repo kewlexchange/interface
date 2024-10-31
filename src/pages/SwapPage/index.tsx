@@ -36,19 +36,21 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                     tabContent:'h-full',
                                     tab:"h-[50px] "
                                 }} variant="solid" color={"default"} aria-label="Swap Tabs">
-                                    <Tab key={"trade"} title={
+
+
+                                {/* <Tab key={"trade"} title={
                                         <div className="w-full flex flex-col items-center justify-center">
                                         <span translate="no" className="material-symbols-outlined">rocket_launch</span>
                                         <span className="text-xs">Fushion</span>
                                     </div>  
                                     }>
                                         <TRADE_TAB />
-                                    </Tab>
-                                    å
-                                    {/* <Tab key={"arbitrage"} title={"Arbitrage"}>
+                                </Tab>
+                                    
+                                     <Tab key={"arbitrage"} title={"Arbitrage"}>
                                     <ARBITRAGE_TAB/>
-                                </Tab> 
-                                 */}
+                                </Tab>  */}
+                                 
                                     <Tab key="swap" title={
                                           <div className="w-full flex flex-col items-center justify-center">
                                           <span translate="no" className="material-symbols-outlined">swap_horizontal_circle</span>
@@ -89,14 +91,7 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                             </Tab>
 
                                         </Tabs>
-
-
-
-
                                     </Tab>
-
-
-
                                     <Tab key="settings" title={
                                         <div className="w-full flex flex-col items-center justify-center">
                                             <span translate="no" className="material-symbols-outlined">

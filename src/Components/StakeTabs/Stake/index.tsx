@@ -377,7 +377,7 @@ const _STAKE_TAB = () => {
 
                                 <div className='w-full gap-2 p-2 flex flex-col'>
                                     <span>
-                                        To participate in the stake pool and receive rewards, you need to register with the IMON Name Service (CNS).                                            </span>
+                                        To participate in the stake pool and receive rewards, you need to register with the Chiliz Name Service (CNS).                                            </span>
                                     <Button as={NavLink} to={"/cns"} color='default' size='lg' className='w-full' variant='solid'>Register CNS</Button>
 
                                 </div>

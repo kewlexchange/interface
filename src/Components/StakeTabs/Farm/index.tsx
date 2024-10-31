@@ -538,7 +538,7 @@ const _FARM_TAB = () => {
     
                                     <div className='w-full gap-2 p-2 flex flex-col'>
                                     <span className={"text-center bg-danger-500/10 text-danger-500 rounded-lg col-span-2 p-2"}>
-                                            To participate in the farm pool and receive rewards, you need to register with the IMON Name Service (CNS).                                            </span>
+                                            To participate in the farm pool and receive rewards, you need to register with the Chiliz Name Service (CNS).                                            </span>
                                         <Button as={NavLink} to={"/cns"} color='default' size='lg' className='w-full' variant='solid'>Register CNS</Button>
     
                                     </div>
