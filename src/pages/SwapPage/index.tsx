@@ -38,14 +38,14 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                 }} variant="solid" color={"default"} aria-label="Swap Tabs">
 
 
-                                {/* <Tab key={"trade"} title={
+                                 <Tab key={"trade"} title={
                                         <div className="w-full flex flex-col items-center justify-center">
                                         <span translate="no" className="material-symbols-outlined">rocket_launch</span>
                                         <span className="text-xs">Fushion</span>
                                     </div>  
                                     }>
                                         <TRADE_TAB />
-                                </Tab>
+                                </Tab>{/*
                                     
                                      <Tab key={"arbitrage"} title={"Arbitrage"}>
                                     <ARBITRAGE_TAB/>
