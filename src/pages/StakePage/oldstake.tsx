@@ -12,6 +12,7 @@ import { UNSTAKE_TAB } from "../../Components/StakeTabs/Unstake";
 import { useWeb3React } from "@web3-react/core";
 import { FARM_TAB } from "../../Components/StakeTabs/Farm";
 import { DAO_TAB } from "../../Components/StakeTabs/DAO";
+import { UNSTAKE_ARBITRUM_TAB } from "../../Components/StakeTabs/UnstakeArbitrum";
 
 
 const OldStakePage: React.FunctionComponent<IPage> = props => {
@@ -52,6 +53,12 @@ const OldStakePage: React.FunctionComponent<IPage> = props => {
                                         This pool have been deprecated as we're moving them to our V2 pool. Your KWL rewards will be distributed via airdrop.
                                     </div>
                                     <UNSTAKE_TAB />
+                                </Tab>
+                                <Tab key="unstake_legacy_arbitrum" title="Claim Arbitrum">
+                                    <div className="rounded-lg p-2 w-full my-2 text-center bg-warning-500/10 text-warning-500">
+                                        This pool have been deprecated as we're moving them to our V2 pool. Your KWL rewards will be distributed via airdrop.
+                                    </div>
+                                    <UNSTAKE_ARBITRUM_TAB />
                                 </Tab>
                             </Tabs>
 

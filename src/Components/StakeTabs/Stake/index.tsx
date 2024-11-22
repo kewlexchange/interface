@@ -269,7 +269,6 @@ const _STAKE_TAB = () => {
                                 <span className='text-sm'>Total Value Locked</span>
                                 <span className='text-sm font-bold'>{poolInfo && ethers.utils.formatUnits(poolInfo.totalDeposit.sub(poolInfo.totalWithdraw), poolInfo.tokenInfo.decimals)} {poolInfo && poolInfo.tokenInfo.symbol}</span>
                             </Card>
-
                             <Card shadow='none' className='w-full flex flex-row gap-2 items-center justify-between rounded-lg'>
                                 <span className='text-sm'>Total Deposit</span>
                                 <span className='text-sm font-bold'>{poolInfo && ethers.utils.formatUnits(poolInfo.totalDeposit, poolInfo.tokenInfo.decimals)} {poolInfo && poolInfo.tokenInfo.symbol}</span>
@@ -278,7 +277,6 @@ const _STAKE_TAB = () => {
                                 <span className='text-sm'>Total Withdraw</span>
                                 <span className='text-sm font-bold'>{poolInfo && ethers.utils.formatUnits(poolInfo.totalWithdraw, poolInfo.tokenInfo.decimals)} {poolInfo && poolInfo.tokenInfo.symbol}</span>
                             </Card>
-
                             <Card shadow='none' className='w-full flex flex-row gap-2 items-center justify-between rounded-lg '>
                                 <span className='text-sm'>Joined Users</span>
                                 <span className='text-sm font-bold'>{poolInfo && BigNumber.from(poolInfo.totalJoined).toNumber()}</span>
@@ -287,8 +285,6 @@ const _STAKE_TAB = () => {
                                 <span className='text-sm'>Leaved Users</span>
                                 <span className='text-sm font-bold'>{poolInfo && BigNumber.from(poolInfo.totalLeft).toNumber()}</span>
                             </Card>
-
-
                             <span className='font-bold'>Rewards</span>
                             <Accordion isCompact={true} variant="light" selectionMode="multiple">
                                 {rewardInfo && rewardInfo.map((reward, index) => {
@@ -346,9 +342,6 @@ const _STAKE_TAB = () => {
 
                                 }
                             </Accordion>
-
-
-
                         </div>
                         <div className='w-full flex flex-col gap-2'>
 
@@ -371,19 +364,15 @@ const _STAKE_TAB = () => {
                             }
 
 
-
                             {
                                 !isCNSRegistered &&
-
                                 <div className='w-full gap-2 p-2 flex flex-col'>
                                     <span>
-                                        To participate in the stake pool and receive rewards, you need to register with the Chiliz Name Service (CNS).                                            </span>
+                                        To participate in the stake pool and receive rewards, you need to register with the Chiliz Name Service (CNS).                                           
+                                    </span>
                                     <Button as={NavLink} to={"/cns"} color='default' size='lg' className='w-full' variant='solid'>Register CNS</Button>
-
                                 </div>
                             }
-
-
 
                         </div>
                     </div>
