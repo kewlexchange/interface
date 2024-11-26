@@ -17,7 +17,7 @@ const _STAKE_ITEM = (props:{userAccount:any,isPair:any,nft : any, assets : any,s
     const { state: isErrorShowing, toggle: toggleError } = useModal()
     const [transaction, setTransaction] = useState({ hash: '', summary: '', error: null })
     const [isLoaded,setLoaded] = useState(false)
-    const IMON_STAKE_CONTRACT = useKEWLFarmContract(chainId, true);
+    const IMON_STAKE_CONTRACT = useStakeContract(chainId, true);
     const [rewardInfo,setRewardInfo] : any = useState(null);
 
 

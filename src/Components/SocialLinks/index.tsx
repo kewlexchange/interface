@@ -39,6 +39,9 @@ export const SocialLinks = (props: { className: string }) => {
                     <img className={"w-5 h-5"} src={"/images/social/geckoterminal_icon.svg"}/>
                 </a>
 
+                <a href="https://www.dextools.io/app/en/chiliz/pool-explorer" target="_blank" rel="noreferrer">
+                    <img className={"w-5 h-5"} src={"/images/social/dextools.svg"}/>
+                </a>
 
                 <a href="https://www.coingecko.com/en/exchanges/kewlswap-chiliz-chain" target="_blank" rel="noreferrer">
                     <img className={"w-5 h-5"} src={"/images/social/coingecko.svg"}/>
