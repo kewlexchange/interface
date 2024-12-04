@@ -105,10 +105,7 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                 </Tabs>
                             </div>
                         </CardBody>
-                        <CardFooter>
-                            <Button fullWidth color="default" variant="flat" as={NavLink} to={"/listing"}>Apply for Listing</Button>
-
-                        </CardFooter>
+                   
                     </Card>
                 </div>
             </div>
