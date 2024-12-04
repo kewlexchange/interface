@@ -101,7 +101,8 @@ const _SWAP_TAB = () => {
 
 
     const getTokenLogo = (address:any) => {
-        return defaultAssets.find(token => token?.address === address).logoURI
+        const token = defaultAssets.find(token => token?.address === address);
+        return token ? token.logoURI : DEFAULT_TOKEN_LOGO; // Varsayılan bir logo URI belirleyin
     }
 
 
