@@ -130,7 +130,7 @@ const _DOMAIN_MANAGE_TAB = () => {
         const [_domains, _price, domainContract] = await DOMAINS.getTLDS();
 
         erc721Tokens.push({
-            name: "Intelligent Name Servers",
+            name: "KEWL Name Servers",
             address: domainContract,
         });
 
@@ -298,7 +298,7 @@ const _DOMAIN_MANAGE_TAB = () => {
         }
         setUserNFTAssets([]);
         set721AssetsLoaded(false);
-        if ([ChainId.BITCI, ChainId.BITCI_TEST].includes(chainId)) {
+        if ([ChainId.BITCI, ChainId.BITCI_TEST,ChainId.ABSTRACT_TESTNET].includes(chainId)) {
             fetchBalances();
         } else if([ChainId.CHILIZ_MAINNET, ChainId.CHILIZ_SPICY_TESTNET].includes(chainId)) {
             fetchUserNFTs();

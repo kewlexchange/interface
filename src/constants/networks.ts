@@ -128,6 +128,10 @@ export const FALLBACK_URLS = {
     'https://spicy-rpc.chiliz.com',
     'https://chiliz-spicy.publicnode.com',
   ],
+  [ChainId.ABSTRACT_TESTNET]: [
+    // "Fallback" URLs
+    'https://api.testnet.abs.xyz'
+  ],
 }
 
 /**
@@ -178,5 +182,9 @@ export const RPC_URLS = {
     // "Fallback" URLs
     'https://spicy-rpc.chiliz.com',
     'https://chiliz-spicy.publicnode.com',
+  ],
+  [ChainId.ABSTRACT_TESTNET]: [
+    // "Fallback" URLs
+    'https://api.testnet.abs.xyz',
   ],
 }

@@ -29,7 +29,6 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
    
     const TradeHistory = () => {
         const [trade, setTrade] = useState(null)
-
         const initChatSocket = () => {
             if (!socket) {
                 return
@@ -46,7 +45,6 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
             if (socket) {
                 initChatSocket()
             }
-    
         }, [socket])
 
         return <div className="w-full">

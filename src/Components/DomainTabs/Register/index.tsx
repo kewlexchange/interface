@@ -60,8 +60,8 @@ const _DOMAIN_REGISTER_TAB = () => {
 
     }
     const handleSaveSettings = async () => {
-        if (!([ChainId.ARBITRUM_ONE,ChainId.CHILIZ_MAINNET, ChainId.CHILIZ_SPICY_TESTNET, ChainId.BITCI, ChainId.BITCI_TEST].includes(chainId))) {
-            let error = { message: "IMON Domains not available on this chain!" }
+        if (!([ChainId.ARBITRUM_ONE,ChainId.CHILIZ_MAINNET, ChainId.CHILIZ_SPICY_TESTNET, ChainId.BITCI, ChainId.BITCI_TEST, ChainId.ABSTRACT_TESTNET].includes(chainId))) {
+            let error = { message: "KEWL Domains not available on this chain!" }
             setTransaction({ hash: '', summary: '', error: error });
             toggleError()
             return;

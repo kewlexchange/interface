@@ -30,7 +30,8 @@ export enum ChainId {
   AVAX_FUJI = 43113,
 
   CHILIZ_MAINNET = 88888,
-  CHILIZ_SPICY_TESTNET = 88882
+  CHILIZ_SPICY_TESTNET = 88882,
+  ABSTRACT_TESTNET = 11124
 }
 
 export const DEFAULT_CHAIN_ASSETS_URL = "https://raw.githubusercontent.com/kewlexchange/nfts/main/chiliz/index.json"
@@ -466,7 +467,32 @@ export const BLOCKCHAINS = {
         }
       },
 
-
+      ABS:
+      {MAIN: {
+        enabled:true,
+        chainId: '0xab5',
+        chainName: 'Abstract Mainnet',
+        nativeCurrency: {
+          name: 'Ethereum',
+          symbol: 'ETH',
+          decimals: 18,
+        },
+        rpcUrls: ['https://api.testnet.abs.xyz'],
+        blockExplorerUrls: ['https://explorer.testnet.abs.xyz']
+      },
+        TEST: {
+          enabled:true,
+          chainId: '0x2b74',
+          chainName: 'Abstract Testnet',
+          nativeCurrency: {
+            name: 'Ethereum',
+            symbol: 'ETH',
+            decimals: 18,
+          },
+          rpcUrls: ['https://api.testnet.abs.xyz'],
+          blockExplorerUrls: ['https://explorer.testnet.abs.xyz']
+        }
+      },
 
 }
 export const DEFAULT_CHAIN_INFO = BLOCKCHAINS.CHZ.MAIN;
@@ -488,12 +514,12 @@ export const CHAIN_IDS_TO_NAMES = {
   [ChainId.BITCI]: 'bitci',
   [ChainId.BITCI_TEST]: 'bitcitest',
   [ChainId.CHILIZ_MAINNET]: 'chiliz',
-  [ChainId.CHILIZ_SPICY_TESTNET]: 'chiliztest'
-
+  [ChainId.CHILIZ_SPICY_TESTNET]: 'chiliztest',
+  [ChainId.ABSTRACT_TESTNET]: 'abstestnet'
 } as const
 
 export function isSupportedChain(chainId: number | null | undefined | ChainId): chainId is SupportedChainsType {
-  return !!chainId && ChainId.BITCI === chainId || ChainId.BITCI_TEST === chainId || ChainId.ARBITRUM_ONE === chainId  || ChainId.CHILIZ_MAINNET === chainId || ChainId.CHILIZ_SPICY_TESTNET === chainId
+  return !!chainId && ChainId.BITCI === chainId || ChainId.BITCI_TEST === chainId || ChainId.ARBITRUM_ONE === chainId  || ChainId.CHILIZ_MAINNET === chainId || ChainId.CHILIZ_SPICY_TESTNET === chainId  || ChainId.ABSTRACT_TESTNET === chainId
 }
 
 export function asSupportedChain(chainId: number | null | undefined | ChainId): SupportedChainsType | undefined {
@@ -508,7 +534,8 @@ export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [
   ChainId.ARBITRUM_ONE,
   ChainId.BNB,
   ChainId.AVALANCHE,
-  ChainId.CHILIZ_MAINNET
+  ChainId.CHILIZ_MAINNET,
+  ChainId.ABSTRACT_TESTNET
 ] as const
 
 /**
@@ -521,6 +548,7 @@ export const UNSUPPORTED_V2POOL_CHAIN_IDS = [
   ChainId.BNB,
   ChainId.ARBITRUM_GOERLI,
   ChainId.AVALANCHE,
+
 ] as const
 
 export const TESTNET_CHAIN_IDS = [

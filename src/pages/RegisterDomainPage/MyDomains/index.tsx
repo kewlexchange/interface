@@ -83,7 +83,7 @@ const MyDomainsPage: React.FunctionComponent<IPage> = props => {
 
         const [_domains, _price,domainContract] = await DOMAINS.getTLDS();
 
-        erc721Tokens.push({ name: "Intelligent Name Servers", address: domainContract })
+        erc721Tokens.push({ name: "KEWL Name Servers", address: domainContract })
 
         const imon721TokenIDList = [];
 
