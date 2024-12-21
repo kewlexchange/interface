@@ -147,7 +147,7 @@ const MyDomainsPage: React.FunctionComponent<IPage> = props => {
         if (!account) { return; }
         setUserNFTAssets([]);
         set721AssetsLoaded(false);
-        if ([ChainId.BITCI, ChainId.BITCI_TEST].includes(chainId)) {
+        if ([ChainId.BITCI, ChainId.BITCI_TEST,ChainId.ABSTRACT_TESTNET].includes(chainId)) {
             fetchBalances();
         }else{
             fetchUserNFTs()

@@ -268,6 +268,19 @@ const CHAIN_INFO: ChainInfoMap = {
     nativeCurrency: { name: 'CHILIZ', symbol: 'CHZ', decimals: 18 },
     defaultListUrl: ["https://raw.githubusercontent.com/imonai/nfts/main/spicy/index.json"],
   },
+  [ChainId.ABSTRACT_TESTNET]: {
+    networkType: NetworkType.L1,
+    bridge: '',
+    docs: 'https://abs.xyz/',
+    explorer: 'https://explorer.testnet.abs.xyz',
+    infoLink: 'https://info.kewl.exchange/#/abstract/',
+    label: 'Abstract Testnet',
+    logoUrl: chilizLogoURL,
+    circleLogoUrl: chilizLogoURL,
+    squareLogoUrl: chilizLogoURL,
+    nativeCurrency: { name: 'ETHEREUM', symbol: 'ETH', decimals: 18 },
+    defaultListUrl: ["https://raw.githubusercontent.com/imonai/nfts/main/spicy/index.json"],
+  },
 } as const
 
 export function getChainInfo(chainId: SupportedL1ChainId): L1ChainInfo
