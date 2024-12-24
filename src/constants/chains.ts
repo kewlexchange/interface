@@ -577,7 +577,8 @@ export const L1_CHAIN_IDS = [
   ChainId.AVALANCHE,
   ChainId.BITCI,
   ChainId.BITCI_TEST,
-  ChainId.CHILIZ_MAINNET
+  ChainId.CHILIZ_MAINNET,
+  ChainId.ABSTRACT_TESTNET
 ] as const
 
 export type SupportedL1ChainId = (typeof L1_CHAIN_IDS)[number]
@@ -591,6 +592,7 @@ export const L2_CHAIN_IDS = [
   ChainId.ARBITRUM_GOERLI,
   ChainId.OPTIMISM,
   ChainId.OPTIMISM_GOERLI,
+  ChainId.ABSTRACT_TESTNET
 ] as const
 
 export type SupportedL2ChainId = (typeof L2_CHAIN_IDS)[number]
