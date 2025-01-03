@@ -532,7 +532,7 @@ const _SWAP_TAB = () => {
 
 
 
-                            <div onPress={() => {
+                            <div onClick={() => {
                                 setInputValue(baseAsset.balance, true)
                             }} className="balance cursor-pointer">
                                 Balance: {baseAsset && baseAsset.balance}
@@ -549,7 +549,7 @@ const _SWAP_TAB = () => {
 
 
 
-                        <button onPress={() => {
+                        <button onClick={() => {
                             handleSwapAssets()
                         }} className="swap-currencies sm:order-2  my-3 anim "
                             style={{ "left": "calc(50% - 16px)" }}>
@@ -584,7 +584,7 @@ const _SWAP_TAB = () => {
                             }
 
 
-                            <div onPress={() => {
+                            <div onClick={() => {
                                 setInputValue(quoteAsset && quoteAsset.balance, false)
                             }} className="balance cursor-pointer">
                                 Balance: {quoteAsset && quoteAsset.balance}

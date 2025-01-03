@@ -687,7 +687,7 @@ const _POOL_TAB = () => {
 
 
 
-                        <div onPress={() => {
+                        <div onClick={() => {
                             setInputValue(baseAsset.balance, true)
                         }} className="balance cursor-pointer">
                             Balance: {baseAsset && baseAsset.balance}
@@ -701,7 +701,7 @@ const _POOL_TAB = () => {
                             pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0" minLength={0} maxLength={100} spellCheck="false" />
                     </div>
 
-                    <button onPress={() => {
+                    <button onClick={() => {
                         handleSwapAssets()
                     }} className="swap-currencies sm:order-2  my-3 anim"
                         style={{ "left": "calc(50% - 16px)" }}>
