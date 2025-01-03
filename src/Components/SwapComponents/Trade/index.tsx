@@ -828,7 +828,7 @@ const _SWAP_TAB = () => {
                 <div className="w-full rounded-xl">
                     <div className="swap-inputs">
                         <div className="input sm:order-1">
-                            <div onPress={() => {
+                            <div onClick={() => {
                                 setInputValue(baseAsset.balance, true)
                             }} className="balance cursor-pointer">
                                 Balance: {baseAsset && baseAsset.balance}
