@@ -54,7 +54,7 @@ export const NFTStakeItem = (props: {collection:any, item:any,index:any})=> {
                                                 <div className={"w-full  rounded-lg  border border-default flex flex-col gap-2"}>
                                                     <div className={"w-full  p-2 flex items-center justify-between"}>
                                                             <span>Asset Info</span>
-                                                            <button onClick={() => { 
+                                                            <button onPress={() => { 
                                                                     setExpanded(!isExpanded)
                                                                 }} className="flex items-center gap-x-2 select-none w-8 text-center justify-center h-8 cursor-pointer border border-default bg-white text-pink-960 hover:bg-pink-960 hover:text-white rounded-full p-2">
                                                                     <span translate={"no"}
@@ -92,7 +92,7 @@ export const NFTStakeItem = (props: {collection:any, item:any,index:any})=> {
                                                             <span>{BigNumber.from(props.item.remaining_amount).toNumber()}</span>
                                                             </div>
                                                             <div className={"w-full items-center rounded-lg flex flex-row justify-between border border-default gap-2 p-2"}>
-                                                                <button onClick={()=>{
+                                                                <button onPress={()=>{
                                                                     handleViewItem(props.item)
                                                                 }} className={"w-full pointer-events-auto rounded-md bg-pink-960 px-3 py-2 text-[0.8125rem] font-semibold leading-5 text-white hover:bg-pink-900"}>
                                                                     View Item

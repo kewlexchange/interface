@@ -25,7 +25,7 @@ export default function Option({ connection }: { connection: Connection }) {
     startContent={
       <img className={"w-10 h-10 rounded-xl"} src={connection.getIcon?.(false)} alt="Icon" />
     }
-    onClick={activate}>
+    onPress={activate}>
 
         <span className='w-full text-start'>{connection.getName()}</span>
        {/*{isCurrentOptionPending && <span className={"w-full"}>WAIT PLEASE</span>}*/}

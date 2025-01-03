@@ -180,25 +180,25 @@ export const WrapTab = (props: {account})=> {
 
                                 <div className="flex items-center justify-between border-t flex-wrap p-2">
                                     <div className="whitespace-nowrap">
-                                        <span  className="text-sm font-semibold ">Balance :</span> <button onClick={()=>{
+                                        <span  className="text-sm font-semibold ">Balance :</span> <button onPress={()=>{
                                             setAmount(userBalance)
                                             }}>{userBalance} {getNativeCurrencyByChainId(chainId)}</button>
                                     </div>
                                     <div className="whitespace-nowrap">
-                                        <span  className="text-sm font-semibold ">Balance :</span> <button onClick={()=>{
+                                        <span  className="text-sm font-semibold ">Balance :</span> <button onPress={()=>{
                                             setAmount(userWETHBalance);
                                         }}>{userWETHBalance} W{getNativeCurrencyByChainId(chainId)} </button>
                                     </div>
                                 </div>
                         </div>
                         <div className={"w-full flex flex-row items-center justify-center gap-2"}>
-                    <Button size='lg' color='default' onClick={()=>{
+                    <Button size='lg' color='default' onPress={()=>{
                         handleWrap();
                     }} className={"w-full flex flex-row items-center justify-center"}>
                         <span>Wrap</span>
                         <span className={"text-xs"}>{getNativeCurrencyByChainId(chainId)} to W{getNativeCurrencyByChainId(chainId)}</span>
                         </Button>
-                    <Button size='lg' color='default' onClick={()=>{
+                    <Button size='lg' color='default' onPress={()=>{
                         handleUnwrap();
                     }} className={" flex w-full flex-row items-center justify-center"}>
                         <span>Unwrap</span>

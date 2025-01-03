@@ -366,7 +366,7 @@ const _SWAP_TAB = () => {
                                 <TableCell>
                                     {
                                         bettorInfo && !bettorInfo.claimed ? <>
-                                            <Button onClick={() => {
+                                            <Button onPress={() => {
                                                 handleClaim(bettorInfo, data.match, data.side)
                                             }} size='sm' color='default'>Claim</Button>
                                         </> : <>
@@ -438,7 +438,7 @@ const _SWAP_TAB = () => {
                                 <CardBody>
 
                                     {
-                                        matchEntry && <Card fullWidth isHoverable isPressable={true} onClick={() => {
+                                        matchEntry && <Card fullWidth isHoverable isPressable={true} onPress={() => {
                                             toggleExpand()
                                         }}>
                                             <CardHeader>
@@ -478,7 +478,7 @@ const _SWAP_TAB = () => {
 
                                             {
                                                 matches.map((matchEntry, index) => {
-                                                    return <Card onClick={() => {
+                                                    return <Card onPress={() => {
                                                         setSelectedMatch(matchEntry)
                                                         toggleExpand();
                                                     }} isHoverable fullWidth isPressable={true}>
@@ -540,7 +540,7 @@ const _SWAP_TAB = () => {
                                     {
                                         baseAsset &&
 
-                                        <Button className="token-selector  px-2" radius='full' variant="flat" color="default" onClick={() => {
+                                        <Button className="token-selector  px-2" radius='full' variant="flat" color="default" onPress={() => {
                                             setIsBase(true)
                                             toggleSelectToken()
                                         }} startContent={
@@ -559,7 +559,7 @@ const _SWAP_TAB = () => {
 
 
 
-                                    <div onClick={() => {
+                                    <div onPress={() => {
                                         setInputValue(baseAsset.balance, true)
                                     }} className="balance cursor-pointer">
                                         Balance: {baseAsset && baseAsset.balance}
@@ -575,13 +575,13 @@ const _SWAP_TAB = () => {
 
                                 <div className={"flex flex-col gap-2 w-full"}>
                                     <ButtonGroup size='lg' variant='shadow' fullWidth>
-                                        <Button className='uppercase' onClick={() => {
+                                        <Button className='uppercase' onPress={() => {
                                             handleDeposit(0)
                                         }} color='default' size='lg'>{matchEntry?.home.name}</Button>
-                                        <Button onClick={() => {
+                                        <Button onPress={() => {
                                             handleDeposit(2)
                                         }} className='uppercase' color='default' size='lg'>{matchEntry?.draw.name}</Button>
-                                        <Button className='uppercase' onClick={() => {
+                                        <Button className='uppercase' onPress={() => {
                                             handleDeposit(1)
                                         }} color='success' size='lg'>{matchEntry?.away.name}</Button>
 

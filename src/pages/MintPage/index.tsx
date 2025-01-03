@@ -99,7 +99,7 @@ const MintPage: React.FunctionComponent<IPage> = props => {
                         </p>
                     </div>
 
-                    <button onClick={()=>{
+                    <button onPress={()=>{
                       handleMint()
                     }} className={"btn btn-primary"}>Airdrop is Expired</button>
                 </div>

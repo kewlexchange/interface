@@ -245,11 +245,11 @@ const MigratePage: React.FunctionComponent<IPage> = props => {
                     </CardBody>
                     <CardFooter className="flex flex-row gap-2">
 
-                    <Button onClick={()=>{
+                    <Button onPress={()=>{
                             handleUnlock();
                         }} color="default" size="lg" className="w-full">1 - Unlock</Button>
 
-                        <Button onClick={()=>{
+                        <Button onPress={()=>{
                             handleMigrate();
                         }} color="default" size="lg" className="w-full">2 - Migrate IMON to KWL</Button>
 

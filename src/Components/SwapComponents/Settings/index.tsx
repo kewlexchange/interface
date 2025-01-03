@@ -144,20 +144,20 @@ const _SETTINGS_TAB = () => {
                                 <Input
                                     startContent={
                                         <ButtonGroup size='sm' fullWidth={true}>
-                                        <Button onClick={() => {
+                                        <Button onPress={() => {
                                             setSlippageInput('')
                                             setRawSlippage(10)
                                         }} color={(rawSlippage === 10 ? "default" : "default")}>0.1%</Button>
-                                        <Button onClick={() => {
+                                        <Button onPress={() => {
                                             setSlippageInput('')
                                             setRawSlippage(50)
                                         }} color={(rawSlippage === 50 ? "default" : "default")}>0.5%</Button>
-                                        <Button onClick={() => {
+                                        <Button onPress={() => {
                                             setSlippageInput('')
                                             setRawSlippage(100)
                                         }} color={(rawSlippage === 100 ? "default" : "default")}>1%</Button>
             
-                                        <Button onClick={() => {
+                                        <Button onPress={() => {
                                             setSlippageInput('')
                                             setRawSlippage(200)
                                         }} color={(rawSlippage === 200 ? "default" : "default")}>2%</Button>
@@ -223,7 +223,7 @@ const _SETTINGS_TAB = () => {
                     </Card>
 
                     <div className="w-full">
-                        <Button className={"w-full"} onClick={() => {
+                        <Button className={"w-full"} onPress={() => {
                             handleSaveSettings()
                         }} color="default">
                             Save Settings

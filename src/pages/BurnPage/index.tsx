@@ -304,12 +304,12 @@ const BurnPage: React.FunctionComponent<IPage> = props => {
                         </div>
                         <div className="w-full flex flex-col items-center justify-center">
                             {
-                                isUnlocked && <button onClick={()=>{
+                                isUnlocked && <button onPress={()=>{
                                     handleBurn();
                                 }} className=" my-2 btn btn-primary w-full">Burn & Claim</button>
                             }
                             {
-                                !isUnlocked && <button onClick={()=>{
+                                !isUnlocked && <button onPress={()=>{
                                     handleUnlock();
                                 }} className=" my-2 btn btn-primary w-full">Unlock</button>
                             }

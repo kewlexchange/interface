@@ -220,7 +220,7 @@ const NFTDetails: React.FunctionComponent<IPage> = props => {
                                             <CardFooter>
                                                 <div className="w-full flex flex-col items-center justify-center">
                                                     {account && nftItem && !nftItem.is_cancelled && account && nftItem && !nftItem.is_completed &&
-                                                        <Button color="default" size="lg" onClick={() => {
+                                                        <Button color="default" size="lg" onPress={() => {
                                                             handleBuy()
                                                         }} className="w-full">Buy Now</Button>
                                                     }
@@ -237,7 +237,7 @@ const NFTDetails: React.FunctionComponent<IPage> = props => {
                             {account && nftItem && !nftItem.is_cancelled && !nftItem.is_completed && account === nftItem.seller &&
 
                                 <div className="max-w-xl min-w-xl sm:w-full sm:max-w-full rounded-xl  p-2">
-                                    <Button onClick={() => {
+                                    <Button onPress={() => {
                                         handleCancel()
                                     }} color="default" size="lg" className={"w-full"}>Cancel</Button>
                                 </div>}

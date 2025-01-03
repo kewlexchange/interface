@@ -236,17 +236,17 @@ const _NFT = (props: { itemType, contractAddress, tokenId, showMetadata, canSell
                             {
                                 isLoaded&& <>
                                 {
-                                !isLocked ? <Button size='sm' className='w-full' color='default' onClick={() => {
+                                !isLocked ? <Button size='sm' className='w-full' color='default' onPress={() => {
                                     handleUnlock()
                                 }}>Unlock to Sell</Button> :
-                                    <Button size='sm' color='default'  onClick={() => {
+                                    <Button size='sm' color='default'  onPress={() => {
                                         toggleSell()
                                     }} className={"w-full"}>Sell</Button>
                             }
-                            <Button size='sm' color='default' onClick={() => {
+                            <Button size='sm' color='default' onPress={() => {
                                 toggleTransfer()
                             }} className={"w-full"}>Transfer</Button>
-                            <Button size='sm' color='default' onClick={() => {
+                            <Button size='sm' color='default' onPress={() => {
                                 toggleMetadata()
                             }} className={"w-full"}>{!isMetadata ? "Metadata" : "Image"}</Button>
                                 </>

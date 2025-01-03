@@ -199,7 +199,7 @@ const _STAKE_TAB = () => {
                         {
                                 
 
-                                    <Button className="w-full" radius='lg' size='lg' variant="flat" color="default" onClick={() => {
+                                    <Button className="w-full" radius='lg' size='lg' variant="flat" color="default" onPress={() => {
                                         setIsBase(true)
                                         toggleSelectToken()
                                     }} startContent={
@@ -306,10 +306,10 @@ const _STAKE_TAB = () => {
                                 </CardBody>
                                 <CardFooter>
                                     <div className='w-full grid grid-cols-2 gap-2'>
-                                        <Button onClick={() => {
+                                        <Button onPress={() => {
                                             handleVote(true)
                                         }} color='success' size='lg' className='w-full text-white' variant='solid'>Increase Rewards</Button>
-                                        <Button onClick={() => {
+                                        <Button onPress={() => {
                                              handleVote(false)
                                         }} color='default' size='lg' className='w-full' variant='solid'>Decrease Rewards</Button>
                                     </div>

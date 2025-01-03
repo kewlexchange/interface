@@ -513,7 +513,7 @@ const _SWAP_TAB = () => {
                             {
                                 baseAsset &&
 
-                                <Button className="token-selector  px-2" radius='full' variant="flat" color="default" onClick={() => {
+                                <Button className="token-selector  px-2" radius='full' variant="flat" color="default" onPress={() => {
                                     setIsBase(true)
                                     toggleSelectToken()
                                 }} startContent={
@@ -532,7 +532,7 @@ const _SWAP_TAB = () => {
 
 
 
-                            <div onClick={() => {
+                            <div onPress={() => {
                                 setInputValue(baseAsset.balance, true)
                             }} className="balance cursor-pointer">
                                 Balance: {baseAsset && baseAsset.balance}
@@ -549,7 +549,7 @@ const _SWAP_TAB = () => {
 
 
 
-                        <button onClick={() => {
+                        <button onPress={() => {
                             handleSwapAssets()
                         }} className="swap-currencies sm:order-2  my-3 anim "
                             style={{ "left": "calc(50% - 16px)" }}>
@@ -564,7 +564,7 @@ const _SWAP_TAB = () => {
                             {
                                 quoteAsset &&
 
-                                <Button className="token-selector px-2" radius='full' variant="flat" color="default" onClick={() => {
+                                <Button className="token-selector px-2" radius='full' variant="flat" color="default" onPress={() => {
                                     setIsBase(false)
                                     toggleSelectToken()
                                 }} startContent={
@@ -584,7 +584,7 @@ const _SWAP_TAB = () => {
                             }
 
 
-                            <div onClick={() => {
+                            <div onPress={() => {
                                 setInputValue(quoteAsset && quoteAsset.balance, false)
                             }} className="balance cursor-pointer">
                                 Balance: {quoteAsset && quoteAsset.balance}
@@ -604,7 +604,7 @@ const _SWAP_TAB = () => {
                         pairInfo && pairInfo.valid && baseAsset && quoteAsset && <div className={"w-full grid grid-cols-1 gap-2"}>
                             {
                                 isAllowanceRequired() === true &&
-                                <Button className={"w-full"} onClick={() => {
+                                <Button className={"w-full"} onPress={() => {
                                     handleApprove(baseAsset.address);
                                 }} color="default">
                                     Unlock {baseAsset.symbol}
@@ -618,11 +618,11 @@ const _SWAP_TAB = () => {
 
                         {
                             baseAsset && quoteAsset && quoteAsset.symbol == `W${baseAsset.symbol}` ?
-                                baseAsset && quoteAsset && <Button color={"default"} variant='solid' fullWidth onClick={() => {
+                                baseAsset && quoteAsset && <Button color={"default"} variant='solid' fullWidth onPress={() => {
                                     handleWrap()
                                 }}> Wrap {baseAsset.symbol} to {quoteAsset.symbol}  </Button>
                                 :
-                                baseAsset && quoteAsset && <Button color={"default"} variant='solid' fullWidth onClick={() => {
+                                baseAsset && quoteAsset && <Button color={"default"} variant='solid' fullWidth onPress={() => {
                                     handleUnWrap()
                                 }}> Unwrap {baseAsset.symbol} to {quoteAsset.symbol} </Button>
 

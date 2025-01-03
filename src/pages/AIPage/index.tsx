@@ -676,7 +676,7 @@ const AIPage: React.FunctionComponent<IPage> = props => {
                         </div>
                         <div className={"w-full flex flex-row items-center justify-end gap-2"}>
 
-                            <button onClick={() => {
+                            <button onPress={() => {
                                 setUserPropmts([])
                             }} className={"bg-background border-default border border-1 rounded-full p-2 flex items-center justify-center hover:bg-white/30"}>
                                 <span translate={"no"} className="material-symbols-outlined">
@@ -685,7 +685,7 @@ const AIPage: React.FunctionComponent<IPage> = props => {
                             </button>
 
                             {
-                                !isListening && <button onClick={() => {
+                                !isListening && <button onPress={() => {
                                     setIsListening(true);
                                 }} className={"bg-background border-default border border-1 rounded-full p-2 flex items-center justify-center hover:bg-white/30"}>
                                     <span translate={"no"} className="material-symbols-outlined">
@@ -696,7 +696,7 @@ const AIPage: React.FunctionComponent<IPage> = props => {
                             }
 
                             {
-                                isListening && <button onClick={() => {
+                                isListening && <button onPress={() => {
                                     setIsListening(false)
                                 }} className={"bg-background border-default border border-1 rounded-full p-2 flex items-center justify-center hover:bg-white/30"}>
                                     <span translate={"no"} className="material-symbols-outlined">
@@ -706,7 +706,7 @@ const AIPage: React.FunctionComponent<IPage> = props => {
                             }
 
 
-                            <button onClick={() => {
+                            <button onPress={() => {
                                 setShowSettings(!showSettings)
                             }} className={"bg-background border-default border border-1 rounded-full p-2 flex items-center justify-center hover:bg-white/30"}>
                                 <span translate={"no"} className="material-symbols-outlined">
@@ -741,7 +741,7 @@ const AIPage: React.FunctionComponent<IPage> = props => {
                                     </div>
                                     {
                                         voiceList && voiceList.length > 0 &&
-                                        <button onClick={() => {
+                                        <button onPress={() => {
                                             setShowLanguages(!showLanguages)
                                         }} className={"sm:col-span-2 w-full bg-background border-default border border-1 rounded-lg p-2 flex flex-col gap-2"}>
                                             <span className={"font-bold text-xs whitespace-nowrap"}>{voiceList[selectedVoiceIndex]?.name}</span>
@@ -754,7 +754,7 @@ const AIPage: React.FunctionComponent<IPage> = props => {
                                     <div className={"w-full max-h-[300px] overflow-y-scroll overflow-x-hidden grid sm:grid-cols-5  p-2 grid-cols-2 rounded-lg gap-2"}>
                                         {
                                             showLanguages && voiceList && voiceList.length > 0 && voiceList.map((voice, index) => (
-                                                <button onClick={() => {
+                                                <button onPress={() => {
                                                     setSelectedVoiceIndex(index)
                                                     setShowLanguages(false)
                                                 }} className={(index == selectedVoiceIndex ? "bg-white/30" : "") + " border-default border rounded-lg hover:bg-white/30 p-2 flex flex-col gap-2"}>
@@ -787,7 +787,7 @@ const AIPage: React.FunctionComponent<IPage> = props => {
 
                                                 {
 
-                                                    <div onClick={() => {
+                                                    <div onPress={() => {
                                                         toggleCryptoSelectShowing()
                                                     }} className="token-selector">
                                                         <img className="rounded-full" src={activeCryptocurrency && activeCryptocurrency.Logo} alt={activeCryptocurrency && activeCryptocurrency.Name} />
@@ -820,7 +820,7 @@ const AIPage: React.FunctionComponent<IPage> = props => {
                                     {
                                         defaultQuestions.map((item, index) => {
                                             return (
-                                                <Button key={`ai-question-item` + index} onClick={() => {
+                                                <Button key={`ai-question-item` + index} onPress={() => {
                                                     setMessageInput(item)
                                                 }} className="flex flex-row gap-2 items-center justify-start min-h-[50px] w-full text-xs">
                                                     <img className="w-5 h-5 rounded-full" src={activeCryptocurrency && activeCryptocurrency.Logo} alt="IMON Question" />
@@ -835,7 +835,7 @@ const AIPage: React.FunctionComponent<IPage> = props => {
 
                             </div>
                             <div className="flex items-center justify-center">
-                                <Button color="default" onClick={() => {
+                                <Button color="default" onPress={() => {
                                     handleSendMessage()
                                 }} className="btn btn-primary w-[50%] rounded-lg p-2">
                                     Ask IMON

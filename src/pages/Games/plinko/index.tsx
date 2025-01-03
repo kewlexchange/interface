@@ -260,7 +260,7 @@ useEffect(() => {
                                     <div className="w-full">
                                         <span className="text-xs font-bold text-pink-900">PARTICIPATION</span>
                                         <div className="w-full bg-pink-100 flex flex-row items-center justify-between border border-b-4 rounded-full border border-pink-200 border border-b-pink-500 p-2">
-                                            <button onClick={() => {
+                                            <button onPress={() => {
                                                 playFromBegin(sounds.button);
 
                                                 const _betAmount = betAmount > 10 ? betAmount / 2 : 10;
@@ -274,7 +274,7 @@ useEffect(() => {
                                                 1/2
                                             </button>
                                             <span className="text-2xl text-white font-bold">{betAmount}</span>
-                                            <button onClick={() => {
+                                            <button onPress={() => {
                                                 playFromBegin(sounds.button);
 
                                                 const _betAmount = betAmount * 2;
@@ -293,7 +293,7 @@ useEffect(() => {
                                     <div className="w-full">
                                         <span className="text-xs font-bold text-pink-900">BALLS</span>
                                         <div className="w-full bg-pink-100 flex flex-row items-center justify-between border border-b-4 rounded-full border border-pink-200 border border-b-pink-500 p-2">
-                                            <button onClick={() => {
+                                            <button onPress={() => {
                                                 playFromBegin(sounds.button);
 
                                                 const _balls = balls - 1;
@@ -309,7 +309,7 @@ useEffect(() => {
                                                 </span>
                                             </button>
                                             <span className="text-2xl text-white font-bold">{balls}</span>
-                                            <button onClick={() => {
+                                            <button onPress={() => {
                                                 playFromBegin(sounds.button);
 
                                                 const _balls = balls + 1 > 18 ? 18 : balls + 1;
@@ -330,7 +330,7 @@ useEffect(() => {
                                     <div className="w-full">
                                         <span className="text-xs font-bold text-pink-900">RISK LEVEL</span>
                                         <div className="w-full bg-pink-100 flex flex-row items-center justify-between border border-b-4 rounded-full border border-pink-200 border border-b-pink-500 p-2">
-                                            <button onClick={() => {
+                                            <button onPress={() => {
                                                 playFromBegin(sounds.button);
 
                                                 const _risk = risk - 1;
@@ -348,7 +348,7 @@ useEffect(() => {
                                             <span className="text-2xl text-white font-bold">
                                                 {risk == 1 ? "LOW" : risk == 2 ? "MID" : "HIGH"}
                                             </span>
-                                            <button onClick={() => {
+                                            <button onPress={() => {
                                                 playFromBegin(sounds.button);
 
                                                 const _risk = risk + 1;
@@ -369,7 +369,7 @@ useEffect(() => {
                                     <div className="w-full">
                                         <span className="text-xs font-bold text-pink-900">ROWS</span>
                                         <div className="w-full bg-pink-100 flex flex-row items-center justify-between border border-b-4 rounded-full border border-pink-200 border border-b-pink-500 p-2">
-                                            <button onClick={() => {
+                                            <button onPress={() => {
                                                 playFromBegin(sounds.button);
 
                                                 setRows(8)
@@ -378,7 +378,7 @@ useEffect(() => {
                                                     8
                                                 </span>
                                             </button>
-                                            <button onClick={() => {
+                                            <button onPress={() => {
                                                 playFromBegin(sounds.button);
 
                                                 setRows(12)
@@ -387,7 +387,7 @@ useEffect(() => {
                                                     12
                                                 </span>
                                             </button>
-                                            <button onClick={() => {
+                                            <button onPress={() => {
                                                 playFromBegin(sounds.button);
 
                                                 setRows(16)
@@ -409,7 +409,7 @@ useEffect(() => {
 
 
                                     <div className={"w-full gap-2 rounded-lg"}>
-                                        <button className="btn btn-primary hover:bg-pink-200 w-full text-white text-2xl rounded-full border border-b-4 border border-b-pink-300" onClick={() => {
+                                        <button className="btn btn-primary hover:bg-pink-200 w-full text-white text-2xl rounded-full border border-b-4 border border-b-pink-300" onPress={() => {
                                             playGame()
                                             //onPlay();
                                             //playFromBegin(sounds.button);
@@ -469,7 +469,7 @@ useEffect(() => {
                                                             </div>
                                                         </div>
 
-                                                        <Button size="sm" variant="flat" color={"default"} className="col-span-3" onClick={()=>{
+                                                        <Button size="sm" variant="flat" color={"default"} className="col-span-3" onPress={()=>{
                                                             onPlay(game);
                                                             
                                                         }}>Replay</Button>

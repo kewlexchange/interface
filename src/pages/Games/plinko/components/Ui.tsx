@@ -115,10 +115,10 @@ class Ui extends React.PureComponent<Props, State> {
                                         </select>
                               
                    
-                            <button className="betbutton"  color="success" onClick={onPlaceBet}>
+                            <button className="betbutton"  color="success" onPress={onPlaceBet}>
                                 {t("bet")}
                             </button>
-                            <button className="betbutton"  color="default" onClick={this.onSimulate}>
+                            <button className="betbutton"  color="default" onPress={this.onSimulate}>
                                 {t("simulate")}
                             </button>
                         </div>

@@ -161,7 +161,7 @@ const NFTSoccerGame: React.FunctionComponent<IPage> = props => {
                             <span>Total</span>
                             <span>{amount > 0 ? formatEther(pricePerMint.mul(amount)) : 0} CHZ</span>
                         </div>
-                        <Button className="w-full" size="lg" onClick={()=>{
+                        <Button className="w-full" size="lg" onPress={()=>{
                             if([ChainId.CHILIZ_SPICY_TESTNET,ChainId.CHILIZ_MAINNET].includes(chainId)){
                                 handleMint();
                             }

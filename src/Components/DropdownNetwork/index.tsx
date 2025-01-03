@@ -54,7 +54,7 @@ export const DropdownNetwork = (props: { className?: string, testMode?: boolean 
 
                         <Card shadow="none"  isPressable className={chainId == ChainId.CHILIZ_MAINNET ? "bg-danger" : ""}
 
-                            onClick={() => {
+                            onPress={() => {
                                 handleChangeActiveNetwork(ChainId.CHILIZ_MAINNET);
                             }}>
                             <div className="flex flex-row gap-2 p-2">
@@ -69,7 +69,7 @@ export const DropdownNetwork = (props: { className?: string, testMode?: boolean 
 
                         <Card shadow="none"  isPressable className={chainId == ChainId.CHILIZ_SPICY_TESTNET ? "bg-danger" : ""}
 
-                            onClick={() => {
+                            onPress={() => {
                                 handleChangeActiveNetwork(ChainId.CHILIZ_SPICY_TESTNET);
                             }} >
                             <div className="flex flex-row gap-2 p-2">
@@ -82,7 +82,7 @@ export const DropdownNetwork = (props: { className?: string, testMode?: boolean 
                         </Card>
 
                         <Card shadow="none"  isPressable className={chainId == ChainId.ARBITRUM_ONE ? "bg-danger" : ""}
-                            onClick={() => {
+                            onPress={() => {
                                 handleChangeActiveNetwork(ChainId.ARBITRUM_ONE);
                             }}>
                             <div className="flex flex-row gap-2 p-2">
@@ -100,7 +100,7 @@ export const DropdownNetwork = (props: { className?: string, testMode?: boolean 
 
                         <Card shadow="none"  isPressable className={chainId == ChainId.BITCI ? "bg-danger" : ""}
 
-                            onClick={() => {
+                            onPress={() => {
                                 handleChangeActiveNetwork(ChainId.BITCI);
                             }}>
                             <div className="flex flex-row gap-2 p-2">
@@ -114,7 +114,7 @@ export const DropdownNetwork = (props: { className?: string, testMode?: boolean 
                         </Card>
                         <Card shadow="none" isPressable className={chainId == ChainId.BITCI_TEST ? "bg-danger" : ""}
 
-                            onClick={() => {
+                            onPress={() => {
                                 handleChangeActiveNetwork(ChainId.BITCI_TEST);
                             }}>
                             <div className="flex flex-row gap-2 p-2">

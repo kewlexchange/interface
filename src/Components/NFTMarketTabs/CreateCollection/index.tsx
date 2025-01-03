@@ -549,13 +549,13 @@ const _NFT_MARKET_CREATE_COLLECTION_TAB = () => {
                                                     <div className={"w-full  gap-2"}>
                                                     <ButtonGroup size='sm'>
 
-                                                        <Button variant='solid'  onClick={(e) => {
+                                                        <Button variant='solid'  onPress={(e) => {
                                                             setIs1155(false);
                                                             setValue("mint_amount", 1);
                                                         }} color={(!is1155 ? "default" : "default")}>
                                                             ERC-721
                                                         </Button>
-                                                        <Button variant='solid' onClick={(e) => {
+                                                        <Button variant='solid' onPress={(e) => {
                                                             setIs1155(true);
                                                             setValue("mint_amount", 1000)
                                                         }} color={(is1155 ? "default" : "default")}>
@@ -609,31 +609,31 @@ const _NFT_MARKET_CREATE_COLLECTION_TAB = () => {
                                               
                                                     <ButtonGroup size='sm'>
 
-                                                        <Button variant={"solid"} onClick={(e) => {
+                                                        <Button variant={"solid"} onPress={(e) => {
                                                             e.preventDefault()
                                                             setRoyaltiesRatio(0);
                                                         }} color={(royaltiesRatio == 0 ? "default" : "default")}>
                                                             NONE
                                                         </Button>
-                                                        <Button variant={"solid"} onClick={(e) => {
+                                                        <Button variant={"solid"} onPress={(e) => {
                                                             e.preventDefault()
                                                             setRoyaltiesRatio(1);
                                                         }} color={(royaltiesRatio == 1 ? "default" : "default")}>
                                                             25%
                                                         </Button>
-                                                        <Button variant={"solid"} onClick={(e) => {
+                                                        <Button variant={"solid"} onPress={(e) => {
                                                             e.preventDefault()
                                                             setRoyaltiesRatio(2);
                                                         }} color={(royaltiesRatio == 2 ? "default" : "default")}>
                                                             50%
                                                         </Button>
-                                                        <Button variant={"solid"} onClick={(e) => {
+                                                        <Button variant={"solid"} onPress={(e) => {
                                                             e.preventDefault()
                                                             setRoyaltiesRatio(3);
                                                         }} color={(royaltiesRatio == 3 ? "default" : "default")}>
                                                             75%
                                                         </Button>
-                                                        <Button variant={"solid"} onClick={(e) => {
+                                                        <Button variant={"solid"} onPress={(e) => {
                                                             e.preventDefault()
                                                             setRoyaltiesRatio(4);
                                                         }} color={(royaltiesRatio == 4 ? "default" : "default")}>
@@ -664,7 +664,7 @@ const _NFT_MARKET_CREATE_COLLECTION_TAB = () => {
                                                 <span translate={"no"} className="material-symbols-outlined">
                                                     add
                                                 </span>
-                                            } color="success" onClick={() => append(
+                                            } color="success" onPress={() => append(
                                                 {
                                                     trait_type: "",
                                                     display_type: "string",
@@ -715,7 +715,7 @@ const _NFT_MARKET_CREATE_COLLECTION_TAB = () => {
                                                     <Input name='max_value' defaultValue={fieldItem.max_value} size={"lg"} type="number" label="Max Value" {...register(`attributes[${fieldItem.id}].max_value`, { required: fieldItem.display_type == "boost_percentage" })} />
 
 
-                                                    <Button size="lg" color="default" onClick={() => remove(index)}>
+                                                    <Button size="lg" color="default" onPress={() => remove(index)}>
                                                         Remove
                                                     </Button>
 
@@ -732,7 +732,7 @@ const _NFT_MARKET_CREATE_COLLECTION_TAB = () => {
 
                         <CardFooter>
                             <div className="w-full flex items-center justify-center">
-                                <Button size='lg' color='default' onClick={(e) => {
+                                <Button size='lg' color='default' onPress={(e) => {
                                     e.preventDefault();
                                     handleCreateCollection();
                                 }} type="submit">Create NFT</Button>

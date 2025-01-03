@@ -295,7 +295,7 @@ const ListingPage: React.FunctionComponent<IPage> = props => {
                                                 defaultValue={25000}
                                                 className="w-full"
                                             />
-                                            <Button onClick={() => {
+                                            <Button onPress={() => {
                                                 handleListingRequest()
                                             }} fullWidth size="lg" color="default">Donate For Listing</Button>
                                         </CardFooter>

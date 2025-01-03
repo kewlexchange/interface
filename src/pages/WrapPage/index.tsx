@@ -192,24 +192,24 @@ const WrapPage: React.FunctionComponent<IPage> = props => {
 
                                 <div className="flex items-center justify-between border-t flex-wrap p-2">
                                     <div className="whitespace-nowrap">
-                                        <span  className="text-sm font-semibold ">Balance :</span> <button onClick={()=>{
+                                        <span  className="text-sm font-semibold ">Balance :</span> <button onPress={()=>{
                                             setAmount(userBalance)
                                             }}>{userBalance} {getNativeCurrencyByChainId(chainId)}</button>
                                     </div>
                                     <div className="whitespace-nowrap">
-                                        <span  className="text-sm font-semibold ">Balance :</span> <button onClick={()=>{
+                                        <span  className="text-sm font-semibold ">Balance :</span> <button onPress={()=>{
                                             setAmount(userWETHBalance);
                                         }}>{userWETHBalance} W{getNativeCurrencyByChainId(chainId)} </button>
                                     </div>
                                 </div>
                         </div>
                         <div className={"w-full flex flex-row items-center justify-center gap-2"}>
-                    <button onClick={()=>{
+                    <button onPress={()=>{
                         handleWrap();
                     }} className={"btn btn-primary  w-full flex flex-col items-start justify-start"}>
                         <span>Wrap</span>
                         <span className={"text-xs"}>{getNativeCurrencyByChainId(chainId)} to W{getNativeCurrencyByChainId(chainId)}</span></button>
-                    <button onClick={()=>{
+                    <button onPress={()=>{
                         handleUnwrap();
                     }} className={"btn btn-primary flex w-full flex-col items-start justify-start"}>
                         <span>Unwrap</span>

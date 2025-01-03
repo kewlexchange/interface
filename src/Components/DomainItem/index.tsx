@@ -461,7 +461,7 @@ const _DomainItem = (props: { domainEntry, itemType, contractAddress, tokenId, s
 
 
                             <div className='w-full'>
-                                <Button size={"lg"} color={"default"} onClick={() => {
+                                <Button size={"lg"} color={"default"} onPress={() => {
                                     handleSetAsPrimaryName();
                                 }} className=''>
                                     Set as primary name

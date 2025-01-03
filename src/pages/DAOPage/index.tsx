@@ -315,11 +315,11 @@ const DAOPage: React.FunctionComponent<IPage> = props => {
                                                     </div>
 
                                                     <div className={"grid grid-cols-3 gap-3"}>
-                                                        <button onClick={() => { handleVote(proposalItem, true) }} className={"rounded-lg py-2 hover:border-green-300 border border-green-500 text-pink-960 bg-green-100 flex flex-col items-center justify-center"}>
+                                                        <button onPress={() => { handleVote(proposalItem, true) }} className={"rounded-lg py-2 hover:border-green-300 border border-green-500 text-pink-960 bg-green-100 flex flex-col items-center justify-center"}>
                                                         <span translate={"no"} className="material-symbols-outlined">thumb_up</span>
                                                             Unlock Pool
                                                         </button>
-                                                        <button onClick={() => {
+                                                        <button onPress={() => {
                                                             handleVote(proposalItem, false)
                                                         }} className={"rounded-lg py-2 hover:border-red-300 border border-red-500 text-red-500 bg-red-100 flex flex-col items-center justify-center"}>
                                                           <span translate={"no"} className="material-symbols-outlined">

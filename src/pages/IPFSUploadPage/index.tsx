@@ -495,14 +495,14 @@ const IPFSUploadPage: React.FunctionComponent<IPage> = props => {
                                         <div className={"flex flex-col w-full"}>
                                             <span>NFT Standard</span>
                                             <div className={"w-full grid grid-cols-2 gap-2"}>
-                                                <button onClick={(e) => {
+                                                <button onPress={(e) => {
                                                     e.preventDefault()
                                                     setIs1155(false);
                                                     setValue("mint_amount", 1);
                                                 }} className={(!is1155 ? "bg-white/30" : "") + " rounded-lg p-2 hover:bg-white/30"}>
                                                     ERC-721
                                                 </button>
-                                                <button onClick={(e) => {
+                                                <button onPress={(e) => {
                                                     e.preventDefault()
                                                     setIs1155(true);
                                                     setValue("mint_amount", 1000)
@@ -551,31 +551,31 @@ const IPFSUploadPage: React.FunctionComponent<IPage> = props => {
                                         <div className={"flex flex-col w-full"}>
                                             <span>Royalties [Max:0.075]</span>
                                             <div className={"w-full grid grid-cols-5 gap-2"}>
-                                                <button onClick={(e) => {
+                                                <button onPress={(e) => {
                                                     e.preventDefault()
                                                     setRoyaltiesRatio(0);
                                                 }} className={(royaltiesRatio == 0 ? "bg-white/30" : "") + "  rounded-lg p-2 hover:bg-white/30"}>
                                                     NONE
                                                 </button>
-                                                <button onClick={(e) => {
+                                                <button onPress={(e) => {
                                                     e.preventDefault()
                                                     setRoyaltiesRatio(1);
                                                 }} className={(royaltiesRatio == 1 ? "bg-white/30" : "") + "  rounded-lg p-2 hover:bg-white/30"}>
                                                     25%
                                                 </button>
-                                                <button onClick={(e) => {
+                                                <button onPress={(e) => {
                                                     e.preventDefault()
                                                     setRoyaltiesRatio(2);
                                                 }} className={(royaltiesRatio == 2 ? "bg-white/30" : "") + "   rounded-lg p-2 hover:bg-white/30"}>
                                                     50%
                                                 </button>
-                                                <button onClick={(e) => {
+                                                <button onPress={(e) => {
                                                     e.preventDefault()
                                                     setRoyaltiesRatio(3);
                                                 }} className={(royaltiesRatio == 3 ? "bg-white/30" : "") + "  rounded-lg p-2 hover:bg-white/30"}>
                                                     75%
                                                 </button>
-                                                <button onClick={(e) => {
+                                                <button onPress={(e) => {
                                                     e.preventDefault()
                                                     setRoyaltiesRatio(4);
                                                 }} className={(royaltiesRatio == 4 ? "bg-white/30" : "") + "  rounded-lg p-2 hover:bg-white/30"}>
@@ -602,7 +602,7 @@ const IPFSUploadPage: React.FunctionComponent<IPage> = props => {
                                         <span translate={"no"} className="material-symbols-outlined">
                                         add
                                     </span>
-                                    } color="success"  onClick={() => append(
+                                    } color="success"  onPress={() => append(
                                         {
                                             trait_type: "",
                                             display_type: "string",
@@ -668,7 +668,7 @@ const IPFSUploadPage: React.FunctionComponent<IPage> = props => {
                                         </div>
                                         <div className="flex flex-col gap-2 rounded-lg p-2">
                                             <span>Remove</span>
-                                            <Button size="md" color="default" onClick={() => remove(index)}>
+                                            <Button size="md" color="default" onPress={() => remove(index)}>
                                                 Remove
                                             </Button>
                                         </div>
@@ -681,7 +681,7 @@ const IPFSUploadPage: React.FunctionComponent<IPage> = props => {
                     </>
 
                     <div className="w-full flex items-center justify-center">
-                        <button onClick={ (e)=>{
+                        <button onPress={ (e)=>{
                             e.preventDefault();      
                             handleCreateCollection();   
                         }} className="btn btn-primary" type="submit">Upload to IPFS</button>

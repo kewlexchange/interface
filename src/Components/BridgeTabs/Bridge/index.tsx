@@ -275,7 +275,7 @@ const _BRIDGE_TAB = () => {
 
                                 {
                                     <>
-                                        <Button className="token-selector" radius='full' variant="flat" color="default" onClick={() => {
+                                        <Button className="token-selector" radius='full' variant="flat" color="default" onPress={() => {
                                     setIsBase(true)
                                     //toggleSelectToken()
                                 }} startContent={
@@ -294,7 +294,7 @@ const _BRIDGE_TAB = () => {
                                   
                                 }
 
-                                <div onClick={() => {
+                                <div onPress={() => {
                                     setInputValue(baseAsset?.balance, true)
                                 }} className="balance  cursor-pointer">
                                     Balance: {baseAsset && baseAsset.balance}
@@ -388,7 +388,7 @@ const _BRIDGE_TAB = () => {
                             </Select>
 
                             {
-                             isCNSRegistered && <Button onClick={()=>{
+                             isCNSRegistered && <Button onPress={()=>{
                                 handleTransferAssets();
                              }} className='w-full' size='lg' color='default'>Transfer</Button>
                             }

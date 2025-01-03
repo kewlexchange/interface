@@ -188,7 +188,7 @@ const _MORPH_TAB = () => {
                                     {
                                         baseAsset &&
 
-                                        <Button className="token-selector" radius='full' variant="flat" color="default" onClick={() => {
+                                        <Button className="token-selector" radius='full' variant="flat" color="default" onPress={() => {
                                             toggleSelectToken()
                                         }} startContent={
                                             <Image className='w-[32px] h-[32px] min-w-[32px] min-h-[32px] max-h-[32px] max-w-[32px]' src={baseAsset.logoURI} />
@@ -206,7 +206,7 @@ const _MORPH_TAB = () => {
 
 
 
-                                    <div onClick={() => {
+                                    <div onPress={() => {
                                         setInputValue(baseAsset.balance, true)
                                     }} className="balance cursor-pointer">
                                         Balance: {baseAsset && baseAsset.balance}
@@ -232,7 +232,7 @@ const _MORPH_TAB = () => {
 
 
                         {
-                             isAllowanceRequired() === true  && <Button className={"w-full"} onClick={() => {
+                             isAllowanceRequired() === true  && <Button className={"w-full"} onPress={() => {
                                 handleApprove(baseAsset.address)
                             }} color="default">
                                 Unlock
@@ -240,7 +240,7 @@ const _MORPH_TAB = () => {
                         }
                        
                        {
-                            isAllowanceRequired() === false  && <Button className={"w-full"} onClick={() => {
+                            isAllowanceRequired() === false  && <Button className={"w-full"} onPress={() => {
                                 handleTokenToNFT()
                             }} color="default">
                                 Morph Token to NFT

@@ -17,7 +17,7 @@ export const Volume = () => {
     // @ts-ignore
     return (
         <>
-            <button className={"rounded-full transparent-bg text-white hover:bg-white/30 p-1"} onClick={()=>{
+            <button className={"rounded-full transparent-bg text-white hover:bg-white/30 p-1"} onPress={()=>{
                 toggleVolume()
             }}>
                 <img className={"w-3 h-3"} src={playSound ? VOLUME_OFF : VOLUME_ON}/>

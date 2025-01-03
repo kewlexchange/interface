@@ -992,7 +992,7 @@ const _ARBITRAGE_TAB = () => {
                     )}
                 </Select>
 
-                <Button onClick={() => {
+                <Button onPress={() => {
                     handleSwapAll();
                 }} color='default' fullWidth>Swap All</Button>
             </div>
@@ -1022,7 +1022,7 @@ const _ARBITRAGE_TAB = () => {
                 <div className="w-full rounded-xl">
                     <div className="swap-inputs">
                         <div className="input sm:order-1">
-                            <div onClick={() => {
+                            <div onPress={() => {
                                 setInputValue(baseAsset.balance, true)
                             }} className="balance cursor-pointer">
                                 Balance: {baseAsset && baseAsset.balance}
@@ -1035,7 +1035,7 @@ const _ARBITRAGE_TAB = () => {
 
                         <Card shadow='none' fullWidth className='my-3 flex flex-row gap-2'>
                             {
-                                baseAsset && <Button size='lg' fullWidth className=" px-2" radius='full' variant="flat" color="default" onClick={() => {
+                                baseAsset && <Button size='lg' fullWidth className=" px-2" radius='full' variant="flat" color="default" onPress={() => {
                                     setIsBase(true)
                                     toggleSelectToken()
                                 }} startContent={
@@ -1052,7 +1052,7 @@ const _ARBITRAGE_TAB = () => {
                                 </Button>
                             }
 
-                            <Button isIconOnly size='lg' radius='full' color='default' variant='solid' onClick={() => {
+                            <Button isIconOnly size='lg' radius='full' color='default' variant='solid' onPress={() => {
                                 handleSwapAssets()
                             }} className=" anim "
                             >
@@ -1064,7 +1064,7 @@ const _ARBITRAGE_TAB = () => {
                             {
                                 quoteAsset &&
 
-                                <Button fullWidth size='lg' className="px-2" radius='full' variant="flat" color="default" onClick={() => {
+                                <Button fullWidth size='lg' className="px-2" radius='full' variant="flat" color="default" onPress={() => {
                                     setIsBase(false)
                                     toggleSelectToken()
                                 }} startContent={
@@ -1125,7 +1125,7 @@ const _ARBITRAGE_TAB = () => {
                         pairInfo && pairInfo.valid && baseAsset && quoteAsset && <div className={"w-full grid grid-cols-1 gap-2"}>
                             {
                                 isAllowanceRequired() === true &&
-                                <Button className={"w-full"} onClick={() => {
+                                <Button className={"w-full"} onPress={() => {
                                     handleApprove(baseAsset.address);
                                 }} color="default">
                                     Unlock {baseAsset.symbol}
@@ -1140,13 +1140,13 @@ const _ARBITRAGE_TAB = () => {
 
                         {
                             account ? isAllowanceRequired() === false && pairInfo && pairInfo.valid && hasLiquidity &&
-                                <Button className={"w-full"} onClick={() => {
+                                <Button className={"w-full"} onPress={() => {
                                     handleSwap()
                                 }} color="default">
                                     Swap
                                 </Button>
                                 :
-                                <Button className={"w-full"} onClick={() => {
+                                <Button className={"w-full"} onPress={() => {
                                     toggleConnectModal()
                                 }} color="default">
                                     Connect

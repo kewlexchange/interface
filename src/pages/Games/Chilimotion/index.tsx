@@ -208,7 +208,7 @@ const ChilimonPage: React.FunctionComponent<IPage> = props => {
                                             </div>
 
                                             {
-                                                userPlayedGames && userPlayedGames.length * 2.5 > 0 ?  <button onClick={() => {
+                                                userPlayedGames && userPlayedGames.length * 2.5 > 0 ?  <button onPress={() => {
                                                     claimAirdrop();
                                                 }} className={"btn btn-primary"}>Claim Your {userPlayedGames && userPlayedGames.length * 2.5} CHZ Airdrop</button> :
                                                 <span className="btn btn-primary">No Rewards Available</span>
@@ -343,7 +343,7 @@ const ChilimonPage: React.FunctionComponent<IPage> = props => {
                                                                 </> :  <>
                                                                 {
                                                                     game.claimed ? <>Claimed!</> : <>
-                                                                            <button onClick={()=>{
+                                                                            <button onPress={()=>{
                                                                     handleBurn(game)
                                                                 }}  className={"btn btn-primary w-full"}>Claim</button>
                                                                     </>

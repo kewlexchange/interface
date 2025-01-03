@@ -667,7 +667,7 @@ const _POOL_TAB = () => {
                         {
                             baseAsset &&
 
-                            <Button className="token-selector px-2" radius='full' variant="flat" color="default" onClick={() => {
+                            <Button className="token-selector px-2" radius='full' variant="flat" color="default" onPress={() => {
                                 setIsBase(true)
                                 toggleSelectToken()
                             }} startContent={
@@ -687,7 +687,7 @@ const _POOL_TAB = () => {
 
 
 
-                        <div onClick={() => {
+                        <div onPress={() => {
                             setInputValue(baseAsset.balance, true)
                         }} className="balance cursor-pointer">
                             Balance: {baseAsset && baseAsset.balance}
@@ -701,7 +701,7 @@ const _POOL_TAB = () => {
                             pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0" minLength={0} maxLength={100} spellCheck="false" />
                     </div>
 
-                    <button onClick={() => {
+                    <button onPress={() => {
                         handleSwapAssets()
                     }} className="swap-currencies sm:order-2  my-3 anim"
                         style={{ "left": "calc(50% - 16px)" }}>
@@ -715,7 +715,7 @@ const _POOL_TAB = () => {
                         {
                             quoteAsset &&
 
-                            <Button className="token-selector px-2" radius='full' variant="flat" color="default" onClick={() => {
+                            <Button className="token-selector px-2" radius='full' variant="flat" color="default" onPress={() => {
                                 setIsBase(false)
                                 toggleSelectToken()
                             }} startContent={
@@ -731,7 +731,7 @@ const _POOL_TAB = () => {
 
                         }
 
-                        <div onClick={() => {
+                        <div onPress={() => {
                             setInputValue(quoteAsset.balance, false)
                         }} className="balance cursor-pointer">
                             Balance: {quoteAsset && quoteAsset.balance}
@@ -838,7 +838,7 @@ const _POOL_TAB = () => {
                     <div className={"w-full grid grid-cols-1 gap-2"}>
                         {
                             baseAsset && quoteAsset && baseAsset.address !== ETHER_ADDRESS && hasBaseAllowance === false &&
-                            <Button className={"w-full"} onClick={() => {
+                            <Button className={"w-full"} onPress={() => {
                                 handleApprove(baseAsset.address);
                             }} color="default">
                                 Unlock {baseAsset.symbol}
@@ -846,7 +846,7 @@ const _POOL_TAB = () => {
                         }
                         {
                             baseAsset && quoteAsset && quoteAsset.address !== ETHER_ADDRESS && hasQuoteAllowance === false &&
-                            <Button className={"w-full"} onClick={() => {
+                            <Button className={"w-full"} onPress={() => {
                                 handleApprove(quoteAsset.address);
                             }} color="default">
                                 Unlock {quoteAsset.symbol}
@@ -858,12 +858,12 @@ const _POOL_TAB = () => {
 
 
                     <div className={"w-full grid grid-cols-2 gap-2"}>
-                        <Button className={"w-full"} onClick={() => {
+                        <Button className={"w-full"} onPress={() => {
                             handleAddLiquidity()
                         }} color="default">
                             Add Liquidity
                         </Button>
-                        <Button className={"w-full"} onClick={() => {
+                        <Button className={"w-full"} onPress={() => {
                             handleRemoveLiquidity()
                         }} color="default">
                             Remove Liquidity

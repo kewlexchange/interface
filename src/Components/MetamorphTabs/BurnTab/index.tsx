@@ -309,10 +309,10 @@ const _BURN_TAB = () => {
             <div className="px-6">{props.token.balance}</div>
             </CardBody>
             <CardFooter className='flex flex-row gap-2 w-full'>
-                <Button onClick={()=>{
+                <Button onPress={()=>{
                     handleNFTToToken(props.token)
                 }} size='sm' color='default'>Convert NFT to Token</Button>
-                <Button as={NavLink} to={"/account"} onClick={()=>{
+                <Button as={NavLink} to={"/account"} onPress={()=>{
                    
                 }} size='sm' color='default'>Sell On NFT Marketplace</Button>
             </CardFooter>

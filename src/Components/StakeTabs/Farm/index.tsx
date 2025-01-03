@@ -364,7 +364,7 @@ const _FARM_TAB = () => {
 
 
                             {
-                            <Button className="px-2 token-selector min-w-[200px]" radius='full' variant="flat" color="default" onClick={() => {
+                            <Button className="px-2 token-selector min-w-[200px]" radius='full' variant="flat" color="default" onPress={() => {
                                 setIsBase(true)
                                 toggleSelectToken()
                             }} startContent={
@@ -390,7 +390,7 @@ const _FARM_TAB = () => {
 
                               
 
-                                <div onClick={() => {
+                                <div onPress={() => {
                                     setInputValue(userBalance, true)
                                 }} className="balance  cursor-pointer">
                                     Balance: {userBalance}
@@ -518,7 +518,7 @@ const _FARM_TAB = () => {
                                 {
     
     
-                                isCNSRegistered && baseAsset && baseAsset.address !== ETHER_ADDRESS && <Button onClick={() => {
+                                isCNSRegistered && baseAsset && baseAsset.address !== ETHER_ADDRESS && <Button onPress={() => {
                                         handleUnlock()
                                     }} color='default' size='lg' className='w-full' variant='solid'>Unlock</Button>
     
@@ -526,7 +526,7 @@ const _FARM_TAB = () => {
     
     
                                 {
-                                    isCNSRegistered && <Button onClick={() => {
+                                    isCNSRegistered && <Button onPress={() => {
                                         handleStake()
                                     }} color='default' size='lg' className='w-full' variant='solid'>Stake</Button>
                                 }

@@ -114,7 +114,7 @@ The nature of overlapping standards, however, does imply that integrating protoc
                         </p>
                     </div>
 
-                    <button onClick={()=>{
+                    <button onPress={()=>{
                       handleMint()
                     }} className={"btn btn-primary"}>Mint Now</button>
                 </div>

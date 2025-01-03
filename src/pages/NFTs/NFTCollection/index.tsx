@@ -188,7 +188,7 @@ const NFTCollection: React.FunctionComponent<IPage> = props => {
                             <span>{sweepItem ? BigNumber.from(basketNFTAmount).toNumber() : 0}</span>
                             <span>NFT</span>
                         </div>
-                        <Button color={"default"} onClick={()=>{
+                        <Button color={"default"} onPress={()=>{
                             handleBuy()
                         }} className={"w-full btn btn-primary"}>
                             Buy

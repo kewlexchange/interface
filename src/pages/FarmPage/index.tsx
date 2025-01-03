@@ -116,7 +116,7 @@ const FarmPage: React.FunctionComponent<IPage> = props => {
 
                                                     {
                                                         activePool &&
-                                                        <div onClick={() => {
+                                                        <div onPress={() => {
                                                             togglePools();
                                                         }} className="farm-token-selector flex flex-row justify-between">
                                                             <DoubleCurrencyIcon baseIcon={getAssetIconByChainIdFromTokenList(chainId, defaultAssets, activePool.base.token)} quoteIcon={getAssetIconByChainIdFromTokenList(chainId, defaultAssets, activePool.quote.token)} />
@@ -151,7 +151,7 @@ const FarmPage: React.FunctionComponent<IPage> = props => {
                                                 <div className="w-full grid grid-cols-2 sm:grid-cols-2 gap-2">
                                                     {
                                                         farmPools && farmPools.map((pool, index) => {
-                                                            return <div key={`pool${index}`} onClick={() => {
+                                                            return <div key={`pool${index}`} onPress={() => {
                                                                 setActivePool(pool)
                                                                 togglePools()
                                                             }} className={(activePool.pair == pool.pair ? "selected " : "") + "stake-time-period-item flex flex-row gap-2 items-between justify-between border border-1 rounded-lg hover:bg-gray/50 p-2"}>
@@ -263,12 +263,12 @@ const FarmPage: React.FunctionComponent<IPage> = props => {
 
                                     <div className="w-full flex flex-col items-center justify-center">
                                         {
-                                            ((activePool && activePool.can_stake) && (scoreInfo && scoreInfo.votingMultiplier > 0)) && isUnlocked && <button onClick={() => {
+                                            ((activePool && activePool.can_stake) && (scoreInfo && scoreInfo.votingMultiplier > 0)) && isUnlocked && <button onPress={() => {
 
                                             }} className=" my-2 btn btn-primary w-full">Stake</button>
                                         }
                                         {
-                                            ((activePool && activePool.can_stake) && (scoreInfo && scoreInfo.votingMultiplier > 0)) && !isUnlocked && <button onClick={() => {
+                                            ((activePool && activePool.can_stake) && (scoreInfo && scoreInfo.votingMultiplier > 0)) && !isUnlocked && <button onPress={() => {
 
                                             }} className=" my-2 btn btn-primary w-full">Unlock</button>
                                         }

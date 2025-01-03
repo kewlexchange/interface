@@ -252,14 +252,14 @@ const _NFT = (props: {itemType,contractAddress,tokenId,showMetadata,canSell,canS
 
                         <div className={"w-full grid grid-cols-2 gap-2"}>
                             {
-                                !isLocked ? <button onClick={()=>{
+                                !isLocked ? <button onPress={()=>{
                                         handleUnlock()
                                 }} className={"btn btn-primary"}>Unlock to Sell</button> :
-                                <button onClick={()=>{
+                                <button onPress={()=>{
                                     toggleSell()
                                 }} className={"btn btn-primary"}>Sell</button>
                             }
-                            <button onClick={()=>{
+                            <button onPress={()=>{
                                         toggleTransfer()
                                     }} className={"btn btn-primary"}>Transfer</button>
                         </div>  }

@@ -17,8 +17,8 @@ export default function ConnectionErrorView() {
        <span className={"text-black"}>The connection attempt failed. Please click try again and follow the steps to connect in your wallet</span>
 
        <div className={"grid grid-cols-2 gap-4 w-full"}>
-       <button onClick={retry} className={"btn btn-primary w-full"}>Try Again</button>
-       <button onClick={cancelActivation} className={"btn btn-secondary w-full"}>Go Back</button>
+       <button onPress={retry} className={"btn btn-primary w-full"}>Try Again</button>
+       <button onPress={cancelActivation} className={"btn btn-secondary w-full"}>Go Back</button>
        </div>
 
        {/*<Wrapper>
@@ -31,11 +31,11 @@ export default function ConnectionErrorView() {
                    T.
                </Trans>
            </ThemedText.BodyPrimary>
-           <ButtonPrimary $borderRadius="16px" onClick={retry}>
+           <ButtonPrimary $borderRadius="16px" onPress={retry}>
                <Trans>Try Again</Trans>
            </ButtonPrimary>
            <ButtonEmpty width="fit-content" padding="0" marginTop={20}>
-               <ThemedText.Link onClick={cancelActivation} marginBottom={12}>
+               <ThemedText.Link onPress={cancelActivation} marginBottom={12}>
                    <Trans>Back to wallet selection</Trans>
                </ThemedText.Link>
            </ButtonEmpty>

@@ -437,7 +437,7 @@ const _CREATE_STAKE_POOL_TAB = () => {
                     {
                         baseAsset &&
 
-                        <Button fullWidth size='lg' className=" px-2 mb-2" radius='lg' variant="flat" color="default" onClick={() => {
+                        <Button fullWidth size='lg' className=" px-2 mb-2" radius='lg' variant="flat" color="default" onPress={() => {
                             setIsBase(true)
                             toggleSelectToken()
                         }} startContent={
@@ -470,7 +470,7 @@ const _CREATE_STAKE_POOL_TAB = () => {
                             {
                                 quoteAsset &&
 
-                                <Button className="token-selector px-2" radius='full' variant="flat" color="default" onClick={() => {
+                                <Button className="token-selector px-2" radius='full' variant="flat" color="default" onPress={() => {
                                     setIsBase(false)
                                     toggleSelectToken()
                                 }} startContent={
@@ -490,7 +490,7 @@ const _CREATE_STAKE_POOL_TAB = () => {
                             }
 
 
-                            <div onClick={() => {
+                            <div onPress={() => {
                                 setInputValue(quoteAsset && quoteAsset.balance, false)
                             }} className="balance cursor-pointer">
                                 Balance: {quoteAsset && quoteAsset.balance}
@@ -522,11 +522,11 @@ const _CREATE_STAKE_POOL_TAB = () => {
                 </div>
 
              
-                <Button onClick={()=>{
+                <Button onPress={()=>{
                             // unlock
                             handleUnlock()
                         }} size='lg' fullWidth color='default' variant='solid'>Unlock</Button>
-                <Button onClick={()=>{
+                <Button onPress={()=>{
                             // stake
 
                             handleCreatePool()

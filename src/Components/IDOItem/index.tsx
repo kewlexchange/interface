@@ -356,7 +356,7 @@ const _IDOItem = (props: { IDOParams, name }) => {
                                                 </div>
 
                                             </div>
-                                            <Button onClick={() => {
+                                            <Button onPress={() => {
                                                 initDefaults()
                                             }} isIconOnly radius='full'>
                                                 <span translate='no' className="material-symbols-outlined">
@@ -409,7 +409,7 @@ const _IDOItem = (props: { IDOParams, name }) => {
                                                 />
 
                                                 <div className="w-full">
-                                                    <Button onClick={() => {
+                                                    <Button onPress={() => {
                                                         handleContribute();
                                                     }} variant='shadow' size='lg' className='w-full' color='success'>Contribute</Button>
                                                 </div>
@@ -442,7 +442,7 @@ const _IDOItem = (props: { IDOParams, name }) => {
                                                 </div>
 
                                             </div>
-                                            <Button onClick={() => {
+                                            <Button onPress={() => {
                                                 initDefaults()
                                             }} isIconOnly radius='full'>
                                                 <span translate='no' className="material-symbols-outlined">
@@ -482,7 +482,7 @@ const _IDOItem = (props: { IDOParams, name }) => {
 
 
                                                 <div className="w-full">
-                                                    <Button onClick={() => {
+                                                    <Button onPress={() => {
                                                         handleRefund();
                                                     }} isDisabled={userInfo && userInfo.isRefunded} variant='shadow' size='lg' className='w-full' color='default'>Refund</Button>
                                                 </div>
@@ -515,7 +515,7 @@ const _IDOItem = (props: { IDOParams, name }) => {
 
 
                                             </div>
-                                            <Button onClick={() => {
+                                            <Button onPress={() => {
                                                 initDefaults()
                                             }} isIconOnly radius='full'>
                                                 <span translate='no' className="material-symbols-outlined">
@@ -559,7 +559,7 @@ const _IDOItem = (props: { IDOParams, name }) => {
 
 
                                                 <div className="w-full">
-                                                    <Button onClick={() => {
+                                                    <Button onPress={() => {
 
                                                     }} variant='shadow' isDisabled size='lg' className='w-full' color='secondary'>Claim Tokens</Button>
                                                 </div>

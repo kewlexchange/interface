@@ -280,7 +280,7 @@ const App = () => {
                     </DropdownSection>
 
                     <DropdownSection aria-label="Help & Feedback">
-                      <DropdownItem onClick={() => {
+                      <DropdownItem onPress={() => {
                         disconnect();
                       }} key="logout">Disconnect</DropdownItem>
                     </DropdownSection>
@@ -288,7 +288,7 @@ const App = () => {
                 </Dropdown>
 
               </> : <>
-                <Button variant='solid' color='default' onClick={async () => {
+                <Button variant='solid' color='default' onPress={async () => {
                   await handleConnect();
                 }}>Connect</Button>
               </>
@@ -300,7 +300,7 @@ const App = () => {
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
               
               
-              <Link onClick={(e) => {
+              <Link onPress={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/swap"} >
@@ -309,7 +309,7 @@ const App = () => {
             </NavbarMenuItem>
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onClick={(e) => {
+              <Link onPress={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/nfts"}>
@@ -319,7 +319,7 @@ const App = () => {
 
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onClick={(e) => {
+              <Link onPress={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/earn"}>
@@ -328,7 +328,7 @@ const App = () => {
             </NavbarMenuItem>
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onClick={(e) => {
+              <Link onPress={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/cns"}>
@@ -338,7 +338,7 @@ const App = () => {
 
 
             <NavbarMenuItem className='flex flex-row items-start justify-start'>
-              <Link onClick={(e) => {
+              <Link onPress={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/launchpad"}>
@@ -348,7 +348,7 @@ const App = () => {
 
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onClick={(e) => {
+              <Link onPress={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/metamorph"}>
@@ -358,7 +358,7 @@ const App = () => {
 
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onClick={(e) => {
+              <Link onPress={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/vesting"}>
@@ -368,7 +368,7 @@ const App = () => {
 
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onClick={(e) => {
+              <Link onPress={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/explorer"}>

@@ -297,7 +297,7 @@ const Domain = () => {
         </DropdownSection>  
 
         <DropdownSection aria-label="Help & Feedback">
-          <DropdownItem onClick={()=>{
+          <DropdownItem onPress={()=>{
             disconnect();
           }} key="logout">Disconnect</DropdownItem>
         </DropdownSection> 
@@ -305,7 +305,7 @@ const Domain = () => {
     </Dropdown>
     
               </> : <>
-              <Button variant='solid' color='default' onClick={async () => {
+              <Button variant='solid' color='default' onPress={async () => {
                   await handleConnect();
                 }}>Connect</Button>
               </>
@@ -317,7 +317,7 @@ const Domain = () => {
 
 
         <NavbarMenuItem className='flex flex-row items-center justify-start'>
-        <Link onClick={(e)=>{
+        <Link onPress={(e)=>{
         setIsMenuOpen(false)
         e.stopPropagation();
       }} color="foreground" as={NavLink} to={"/cns"}>
@@ -327,7 +327,7 @@ const Domain = () => {
 
 
         <NavbarMenuItem className='flex flex-row items-center justify-start'>
-          <Link onClick={(e)=>{
+          <Link onPress={(e)=>{
         setIsMenuOpen(false)
         e.stopPropagation();
       }} color="foreground" as={NavLink} to={"/nfts/2"}>

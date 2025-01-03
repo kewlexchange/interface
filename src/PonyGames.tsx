@@ -293,7 +293,7 @@ const PonyGames = () => {
                     </DropdownSection>
 
                     <DropdownSection aria-label="Help & Feedback">
-                      <DropdownItem onClick={() => {
+                      <DropdownItem onPress={() => {
                         disconnect();
                       }} key="logout">Disconnect</DropdownItem>
                     </DropdownSection>
@@ -301,7 +301,7 @@ const PonyGames = () => {
                 </Dropdown>
 
               </> : <>
-                <Button variant='shadow' color='secondary' onClick={async () => {
+                <Button variant='shadow' color='secondary' onPress={async () => {
                   await handleConnect();
                 }}>Connect</Button>
               </>
@@ -313,7 +313,7 @@ const PonyGames = () => {
 
 
             <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onClick={(e) => {
+              <Link onPress={(e) => {
                 setIsMenuOpen(false)
                 e.stopPropagation();
               }} color="foreground" as={NavLink} to={"/games"}>

@@ -64,7 +64,7 @@ const UnstakePage: React.FunctionComponent<IPage> = props => {
                                 <span className={"text-xs font-bold whitespace-nowrap"}>Reward Amount</span>
                                 <span className={"font-extrabold"}>{ethers.utils.formatUnits(props.stakingItem.rewardAmount,props.stakingItem.rewardDecimals)}</span>
                             </div>
-                            <button onClick={()=>{
+                            <button onPress={()=>{
                                 updateState()
                             }} className={"rounded-full flex items-center justify-center w-8 h-8 transparent-bg hover:bg-white/30"}>
                                 <span translate={"no"} className="material-symbols-outlined">

@@ -433,7 +433,7 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
                                             </div>
 
                                         </div>
-                                        <Button onClick={() => {
+                                        <Button onPress={() => {
                                             initDefaults()
                                         }} isIconOnly radius='full'>
                                             <span translate='no' className="material-symbols-outlined">
@@ -491,7 +491,7 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
                                                     setAcceptAggrement(val)
                                                 }} color={"default"} size="lg">I acknowledge that TBT is a MEME token and understand that I am solely responsible for any potential losses incurred.</Switch>
 
-                                                <Button isDisabled={!acceptAggrement} onClick={() => {
+                                                <Button isDisabled={!acceptAggrement} onPress={() => {
                                                     handleContribute();
                                                 }} variant='shadow' size='lg' className='w-full' color='default'>Invest Now</Button>
                                             </div>
@@ -522,7 +522,7 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
                                             </div>
 
                                         </div>
-                                        <Button onClick={() => {
+                                        <Button onPress={() => {
                                             initDefaults()
                                         }} isIconOnly radius='full'>
                                             <span translate='no' className="material-symbols-outlined">
@@ -562,7 +562,7 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
 
 
                                             <div className="w-full">
-                                                <Button onClick={() => {
+                                                <Button onPress={() => {
                                                     handleRefund();
                                                 }} isDisabled={userInfo && userInfo.isRefunded} variant='shadow' size='lg' className='w-full' color='default'>Refund</Button>
                                             </div>
@@ -595,7 +595,7 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
 
 
                                         </div>
-                                        <Button onClick={() => {
+                                        <Button onPress={() => {
                                             initDefaults()
                                         }} isIconOnly radius='full'>
                                             <span translate='no' className="material-symbols-outlined">
@@ -636,7 +636,7 @@ const _ANGRYHOOPIDO = (props: { IDOParams, name }) => {
 
 
                                             <div className="w-full">
-                                                <Button onClick={() => {
+                                                <Button onPress={() => {
                                                     handleClaimTokens()
 
                                                 }} variant='shadow' size='lg' className='w-full' color='secondary'>Claim Tokens</Button>

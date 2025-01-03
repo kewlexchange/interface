@@ -229,7 +229,7 @@ const _STAKE_TAB = () => {
 {
                             baseAsset &&
 
-                            <Button className="token-selector" radius='full' variant="flat" color="default" onClick={() => {
+                            <Button className="token-selector" radius='full' variant="flat" color="default" onPress={() => {
                                 setIsBase(true)
                                 toggleSelectToken()
                             }} startContent={
@@ -246,7 +246,7 @@ const _STAKE_TAB = () => {
                         }
 
 
-                                <div onClick={() => {
+                                <div onPress={() => {
                                     setInputValue(baseAsset?.balance, true)
                                 }} className="balance  cursor-pointer">
                                     Balance: {baseAsset && baseAsset.balance}
@@ -350,7 +350,7 @@ const _STAKE_TAB = () => {
                             {
 
 
-                        isCNSRegistered && baseAsset && baseAsset.address !== ETHER_ADDRESS && <Button onClick={() => {
+                        isCNSRegistered && baseAsset && baseAsset.address !== ETHER_ADDRESS && <Button onPress={() => {
                                     handleUnlock()
                                 }} color='default' size='lg' className='w-full' variant='solid'>Unlock</Button>
 
@@ -358,7 +358,7 @@ const _STAKE_TAB = () => {
 
 
                             {
-                                isCNSRegistered && <Button onClick={() => {
+                                isCNSRegistered && <Button onPress={() => {
                                     handleStake()
                                 }} color='default' size='lg' className='w-full' variant='solid'>Stake</Button>
                             }

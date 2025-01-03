@@ -421,7 +421,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
                                                 </div>
 
                                             </div>
-                                            <Button onClick={() => {
+                                            <Button onPress={() => {
                                                 initDefaults()
                                             }} isIconOnly radius='full'>
                                                 <span translate='no' className="material-symbols-outlined">
@@ -479,7 +479,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
                                                     setAcceptAggrement(val)
                                                 }} color={"default"} size="lg">I acknowledge that CHZINU is a MEME token and understand that I am solely responsible for any potential losses incurred.</Switch>
 
-                                                    <Button isDisabled={!acceptAggrement} onClick={() => {
+                                                    <Button isDisabled={!acceptAggrement} onPress={() => {
                                                         handleContribute();
                                                     }} variant='shadow' size='lg' className='w-full' color='default'>Invest Now</Button>
                                                 </div>
@@ -512,7 +512,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
                                                 </div>
 
                                             </div>
-                                            <Button onClick={() => {
+                                            <Button onPress={() => {
                                                 initDefaults()
                                             }} isIconOnly radius='full'>
                                                 <span translate='no' className="material-symbols-outlined">
@@ -552,7 +552,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
 
 
                                                 <div className="w-full">
-                                                    <Button onClick={() => {
+                                                    <Button onPress={() => {
                                                         handleRefund();
                                                     }} isDisabled={userInfo && userInfo.isRefunded} variant='shadow' size='lg' className='w-full' color='default'>Refund</Button>
                                                 </div>
@@ -585,7 +585,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
 
 
                                             </div>
-                                            <Button onClick={() => {
+                                            <Button onPress={() => {
                                                 initDefaults()
                                             }} isIconOnly radius='full'>
                                                 <span translate='no' className="material-symbols-outlined">
@@ -626,7 +626,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
 
 
                                                 <div className="w-full">
-                                                    <Button onClick={() => {
+                                                    <Button onPress={() => {
                                                         handleClaimTokens()
 
                                                     }} variant='shadow'  size='lg' className='w-full' color='secondary'>Claim Tokens</Button>
@@ -634,7 +634,7 @@ const _CHZINUIDO = (props: { IDOParams, name }) => {
 
                                                 {
                                                       account && ethers.utils.getAddress(account) == ethers.utils.getAddress("0xFba3C1F60DdE14a202F9b67A8b0F76b9ee6e9646") && <>
-                                                          <Button onClick={() => {
+                                                          <Button onPress={() => {
                                                         handleClaimFunds()
                                                     }} variant='shadow' size='lg' className='w-full' color='default'>Claim Funds</Button>
                                                       </>

@@ -240,7 +240,7 @@ const _SWAP_TAB = () => {
                             {
                                 baseAsset &&
 
-                                <Button className="token-selector  px-2" radius='full' variant="flat" color="default" onClick={() => {
+                                <Button className="token-selector  px-2" radius='full' variant="flat" color="default" onPress={() => {
                                     setIsBase(true)
                                     toggleSelectToken()
                                 }} startContent={
@@ -259,7 +259,7 @@ const _SWAP_TAB = () => {
 
 
 
-                            <div onClick={() => {
+                            <div onPress={() => {
                                 setInputValue(baseAsset.balance, true)
                             }} className="balance cursor-pointer">
                                 Balance: {baseAsset && baseAsset.balance}
@@ -286,7 +286,7 @@ const _SWAP_TAB = () => {
                 <div className={"flex flex-col gap-2 w-full"}>
  
                     <div className="w-full flex flex-col items-center justify-center">
-                       <Button onClick={()=>{
+                       <Button onPress={()=>{
                         handleLockTokens();
                        }} size='lg' fullWidth color='default'>Lock Tokens</Button>
                     </div>

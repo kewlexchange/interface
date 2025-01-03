@@ -165,7 +165,7 @@ const NFTDistributor: React.FunctionComponent<IPage> = props => {
                                     </span>
                                 </div>
                             </div> : userProofs ? <>
-                                <Button onClick={()=>{
+                                <Button onPress={()=>{
                                 handleMint();
                             }} color="default" variant="solid">
                                 Claim Your Membership NFT

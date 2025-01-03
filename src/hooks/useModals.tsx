@@ -43,7 +43,7 @@ export const ModalNoProvider = ({ isShowing, hide }) => {
                         <p className='text-center'>
                             No Web3 browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.
                         </p>
-                        <a className={"btn btn-primary mt-4"} target='_blank' onClick={hide} href='https://metamask.io/download.html'>
+                        <a className={"btn btn-primary mt-4"} target='_blank' onPress={hide} href='https://metamask.io/download.html'>
                             <span>Install MetaMask</span>
                         </a>
                     </div>
@@ -104,7 +104,7 @@ export const ModalError = ({ isShowing, hide, error }) => {
                         <p className='text-xs'>
                             Transaction attempt failed with an Error
                         </p>
-                        <Button color="default" size="lg" className={"w-full"} onClick={() => {
+                        <Button color="default" size="lg" className={"w-full"} onPress={() => {
                             hide();
                         }
                         }>
@@ -131,7 +131,7 @@ export const ModalInfo = ({ isShowing, hide, error }) => {
                         <textarea defaultValue={error?.data ? error.data?.message : error?.message} rows={5} cols={5} className={"w-full h-20 rounded-xl p-2 "} />
 
 
-                        <Button color="default" size="lg" className={"w-full"} onClick={() => {
+                        <Button color="default" size="lg" className={"w-full"} onPress={() => {
                             hide();
                         }
                         }>
@@ -157,7 +157,7 @@ export const ModalSuccessTransaction = ({ isShowing, hide, transaction }) => {
                         <p>Transaction has been completed.</p>
                         <a className={"my-2 text-blue-500"} href={generateTxLink(chainId, transaction.hash)} target={"_blank"}>View on Explorer</a>
 
-                        <Button color="default" size="lg" className={"w-full"} onClick={() => {
+                        <Button color="default" size="lg" className={"w-full"} onPress={() => {
                             hide();
                         }
                         }>
@@ -269,7 +269,7 @@ export const ModalSellNFT = ({ isShowing, hide, contractAddress, tokenId, tokenT
                             </div>
                             <div className="w-full flex flex-col items-center justify-center">
                                 {
-                                    <Button variant="solid" color="default" onClick={() => {
+                                    <Button variant="solid" color="default" onPress={() => {
                                         handleSell(defaultPrice, userBalance)
                                     }} className=" w-full">Sell</Button>
                                 }
@@ -365,7 +365,7 @@ export const ModalTransferNFT = ({ isShowing, hide, contractAddress, tokenId, to
                     </div>
                     <div className="w-full flex flex-col items-center justify-center">
                         {
-                            <Button size="lg" color="default" onClick={() => {
+                            <Button size="lg" color="default" onPress={() => {
                                 handleTransfer(userAmount, receiverAddress)
                             }} className=" my-2 w-full">Transfer</Button>
                         }
@@ -398,7 +398,7 @@ export const ModalShowWallet = ({ isShowing, hide, address, onDisconnect, isClos
                             </div>
 
                             <div className={"flex align-center justify-center my-3"}>
-                                <button onClick={() => {
+                                <button onPress={() => {
                                     onDisconnect();
                                 }} className={"btn btn-primary"}>
                                     Disconnect
@@ -748,7 +748,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                                                                     </AvatarGroup>
 
                                                                 }
-                                                                    key={`token${tokenItem.address}`} onClick={() => {
+                                                                    key={`token${tokenItem.address}`} onPress={() => {
                                                                         onSelect(tokenItem)
                                                                         setSearchText("")
                                                                     }} className={"w-full flex flex-row items-center justify-between gap-2"}>
@@ -793,7 +793,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                                                                         startContent={
                                                                             <DoubleCurrencyIcon baseIcon={getIconPath(exchangeItem.base.symbol)} quoteIcon={getIconPath(exchangeItem.quote.symbol)} />
                                                                         }
-                                                                        key={`exchangeItem${exchangeIndex}`} onClick={() => {
+                                                                        key={`exchangeItem${exchangeIndex}`} onPress={() => {
                                                                             handleSelectPair(exchangeItem)
                                                                         }} className="w-full">
                                                                         <span className={"sm:text-sm"}>{exchangeItem.base.symbol} x {exchangeItem.quote.symbol}</span>
@@ -828,7 +828,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                                         <div className="w-full flex flex-row items-center justify-between">
                                         <Switch  isSelected={isSelected} onValueChange={setIsSelected} defaultSelected color="default">I understand. I promise not to buy, I swear to God.</Switch>
 
-                                            <Button isDisabled={!isSelected} onClick={() => {
+                                            <Button isDisabled={!isSelected} onPress={() => {
                                                 handleImportToken()
                                             }} size="lg" color="default">Import Token</Button>
                                         </div>
@@ -1188,7 +1188,7 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
                                                                     </AvatarGroup>
 
                                                                 }
-                                                                    key={`token${tokenItem.address}`} onClick={() => {
+                                                                    key={`token${tokenItem.address}`} onPress={() => {
                                                                         onSelect(tokenItem)
                                                                         setSearchText("")
                                                                     }} className={"w-full flex flex-row items-center justify-between gap-2"}>
@@ -1232,7 +1232,7 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
                                         <div className="w-full flex flex-row items-center justify-between">
                                         <Switch  isSelected={isSelected} onValueChange={setIsSelected} defaultSelected color="default">I understand. I promise not to buy, I swear to God.</Switch>
 
-                                            <Button isDisabled={!isSelected} onClick={() => {
+                                            <Button isDisabled={!isSelected} onPress={() => {
                                                 handleImportToken()
                                             }} size="lg" color="default">Import Token</Button>
                                         </div>
@@ -1478,7 +1478,7 @@ export const ModalSelectExchangePair = ({ isShowing, disableToken, hide, tokenLi
                                                     canDisplay(exchangeItem.pair) &&
                                                     <Button  size="lg" variant="flat"
                                                         
-                                                        key={`exchangeItem${exchangeIndex}`} onClick={() => {
+                                                        key={`exchangeItem${exchangeIndex}`} onPress={() => {
                                                             handleSelectPair(exchangeItem)
                                                         }} className="w-full flex flex-col gap-2 h-[100px]">
                                                             <DoubleCurrencyIcon baseIcon={getIconPath(exchangeItem.base.symbol)} quoteIcon={getIconPath(exchangeItem.quote.symbol)} />

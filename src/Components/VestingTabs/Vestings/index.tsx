@@ -251,7 +251,7 @@ const _SWAP_TAB = () => {
                                                     Already Claimed
                                                     </Button>
                                                   </> : <>
-                                                  <Button onClick={()=>{
+                                                  <Button onPress={()=>{
                                                         handleClaim(vestingInfo.index);
                                                     }} fullWidth size="sm" color="success" variant="flat">
                                                         Claim

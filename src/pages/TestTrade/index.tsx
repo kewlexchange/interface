@@ -312,7 +312,7 @@ const TestTrade: React.FunctionComponent<IPage> = props => {
 
                                         {
                                             baseAsset &&
-                                            <div onClick={()=>{
+                                            <div onPress={()=>{
                                                 setIsBase(true)
                                                 toggleSelectToken()
                                             }} className="token-selector">
@@ -332,12 +332,12 @@ const TestTrade: React.FunctionComponent<IPage> = props => {
 
                                     <div className={"w-full grid grid-cols-2 gap-2"}>
 
-                                        <button onClick={()=>{
+                                        <button onPress={()=>{
                                             handleApprove()
                                         }} className={"btn btn-primary"}>
                                             Unlock
                                         </button>
-                                        <button onClick={()=>{
+                                        <button onPress={()=>{
                                             handleTrade()
                                         }} className={"btn btn-primary"}>
                                             Trade

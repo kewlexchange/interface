@@ -310,7 +310,7 @@ const CreateLaunchPage: React.FunctionComponent<IPage> = props => {
                     </>
 
                     <div className="w-full flex items-center justify-center">
-                        <button onClick={(e) => {
+                        <button onPress={(e) => {
                             e.preventDefault();
 
                         }} className="btn btn-primary" type="submit">Create Launchpad</button>

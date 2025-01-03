@@ -52,7 +52,7 @@ export const Network = (props: { className?: string, testMode?: boolean }) => {
 
                     <div className="grid grid-cols-2 sm:grid-cols-1 gap-3">
 
-                        <div onClick={() => {
+                        <div onPress={() => {
                             handleChangeActiveNetwork(ChainId.CHILIZ_MAINNET);
                         }} className={"w-full flex flex-row gap-2 items-center hover:bg-gray/50 rounded-lg p-3 " + (chainId === ChainId.CHILIZ_MAINNET ? "bg-green-500  text-white " : "bg-default")}>
                             <div className="thumb bsc">
@@ -64,7 +64,7 @@ export const Network = (props: { className?: string, testMode?: boolean }) => {
                             </div>
                         </div>
 
-                        <div onClick={() => {
+                        <div onPress={() => {
                             handleChangeActiveNetwork(ChainId.CHILIZ_SPICY_TESTNET);
                         }} className={"w-full flex flex-row gap-2 items-center hover:bg-gray/50 rounded-lg p-3 " + (chainId === ChainId.CHILIZ_SPICY_TESTNET ? "bg-green-500  text-white " : "bg-default")}>
                             <div className="thumb bsc">
@@ -76,7 +76,7 @@ export const Network = (props: { className?: string, testMode?: boolean }) => {
                             </div>
                         </div>
 
-                        <div onClick={() => {
+                        <div onPress={() => {
                             handleChangeActiveNetwork(ChainId.ARBITRUM_ONE);
                         }} className={"w-full flex flex-row gap-2 items-center hover:bg-gray/50 rounded-lg p-3 " + (chainId === ChainId.ARBITRUM_ONE ? "bg-green-500  text-white " : "transparent-bg")}>
                             <div className="thumb bsc">
@@ -88,7 +88,7 @@ export const Network = (props: { className?: string, testMode?: boolean }) => {
                             </div>
                         </div>
                         {/* 
-                        <div onClick={() => {
+                        <div onPress={() => {
                             handleChangeActiveNetwork(ChainId.BITCI);
                         }} className={"w-full hidden flex flex-row gap-2 items-center hover:bg-gray/50 rounded-lg p-3 " + ([ChainId.BITCI, ChainId.BITCI_TEST].includes(chainId) ? "bg-green-500 text-white" : "transparent-bg")}>
                             <div className="thumb bsc">
@@ -100,7 +100,7 @@ export const Network = (props: { className?: string, testMode?: boolean }) => {
                             </div>
                         </div>
 
-                        <div onClick={() => {
+                        <div onPress={() => {
                             handleChangeActiveNetwork(ChainId.BITCI_TEST);
                         }} className={"w-full hidden flex flex-row gap-2 items-center hover:bg-gray/50 rounded-lg p-3 " + ([ChainId.BITCI, ChainId.BITCI_TEST].includes(chainId) ? "bg-green-500 text-white" : "transparent-bg")}>
                             <div className="thumb bsc">

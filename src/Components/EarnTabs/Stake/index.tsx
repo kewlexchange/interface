@@ -212,7 +212,7 @@ const _STAKE_POOL_TAB = () => {
                     <div className="swap-inputs mb-2">
                         <div className="input sm:order-3">
                             {
-                                <Button className="token-selector px-2" radius='full' variant="solid" color="default" onClick={() => {
+                                <Button className="token-selector px-2" radius='full' variant="solid" color="default" onPress={() => {
                                     setIsBase(false)
                                     toggleSelectToken()
                                 }}
@@ -221,7 +221,7 @@ const _STAKE_POOL_TAB = () => {
                                 </Button>
                             }
 
-                            <div onClick={() => {
+                            <div onPress={() => {
                                 setInputValue(quoteAsset && quoteAsset.balance, false)
                             }} className="balance cursor-pointer">
                                 Balance: {quoteAsset && quoteAsset.balance}

@@ -167,7 +167,7 @@ const _DOMAIN_REGISTER_TAB = () => {
                                 <div className="w-full gap-2 grid grid-cols-3 items-center justify-center">
                                     {
                                         tldDomains && tldDomains.map((domainItem, domainIndex) => {
-                                            return (<button onClick={() => {
+                                            return (<button onPress={() => {
                                                 setCurrentTLD(domainItem)
 
                                             }} key={`domain${domainIndex}`} className={(currentTLD && currentTLD.name === domainItem.name ? "bg-gradient text-white" : "") + " rounded-lg border-default border border-1 p-2 min-w-[60px] hover:bg-gradient hover:text-white"}>
@@ -195,7 +195,7 @@ const _DOMAIN_REGISTER_TAB = () => {
 
                                             {
                                                 currentTLD &&
-                                                <div onClick={() => {
+                                                <div onPress={() => {
 
                                                 }} className="token-selector text-center">
 
@@ -268,7 +268,7 @@ const _DOMAIN_REGISTER_TAB = () => {
 
                             {currentTLD && domainName.length > 0 &&
                                 <div className="w-full">
-                                    <Button color='default' onClick={() => {
+                                    <Button color='default' onPress={() => {
                                         handleSaveSettings()
                                     }} className="w-full">Register Now</Button>
                                 </div>

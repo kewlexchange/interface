@@ -201,7 +201,7 @@ const OldStakePage: React.FunctionComponent<IPage> = props => {
                                             </div>
                                         </div>
                                         <div className="flex items-center justify-start py-2 pl-2 ">
-                                            <button onClick={()=>{
+                                            <button onPress={()=>{
                                                 togglePools();
                                             }} className="flex items-center gap-x-2 pr-8 select-none cursor-pointer bg-white/30 hover:bg-white/50 rounded-full p-2">
                                                 {
@@ -226,7 +226,7 @@ const OldStakePage: React.FunctionComponent<IPage> = props => {
                                                 <div className="w-full grid grid-cols-4 sm:grid-cols-2 gap-2 ">
                                                     {
                                                         stakePools && stakePools.map((pool,index)=>{
-                                                            return <div key={`pool${index}`} onClick={()=>{
+                                                            return <div key={`pool${index}`} onPress={()=>{
                                                                 setActiveStakePool(pool)
                                                                 togglePools()
                                                             }} className={(activeStakePool.pool_contract == pool.pool_contract ? "selected " : "") + "stake-time-period-item"}>
@@ -262,36 +262,36 @@ const OldStakePage: React.FunctionComponent<IPage> = props => {
                                                         <span className={"font-bold"}>Time Lock Period</span>
                                                     </div>
                                                     <div className="w-full grid grid-cols-2 sm:grid-cols-1 gap-2 ">
-                                                        <div onClick={()=>(setTimePeriod(0))} className={(timePeriod == 0 ? "selected " : "") + "stake-time-period-item"}>
+                                                        <div onPress={()=>(setTimePeriod(0))} className={(timePeriod == 0 ? "selected " : "") + "stake-time-period-item"}>
                                                             <div className={"period"}>1 Month</div>
                                                             <div translate={"no"} className={"badge bg-purple-600"}>1x</div>
                                                         </div>
-                                                        <div onClick={()=>(setTimePeriod(1))}  className={(timePeriod == 1 ? "selected " : "") + "stake-time-period-item"}>
+                                                        <div onPress={()=>(setTimePeriod(1))}  className={(timePeriod == 1 ? "selected " : "") + "stake-time-period-item"}>
                                                             <div className={"period"}>3 Month</div>
                                                             <div translate={"no"}  className={"badge bg-fuchsia-500"}>2x</div>
                                                         </div>
-                                                        <div onClick={()=>(setTimePeriod(2))}  className={(timePeriod == 2 ? "selected " : "") + "stake-time-period-item"}>
+                                                        <div onPress={()=>(setTimePeriod(2))}  className={(timePeriod == 2 ? "selected " : "") + "stake-time-period-item"}>
                                                             <div className={"period"}>6 Month</div>
                                                             <div translate={"no"}  className={"badge bg-blue-500"}>4x</div>
                                                         </div>
-                                                        <div onClick={()=>(setTimePeriod(3))}  className={(timePeriod == 3 ? "selected " : "") + "stake-time-period-item"}>
+                                                        <div onPress={()=>(setTimePeriod(3))}  className={(timePeriod == 3 ? "selected " : "") + "stake-time-period-item"}>
                                                             <div className={"period"}>1 Year</div>
                                                             <div translate={"no"}  className={"badge bg-green-500"}>8x</div>
                                                         </div>
-                                                        <div onClick={()=>(setTimePeriod(4))}  className={(timePeriod == 4 ? "selected " : "") + "stake-time-period-item"}>
+                                                        <div onPress={()=>(setTimePeriod(4))}  className={(timePeriod == 4 ? "selected " : "") + "stake-time-period-item"}>
                                                             <div className={"period"}>2 Year</div>
                                                             <div translate={"no"}  className={"badge bg-lime-500"}>16x</div>
                                                         </div>
-                                                        <div onClick={()=>(setTimePeriod(5))}  className={(timePeriod == 5 ? "selected " : "") + "stake-time-period-item"}>
+                                                        <div onPress={()=>(setTimePeriod(5))}  className={(timePeriod == 5 ? "selected " : "") + "stake-time-period-item"}>
                                                             <div className={"period"}>3 Year</div>
                                                             <div translate={"no"}  className={"badge  bg-yellow-500"}>32x</div>
                                                         </div>
-                                                        <div onClick={()=>(setTimePeriod(6))}  className={(timePeriod == 6 ? "selected " : "") + "stake-time-period-item"}>
+                                                        <div onPress={()=>(setTimePeriod(6))}  className={(timePeriod == 6 ? "selected " : "") + "stake-time-period-item"}>
                                                             <div className={"period"}>4 Year</div>
                                                             <div translate={"no"}  className={"badge bg-orange-500"}>64x</div>
 
                                                         </div>
-                                                        <div onClick={()=>(setTimePeriod(7))}  className={(timePeriod == 7 ? "selected " : "") + "stake-time-period-item"}>
+                                                        <div onPress={()=>(setTimePeriod(7))}  className={(timePeriod == 7 ? "selected " : "") + "stake-time-period-item"}>
                                                             <div className={"period"}>5 Year</div>
                                                             <div translate={"no"}  className={"badge bg-red-500"}>128x</div>
                                                         </div>
@@ -397,12 +397,12 @@ const OldStakePage: React.FunctionComponent<IPage> = props => {
 
                                     <div className="w-full flex flex-col items-center justify-center">
                                         {
-                                            ((activeStakePool && activeStakePool.can_stake) && (scoreInfo && scoreInfo.votingMultiplier > 0)) && isUnlocked && <button onClick={()=>{
+                                            ((activeStakePool && activeStakePool.can_stake) && (scoreInfo && scoreInfo.votingMultiplier > 0)) && isUnlocked && <button onPress={()=>{
                                                 handleStake()
                                             }} className=" my-2 btn btn-primary w-full">Stake</button>
                                         }
                                         {
-                                            ((activeStakePool && activeStakePool.can_stake) && (scoreInfo && scoreInfo.votingMultiplier > 0)) && !isUnlocked && <button onClick={()=>{
+                                            ((activeStakePool && activeStakePool.can_stake) && (scoreInfo && scoreInfo.votingMultiplier > 0)) && !isUnlocked && <button onPress={()=>{
                                                 handleAllowance()
                                             }} className=" my-2 btn btn-primary w-full">Unlock</button>
                                         }

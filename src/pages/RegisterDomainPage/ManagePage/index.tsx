@@ -63,7 +63,7 @@ const ManagePage: React.FunctionComponent<IPage> = props => {
                                                 </div>
 
                                             </NavLink>
-                                            <NavLink to={"/cns/domains"} onClick={() => {
+                                            <NavLink to={"/cns/domains"} onPress={() => {
 
                                             }} role="tab" className={" rounded-full grid place-items-center px-2 min-w-[100px] text-center h-full relative bg-transparent antialiased font-sans text-base leading-relaxed select-none cursor-pointer p-0 font-normal"} data-value="html">
                                                 <div className="z-20 flex items-center justify-center">
@@ -74,7 +74,7 @@ const ManagePage: React.FunctionComponent<IPage> = props => {
                                                 </div>
 
                                             </NavLink>
-                                            <NavLink to={"/cns/manage"} onClick={() => {
+                                            <NavLink to={"/cns/manage"} onPress={() => {
 
                                             }} role="tab" className={("bg-gradient text-white shadow") + " rounded-full grid place-items-center px-2 min-w-[100px] text-center h-full relative bg-transparent antialiased font-sans text-base leading-relaxed select-none cursor-pointer p-0 font-normal"} data-value="html">
                                                 <div className="z-20 flex items-center justify-center">

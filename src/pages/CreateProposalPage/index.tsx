@@ -286,7 +286,7 @@ const CreateProposalPage: React.FunctionComponent<IPage> = props => {
                                 </div>
                             </div>
                             <div className="w-full flex flex-col items-center justify-center">
-                                <button onClick={() => {
+                                <button onPress={() => {
                                     handleCreateProposal();
                                 }} className=" my-2 btn btn-primary w-full hidden">Create Proposal
                                 </button>
