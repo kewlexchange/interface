@@ -731,7 +731,7 @@ const _POOL_TAB = () => {
 
                         }
 
-                        <div onPress={() => {
+                        <div onClick={() => {
                             setInputValue(quoteAsset.balance, false)
                         }} className="balance cursor-pointer">
                             Balance: {quoteAsset && quoteAsset.balance}
