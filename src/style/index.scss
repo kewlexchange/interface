@@ -1255,3 +1255,72 @@ svg:not(:root) {
      -webkit-mask-position: center;
      mask-position: center;
  }
+
+
+
+
+ .screen hr { border: 1px solid #59ffff; }
+
+.screen ul { margin-left: 2em; }
+
+.list {
+  display: grid;
+  grid-template-columns: 125px 1fr;
+  margin-top: 2em;
+  margin-bottom: 4em;
+}
+
+.list span:nth-child(2n-1) {
+  text-align: center;
+  display: block;
+}
+
+.list span[data-status="correct"]::before {
+  content: "♦";
+  color: #59ffff;
+}
+
+.list span[data-status="current"]::before {
+  content: "»";
+  color: #59ffff;
+}
+
+.list span[data-status="fixed"]::before {
+  content: "fixed";
+  color: #9c0b07;
+  font-weight: bold;
+}
+
+.button-panel {
+  margin-bottom: 1.5em;
+}
+
+.actionBtn{
+  color:#ffffff !important;
+  padding: 10px !important;
+  height: 50px !important;
+  margin-bottom: 10px !important;
+}
+
+.info{
+  text-align: center;
+  width: 100%;
+  cursor: pointer !important;
+  background: #525252;
+  border: 0;
+  font-family: var(--fontName);
+  font-size: 1rem;
+  color: #bcbdaa;
+  outline: 0;
+  padding: 2px;
+  margin-right: 1em;
+  box-shadow: 10px 8px 0 black;
+  text-decoration: none;
+}
+
+canvas {
+    display: block; /* Varsayılan olarak kenar boşluklarını kaldırır */
+    width: 100%;    /* Ekran genişliğini doldurur */
+    height: 100%;   /* Ekran yüksekliğini doldurur */
+  }
+

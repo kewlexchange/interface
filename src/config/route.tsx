@@ -54,6 +54,7 @@ import VestingPage from "../pages/VestingPage";
 import PredictionsPage from "../pages/PredictionsPage";
 import OldStakePage from "../pages/StakePage/oldstake";
 import PepperPage from "../pages/PepperPage";
+import TokenInfo from "../pages/TokenInfo";
 
 const routes: IRoute[] = [
     { path: "/", name: "HomePage", title: 'Home', component: isIMON() ? HomePage : isCHZDomains() ? DomainsHomePage : GamesPage, exact: true, full: true },
@@ -111,8 +112,8 @@ const routes: IRoute[] = [
     { path: "/tos", name: "Terms Of Service", title: 'Terms Of Service', component: TOSPage, exact: true, full: false },
     { path: "/vesting", name: "Vesting", title: 'Vesting', component: VestingPage, exact: true, full: false },
     { path: "/euro2024", name: "Football Predictions", title: 'EURO 2024 Football Predictions', component: PredictionsPage, exact: true, full: false },
-    { path: "/pepper", name: "PEPPER Claims", title: 'PEPPER Claims', component: PepperPage, exact: true, full: false }
-
+    { path: "/pepper", name: "PEPPER Claims", title: 'PEPPER Claims', component: PepperPage, exact: true, full: false },
+    { path: "/token", name: "Token Info", title: 'Token Info', component: TokenInfo, exact: true, full: false }
   ];
 
   
