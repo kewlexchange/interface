@@ -189,19 +189,19 @@ const TokenInfo: React.FunctionComponent<IPage> = props => {
                         </div>
                         <div className="w-full flex flex-row gap-2 justify-between items-center">
                             <span>Max Supply</span>
-                            <span>117.000.00</span>
+                            <span>117.000.00 KWL</span>
                         </div>
                         <div className="w-full flex flex-row gap-2 justify-between items-center">
                             <span>Circulating Supply</span>
-                            <span>97.000.00</span>
+                            <span>97.000.00 KWL</span>
                         </div>
                         <div className="w-full flex flex-row gap-2 justify-between items-center">
                             <span>Burned Tokens</span>
-                            <span>883.000.00</span>
+                            <span>883.000.00 KWL</span>
                         </div>
                         <div className="w-full flex flex-row gap-2 justify-between items-center">
                             <span>Locked Tokens</span>
-                            <span>20.000.00</span>
+                            <span>20.000.00 KWL</span>
                         </div>
                     </div>
                     </div>
