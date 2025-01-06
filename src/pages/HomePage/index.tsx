@@ -21,6 +21,8 @@ import { title } from "../../Components/Primitives";
 import { NavLink } from "react-router-dom";
 import { HighlightGroup, HighlighterItem } from "../../Components/HighlighterItem";
 import { useTranslation } from 'react-i18next';
+import TokenInfo from "../TokenInfo";
+import TokenInfoComponent from "../../Components/TokenInfoComponent";
 
 const HomePage: React.FunctionComponent<IPage> = props => {
     const { chainId, account } = useWeb3React()
@@ -239,6 +241,10 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                             </HighlightGroup>
                         </div>
 
+                        <div className="w-full">
+                <TokenInfoComponent/>
+            </div>
+
                         <div className="flex flex-col w-full p-5 gap-4 items-center">
                             <div className="container w-full flex flex-col gap-2 items-center text-center justify-center py-1 mb-10 ">
                                 <div className="w-full text-center">
@@ -256,6 +262,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                     </div>
                 </div>
             </div>
+        
         </div>
     )
 }
