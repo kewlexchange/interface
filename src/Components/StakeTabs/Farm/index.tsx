@@ -315,7 +315,8 @@ const _FARM_TAB = () => {
         
         let validPairs = [
             { base: "KWL", quote: "WCHZ" },
-            { base: "KWL", quote: "PEPPER" }
+            { base: "KWL", quote: "PEPPER" },
+            { base: "KWL", quote: "DSWAP" }
         ];
         
         const filteredPairs = _exchangePairs
@@ -390,7 +391,7 @@ const _FARM_TAB = () => {
 
                               
 
-                                <div onPress={() => {
+                                <div onClick={() => {
                                     setInputValue(userBalance, true)
                                 }} className="balance  cursor-pointer">
                                     Balance: {userBalance}
