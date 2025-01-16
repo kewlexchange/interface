@@ -67,8 +67,6 @@ const _MarketNFTItem = (props: { isActive?, item, contractAddress, tokenId, item
     return (
         <>   
             <Image
-            isBlurred
-            isZoomed
             alt="Intelligent Monsters"
             className="z-0 w-full min-w-[64px] min-h-[64px] max-w-[64px] max-h-[64px] object-fit"
             src={nftImage}

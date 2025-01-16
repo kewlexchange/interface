@@ -109,7 +109,7 @@ const _NFT_MARKET_COLLECTION_TAB = () => {
         selectionMode="single"
         topContentPlacement="outside"
         aria-label="Example static collection table"
-        onRowAction={(key) => {
+        onRowAction={(key:any) => {
             navigate(key);
         }
 
