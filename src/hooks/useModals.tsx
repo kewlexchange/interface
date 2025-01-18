@@ -712,11 +712,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
 
 
 
-
-                <Card shadow="sm" fullWidth={true}>
-
-                    <CardBody>
-                        <Tabs color="default" aria-label="Options">
+            <Tabs color="default" aria-label="Options">
                             <Tab key="tokens" title="Tokens">
                                 <Card shadow="sm">
                                     <CardHeader>
@@ -840,9 +836,6 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                             </Tab>
 
                         </Tabs>
-                    </CardBody>
-                </Card>
-
 
 
 

@@ -271,7 +271,7 @@ const _SWAP_TAB = () => {
 
     }
 
-    const onSelectToken = (tokenInfo) => {
+    const onSelectToken = (tokenInfo : any) => {
 
         if (tokenSelector.side == TradeType.EXACT_INPUT) {
             setBaseAsset(tokenInfo)
