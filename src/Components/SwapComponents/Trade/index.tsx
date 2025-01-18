@@ -48,8 +48,8 @@ const _TRADE_TAB = () => {
     });
 
     const defaultAssets = useAppSelector((state) => state.user.tokenList && state.user.tokenList[chainId])
-    const [baseAsset, setBaseAsset] = useState(null)
-    const [quoteAsset, setQuoteAsset] = useState(null)
+    const [baseAsset, setBaseAsset] = useState<Token | null>(null)
+    const [quoteAsset, setQuoteAsset] = useState<Token | null>(null)
     const [isBase, setIsBase] = useState(tokenSelector.side == TradeType.EXACT_INPUT)
 
     const [baseLiquidity, setBaseLiquidity] = useState("0")
@@ -132,6 +132,7 @@ const _TRADE_TAB = () => {
         if (!chainId) { return }
         if (!baseAsset) { return }
         if (!quoteAsset) { return }
+        if(!provider){return}
 
 
         if (!isSupportedChain(chainId)) {
@@ -193,34 +194,10 @@ const _TRADE_TAB = () => {
 
 
     }
+ 
 
-    const checkAllowance = async (baseAsset, quoteAsset) => {
-        if (!pairInfo) { return }
-        if (!chainId) { return }
-        if (!defaultAssets) { return }
-        if ((!account)) {
-            setBaseTokenAllowance(0)
-            setQuoteTokenAllowance(0)
-            return;
-        }
-
-        let baseTokenERC = ERC20Contract(baseAsset);
-        let quoteTokenERC = ERC20Contract(quoteAsset);
-        const _baseAllowanceAmount = await baseTokenERC.allowance(account, EXCHANGE.address);
-        const _quoteAllowanceAmount = await quoteTokenERC.allowance(account, EXCHANGE.address);
-        setQuoteTokenAllowance(_quoteAllowanceAmount)
-        setBaseTokenAllowance(_baseAllowanceAmount)
-    }
-
-    const displayError = (message) => {
-        let error = { message: message }
-        setTransaction({ hash: '', summary: '', error: error });
-        toggleError();
-    }
-
-    function toHex(currencyAmount: CurrencyAmount<Currency>) {
-        return `0x${currencyAmount.quotient.toString(16)}`
-    }
+    
+ 
 
 
 
@@ -466,6 +443,7 @@ const _TRADE_TAB = () => {
           if (!baseAsset) { return }
           if (!quoteAsset) { return }
           if (!debouncedInputValue) { return }
+          if (!EXCHANGE){return}
     
     
           const depositAmount = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals)
