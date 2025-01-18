@@ -57,40 +57,31 @@ const _TRADE_TAB = () => {
 
   const initTradeScreen = async () => {
 
-    console.log('chainId',chainId,provider,defaultAssets)
     if (!chainId) {
       return;
     }
-    console.log('chainId1',chainId,provider,defaultAssets)
-
  
     if (!EXCHANGE) {
       return;
     }
-    console.log('chainId3',chainId,provider,defaultAssets)
 
     if (!provider) {
       return
     }
 
 
+    await fetchTokens()
 
-    if (!defaultAssets) {
-      await fetchTokens()
-
-      return
-    }
-    console.log('chainId2',chainId,provider,defaultAssets)
-
-
-    const kwlToken = defaultAssets.find((token: any) => token && token.symbol === "KWL");
-    if (kwlToken) {
-      setQuoteAsset(kwlToken);
-      setBaseAsset(defaultAssets.find((token: any) => token?.symbol === getNativeCurrencyByChainId(chainId)))
-    } else {
-      console.error("KWL token not found in defaultAssets.");
-      setBaseAsset(null)
-      setQuoteAsset(null)
+    if (!baseAsset || !quoteAsset) {
+      const kwlToken = defaultAssets.find((token: any) => token && token.symbol === "KWL");
+      if (kwlToken) {
+        setQuoteAsset(kwlToken);
+        setBaseAsset(defaultAssets.find((token: any) => token?.symbol === getNativeCurrencyByChainId(chainId)))
+      } else {
+        console.error("KWL token not found in defaultAssets.");
+        setBaseAsset(null)
+        setQuoteAsset(null)
+      }
     }
 
     const _allExchangePairs = await EXCHANGE.getAllPairs();
@@ -99,7 +90,7 @@ const _TRADE_TAB = () => {
   useEffect(() => {
     initTradeScreen();
 
-  }, [account, provider, chainId,defaultAssets])
+  }, [account, provider, chainId])
 
 
   const setInputValue = (e: any, side: TradeType) => {
