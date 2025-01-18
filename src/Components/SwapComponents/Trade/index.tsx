@@ -103,7 +103,6 @@ const _TRADE_TAB = () => {
 
   }
 
-
   const handleSwapAssets = async () => {
     const temp = baseAsset;
     setBaseAsset(quoteAsset);
@@ -152,7 +151,6 @@ const _TRADE_TAB = () => {
 
 
     const [tradingPairs, setTradingPairs] = useState<TCustomPair[]>([])
-    const [isLoaded, setLoaded] = useState<boolean>(false)
 
 
     const TradeItem: React.FC<TradeItemProps> = ({ pair }) => {
