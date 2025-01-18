@@ -315,7 +315,7 @@ const App = () => {
                 <Link href='/'>
                 <Image className='cursor' onClick={() => {
 
-                }} width={80} height={80} src={ICON_LOGO} />
+                }} width={72} height={72} src={ICON_LOGO} />
                 </Link>
                 <p className="hidden font-bold text-inherit">KEWL</p>
 
