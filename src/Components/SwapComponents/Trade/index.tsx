@@ -37,6 +37,8 @@ const _TRADE_TAB = () => {
     showTokenSelector: false,
     side: TradeType.EXACT_INPUT,
   });
+  const [isBase, setIsBase] = useState(tokenSelector.side == TradeType.EXACT_INPUT)
+
 
   const defaultAssets = useAppSelector((state) => state.user.tokenList && state.user.tokenList[chainId])
   const [baseAsset, setBaseAsset] = useState<any>(null)
