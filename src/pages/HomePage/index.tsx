@@ -24,6 +24,7 @@ import { useTranslation } from 'react-i18next';
 import TokenInfo from "../TokenInfo";
 import TokenInfoComponent from "../../Components/TokenInfoComponent";
 import Cobe from "../../Components/Cobe";
+import { TRADE_TAB } from "../../Components/SwapComponents/Trade";
 
 const HomePage: React.FunctionComponent<IPage> = props => {
     const { chainId, account } = useWeb3React()
@@ -34,10 +35,12 @@ const HomePage: React.FunctionComponent<IPage> = props => {
     }, []);
 
     return (
+        <>
         <div className="absolute left-0 top-0 w-screen h-screen  flex flex-col gap-2 items-center justify-center">
             <div className="w-full ">
             </div>
             </div>
+            </>   
      
     )
 }

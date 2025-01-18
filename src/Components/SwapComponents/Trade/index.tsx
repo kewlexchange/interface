@@ -25,7 +25,7 @@ import { PairInfo, Router, TCustomPair, TradeItemProps } from '../../../interfac
 
 
 
-const _SWAP_TAB = () => {
+const _TRADE_TAB = () => {
 
     const { connector, account, provider, chainId } = useWeb3React()
     const IMONDIAMOND = useDiamondContract(chainId, true);
@@ -895,5 +895,5 @@ const _SWAP_TAB = () => {
         </>
     );
 }
-export const TRADE_TAB = memo(_SWAP_TAB)
+export const TRADE_TAB = memo(_TRADE_TAB)
 

@@ -1,59 +1,50 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import 'regenerator-runtime/runtime.js';
-import Web3Provider from '../src/Components/Web3Provider'
-
-import App from './App';
-import Domain from './Domain';
-import { Provider } from 'react-redux'
-import "../src/i18n/i18n"
-import "./style/index.scss"
-import './polyfills';
+import '../src/style/index.scss';
+import '../src/i18n/i18n';
 import { HelmetProvider } from 'react-helmet-async';
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-
-import store from "./state";
+import { NextUIProvider } from '@nextui-org/react';
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { Provider } from 'react-redux';
 import { SocketProvider } from './hooks/useSocketProvider';
 import { isCHZDomains, isIMON, isPonyGames } from './hooks/useDomains';
-import {NextUIProvider} from '@nextui-org/react'
-import { createRoot } from 'react-dom/client';
+import store from './state';
+import App from './App';
+import Domain from './Domain';
 import PonyGames from './PonyGames';
 
 (window as any).global = window;
 
+// Disable auto refresh on network change for MetaMask
 if (!!window.ethereum) {
-    window.ethereum.autoRefreshOnNetworkChange = false
+  window.ethereum.autoRefreshOnNetworkChange = false;
 }
 
-const root = document.getElementById('root');
-const rootInstance = createRoot(root);
-rootInstance.render(
+// Define a component to wrap the main application with all providers
+const AppWrapper: React.FC = () => {
+  return (
+    <React.StrictMode>
+      <HelmetProvider>
+        <NextUIProvider>
+          <NextThemesProvider attribute="class" defaultTheme="dark">
+            <SocketProvider>
+              <Provider store={store}>
+                {isIMON() && <App />}
+                {isCHZDomains() && <Domain />}
+                {isPonyGames() && <PonyGames />}
+              </Provider>
+            </SocketProvider>
+          </NextThemesProvider>
+        </NextUIProvider>
+      </HelmetProvider>
+    </React.StrictMode>
+  );
+};
 
-  <HelmetProvider>
-  <SocketProvider>
-  <NextUIProvider>
-  <NextThemesProvider  attribute="class" defaultTheme="dark">
-
-    <Provider store={store}>
-      {
-        isIMON() &&  <App/>
-      }
-      {
-        isCHZDomains() && <Domain/>
-      }
-        {
-        isPonyGames() && <PonyGames/>
-      }
-           
-    </Provider>
-    </NextThemesProvider>
-
-    </NextUIProvider>
-    </SocketProvider>
-    </HelmetProvider>
-
-
-
-);
-
- 
+// Render the application
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  const root = createRoot(rootElement);
+  root.render(<AppWrapper />);
+}
