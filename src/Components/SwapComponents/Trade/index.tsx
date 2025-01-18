@@ -3,32 +3,24 @@ import { DECENTRALIZED_EXCHANGES, DEFAULT_TOKEN_LOGO, ETHER_ADDRESS, INITIAL_ALL
 import { ethers } from 'ethers';
 import { useWeb3React } from '@web3-react/core';
 import JSBI from 'jsbi';
-import moment from 'moment';
-import { Route as ReactRoute, NavLink } from 'react-router-dom';
 import { isSupportedChain } from '../../../constants/chains';
 import { WETH9, Token, CurrencyAmount, Pair, Price, Trade, Currency, Percent, Route, CHILIZWRAPPER } from '../../../entities';
-import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract, useFanTokenWrapperContract } from '../../../hooks/useContract';
+import {  useExchangeContract, useERC20Contract, usePAIRContract, useFanTokenWrapperContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalSelectExchangePair } from '../../../hooks/useModals';
 import { useAppSelector } from '../../../state/hooks';
 import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { debounce, getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../utils';
-import { DoubleCurrencyIcon } from '../../DoubleCurrency';
 import UniwalletModal from '../../Modal/UniwalletModal';
 import { Badge, Accordion, AccordionItem, Avatar, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Image, Input, ScrollShadow, Switch } from '@nextui-org/react';
 import { formatEther, formatUnits, parseEther, parseUnits } from '@ethersproject/units';
-import { Chart } from '../../Chart';
-import { BLACK_LIST } from '../../../constants/blacklist';
-import { RadioGroup, Radio, useRadio, VisuallyHidden, cn } from "@nextui-org/react";
 import { ChevronsRight, CirclePercent, GitCompareArrows, ScanEye, ScanSearch } from 'lucide-react';
-import Cobe from '../../Cobe';
 import { PairInfo, Router, TCustomPair, TradeItemProps } from '../../../interfaces/tokenId';
 
 
 
 const _TRADE_TAB = () => {
 
-    const { connector, account, provider, chainId } = useWeb3React()
-    const IMONDIAMOND = useDiamondContract(chainId, true);
+    const { account, provider, chainId } = useWeb3React()
     const EXCHANGE = useExchangeContract(chainId, true)
     const FANTOKENWRAPPER = useFanTokenWrapperContract(chainId, true)
 
@@ -40,7 +32,6 @@ const _TRADE_TAB = () => {
     const { state: isNoProvider, toggle: toggleNoProvider } = useModal()
     const { state: isSelectToken, toggle: toggleSelectToken } = useModal()
     const { state: isConnect, toggle: toggleConnectModal } = useModal()
-    const { state: isShowWallet, toggle: toggleWalletModal } = useModal()
 
     const [tokenSelector, setTokenSelector] = useState<{ showTokenSelector: boolean, side: TradeType }>({
         showTokenSelector: false,
@@ -48,45 +39,45 @@ const _TRADE_TAB = () => {
     });
 
     const defaultAssets = useAppSelector((state) => state.user.tokenList && state.user.tokenList[chainId])
-    const [baseAsset, setBaseAsset] = useState<Token | null>(null)
-    const [quoteAsset, setQuoteAsset] = useState<Token | null>(null)
+    const [baseAsset, setBaseAsset] = useState<any>(null)
+    const [quoteAsset, setQuoteAsset] = useState<any>(null)
     const [isBase, setIsBase] = useState(tokenSelector.side == TradeType.EXACT_INPUT)
 
-    const [baseLiquidity, setBaseLiquidity] = useState("0")
-    const [quoteLiquidity, setQuoteLiquidity] = useState("0")
-
+   
     const [baseInputValue, setBaseInputValue] = useState("")
     const [debouncedInputValue, setDebouncedSetInputValue] = useState("")
     const [quoteInputValue, setQuoteInputValue] = useState("")
-
-    const [baseTokenAllowance, setBaseTokenAllowance] = useState(0)
-    const [quoteTokenAllowance, setQuoteTokenAllowance] = useState(0)
+ 
     const ERC20Contract = useERC20Contract()
 
-    const [tradingPairs, setTradingPairs] = useState([])
-
-    const [pairInfo, setPairInfo] = useState(null)
-    const PAIRContract = usePAIRContract()
-    const [hasLiquidity, setHasLiquidity] = useState(false)
-    const [tradeInfo, setTradeInfo] = useState(null)
-    const userDeadline = useAppSelector((state) => state.user.userDeadline);
-    const userTax = useAppSelector((state) => state.user.userTax);
-    const userSlippageTolerance = useAppSelector((state) => state.user.userSlippageTolerance);
     const [allExchangePairs, setAllExchangePairs]: any = useState(null)
-    const [isLoaded, setLoaded] = useState(false)
     const { fetchTokens } = useFetchAllTokenList(chainId, account);
 
+
+    const initTradeScreen = async () => {
+
+      if(!defaultAssets){
+        return
+      }
+
+      const kwlToken = defaultAssets.find(token => token && token.symbol === "KWL");
+      if (kwlToken) {
+          setQuoteAsset(kwlToken);
+          setBaseAsset(defaultAssets.find(token => token?.symbol === getNativeCurrencyByChainId(chainId)))
+      } else {
+          console.error("KWL token not found in defaultAssets.");
+          setBaseAsset(null)
+          setQuoteAsset(null)
+      }
+
+      await fetchTokens()
+      const _allExchangePairs = await EXCHANGE.getAllPairs();
+      setAllExchangePairs(_allExchangePairs)
+    }
     useEffect(() => {
-        const kwlToken = defaultAssets.find(token => token && token.symbol === "KWL");
-        if (kwlToken) {
-            setQuoteAsset(kwlToken);
-            setBaseAsset(defaultAssets.find(token => token?.symbol === getNativeCurrencyByChainId(chainId)))
-        } else {
-            console.error("KWL token not found in defaultAssets.");
-            setBaseAsset(null)
-            setQuoteAsset(null)
-        }
-    }, [defaultAssets,account,provider])
+      initTradeScreen();
+      
+    }, [account,provider,chainId])
 
 
     const setInputValue = (e: any, side: TradeType) => {
@@ -106,133 +97,10 @@ const _TRADE_TAB = () => {
     }
 
 
-
-
-
-    useEffect(() => {
-        fetchTokens()
-    }, [account,chainId])
-
-
-    const resetSwap = async (isBase) => {
-        setTradeInfo(null)
-        setHasLiquidity(true)
-        if (!isBase) {
-            setBaseInputValue("")
-        } else {
-            setQuoteInputValue("")
-        }
-        setBaseLiquidity("")
-        setQuoteLiquidity("")
-        setTradingPairs([])
-    }
-    const fetchPrice = async () => {
-        setLoaded(false)
-        setTradingPairs([])
-        if (!chainId) { return }
-        if (!baseAsset) { return }
-        if (!quoteAsset) { return }
-        if(!provider){return}
-
-
-        if (!isSupportedChain(chainId)) {
-            return;
-        }
-
-        let _baseAddress = baseAsset.address === ETHER_ADDRESS ? WETH9[chainId].address : baseAsset.address
-        let _quoteAddress = quoteAsset.address === ETHER_ADDRESS ? WETH9[chainId].address : quoteAsset.address
-
-        var _baseTokenBalance: any = 0;
-        var _quoteTokenBalance: any = 0;
-
-        if (account) {
-            if ((baseAsset.address != ETHER_ADDRESS) && (quoteAsset.address != ETHER_ADDRESS)) {
-                const BaseERC20Token = ERC20Contract(baseAsset.address)
-                _baseTokenBalance = await BaseERC20Token.balanceOf(account);
-                const QuoteERC20Token = ERC20Contract(quoteAsset.address)
-                _quoteTokenBalance = await QuoteERC20Token.balanceOf(account);
-            } else {
-                if (baseAsset.address == ETHER_ADDRESS) {
-                    _baseTokenBalance = await provider.getBalance(account);
-                    const QuoteERC20Token = ERC20Contract(quoteAsset.address)
-                    _quoteTokenBalance = await QuoteERC20Token.balanceOf(account);
-                } else if (quoteAsset.address == ETHER_ADDRESS) {
-                    _quoteTokenBalance = await provider.getBalance(account);
-                    const BaseERC20Token = ERC20Contract(baseAsset.address)
-                    _baseTokenBalance = await BaseERC20Token.balanceOf(account);
-                }
-            }
-        }
-
-
-        const _allExchangePairs = await EXCHANGE.getAllPairs();
-        setAllExchangePairs(_allExchangePairs)
-
-
-
-
-
-
-        if (isBase) {
-            if (parseFloatWithDefault(baseInputValue, 0) === 0) {
-                await resetSwap(true)
-                return
-            }
-        } else {
-            if (parseFloatWithDefault(quoteInputValue, 0) === 0) {
-                await resetSwap(false)
-                return
-            }
-        }
-
-        let depositAmount = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals);
-        const availableTradingPairs = await EXCHANGE.fetchPairs(DECENTRALIZED_EXCHANGES, FANTOKENWRAPPER.address, _baseAddress, _quoteAddress, depositAmount)
-        setTradingPairs(availableTradingPairs)
-
-        console.log('pairs', availableTradingPairs)
-        setLoaded(true)
-
-
-    }
- 
-
-    
- 
-
-
-
-    useEffect(() => {
-      if(!provider){
-        return;
-      }
-      if(!baseAsset){
-        return
-      }
-      if(!quoteAsset){
-        return
-      }
-      if(!debouncedInputValue){
-        return
-      }
-        if (!isSupportedChain(chainId)) {
-            setBaseAsset(null)
-            setQuoteAsset(null)
-            setPairInfo(null)
-        }
-        console.log("tetiklendi..")
-        fetchPrice()
-    }, [baseAsset, quoteAsset,debouncedInputValue])
-
-   
-
-
     const handleSwapAssets = async () => {
-        setPairInfo(null)
         const temp = baseAsset;
         setBaseAsset(quoteAsset);
         setQuoteAsset(temp)
-
-
     }
 
     const onSelectToken = (tokenInfo : any) => {
@@ -277,6 +145,7 @@ const _TRADE_TAB = () => {
    
     
         const [tradingPairs, setTradingPairs] = useState<TCustomPair[]>([])
+        const [isLoaded,setLoaded] = useState<boolean>(false)
     
     
         const TradeItem: React.FC<TradeItemProps> = ({ pair }) => {
@@ -418,6 +287,30 @@ const _TRADE_TAB = () => {
     
           </div>)
         }
+
+        useEffect(() => {
+          if(!provider){
+            return;
+          }
+          if(!baseAsset){
+            return
+          }
+          if(!quoteAsset){
+            return
+          }
+          if(!debouncedInputValue){
+            return
+          }
+            if (!isSupportedChain(chainId)) {
+                setBaseAsset(null)
+                setQuoteAsset(null)
+            }
+            console.log("tetiklendi..")
+          
+        }, [baseAsset, quoteAsset,debouncedInputValue])
+    
+
+  
     
     
     
@@ -444,6 +337,9 @@ const _TRADE_TAB = () => {
           if (!quoteAsset) { return }
           if (!debouncedInputValue) { return }
           if (!EXCHANGE){return}
+          if(!chainId){
+            return
+          }
     
     
           const depositAmount = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals)
@@ -581,6 +477,10 @@ const _TRADE_TAB = () => {
         const handleSwapAll = async () => {
     
           if (!baseAsset) {
+            return
+          }
+
+          if(!chainId){
             return
           }
     
