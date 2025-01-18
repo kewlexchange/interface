@@ -21,7 +21,7 @@ const NFTs: React.FunctionComponent<IPage> = props => {
                         <span className="mt-6 text-zinc-300 lg:max-w-lg lg:text-xl lg:leading-8">Mint and trade NFTs on the fastest community-owned Chiliz chain, secured and governed by <strong>$KWL</strong>.</span>
                     </div>
                     <div className="my-20 flex items-center justify-center p-10 lg:my-0 lg:justify-end lg:px-0">
-                        <Image isZoomed isBlurred shadow={"lg"} src={"https://ipfs.kewl.exchange/ipfs/QmTDz8e4g4XtaH18y482P7YwE4kJ6hko6s8JZBvYwtKGEX/11000000000000000000.png"} />
+                        <Image className="z-0"  isBlurred shadow={"lg"} src={"https://ipfs.kewl.exchange/ipfs/QmTDz8e4g4XtaH18y482P7YwE4kJ6hko6s8JZBvYwtKGEX/11000000000000000000.png"} />
 
                     </div>
                 </div>

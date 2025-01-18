@@ -187,7 +187,7 @@ const App = () => {
         }} isClosable={true} address={account} isShowing={isShowWallet} hide={toggleWalletModal} />
 
 
-        <div className='w-full fixed  z-[99999] bg-red-500 top-[5px]'>
+        <div className='w-full fixed  z-[1] bg-red-500 top-[5px]'>
           <div className=" absolute top-3  w-full z-40 flex items-center justify-center">
 
             <Navbar
@@ -315,7 +315,7 @@ const App = () => {
                 <Link href='/'>
                 <Image className='cursor' onClick={() => {
 
-                }} width={86} height={86} src={ICON_LOGO} />
+                }} width={80} height={80} src={ICON_LOGO} />
                 </Link>
                 <p className="hidden font-bold text-inherit">KEWL</p>
 
@@ -441,7 +441,7 @@ const App = () => {
                 key={`route${index}`}
                 path={route.path}
                 element={
-                  <div className='w-full  h-full  max-w-5xl'>
+                  <div className='relative w-full  h-full  max-w-5xl'>
 
 
                       <route.component title={route.title} />
