@@ -57,19 +57,32 @@ const _TRADE_TAB = () => {
 
   const initTradeScreen = async () => {
 
-    if (!defaultAssets) {
-      return
+    console.log('chainId',chainId,provider,defaultAssets)
+    if (!chainId) {
+      return;
     }
+    console.log('chainId1',chainId,provider,defaultAssets)
+
+ 
     if (!EXCHANGE) {
       return;
     }
+    console.log('chainId3',chainId,provider,defaultAssets)
 
     if (!provider) {
       return
     }
-    if (!chainId) {
-      return;
+
+
+
+    if (!defaultAssets) {
+      await fetchTokens()
+
+      return
     }
+    console.log('chainId2',chainId,provider,defaultAssets)
+
+
     const kwlToken = defaultAssets.find((token: any) => token && token.symbol === "KWL");
     if (kwlToken) {
       setQuoteAsset(kwlToken);
@@ -80,14 +93,13 @@ const _TRADE_TAB = () => {
       setQuoteAsset(null)
     }
 
-    await fetchTokens()
     const _allExchangePairs = await EXCHANGE.getAllPairs();
     setAllExchangePairs(_allExchangePairs)
   }
   useEffect(() => {
     initTradeScreen();
 
-  }, [account, provider, chainId])
+  }, [account, provider, chainId,defaultAssets])
 
 
   const setInputValue = (e: any, side: TradeType) => {
