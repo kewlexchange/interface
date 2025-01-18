@@ -348,6 +348,8 @@ const _TRADE_TAB = () => {
       if (!baseAsset) { return }
       if (!quoteAsset) { return }
       if (!debouncedInputValue) { return }
+      if (!baseInputValue) { return }
+
       if (!EXCHANGE) { return }
       if (!chainId) {
         return
