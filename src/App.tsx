@@ -35,6 +35,7 @@ import { DropdownNetwork } from './Components/DropdownNetwork';
 import { LandingBG } from './Components/Landing';
 import { LeftMenu } from './Components/LeftMenu';
 import { icons, Menu } from 'lucide-react';
+import Cobe from './Components/Cobe';
 
 
 const ReactAudioPlayerEx = process.env.NODE_ENV === 'production' ? (ReactAudioPlayer as any).default : ReactAudioPlayer;
@@ -204,7 +205,15 @@ const App = () => {
             >
 
 
-              <Dropdown>
+<Dropdown
+                      showArrow
+
+                      radius="sm"
+                      classNames={{
+                        base: "before:bg-default-200", // change arrow background
+                        content: "py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
+                      }}
+                    >
                 <NavbarItem>
 
                   <DropdownTrigger>
@@ -420,6 +429,11 @@ const App = () => {
 
         <div className={"w-screen h-screen overflow-y-scroll  py-[88px] pb-[70px] flex flex-col items-center justify-center w-screen h-full"}>
 
+        <div className="absolute left-0 top-0 z-[0] w-screen h-screen  flex flex-col gap-2 items-center justify-center">
+            <div className="w-full ">
+            <Cobe text="KEWL" description="EXCHANGE"/>
+            </div>
+          </div>
 
           <Routes>
             {routes.map((route, index) => (

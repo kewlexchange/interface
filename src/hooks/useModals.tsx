@@ -739,7 +739,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
 
                                                     {
                                                         disableToken && filteredItems && filteredItems.map((tokenItem) => {
-                                                            return (canDisplay(tokenItem.address)) &&
+                                                            return (canDisplay(tokenItem.address) && tokenItem.decimals > 0) &&
                                                                 <ListboxItem startContent={
                                                                     <AvatarGroup size='sm' isBordered>
 

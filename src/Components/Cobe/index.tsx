@@ -2,7 +2,12 @@ import createGlobe from "cobe";
 import React, { useEffect, useRef } from "react";
 import { useSpring } from "react-spring";
 
-const Cobe: React.FC = React.memo(() => {
+interface CobeProps {
+  text: string;
+  description: string;
+}
+
+const Cobe: React.FC<CobeProps> = React.memo(({ text, description }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerInteracting = useRef<number | null>(null);
   const pointerInteractionMovement = useRef<number>(0);
@@ -96,9 +101,9 @@ const Cobe: React.FC = React.memo(() => {
             margin: "auto",
           }}
         >
-          KEWL
+          {text}
         </h1>
-        <span style={{ fontSize: "1.2em" }}>EXCHANGE</span>
+        <span style={{ fontSize: "1.2em" }}>{description}</span>
       </div>
       <canvas
         ref={canvasRef}

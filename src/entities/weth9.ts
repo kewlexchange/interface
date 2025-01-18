@@ -20,3 +20,7 @@ export const WETH9: { [chainId: number]: Token } = {
   [88888]: new Token(88888,"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47",18,"WCHZ","Wrapped Chiliz"),
   [88882]: new Token(88882,"0x721EF6871f1c4Efe730Dce047D40D1743B886946",18,"WCHZ","Wrapped Chiliz")
 }
+
+export const CHILIZWRAPPER: { [chainId: number]: Token } = {
+  [88888]: new Token(88888,"0xAEdcF2bf41891777c5F638A098bbdE1eDBa7B264",18,"WCHZ","Wrapped Chiliz"),
+}

@@ -36,7 +36,6 @@ const HomePage: React.FunctionComponent<IPage> = props => {
     return (
         <div className="absolute left-0 top-0 w-screen h-screen  flex flex-col gap-2 items-center justify-center">
             <div className="w-full ">
-                <Cobe/>
             </div>
             </div>
      
