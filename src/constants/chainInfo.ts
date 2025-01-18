@@ -214,7 +214,7 @@ const CHAIN_INFO: ChainInfoMap = {
     circleLogoUrl: avaxLogo,
     squareLogoUrl: avaxSquareLogo,
     nativeCurrency: { name: 'AVAX', symbol: 'AVAX', decimals: 18 },
-    defaultListUrl: [],
+    defaultListUrl: ["https://raw.githubusercontent.com/kewlexchange/assets/refs/heads/main/avax/index.json"],
   },
   [ChainId.BITCI]: {
     networkType: NetworkType.L1,

@@ -519,7 +519,7 @@ export const CHAIN_IDS_TO_NAMES = {
 } as const
 
 export function isSupportedChain(chainId: number | null | undefined | ChainId): chainId is SupportedChainsType {
-  return !!chainId && ChainId.BITCI === chainId || ChainId.BITCI_TEST === chainId || ChainId.ARBITRUM_ONE === chainId  || ChainId.CHILIZ_MAINNET === chainId || ChainId.CHILIZ_SPICY_TESTNET === chainId  || ChainId.ABSTRACT_TESTNET === chainId
+  return !!chainId && ChainId.BITCI === chainId || ChainId.BITCI_TEST === chainId || ChainId.ARBITRUM_ONE === chainId  || ChainId.CHILIZ_MAINNET === chainId || ChainId.CHILIZ_SPICY_TESTNET === chainId  || ChainId.ABSTRACT_TESTNET === chainId || ChainId.AVALANCHE === chainId
 }
 
 export function asSupportedChain(chainId: number | null | undefined | ChainId): SupportedChainsType | undefined {

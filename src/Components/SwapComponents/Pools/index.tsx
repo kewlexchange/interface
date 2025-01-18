@@ -604,8 +604,15 @@ const _POOL_TAB = () => {
         if (!chainId) { return; }
         if (!defaultAssets) { return }
         if (defaultAssets.length == 0) { return }
-        setQuoteAsset(defaultAssets.find(token => token?.symbol === "KWL"))
-        //setBaseAsset(defaultAssets.find(token => token?.symbol === WETH9[chainId].symbol))
+
+           if (defaultAssets.length > 0) {
+                    setQuoteAsset(defaultAssets[2]);
+                    setBaseAsset(defaultAssets.find(token => token?.symbol === getNativeCurrencyByChainId(chainId)))
+                } else {
+                    console.error("KWL token not found in defaultAssets.");
+                    setBaseAsset(null)
+                    setQuoteAsset(null)
+                }
         setBaseAsset(defaultAssets.find(token => token?.symbol === getNativeCurrencyByChainId(chainId)))
 
     }, [defaultAssets])

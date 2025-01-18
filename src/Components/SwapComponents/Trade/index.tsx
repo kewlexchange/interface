@@ -71,8 +71,11 @@ const _TRADE_TAB = () => {
 
     await fetchTokens()
 
-    if (!baseAsset || !quoteAsset) {
-      const kwlToken = defaultAssets.find((token: any) => token && token.symbol === "KWL");
+    if (!baseAsset || !quoteAsset || baseAsset.chainId !== quoteAsset.chainId) {
+      const kwlToken = defaultAssets.find(
+        (token: any) => token && (token.symbol === "KWL" || token.symbol === "SFID")
+      );
+      
       if (kwlToken) {
         setQuoteAsset(kwlToken);
         setBaseAsset(defaultAssets.find((token: any) => token?.symbol === getNativeCurrencyByChainId(chainId)))
@@ -82,6 +85,8 @@ const _TRADE_TAB = () => {
         setQuoteAsset(null)
       }
     }
+
+  
 
     const _allExchangePairs = await EXCHANGE.getAllPairs();
     setAllExchangePairs(_allExchangePairs)
@@ -626,6 +631,8 @@ const _TRADE_TAB = () => {
     }, 500), // Debounce süresi
     []
   );
+
+ 
   return (
     <>
       <ModalNoProvider isShowing={isNoProvider} hide={toggleNoProvider} />

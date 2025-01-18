@@ -18,9 +18,15 @@ export const WETH9: { [chainId: number]: Token } = {
   [1907]: new Token(1907, '0xe0D0f25b5FCFa4d3EDD9C2186451d9E04C4B9f11', 18, 'WBITCI', 'Wrapped BITCI'),
   [1908]: new Token(1908, '0xe0D0f25b5FCFa4d3EDD9C2186451d9E04C4B9f11', 18, 'WBITCI', 'Wrapped BITCI'),
   [88888]: new Token(88888,"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47",18,"WCHZ","Wrapped Chiliz"),
-  [88882]: new Token(88882,"0x721EF6871f1c4Efe730Dce047D40D1743B886946",18,"WCHZ","Wrapped Chiliz")
+  [88882]: new Token(88882,"0x721EF6871f1c4Efe730Dce047D40D1743B886946",18,"WCHZ","Wrapped Chiliz"),
+
+  [43114]: new Token(43114,"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",18,"WAVAX","Wrapped AVAX"),
+  
 }
 
 export const CHILIZWRAPPER: { [chainId: number]: Token } = {
-  [88888]: new Token(88888,"0xAEdcF2bf41891777c5F638A098bbdE1eDBa7B264",18,"WCHZ","Wrapped Chiliz"),
+  [88888]: new Token(88888,"0xAEdcF2bf41891777c5F638A098bbdE1eDBa7B264",18,"WCHZ","Chiliz Wrapper"),
+  [42161]: new Token(42161,"0x9D4E136CAb069E0787260c3D6CE2829689495C69",18,"WCHZ","Arbitrum Wrapper"),
+  [43114]: new Token(43114,"0x81e28dCAAC553Fce9225c266731FC450E0954e47",18,"WCHZ","AVAX Wrapper"),
+
 }

@@ -470,7 +470,7 @@ export const CONTRACT_ADRESSES = {
             MAIN:{
                 DIAMOND:"",
                 TOKEN:"",
-                EXCHANGE:"",
+                EXCHANGE:"0xA0BB8f9865f732C277d0C162249A4F6c157ae9D0",
                 TRADE:"",
                 MARKET:"",
                 CHILIMON:"",
@@ -479,7 +479,7 @@ export const CONTRACT_ADRESSES = {
                 STAKE:"",
                 LAUNCHPAD:"",
                 IMON404:"",
-                FAN_TOKEN_WRAPPER:"",
+                FAN_TOKEN_WRAPPER:"0x81e28dCAAC553Fce9225c266731FC450E0954e47",
                 METAMORPH:"",
                 CHILIATOR:"",
                 BRIDGE:"",

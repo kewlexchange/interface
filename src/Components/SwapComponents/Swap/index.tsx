@@ -70,9 +70,9 @@ const _SWAP_TAB = () => {
         if (!defaultAssets) { return }
         if (defaultAssets.length === 0) { return }
 
-        const kwlToken = defaultAssets.find(token => token && token.symbol === "KWL");
-        if (kwlToken) {
-            setQuoteAsset(kwlToken);
+         
+          if (defaultAssets.length > 0) {
+            setQuoteAsset(defaultAssets[2]);
             setBaseAsset(defaultAssets.find(token => token?.symbol === getNativeCurrencyByChainId(chainId)))
         } else {
             console.error("KWL token not found in defaultAssets.");
