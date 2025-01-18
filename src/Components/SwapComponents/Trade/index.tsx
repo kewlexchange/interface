@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { DECENTRALIZED_EXCHANGES, DEFAULT_TOKEN_LOGO, ETHER_ADDRESS, INITIAL_ALLOWED_SLIPPAGE, MINIMUM_LIQUIDITY, TradeType } from '../../../constants/misc';
 import { ethers } from 'ethers';
 import { useWeb3React } from '@web3-react/core';
@@ -11,7 +11,7 @@ import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContr
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalSelectExchangePair } from '../../../hooks/useModals';
 import { useAppSelector } from '../../../state/hooks';
 import { useFetchAllTokenList } from '../../../state/user/hooks';
-import { getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../utils';
+import { debounce, getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../utils';
 import { DoubleCurrencyIcon } from '../../DoubleCurrency';
 import UniwalletModal from '../../Modal/UniwalletModal';
 import { Badge, Accordion, AccordionItem, Avatar, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Image, Input, ScrollShadow, Switch } from '@nextui-org/react';
@@ -56,6 +56,7 @@ const _SWAP_TAB = () => {
     const [quoteLiquidity, setQuoteLiquidity] = useState("0")
 
     const [baseInputValue, setBaseInputValue] = useState("")
+    const [debouncedInputValue, setDebouncedSetInputValue] = useState("")
     const [quoteInputValue, setQuoteInputValue] = useState("")
 
     const [baseTokenAllowance, setBaseTokenAllowance] = useState(0)
@@ -76,10 +77,6 @@ const _SWAP_TAB = () => {
     const { fetchTokens } = useFetchAllTokenList(chainId, account);
 
     useEffect(() => {
-        if (!chainId) { return; }
-        if (!defaultAssets) { return }
-        if (defaultAssets.length === 0) { return }
-
         const kwlToken = defaultAssets.find(token => token && token.symbol === "KWL");
         if (kwlToken) {
             setQuoteAsset(kwlToken);
@@ -89,10 +86,7 @@ const _SWAP_TAB = () => {
             setBaseAsset(null)
             setQuoteAsset(null)
         }
-
-
-        // setQuoteAsset(defaultAssets.find(token => token?.symbol === "KWL"))
-    }, [defaultAssets])
+    }, [defaultAssets,account,provider])
 
 
     const setInputValue = (e: any, side: TradeType) => {
@@ -229,37 +223,30 @@ const _SWAP_TAB = () => {
     }
 
 
- 
 
     useEffect(() => {
+      if(!provider){
+        return;
+      }
+      if(!baseAsset){
+        return
+      }
+      if(!quoteAsset){
+        return
+      }
+      if(!debouncedInputValue){
+        return
+      }
         if (!isSupportedChain(chainId)) {
             setBaseAsset(null)
             setQuoteAsset(null)
             setPairInfo(null)
         }
+        console.log("tetiklendi..")
         fetchPrice()
-    }, [chainId, account, defaultAssets, provider, baseAsset, quoteAsset, baseInputValue, quoteInputValue])
+    }, [baseAsset, quoteAsset,debouncedInputValue])
 
-    const handleApprove = async (token) => {
-        let poolToken = ERC20Contract(token);
-        const tokenDecimals = await poolToken.decimals();
-        const transferAmount = ethers.constants.MaxUint256
-        toggleLoading();
-        await poolToken.approve(EXCHANGE.address, transferAmount, { from: account }).then(async (tx) => {
-            await tx.wait();
-            const summary = `Unlocking tokens for: ${EXCHANGE.address}`
-            setTransaction({ hash: tx.hash, summary: summary, error: null });
-            await provider.getTransactionReceipt(tx.hash).then(() => {
-                toggleTransactionSuccess();
-            });
-        }).catch((error: Error) => {
-            setTransaction({ hash: '', summary: '', error: error });
-            toggleError();
-        }).finally(async () => {
-            toggleLoading();
-        });
-
-    }
+   
 
 
     const handleSwapAssets = async () => {
@@ -281,34 +268,13 @@ const _SWAP_TAB = () => {
         toggleSelectToken()
     }
 
+
     const handleSelectPair = (pair: any, base: any, quote: any) => {
         setBaseAsset(base);
         setQuoteAsset(quote);
         toggleSelectToken();
     }
-    const isAllowanceRequired = () => {
-        if (!baseAsset) {
-            return false
-        }
-        if (baseAsset.address === ETHER_ADDRESS) {
-            return false
-        }
-        if (!baseInputValue) {
-            return false
-        }
-        let baseVal = parseEther("0");
-        try {
-            baseVal = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals);
-        } catch (e) {
-            baseVal = parseEther("0")
-        }
-        return baseVal.gt(baseTokenAllowance)
-    }
-
-   
-
  
-
     const setTradeInputPercent = (percent: number) => {
         // `baseBalance` nesnesinin yapısı ve türlerini kontrol ediyoruz
         let etherBalance: string = baseAsset.balance
@@ -499,7 +465,7 @@ const _SWAP_TAB = () => {
         const handleFetchPairs = async () => {
           if (!baseAsset) { return }
           if (!quoteAsset) { return }
-          if (!baseInputValue) { return }
+          if (!debouncedInputValue) { return }
     
     
           const depositAmount = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals)
@@ -631,7 +597,7 @@ const _SWAP_TAB = () => {
             await handleFetchPairs();
           };
           fetchPairsAsync();
-        }, [baseInputValue]);
+        }, [debouncedInputValue]);
     
     
         const handleSwapAll = async () => {
@@ -749,6 +715,12 @@ const _SWAP_TAB = () => {
         </ScrollShadow>)
       }
     
+      const debouncedSetInputValue = useCallback(
+        debounce((val) => {
+          setDebouncedSetInputValue(val)
+        }, 500), // Debounce süresi
+        [] 
+      );
     return (
         <>
             <ModalNoProvider isShowing={isNoProvider} hide={toggleNoProvider} />
@@ -775,7 +747,7 @@ const _SWAP_TAB = () => {
                             <Input
                                 onChange={(val) => {
                                     setInputValue(val.target.value, TradeType.EXACT_INPUT)
-                                    // debouncedSetInputValue(val.target.value)
+                                     debouncedSetInputValue(val.target.value)
                                 }}
                                 value={baseInputValue}
                                 label={`Input ${baseAsset ? baseAsset.symbol : ""}->${quoteAsset ? quoteAsset.symbol : ""}`}
