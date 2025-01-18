@@ -809,7 +809,7 @@ const _SWAP_TAB = () => {
                     <div className={"w-full flex flex-col gap-2 rounded-lg"}>
 
                         {
-                            tradeInfo && <div className={"w-full grid grid-cols-2 rounded-lg border border-default-100 p-2 text-center gap-2"}>
+                            tradeInfo && <div className={"w-full grid grid-cols-2 rounded-lg bg-default/50 backdrop-blur-sm border border-default-100 p-2 text-center gap-2"}>
 
                                 <div className={"flex items-start justify-start w-full col-span-2"}>
                                     Trading Info

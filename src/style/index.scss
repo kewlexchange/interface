@@ -447,6 +447,7 @@ svg:not(:root) {
 
     body {
         min-height: 100vh;
+        overflow: hidden;
         font-family: "Poppins", sans-serif;
         margin: 0;
         display: flex;

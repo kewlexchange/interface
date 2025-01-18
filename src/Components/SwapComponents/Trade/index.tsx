@@ -789,7 +789,7 @@ const _SWAP_TAB = () => {
                                             }));
                                             toggleSelectToken()
                                         }} size="md" variant="light" isIconOnly radius="full">
-                                            <Image removeWrapper src={baseAsset ? baseAsset.logoURI : DEFAULT_TOKEN_LOGO} radius="full" className="w-[100px] w-10 h-10 min-w-10 min-h-10 p-1 border border-2 border-default text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                                              <Avatar isBordered size="sm" src={baseAsset ? baseAsset.logoURI : DEFAULT_TOKEN_LOGO} />
                                         </Button>
                                         <Button onPress={() => {
                                             handleSwapAssets()
@@ -804,34 +804,15 @@ const _SWAP_TAB = () => {
                                             }));
                                             toggleSelectToken()
                                         }} size="md" variant="light" isIconOnly radius="full">
-                                            <Image removeWrapper src={quoteAsset ? quoteAsset.logoURI : DEFAULT_TOKEN_LOGO} radius="full" className="w-[100px] h-[100px] w-10 h-10 min-w-10 min-h-10 p-1 border border-2 border-default text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                                                  <Avatar isBordered size="sm" src={quoteAsset ? quoteAsset.logoURI : DEFAULT_TOKEN_LOGO} />
+
                                         </Button>
 
                                     </div>
                                 }
                                 fullWidth variant="faded"
                                 radius="full"
-                                classNames={{
-                                    label: "text-black/50 dark:text-white/90",
-                                    input: [
-                                        "bg-transparent",
-                                        "text-black/90 dark:text-white/90",
-                                        "placeholder:text-default-700/50 dark:placeholder:text-white/60",
-                                    ],
-                                    innerWrapper: "bg-transparent",
-                                    inputWrapper: [
-                                        "shadow-sm",
-                                        "bg-default-200/50",
-                                        "dark:bg-default/60",
-                                        "backdrop-blur-xl",
-                                        "backdrop-saturate-200",
-                                        "hover:bg-default-200/70",
-                                        "dark:hover:bg-default/70",
-                                        "group-data-[focus=true]:bg-default-200/50",
-                                        "dark:group-data-[focus=true]:bg-default/60",
-                                        "!cursor-text",
-                                    ],
-                                }}
+                               
                                 className="w-full flex flex-col gap-2 items-center justify-center"
                                 size={"lg"} type="text" />
 
@@ -839,7 +820,7 @@ const _SWAP_TAB = () => {
                         <div className="w-full flex flex-col gap-2 p-2">
                             <div className="grid grid-cols-2">
                                 <div className="w-full flex flex-row gap-2 items-center justify-start">
-                                    <Image className="w-8 h-8" src={baseAsset?.logoURI} />
+                                    <Image className="w-8 h-8" src={baseAsset ? baseAsset?.logoURI : DEFAULT_TOKEN_LOGO} />
                                     <span>{baseAsset && baseAsset.balance} {baseAsset?.symbol}</span>
                                 </div>
 
