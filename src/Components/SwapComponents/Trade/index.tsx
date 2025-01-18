@@ -752,7 +752,7 @@ const _SWAP_TAB = () => {
     return (
         <>
             <ModalNoProvider isShowing={isNoProvider} hide={toggleNoProvider} />
-            <ModalSelectToken disableToken={tokenSelector.side == TradeType.EXACT_INPUT ? baseAsset : quoteAsset} hide={toggleSelectToken} isShowing={isSelectToken} onSelect={onSelectToken} isClosable={true} tokenList={defaultAssets} onSelectPair={handleSelectPair} allExchangePairs={allExchangePairs} />
+            <ModalSelectToken disableToken={tokenSelector.side == TradeType.EXACT_INPUT ? quoteAsset : baseAsset} hide={toggleSelectToken} isShowing={isSelectToken} onSelect={onSelectToken} isClosable={true} tokenList={defaultAssets} onSelectPair={handleSelectPair} allExchangePairs={allExchangePairs} />
             <UniwalletModal />
             <ModalConnect isShowing={isConnect} hide={toggleConnectModal} />
             <ModalNoProvider isShowing={isNoProvider} hide={toggleNoProvider} />

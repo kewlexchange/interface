@@ -13,7 +13,7 @@ import { debounce, getIconByChainId, getNativeCurrencyByChainId, sendHTTPRequest
 import { useDomainContract, useERC20Contract, useNFT1155Contract, useNFT721Contract } from "./useContract";
 import { BigNumber } from "@ethersproject/bignumber";
 import { formatEther, formatUnits, getAddress, isAddress, parseEther } from "ethers/lib/utils";
-import { DEFAULT_TOKEN_LOGO, ETHER_ADDRESS } from "../constants/misc";
+import { DEFAULT_TOKEN_LOGO, ETHER_ADDRESS, ZERO_ADDRESS } from "../constants/misc";
 import { CurrencyAmount, Token, WETH9 } from "../entities";
 import { ChainId, isSupportedChain } from "../constants/chains";
 import { TCommandTypes } from "../constants/commands";
@@ -671,7 +671,8 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
             return false
         }
         const weth9Address = WETH9[chainId].address
-        if (disableToken.address === ETHER_ADDRESS) {
+        const IS_NATIVE = disableToken.addres == ETHER_ADDRESS || disableToken.address == ZERO_ADDRESS
+        if (IS_NATIVE) {
             if (inputAddress === weth9Address) {
                 ret = false;
             }
