@@ -761,7 +761,7 @@ const _SWAP_TAB = () => {
                                             }));
                                             toggleSelectToken()
                                         }} size="md" variant="light" isIconOnly radius="full">
-                                              <Avatar isBordered size="sm" src={baseAsset ? baseAsset.logoURI : DEFAULT_TOKEN_LOGO} />
+                                              <Avatar className='!opacity-1' isBordered size="sm" src={baseAsset ? baseAsset.logoURI : DEFAULT_TOKEN_LOGO} />
                                         </Button>
                                         <Button onPress={() => {
                                             handleSwapAssets()
@@ -776,7 +776,7 @@ const _SWAP_TAB = () => {
                                             }));
                                             toggleSelectToken()
                                         }} size="md" variant="light" isIconOnly radius="full">
-                                                  <Avatar isBordered size="sm" src={quoteAsset ? quoteAsset.logoURI : DEFAULT_TOKEN_LOGO} />
+                                                  <Avatar className='!opacity-1' isBordered size="sm" src={quoteAsset ? quoteAsset.logoURI : DEFAULT_TOKEN_LOGO} />
 
                                         </Button>
 
