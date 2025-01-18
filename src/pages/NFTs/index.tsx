@@ -14,8 +14,8 @@ const NFTs: React.FunctionComponent<IPage> = props => {
     return (
 
         <>
-            <div className="pt-4 md:mx-auto md:max-w-5xl lg:max-w-6xl 2xl:max-w-7xl">
-                <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
+     <div className={"w-full px-2 py-5 swap"}>
+     <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
                     <div className="flex flex-col items-center justify-center px-4 pt-16 text-center lg:items-start lg:py-24 lg:text-left">
                         <h1 className="text-4xl font-bold tracking-tight lg:text-7xl lg:leading-[1.2em]">Discover exclusive NFTs on KEWL NFT Marketplace.</h1>
                         <span className="mt-6 text-zinc-300 lg:max-w-lg lg:text-xl lg:leading-8">Mint and trade NFTs on the fastest community-owned Chiliz chain, secured and governed by <strong>$KWL</strong>.</span>

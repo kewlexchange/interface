@@ -29,10 +29,12 @@ import { isIMON, isCHZDomains } from './hooks/useDomains';
 import Head from './Components/Head/imon';
 import { Account } from './Components/Account';
 import { ThemeSwitch } from './Components/ThemeSwitch';
-import { Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button, Dropdown, DropdownTrigger, DropdownItem, Avatar, DropdownMenu, DropdownSection, User, Badge, Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
+import { Image, Navbar, NavbarBrand, NavbarMenuToggle, NavbarMenuItem, NavbarMenu, NavbarContent, NavbarItem, Link, Button, Dropdown, DropdownTrigger, DropdownItem, Avatar, DropdownMenu, DropdownSection, User, Badge, Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import { Network } from './Components/Network';
 import { DropdownNetwork } from './Components/DropdownNetwork';
 import { LandingBG } from './Components/Landing';
+import { LeftMenu } from './Components/LeftMenu';
+import { icons, Menu } from 'lucide-react';
 
 
 const ReactAudioPlayerEx = process.env.NODE_ENV === 'production' ? (ReactAudioPlayer as any).default : ReactAudioPlayer;
@@ -41,6 +43,8 @@ const App = () => {
   const { state: isConnect, toggle: toggleConnectModal } = useModal()
   const { state: isNoProvider, toggle: toggleNoProvider } = useModal()
   const { state: isShowWallet, toggle: toggleWalletModal } = useModal()
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
   const { state: isTimeLockEnabled, toggle: toggleTimeLock } = useModal()
   const { connector, account, provider, chainId } = useWeb3React()
   const dispatch = useAppDispatch()
@@ -171,7 +175,7 @@ const App = () => {
     i18n.changeLanguage('en')
   }, [])
   return (
-    <>
+    <div className='relative w-full h-full'>
       <BrowserRouter>
 
         <UniwalletModal />
@@ -182,231 +186,256 @@ const App = () => {
         }} isClosable={true} address={account} isShowing={isShowWallet} hide={toggleWalletModal} />
 
 
+        <div className='w-full fixed  z-[99999] bg-red-500 top-[5px]'>
+          <div className=" absolute top-3  w-full z-40 flex items-center justify-center">
 
-        <Navbar
-          shouldHideOnScroll={false} maxWidth={"full"} position="sticky"
-          isMenuOpen={isMenuOpen}
+            <Navbar
+              classNames={{
+                wrapper: "rounded-full pr-2",
+                base: "rounded-full z-40 flex gap-4 border border-1 flex-row relative flex-nowrap items-center h-[var(--navbar-height)] max-w-[1024px] px-0 w-full justify-center bg-transparent",
+              }
+              }
 
-          onMenuOpenChange={setIsMenuOpen}
-        >
-         
-          <NavbarContent  justify="start">
-          <NavbarItem>
+              isBlurred={true} isBordered={true}
+              isMenuOpen={isDrawerOpen}
+              onMenuOpenChange={setIsDrawerOpen}
 
-          <NavbarBrand as={NavLink} to={"/"}>
-              <img className={"h-[45px] w-[45px]"} alt={"Intelligent Monsters Logo"} src={ICON_LOGO} />
-            </NavbarBrand>
-            </NavbarItem>
-   
-            <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
-            
-          </NavbarContent>
 
-      
-    
+            >
 
- 
 
-          <NavbarContent justify="end">
+              <Dropdown>
+                <NavbarItem>
 
-            {
-              account ? <>
-
-                <Dropdown
-                  showArrow
-
-                  radius="sm"
-                  classNames={{
-                    base: "before:bg-default-200", // change arrow background
-                    content: "py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
-                  }}
-                >
                   <DropdownTrigger>
-                    <Button variant='flat' radius={"lg"} className='px-2'>
-                      <Account />
+
+                    <Button
+                      isIconOnly
+                      radius="full"
+                      variant="light"
+                    >
+                      <Menu />
                     </Button>
                   </DropdownTrigger>
-                  <DropdownMenu
-                    disabledKeys={["profile"]}
-                    className="p-3"
-                    variant='faded'
+                </NavbarItem>
+                <DropdownMenu
+                  aria-label="ACME features"
+                  className="w-[340px]"
+                  itemClasses={{
+                    base: "gap-4",
+                  }}
+                >
+                  <DropdownItem key={"swap"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                      e.stopPropagation();
+                    }} color="foreground" as={NavLink} to={"/swap"} >
+                      <span className='text-md'>{t("Swap")}</span>
+                    </Link>
+                  </DropdownItem>
 
-                  >
-                    <DropdownSection aria-label="Profile & Actions">
-                      <DropdownItem
-                        isReadOnly
+                  <DropdownItem key={"nfts"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                      e.stopPropagation();
+                    }} color="foreground" as={NavLink} to={"/nfts"} >
+                      <span className='text-md'>{t("NFTs")}</span>
+                    </Link>
+                  </DropdownItem>
+                  
+                  <DropdownItem key={"earn"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                      e.stopPropagation();
+                    }} color="foreground" as={NavLink} to={"/nfts"} >
+                      <span className='text-md'>{t("Earn")}</span>
+                    </Link>
+                  </DropdownItem>
 
-                        key="profile"
-                        className="gap-2 pb-4 opacity-100 focus-nonee outline-none"
-                      >
-                        <div className='flex flex-row gap-1'>
-                          <Identicon size={32} account={account} />
-                          <div className='flex flex-col gap-2'>
-                            <p className="font-semibold">{userBalance}</p>
-                            <p className="text-xs font-semibold">{account}</p>
-                          </div>
-                        </div>
-                      </DropdownItem>
-                      <DropdownItem as={NavLink}
-                        description="View your wallet's tokens and NFTs in this section."
-                        to="/account" key="dashboard">
-                        <p className="font-semibold">Portfolio</p>
-                      </DropdownItem>
+                  <DropdownItem key={"earn"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                      e.stopPropagation();
+                    }} color="foreground" as={NavLink} to={"/cns"} >
+                      <span className='text-md'>{t("Domains")}</span>
+                    </Link>
+                  </DropdownItem>
+
+                  <DropdownItem key={"earn"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                      e.stopPropagation();
+                    }} color="foreground" as={NavLink} to={"/launchpad"} >
+                      <span className='text-md'>{t("Launchpad")}</span>
+                    </Link>
+                  </DropdownItem>
+
+                  <DropdownItem key={"earn"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                      e.stopPropagation();
+                    }} color="foreground" as={NavLink} to={"/metamorph"} >
+                      <span className='text-md'>{t("Metamorph")}</span>
+                    </Link>
+                  </DropdownItem>
+
+                  <DropdownItem key={"earn"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                      e.stopPropagation();
+                    }} color="foreground" as={NavLink} to={"/vesting"} >
+                      <span className='text-md'>{t("Vesting")}</span>
+                    </Link>
+                  </DropdownItem>
+
+                  <DropdownItem key={"earn"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                      e.stopPropagation();
+                    }} color="foreground" as={NavLink} to={"/explorer"} >
+                      <span className='text-md'>{t("Explorer")}</span>
+                    </Link>
+                  </DropdownItem>
 
 
-                    </DropdownSection>
+                </DropdownMenu>
+              </Dropdown>
 
-                    <DropdownSection title={"Network"} aria-label="Preferences" showDivider>
-                      <DropdownItem variant='light'
 
-                        key="connector"
-                        className="cursor-default hover:none">
-                        <DropdownNetwork />
-                      </DropdownItem>
+              <NavbarBrand>
+                <Link href='/'>
+                <Image className='cursor' onClick={() => {
 
-                    </DropdownSection>
-
-                    <DropdownSection aria-label="Preferences" showDivider>
-                      <DropdownItem
-                        isReadOnly
-                        key="theme"
-                        className="cursor-default"
-                        endContent={
-                          <ThemeSwitch />
-                        }
-                      >
-                        Theme
-                      </DropdownItem>
-                    </DropdownSection>
-
-                    <DropdownSection aria-label="Help & Feedback">
-                      <DropdownItem onPress={() => {
-                        disconnect();
-                      }} key="logout">Disconnect</DropdownItem>
-                    </DropdownSection>
-                  </DropdownMenu>
-                </Dropdown>
-
-              </> : <>
-                <Button variant='solid' color='default' onPress={async () => {
-                  await handleConnect();
-                }}>Connect</Button>
-              </>
-            }
-          </NavbarContent>
-
-          <NavbarMenu className='z-[99999]'>
-
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              
-              
-              <Link onPress={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/swap"} >
-                <span className='text-3xl'>{t("Swap")}</span>
+                }} width={86} height={86} src={ICON_LOGO} />
                 </Link>
-            </NavbarMenuItem>
+                <p className="hidden font-bold text-inherit">KEWL</p>
 
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onPress={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/nfts"}>
-
-                <span className='text-3xl'>{t("NFT Marketplace")}</span></Link>
-            </NavbarMenuItem>
-
-
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onPress={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/earn"}>
-
-                <span className='text-3xl'>{t("Earn")}</span></Link>
-            </NavbarMenuItem>
-
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onPress={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/cns"}>
-
-                <span className='text-3xl'>{t("Domains")}</span></Link>
-            </NavbarMenuItem>
-
-
-            <NavbarMenuItem className='flex flex-row items-start justify-start'>
-              <Link onPress={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/launchpad"}>
-
-                <span className='text-3xl'>{t("Launchpad")}</span></Link>
-            </NavbarMenuItem>
-
-
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onPress={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/metamorph"}>
-
-                <span className='text-3xl'>{t("Metamorph")}</span></Link>
-            </NavbarMenuItem>
-
-
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onPress={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/vesting"}>
-
-                <span className='text-3xl'>{t("Vesting")}</span></Link>
-            </NavbarMenuItem>
-
-
-            <NavbarMenuItem className='flex flex-row items-center justify-start'>
-              <Link onPress={(e) => {
-                setIsMenuOpen(false)
-                e.stopPropagation();
-              }} color="foreground" as={NavLink} to={"/explorer"}>
-
-                <span className='text-3xl'>{t("Explorer")}</span></Link>
-            </NavbarMenuItem>
+              </NavbarBrand>
 
 
 
+              <NavbarContent justify="end">
+                {
+                  account ? <>
+
+                    <Dropdown
+                      showArrow
+
+                      radius="sm"
+                      classNames={{
+                        base: "before:bg-default-200", // change arrow background
+                        content: "py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
+                      }}
+                    >
+                      <DropdownTrigger>
+                        <Button variant='flat' radius={"full"} className='px-2'>
+                          <Account />
+                        </Button>
+                      </DropdownTrigger>
+                      <DropdownMenu
+                        disabledKeys={["profile"]}
+                        className="p-3"
+                        variant='faded'
+
+                      >
+                        <DropdownSection aria-label="Profile & Actions">
+                          <DropdownItem
+                            isReadOnly
+
+                            key="profile"
+                            className="gap-2 pb-4 opacity-100 focus-nonee outline-none"
+                          >
+                            <div className='flex flex-row gap-1'>
+                              <Identicon size={32} account={account} />
+                              <div className='flex flex-col gap-2'>
+                                <p className="font-semibold">{userBalance}</p>
+                                <p className="text-xs font-semibold">{account}</p>
+                              </div>
+                            </div>
+                          </DropdownItem>
+                          <DropdownItem as={NavLink}
+                            description="View your wallet's tokens and NFTs in this section."
+                            to="/account" key="dashboard">
+                            <p className="font-semibold">Portfolio</p>
+                          </DropdownItem>
+
+
+                        </DropdownSection>
+
+                        <DropdownSection title={"Network"} aria-label="Preferences" showDivider>
+                          <DropdownItem variant='light'
+
+                            key="connector"
+                            className="cursor-default hover:none">
+                            <DropdownNetwork />
+                          </DropdownItem>
+
+                        </DropdownSection>
+
+                        <DropdownSection aria-label="Preferences" showDivider>
+                          <DropdownItem
+                            isReadOnly
+                            key="theme"
+                            className="cursor-default"
+                            endContent={
+                              <ThemeSwitch />
+                            }
+                          >
+                            Theme
+                          </DropdownItem>
+                        </DropdownSection>
+
+                        <DropdownSection aria-label="Help & Feedback">
+                          <DropdownItem onPress={() => {
+                            disconnect();
+                          }} key="logout">Disconnect</DropdownItem>
+                        </DropdownSection>
+                      </DropdownMenu>
+                    </Dropdown>
+
+                  </> : <>
+                    <Button radius='full' variant='solid' color='default' onPress={async () => {
+                      await handleConnect();
+                    }}>Connect</Button>
+                  </>
+                }
+              </NavbarContent>
 
 
 
-          </NavbarMenu>
-        </Navbar>
 
 
-        <div className={"pb-[70px] flex flex-col items-center justify-center w-screen h-full"}>
-       
-       
-        <Routes>
-  {routes.map((route, index) => (
-    <Route
-      key={`route${index}`}
-      path={route.path}
-      element={
-        !route.full ? (
-          <Card  shadow='none' fullWidth className='h-full'>
-            <CardBody>
-              <route.component title={route.title} />
-            </CardBody>
-          </Card>
-        ) : (
-          <route.component title={route.title} />
-        )
-      }
-    />
-  ))}
-</Routes>
+
+
+
+            </Navbar>
+          </div>
+
+        </div>
+
+
+
+
+
+
+        <div className={"w-screen h-screen overflow-y-scroll  py-[88px] pb-[70px] flex flex-col items-center justify-center w-screen h-full"}>
+
+
+          <Routes>
+            {routes.map((route, index) => (
+              <Route
+                key={`route${index}`}
+                path={route.path}
+                element={
+                  <div className='w-full  h-full  max-w-5xl'>
+
+
+                      <route.component title={route.title} />
+                    </div>
+                }
+              />
+            ))}
+          </Routes>
 
 
         </div>
@@ -414,7 +443,7 @@ const App = () => {
 
 
 
-        
+
         <div className='flex flex-col items-center justify-center  fixed bottom-0 w-full backdrop-blur-sm'>
           <div className=' footer w-full flex items-center justify-between text-sm px-6'>
             <div className={"font-semibold"}>
@@ -431,7 +460,7 @@ const App = () => {
 
       </BrowserRouter>
 
-    </>
+    </div>
 
 
   );

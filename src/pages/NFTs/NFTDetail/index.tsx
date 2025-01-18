@@ -152,7 +152,7 @@ const NFTDetails: React.FunctionComponent<IPage> = props => {
             <ModalSuccessTransaction transaction={transaction} hide={toggleTransactionSuccess} isShowing={isTransactionSuccess} />
 
 
-            <div className={" mx-auto max-w-xl min-w-xl py-10"}>
+            <div className={" mx-auto max-w-xl min-w-xl"}>
                 <div className={"w-full"}>
                     <div className=" w-full px-4">
                         <div className={"w-full flex flex-col gap-2 items-center justify-center"}>
