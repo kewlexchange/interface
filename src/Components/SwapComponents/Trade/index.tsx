@@ -5,7 +5,7 @@ import { useWeb3React } from '@web3-react/core';
 import JSBI from 'jsbi';
 import { isSupportedChain } from '../../../constants/chains';
 import { WETH9, Token, CurrencyAmount, Pair, Price, Trade, Currency, Percent, Route, CHILIZWRAPPER } from '../../../entities';
-import { useExchangeContract, useERC20Contract, usePAIRContract, useFanTokenWrapperContract } from '../../../hooks/useContract';
+import { useExchangeContract, useERC20Contract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalSelectExchangePair } from '../../../hooks/useModals';
 import { useAppSelector } from '../../../state/hooks';
 import { useFetchAllTokenList } from '../../../state/user/hooks';
@@ -22,7 +22,6 @@ const _TRADE_TAB = () => {
 
   const { account, provider, chainId } = useWeb3React()
   const EXCHANGE = useExchangeContract(chainId, true)
-  const FANTOKENWRAPPER = useFanTokenWrapperContract(chainId, true)
 
 
   const { state: isTransactionSuccess, toggle: toggleTransactionSuccess } = useModal();
@@ -90,7 +89,7 @@ const _TRADE_TAB = () => {
   useEffect(() => {
     initTradeScreen();
 
-  }, [account, provider, chainId])
+  }, [account, provider, chainId,EXCHANGE])
 
 
   const setInputValue = (e: any, side: TradeType) => {
@@ -172,23 +171,24 @@ const _TRADE_TAB = () => {
           return
         }
 
-        let inputAmount = parseUnits(baseInputValue, baseAsset.decimals);
-        let outputAmount = parseUnits(pair.outputAmount, quoteAsset?.decimals)
+        if (!EXCHANGE) {
+          return
+        }
+
+
         let WRAPPER = CHILIZWRAPPER[chainId].address
-
-
-
-
         toggleLoading();
 
         let DEPOSIT_AMOUNT = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals)
         let IS_NATIVE = (baseAsset.address === ETHER_ADDRESS || baseAsset.address === ethers.constants.AddressZero)
+        let outputAmount = parseUnits(pair.outputAmount, quoteAsset?.decimals)
 
         let INPUT_TOKEN = IS_NATIVE ? pair.pair.weth : baseAsset.address;
-        let SwapParam = {
-          amount: DEPOSIT_AMOUNT,
+        let swapParam = {
+          amountIn: DEPOSIT_AMOUNT,
+          amountOut:outputAmount,
           weth9: pair.pair.weth,
-          wrapper: FANTOKENWRAPPER.address,
+          wrapper: WRAPPER,
           pair: pair.pair.pair,
           input: INPUT_TOKEN
         }
@@ -196,8 +196,8 @@ const _TRADE_TAB = () => {
           value: IS_NATIVE ? DEPOSIT_AMOUNT : 0
         }
 
-        if ((!IS_NATIVE) && (SwapParam.input != ethers.constants.AddressZero)) {
-          const tokenContract = ERC20Contract(SwapParam.input);
+        if ((!IS_NATIVE) && (swapParam.input != ethers.constants.AddressZero)) {
+          const tokenContract = ERC20Contract(swapParam.input);
 
           const allowance = await tokenContract.allowance(account, EXCHANGE.address);
           if (allowance.lt(DEPOSIT_AMOUNT)) {
@@ -207,7 +207,11 @@ const _TRADE_TAB = () => {
 
         }
 
-        await EXCHANGE.swap(SwapParam, overrides).then(async (tx) => {
+        
+
+        console.log("EXCHANGE",swapParam)
+
+        await EXCHANGE.swap(swapParam, overrides).then(async (tx) => {
           await tx.wait();
           const summary = `Swapping : ${tx.hash}`
           setTransaction({ hash: tx.hash, summary: summary, error: null });
@@ -502,6 +506,10 @@ const _TRADE_TAB = () => {
         return
       }
 
+      if(!EXCHANGE){
+        return
+      }
+
 
 
       let WRAPPER = CHILIZWRAPPER[chainId].address
@@ -509,24 +517,27 @@ const _TRADE_TAB = () => {
       toggleLoading();
 
       let DEPOSIT_AMOUNT = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals)
-      let allSwapParams = [];
+      let allSwapParams : any = [];
       let IS_NATIVE = (baseAsset.address === ETHER_ADDRESS || baseAsset.address === ethers.constants.AddressZero)
 
 
       tradingPairs.forEach((pair) => {
         if (pair.pair.valid && ((pair.pair.reserve0.gt(DEPOSIT_AMOUNT) && pair.pair.reserve1.gt(DEPOSIT_AMOUNT)))) {
 
+          let outputAmount = parseUnits(pair.outputAmount, quoteAsset?.decimals)
 
-          let INPUT_TOKEN = baseAsset.address === ETHER_ADDRESS ? pair.pair.weth : baseAsset.address;
+          let INPUT_TOKEN = IS_NATIVE ? pair.pair.weth : baseAsset.address;
           let swapParam = {
-            amount: DEPOSIT_AMOUNT,
+            amountIn: DEPOSIT_AMOUNT,
+            amountOut:outputAmount,
             weth9: pair.pair.weth,
             wrapper: WRAPPER,
             pair: pair.pair.pair,
             input: INPUT_TOKEN
           }
 
-          if (!allSwapParams.some(param => param.pair === pair.pair)) {
+
+          if (!allSwapParams.some((param:any) => param.pair === pair.pair)) {
 
             allSwapParams.push(swapParam);
           }
@@ -549,6 +560,8 @@ const _TRADE_TAB = () => {
           await approveTx.wait();
         }
       }
+    
+      console.log("EXCHANGE",EXCHANGE)
 
       await EXCHANGE.swapAll(allSwapParams, overrides).then(async (tx) => {
         await tx.wait();
