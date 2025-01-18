@@ -242,7 +242,7 @@ const App = () => {
                       <span className='text-md'>{t("Swap")}</span>
                     </Link>
                   </DropdownItem>
-
+{/* 
                   <DropdownItem key={"nfts"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
@@ -295,7 +295,7 @@ const App = () => {
                     }} color="foreground" as={NavLink} to={"/vesting"} >
                       <span className='text-md'>{t("Vesting")}</span>
                     </Link>
-                  </DropdownItem>
+                  </DropdownItem> */}
 
                   <DropdownItem key={"earn"}>
                     <Link className='w-full' onPress={(e) => {
