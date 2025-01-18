@@ -99,6 +99,8 @@ const _TRADE_TAB = () => {
     if (regex.test(e)) {
       if (side == TradeType.EXACT_INPUT) {
         setBaseInputValue(e)
+        debouncedSetInputValue(e)
+
         //addSwapInputValue(e)
       } else {
         //setQuoteInputValue(e)
@@ -635,7 +637,6 @@ const _TRADE_TAB = () => {
               <Input
                 onChange={(val) => {
                   setInputValue(val.target.value, TradeType.EXACT_INPUT)
-                  debouncedSetInputValue(val.target.value)
                 }}
                 value={baseInputValue}
                 label={`Input ${baseAsset ? baseAsset.symbol : ""}->${quoteAsset ? quoteAsset.symbol : ""}`}
@@ -648,12 +649,12 @@ const _TRADE_TAB = () => {
                         side: TradeType.EXACT_INPUT
                       }));
                       toggleSelectToken()
-                    }} size="md" variant="light" isIconOnly radius="full">
-                      <Avatar className='!opacity-1' isBordered size="sm" src={baseAsset ? baseAsset.logoURI : DEFAULT_TOKEN_LOGO} />
+                    }} size="md" className="opacity-100" variant="faded" isIconOnly radius="full">
+                      <Avatar className="opacity-100" isBordered size="sm" src={baseAsset ? baseAsset.logoURI : DEFAULT_TOKEN_LOGO} />
                     </Button>
                     <Button onPress={() => {
                       handleSwapAssets()
-                    }} size="md" variant="light" isIconOnly radius="full">
+                    }} size="md" className="opacity-100" variant="faded" isIconOnly radius="full">
                       <GitCompareArrows />
                     </Button>
                     <Button onPress={() => {
@@ -664,7 +665,7 @@ const _TRADE_TAB = () => {
                       }));
                       toggleSelectToken()
                     }} size="md" variant="light" isIconOnly radius="full">
-                      <Avatar className='!opacity-1' isBordered size="sm" src={quoteAsset ? quoteAsset.logoURI : DEFAULT_TOKEN_LOGO} />
+                      <Avatar className="opacity-100" isBordered size="sm" src={quoteAsset ? quoteAsset.logoURI : DEFAULT_TOKEN_LOGO} />
 
                     </Button>
 
