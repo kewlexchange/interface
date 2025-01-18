@@ -926,70 +926,17 @@ const _SWAP_TAB = () => {
                         </div>
 
                     </div>
+                    <div className='w-full'>
+                    <TradeContainer /> 
+                    </div>
                 </div>
 
 
-                <TradeContainer /> 
+             
 
 
 
-                <div className={"flex flex-col gap-2 w-full"}>
-                    <div className={"w-full flex flex-col gap-2 rounded-lg"}>
-
-
-                        {
-                            pairInfo && pairInfo.valid && pairInfo.reserveBase == 0 && pairInfo.reserveQuote == 0 && <div className={"bg-red-500 text-white text-center w-full rounded-lg p-2"}>
-                                {baseAsset?.symbol} x {quoteAsset?.symbol} No liquidity found!
-                            </div>
-                        }
-                        {
-                            pairInfo && !pairInfo.valid && <div className={"flex flex-col gap-2 text-white text-center w-full rounded-lg"}>
-                                <Card className={"w-full rounded-lg flex flex-row items-center justify-start gap-2 p-2"}>
-                                    <DoubleCurrencyIcon baseIcon={baseAsset?.logoURI} quoteIcon={quoteAsset?.logoURI} />
-                                    <span className={"text-red-500"}>{baseAsset?.symbol} x {quoteAsset?.symbol} liquidity doesn't exists!</span>
-                                </Card>
-                            </div>
-                        }
-                    </div>
-
-                    {
-                        pairInfo && pairInfo.valid && baseAsset && quoteAsset && <div className={"w-full grid grid-cols-1 gap-2"}>
-                            {
-                                isAllowanceRequired() === true &&
-                                <Button className={"w-full"} onPress={() => {
-                                    handleApprove(baseAsset.address);
-                                }} color="default">
-                                    Unlock {baseAsset.symbol}
-                                </Button>
-                            }
-                        </div>
-                    }
-
-
-                    <div className="w-full flex flex-col items-center justify-center">
-
-
-                        {
-                            account ? isAllowanceRequired() === false && pairInfo && pairInfo.valid && hasLiquidity &&
-                                <Button className={"w-full"} onPress={() => {
-                                    handleSwap()
-                                }} color="default">
-                                    Swap
-                                </Button>
-                                :
-                                <Button className={"w-full"} onPress={() => {
-                                    toggleConnectModal()
-                                }} color="default">
-                                    Connect
-                                </Button>
-                        }
-
-
-                    </div>
-
-
-
-                </div>
+        
             </div>
 
         </>
