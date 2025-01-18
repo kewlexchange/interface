@@ -35,7 +35,7 @@ export const useFetchAllTokenList = (chainId: number, account: string | null) =>
             tokenList = [...tokenList, ...customTokens];
         }
 
-        tokenList = tokenList.map(item => ({ ...item, balance: '0.0' }));
+        tokenList = tokenList.map(item => ({ ...item, balance: '0.0000' }));
 
 
         if (account && EXCHANGE) {
