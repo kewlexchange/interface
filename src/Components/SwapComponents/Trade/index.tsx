@@ -522,6 +522,9 @@ const _TRADE_TAB = () => {
         return
       }
 
+      if (tradingPairs.length < 1) {
+        return
+      }
 
 
       let WRAPPER = CHILIZWRAPPER[chainId].address
@@ -533,9 +536,32 @@ const _TRADE_TAB = () => {
       let IS_NATIVE = (baseAsset.address === ETHER_ADDRESS || baseAsset.address === ethers.constants.AddressZero)
 
 
-      tradingPairs.forEach((pair) => {
-        if (pair.pair.valid && ((pair.pair.reserve0.gt(DEPOSIT_AMOUNT) && pair.pair.reserve1.gt(DEPOSIT_AMOUNT)))) {
 
+
+      function normalizeAmount(amount: JSBI, decimals: number): JSBI {
+        const DECIMALS_STANDARD = 18; // Tüm karşılaştırmaları 18 decimals üzerinden yapacağız.
+        return JSBI.multiply(
+          amount,
+          JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(DECIMALS_STANDARD - decimals))
+        );
+      }
+      
+     
+       
+      tradingPairs.forEach((pair) => {
+
+
+        if (
+          pair.pair.valid &&
+          JSBI.greaterThan(
+            normalizeAmount( JSBI.BigInt(pair.pair.reserve0.toString()), pair.pair.token0Decimals.toNumber()),
+            normalizeAmount(MINIMUM_LIQUIDITY, pair.pair.token0Decimals.toNumber())
+          ) &&
+          JSBI.greaterThan(
+            normalizeAmount( JSBI.BigInt(pair.pair.reserve1.toString()), pair.pair.token1Decimals.toNumber()),
+            normalizeAmount(MINIMUM_LIQUIDITY, pair.pair.token1Decimals.toNumber())
+          )
+        ) {
           let outputAmount = parseUnits(pair.outputAmount, quoteAsset?.decimals)
 
           let INPUT_TOKEN = IS_NATIVE ? pair.pair.weth : baseAsset.address;
@@ -554,11 +580,36 @@ const _TRADE_TAB = () => {
             allSwapParams.push(swapParam);
           }
         }
+/*
+        if (pair.pair.valid && ((pair.pair.reserve0.gt(MINIMUM_LIQUIDITY) && pair.pair.reserve1.gt(MINIMUM_LIQUIDITY)))) {
+
+          let outputAmount = parseUnits(pair.outputAmount, quoteAsset?.decimals)
+
+          let INPUT_TOKEN = IS_NATIVE ? pair.pair.weth : baseAsset.address;
+          let swapParam = {
+            amountIn: DEPOSIT_AMOUNT,
+            amountOut:outputAmount,
+            weth9: pair.pair.weth,
+            wrapper: WRAPPER,
+            pair: pair.pair.pair,
+            input: INPUT_TOKEN
+          }
+
+
+          if (!allSwapParams.some((param:any) => param.pair === pair.pair)) {
+
+            allSwapParams.push(swapParam);
+          }
+        }*/
       });
 
-      console.log("params", allSwapParams)
+      console.log("params", allSwapParams,tradingPairs)
 
 
+      if(allSwapParams.length == 0){
+        toggleLoading();
+        return;
+      }
 
       let overrides = {
         value: IS_NATIVE ? DEPOSIT_AMOUNT.mul(allSwapParams.length) : ethers.constants.Zero,
