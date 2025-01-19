@@ -713,12 +713,11 @@ const _TRADE_TAB = () => {
                 }
                 fullWidth variant="faded"
                 radius="full"
-
                 className="w-full flex flex-col gap-2 items-center justify-center"
                 size={"lg"} type="text" />
 
             </div>
-            <div className="w-full flex flex-col gap-2 p-2">
+            <div className="w-full flex flex-col gap-2">
               <div className="grid grid-cols-2">
                <div className="w-full flex flex-row gap-2 items-center justify-start">
                {
@@ -730,11 +729,11 @@ const _TRADE_TAB = () => {
 
                
                
-                <div className="w-full flex flex-row items-center justify-end gap-2">
+                <div className="w-full flex flex-row items-center pt-2 justify-end gap-2">
 
 
 
-                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent className="text-danger" />} placement="top-right">
+                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent  />} placement="top-right">
 
                     <Button
                       className="max-w-[40px] min-w-[40px] min-h-[40px] border border-1 border-default/30 hover:border-default"
@@ -752,7 +751,7 @@ const _TRADE_TAB = () => {
                   </Badge>
 
 
-                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent className="text-danger" />} placement="top-right">
+                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent />} placement="top-right">
 
                     <Button
                       className="max-w-[40px] min-w-[40px] min-h-[40px] border border-1 border-default/30 hover:border-default"
@@ -770,7 +769,7 @@ const _TRADE_TAB = () => {
                   </Badge>
 
 
-                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent className="text-danger" />} placement="top-right">
+                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent />} placement="top-right">
 
                     <Button
                       className="max-w-[40px] min-w-[40px] min-h-[40px] border border-1 border-default/30 hover:border-default"
@@ -789,7 +788,7 @@ const _TRADE_TAB = () => {
                   </Badge>
 
 
-                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent className="text-danger" />} placement="top-right">
+                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent />} placement="top-right">
 
                     <Button
                       className="max-w-[40px] min-w-[40px] min-h-[40px] border border-1 border-default/30 hover:border-default"

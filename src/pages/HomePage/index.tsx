@@ -2,6 +2,7 @@ import { Card, CardHeader } from "@nextui-org/react";
 import IPage from "../../interfaces/page";
 import React, { useEffect } from "react";
 import { TRADE_TAB } from "@/Components/SwapComponents/Trade";
+import { LandingBG } from "@/Components/Landing";
 
 
 

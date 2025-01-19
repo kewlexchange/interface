@@ -129,43 +129,51 @@
             cursor:default !important;
             &:nth-child(1){
                 top:calc(50% - 100px);
-                @apply w-[200px] left-[10%]
+                @apply w-[40px] left-[10%] 
             }
             &:nth-child(2){
-                @apply w-[180px] right-[10%] top-[20%]
+                @apply w-[60px] right-[10%] top-[30%] 
             }
             &:nth-child(3){
                 left:calc(50% - 75px);
-                @apply w-[150px] top-[2%]
+                @apply w-[50px] top-[62%] left-[5%] top-[30%] 
             }
             &:nth-child(4){
                 left:calc(60% - 130px);
-                @apply w-[260px] bottom-[10%]
+                @apply w-[60px] bottom-[10%] 
             }
             &:nth-child(5){
-                @apply w-[120px] left-[5%] top-[20%]
+                @apply w-[30px] 
             }
 
-            &:nth-child(6){
+            &:nth-child(6){//chz
                 animation: spinAnim 3s ease-in-out 0s infinite normal forwards;
-                @apply w-[120px] left-[30%] top-[20%] 
+                @apply w-[120px] left-[46%] top-[70%] 
             }
 
-            &:nth-child(7){
+            &:nth-child(7){//chzinu
                 animation: spinAnim 3s ease-in-out 0s infinite normal forwards;
 
-                @apply w-[160px] left-[5%] bottom-[20%] animate-bounce
+                @apply w-[160px] left-[5%] bottom-[10%] animate-bounce 
             }
 
-            &:nth-child(8){
+            &:nth-child(8){//pepper
                 animation: spinAnim 3s ease-in-out 0s infinite normal forwards;
-                @apply w-[260px] right-[5%] top-[70%] animate-bounce delay-500
+                @apply w-[100px] right-[5%] top-[70%] animate-bounce delay-500
             }
 
             &:nth-child(9){
                 animation: spinAnim 3s ease-in-out 0s infinite normal forwards;
-                @apply w-[130px] left-[60%] top-[10%]
+                @apply w-[70px] left-[60%] top-[80%]
             }
+
+
+            &:nth-child(10){//angry1
+                animation: spinAnim 3s ease-in-out 0s infinite normal forwards;
+                @apply w-[70px] left-[35%] top-[80%]
+            }
+
+     
 
             animation: blurAnim 5s ease 0s infinite normal forwards;
             @apply absolute w-[200px] cursor-pointer hover:opacity-100  opacity-20 hover:transition hover:fade-in hover:duration-500 hover:z-[999999999]

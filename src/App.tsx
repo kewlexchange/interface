@@ -187,8 +187,8 @@ const App = () => {
         }} isClosable={true} address={account} isShowing={isShowWallet} hide={toggleWalletModal} />
 
 
-        <div className='w-full fixed  z-[1] bg-red-500 top-[5px]'>
-          <div className=" absolute top-3  w-full z-40 flex items-center justify-center">
+        <div className='w-full fixed   z-[1] bg-red-500 top-[5px]'>
+          <div className=" absolute top-3  px-2 w-full z-40 flex items-center justify-center">
 
             <Navbar
               classNames={{
@@ -205,15 +205,15 @@ const App = () => {
             >
 
 
-<Dropdown
-                      showArrow
+              <Dropdown
+                showArrow
 
-                      radius="sm"
-                      classNames={{
-                        base: "before:bg-default-200", // change arrow background
-                        content: "py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
-                      }}
-                    >
+                radius="sm"
+                classNames={{
+                  base: "before:bg-default-200", // change arrow background
+                  content: "py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
+                }}
+              >
                 <NavbarItem>
 
                   <DropdownTrigger>
@@ -242,7 +242,7 @@ const App = () => {
                       <span className='text-md'>{t("Swap")}</span>
                     </Link>
                   </DropdownItem>
-{/* 
+                  {/* 
                   <DropdownItem key={"nfts"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
@@ -313,9 +313,9 @@ const App = () => {
 
               <NavbarBrand>
                 <Link href='/'>
-                <Image className='cursor' onClick={() => {
+                  <Image className='cursor' onClick={() => {
 
-                }} width={72} height={72} src={ICON_LOGO} />
+                  }} width={72} height={72} src={ICON_LOGO} />
                 </Link>
                 <p className="hidden font-bold text-inherit">KEWL</p>
 
@@ -333,7 +333,7 @@ const App = () => {
                       radius="sm"
                       classNames={{
                         base: "before:bg-default-200", // change arrow background
-                        content: "py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
+                        content: "py-1 px- border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
                       }}
                     >
                       <DropdownTrigger>
@@ -429,10 +429,11 @@ const App = () => {
 
         <div className={"w-screen h-screen overflow-y-scroll  py-[88px] pb-[70px] flex flex-col items-center justify-center w-screen h-full"}>
 
-        <div className="absolute left-0 top-0 z-[0] w-screen h-screen  flex flex-col gap-2 items-center justify-center">
+          <div className="absolute left-0 top-0 z-[0] w-screen h-screen  flex flex-col gap-2 items-center justify-center">
             <div className="w-full ">
-            <Cobe text="KEWL" description="EXCHANGE"/>
+              <Cobe text="KEWL" description="EXCHANGE" />
             </div>
+            <LandingBG/>
           </div>
 
           <Routes>
@@ -441,11 +442,11 @@ const App = () => {
                 key={`route${index}`}
                 path={route.path}
                 element={
-                  <div className='relative w-full  h-full  max-w-5xl'>
+                  <div className='relative w-full px-2 h-full  max-w-5xl'>
 
 
-                      <route.component title={route.title} />
-                    </div>
+                    <route.component title={route.title} />
+                  </div>
                 }
               />
             ))}
