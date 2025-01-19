@@ -437,9 +437,6 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
         if(!tokenList){
             return;
         }
-        if(!searchText){
-            return;
-        }
         if (searchText !== "") {
             const filteredList = tokenList.filter((item) =>
                 item.symbol.toLowerCase().includes(searchText.toLowerCase())
