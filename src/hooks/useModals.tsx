@@ -426,14 +426,11 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
     const ERC20Contract = useERC20Contract()
     const dispatch = useAppDispatch()
     var customTokens = useAppSelector((state) => state.user.customTokenList && state.user.customTokenList[chainId])
-    const {state:isTransactionSuccess, toggle:toggleTransactionSuccess } = useModal();
-    const {state:isShowLoading, toggle:toggleLoading } = useModal();
     const { state: isErrorShowing, toggle: toggleError } = useModal()
     const { state: isInfoShowing, toggle: toggleInfo } = useModal()
     const [transaction, setTransaction] = useState({hash: '',summary: '',error: null})
     const [isSelected, setIsSelected] = useState(false);
 
-    const CNS_DOMAIN_CONTRACT = useDomainContract(chainId, true);
 
 
     useEffect(() => {
@@ -563,14 +560,6 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
         }
 
 
-        /*
-        const [_isRegistered, _Address] = await CNS_DOMAIN_CONTRACT.isRegistered(account);
-       if(!_isRegistered){
-        setTransaction({ hash: '', summary: '', error:{message:`To import external tokens, you need to perform Domain Registration. Please complete your Domain Registration.`}});
-        toggleError();
-        return
-       }
-       */
 
         let customTokenList = [];
         customTokenList.push(tokenInfo)
@@ -688,7 +677,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
 
     useEffect(() => {
 
-        console.log(tokenList)
+        console.log("chainId:tokens",chainId,tokenList)
         if (tokenList) {
             setFilteredItems(tokenList)
             setAllTokenList(tokenList)
@@ -731,40 +720,46 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                                         <ScrollShadow orientation="horizontal" className="w-full h-[270px] max-h-[270px]">
 
                                             <Listbox className="w-full" variant="flat" aria-label="Listbox menu with sections">
+   
+   
+                                            <ListboxSection title="Tokens">
+  {
+    filteredItems && filteredItems.map((tokenItem) => {
+      // Check if disableToken is null or address is different
+      if (disableToken?.address !== tokenItem.address) {
+        return (
+          <ListboxItem 
+            startContent={
+              <AvatarGroup size='sm' isBordered>
+                <Avatar size='sm' src={tokenItem.logoURI} />
+              </AvatarGroup>
+            }
+            key={`token${tokenItem.address}`}
+            onPress={() => {
+              onSelect(tokenItem);
+              setSearchText("");
+            }}
+            className={"w-full flex flex-row items-center justify-between gap-2"}
+          >
+            <div className={"flex flex-row items-center justify-between gap-2 w-full"}>
+              <div className={"w-full flex flex-col items-center justify-center gap-2"}>
+                <div className={"w-full flex flex-col items-start justify-start whitespace-nowrap overflow-ellipsis"}>
+                  <span className="font-bold">{tokenItem.symbol}</span>
+                  <span className={"text-xs whitespace-nowrap overflow-ellipsis"}>{tokenItem.name}</span>
+                </div>
+              </div>
+              <div className={"w-full text-xs text-end"}>
+                {tokenItem.balance}
+              </div>
+            </div>
+          </ListboxItem>
+        );
+      }
+      return null;  // This ensures nothing is rendered if the token is disabled
+    })
+  }
+</ListboxSection>
 
-                                                <ListboxSection title="Tokens">
-
-                                                    {
-                                                        disableToken && filteredItems && filteredItems.map((tokenItem) => {
-                                                            return (canDisplay(tokenItem.address) && tokenItem.decimals > 0) &&
-                                                                <ListboxItem startContent={
-                                                                    <AvatarGroup size='sm' isBordered>
-
-                                                                        <Avatar size='sm' src={tokenItem.logoURI} />
-
-                                                                    </AvatarGroup>
-
-                                                                }
-                                                                    key={`token${tokenItem.address}`} onPress={() => {
-                                                                        onSelect(tokenItem)
-                                                                        setSearchText("")
-                                                                    }} className={"w-full flex flex-row items-center justify-between gap-2"}>
-                                                                    <div className={"flex flex-row items-center justify-between gap-2 w-full"}>
-                                                                        <div className={"w-full flex flex-col items-center justify-center gap-2"}>
-                                                                            <div className={"w-full flex flex-col items-start justify-start whitespace-nowrap overflow-ellipsis"}>
-                                                                                <span className="font-bold">{tokenItem.symbol}</span>
-                                                                                <span className={"text-xs whitespace-nowrap overflow-ellipsis"}>{tokenItem.name}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className={"w-full text-xs text-end "}>
-                                                                            {tokenItem.balance}
-                                                                        </div>
-                                                                    </div>
-
-                                                                </ListboxItem>
-                                                        })
-                                                    }
-                                                </ListboxSection>
                                             </Listbox>
                                         </ScrollShadow>
                                     </CardBody>

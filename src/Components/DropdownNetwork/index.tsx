@@ -81,19 +81,6 @@ export const DropdownNetwork = (props: { className?: string, testMode?: boolean 
                             </div>
                         </Card>
 
-                        <Card shadow="none"  isPressable className={chainId == ChainId.CHILIZ_SPICY_TESTNET ? "bg-danger text-white" : ""}
-
-                            onPress={() => {
-                                handleChangeActiveNetwork(ChainId.CHILIZ_SPICY_TESTNET);
-                            }} >
-                            <div className="flex flex-row gap-2 p-2">
-                                <img className={"w-10 h-10 p-2"} src="/images/coins/chz.svg" alt="CHILIZ_SPICY_TESTNET" />
-                                <div className="flex w-full flex-col items-start justify-start">
-                                    <span>CHILIZ SPICY</span>
-                                    <small>SPICY TESTNET</small>
-                                </div>
-                            </div>
-                        </Card>
 
                         <Card shadow="none"  isPressable className={chainId == ChainId.ARBITRUM_ONE ? "bg-danger text-white" : ""}
                             onPress={() => {

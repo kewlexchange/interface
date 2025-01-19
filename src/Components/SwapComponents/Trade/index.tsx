@@ -11,10 +11,11 @@ import { useAppSelector } from '../../../state/hooks';
 import { useFetchAllTokenList } from '../../../state/user/hooks';
 import { debounce, getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../utils';
 import UniwalletModal from '../../Modal/UniwalletModal';
-import { Badge, Accordion, AccordionItem, Avatar, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Image, Input, ScrollShadow, Switch } from '@nextui-org/react';
+import { Badge, Accordion, AccordionItem, Avatar, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Image, Input, ScrollShadow, Switch, Tooltip } from '@nextui-org/react';
 import { formatEther, formatUnits, parseEther, parseUnits } from '@ethersproject/units';
-import { ChevronsRight, CirclePercent, GitCompareArrows, ScanEye, ScanSearch } from 'lucide-react';
+import { ChevronsRight, CirclePercent, GitCompareArrows, Hand, ScanEye, ScanSearch } from 'lucide-react';
 import { PairInfo, Router, TCustomPair, TradeItemProps } from '../../../interfaces/tokenId';
+import { useToken, useTokenContext } from '@/contexts/tokenListContext';
 
 
 
@@ -23,6 +24,7 @@ const _TRADE_TAB = () => {
   const { account, provider, chainId } = useWeb3React()
   const EXCHANGE = useExchangeContract(chainId, true)
 
+  const { getTokenListByChainId } = useTokenContext();
 
   const { state: isTransactionSuccess, toggle: toggleTransactionSuccess } = useModal();
   const { state: isShowLoading, toggle: toggleLoading } = useModal();
@@ -39,10 +41,10 @@ const _TRADE_TAB = () => {
   const [isBase, setIsBase] = useState(tokenSelector.side == TradeType.EXACT_INPUT)
 
 
-  const defaultAssets = useAppSelector((state) => state.user.tokenList && state.user.tokenList[chainId])
   const [baseAsset, setBaseAsset] = useState<any>(null)
   const [quoteAsset, setQuoteAsset] = useState<any>(null)
 
+  const { fetchTokens } = useFetchAllTokenList(chainId, account);
 
   const [baseInputValue, setBaseInputValue] = useState("")
   const [debouncedInputValue, setDebouncedSetInputValue] = useState("")
@@ -51,9 +53,10 @@ const _TRADE_TAB = () => {
   const ERC20Contract = useERC20Contract()
 
   const [allExchangePairs, setAllExchangePairs]: any = useState(null)
-  const { fetchTokens } = useFetchAllTokenList(chainId, account);
 
+  const { tokens, setTokenList, setChainId ,loadTokens} = useTokenContext();
 
+  
   const initTradeScreen = async () => {
 
     if (!chainId) {
@@ -68,8 +71,13 @@ const _TRADE_TAB = () => {
       return
     }
 
-
     await fetchTokens()
+
+    setBaseAsset(null)
+    setQuoteAsset(null)
+
+
+    /*
 
     if (!baseAsset || !quoteAsset || baseAsset.chainId !== quoteAsset.chainId) {
       const kwlToken = defaultAssets.find(
@@ -85,6 +93,7 @@ const _TRADE_TAB = () => {
         setQuoteAsset(null)
       }
     }
+      */
 
   
 
@@ -94,8 +103,9 @@ const _TRADE_TAB = () => {
   useEffect(() => {
     initTradeScreen();
 
-  }, [account, provider, chainId,EXCHANGE])
+  }, [account, provider, chainId,EXCHANGE,loadTokens])
 
+  
 
   const setInputValue = (e: any, side: TradeType) => {
     const regex = /^[0-9]*\.?[0-9]*$/;
@@ -383,13 +393,10 @@ const _TRADE_TAB = () => {
       const routers = getRoutersByChainId(chainId);
 
 
-      console.log("tokenBase", tokenBase)
       const _tradingPairs = await EXCHANGE.fetchPairs(routers, wrapper, tokenBase.address, tokenQuote.address, depositAmount)
 
-      console.log("coder", routers, wrapper, tokenBase.address, tokenQuote.address, depositAmount)
 
 
-      console.log("_tradingPairs", _tradingPairs)
       const customPairs: TCustomPair[] = []; // Custom pair dizisi oluşturuluyor
 
       const _validPairs: PairInfo[] = []
@@ -636,7 +643,7 @@ const _TRADE_TAB = () => {
   return (
     <>
       <ModalNoProvider isShowing={isNoProvider} hide={toggleNoProvider} />
-      <ModalSelectToken disableToken={tokenSelector.side == TradeType.EXACT_INPUT ? quoteAsset : baseAsset} hide={toggleSelectToken} isShowing={isSelectToken} onSelect={onSelectToken} isClosable={true} tokenList={defaultAssets} onSelectPair={handleSelectPair} allExchangePairs={allExchangePairs} />
+      <ModalSelectToken disableToken={tokenSelector.side == TradeType.EXACT_INPUT ? quoteAsset : baseAsset} hide={toggleSelectToken} isShowing={isSelectToken} onSelect={onSelectToken} isClosable={true} tokenList={getTokenListByChainId(chainId)} onSelectPair={handleSelectPair} allExchangePairs={allExchangePairs} />
       <UniwalletModal />
       <ModalConnect isShowing={isConnect} hide={toggleConnectModal} />
       <ModalNoProvider isShowing={isNoProvider} hide={toggleNoProvider} />
@@ -672,13 +679,17 @@ const _TRADE_TAB = () => {
                       }));
                       toggleSelectToken()
                     }} size="md" className="opacity-100" variant="faded" isIconOnly radius="full">
-                      <Avatar className="opacity-100" isBordered size="sm" src={baseAsset ? baseAsset.logoURI : DEFAULT_TOKEN_LOGO} />
+                      {
+                        baseAsset ? <Avatar className="opacity-100" isBordered size="sm" src={baseAsset.logoURI} />: <Hand />
+                      }
+                      
                     </Button>
                     <Button onPress={() => {
                       handleSwapAssets()
                     }} size="md" className="opacity-100" variant="faded" isIconOnly radius="full">
                       <GitCompareArrows />
                     </Button>
+                    <Tooltip placement='top-right' color='danger' content='Select Quote Asset'>
                     <Button onPress={() => {
                       setTokenSelector(prevState => ({
                         ...prevState,
@@ -686,10 +697,11 @@ const _TRADE_TAB = () => {
                         side: TradeType.EXACT_OUTPUT
                       }));
                       toggleSelectToken()
-                    }} size="md" variant="light" isIconOnly radius="full">
-                      <Avatar className="opacity-100" isBordered size="sm" src={quoteAsset ? quoteAsset.logoURI : DEFAULT_TOKEN_LOGO} />
+                    }} size="md" variant="faded" isIconOnly radius="full">
+                      {quoteAsset ? <Avatar className="opacity-100" isBordered size="sm" src={quoteAsset.logoURI} />: <Hand />}
 
                     </Button>
+                    </Tooltip>
 
                   </div>
                 }
@@ -807,4 +819,6 @@ const _TRADE_TAB = () => {
   );
 }
 export const TRADE_TAB = memo(_TRADE_TAB)
+
+
 

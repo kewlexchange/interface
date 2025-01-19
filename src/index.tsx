@@ -18,6 +18,7 @@ import { isCHZDomains, isIMON, isPonyGames } from './hooks/useDomains';
 import {NextUIProvider} from '@nextui-org/react'
 import { createRoot } from 'react-dom/client';
 import PonyGames from './PonyGames';
+import { TokenProvider } from './contexts/tokenListContext';
 
 (window as any).global = window;
 
@@ -33,7 +34,7 @@ rootInstance.render(
   <SocketProvider>
   <NextUIProvider>
   <NextThemesProvider  attribute="class" defaultTheme="dark">
-
+  <TokenProvider>
     <Provider store={store}>
       {
         isIMON() &&  <App/>
@@ -46,6 +47,7 @@ rootInstance.render(
       }
            
     </Provider>
+    </TokenProvider>
     </NextThemesProvider>
 
     </NextUIProvider>

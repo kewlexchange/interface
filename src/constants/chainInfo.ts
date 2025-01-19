@@ -214,7 +214,7 @@ const CHAIN_INFO: ChainInfoMap = {
     circleLogoUrl: avaxLogo,
     squareLogoUrl: avaxSquareLogo,
     nativeCurrency: { name: 'AVAX', symbol: 'AVAX', decimals: 18 },
-    defaultListUrl: ["https://raw.githubusercontent.com/kewlexchange/assets/refs/heads/main/avax/index.json"],
+    defaultListUrl: ["https://raw.githubusercontent.com/kewlexchange/assets/main/avax/index.json"],
   },
   [ChainId.BITCI]: {
     networkType: NetworkType.L1,
@@ -227,7 +227,7 @@ const CHAIN_INFO: ChainInfoMap = {
     circleLogoUrl: bitciLogoURL,
     squareLogoUrl: bitciLogoURL,
     nativeCurrency: { name: 'BITCI', symbol: 'BITCI', decimals: 18 },
-    defaultListUrl: ["https://raw.githubusercontent.com/imonai/nfts/main/bitci/index.json"],
+    defaultListUrl: ["https://raw.githubusercontent.com/kewlexchange/assets/main/bitci/index.json"],
   },
   [ChainId.BITCI_TEST]: {
     networkType: NetworkType.L1,
@@ -253,7 +253,7 @@ const CHAIN_INFO: ChainInfoMap = {
     circleLogoUrl: chilizLogoURL,
     squareLogoUrl: chilizLogoURL,
     nativeCurrency: { name: 'CHILIZ', symbol: 'CHZ', decimals: 18 },
-    defaultListUrl: ["https://raw.githubusercontent.com/imonai/nfts/main/chiliz/index.json"],
+    defaultListUrl: ["https://raw.githubusercontent.com/kewlexchange/assets/main/chiliz/index.json"],
   },
   [ChainId.CHILIZ_SPICY_TESTNET]: {
     networkType: NetworkType.L1,
