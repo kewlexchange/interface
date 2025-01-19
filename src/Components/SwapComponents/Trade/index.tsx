@@ -671,6 +671,8 @@ const _TRADE_TAB = () => {
                 label={`Input ${baseAsset ? baseAsset.symbol : ""}->${quoteAsset ? quoteAsset.symbol : ""}`}
                 endContent={
                   <div className="flex flex-row gap-2 items-center justify-center">
+                    <Tooltip  color='danger' content='Select Base Asset'>
+
                     <Button onPress={() => {
                       setTokenSelector(prevState => ({
                         ...prevState,
@@ -684,12 +686,16 @@ const _TRADE_TAB = () => {
                       }
                       
                     </Button>
+                    </Tooltip>
+                    <Tooltip  color='danger' content='Switch Assets'>
+
                     <Button onPress={() => {
                       handleSwapAssets()
                     }} size="md" className="opacity-100" variant="faded" isIconOnly radius="full">
                       <GitCompareArrows />
                     </Button>
-                    <Tooltip placement='top-right' color='danger' content='Select Quote Asset'>
+                    </Tooltip>
+                    <Tooltip  color='danger' content='Select Quote Asset'>
                     <Button onPress={() => {
                       setTokenSelector(prevState => ({
                         ...prevState,
@@ -714,14 +720,15 @@ const _TRADE_TAB = () => {
             </div>
             <div className="w-full flex flex-col gap-2 p-2">
               <div className="grid grid-cols-2">
-                {
-                  baseAsset &&  <div className="w-full flex flex-row gap-2 items-center justify-start">
-
+               <div className="w-full flex flex-row gap-2 items-center justify-start">
+               {
+                  baseAsset && <>
                   <Image className="w-8 h-8" src={baseAsset ? baseAsset?.logoURI : DEFAULT_TOKEN_LOGO} />
-                  <span>{baseAsset && baseAsset.balance} {baseAsset?.symbol}</span>
+                  <span>{baseAsset && baseAsset.balance} {baseAsset?.symbol}</span></>
+                }
                 </div>
 
-                }
+               
                
                 <div className="w-full flex flex-row items-center justify-end gap-2">
 
