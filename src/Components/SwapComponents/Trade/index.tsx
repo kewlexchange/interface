@@ -714,11 +714,15 @@ const _TRADE_TAB = () => {
             </div>
             <div className="w-full flex flex-col gap-2 p-2">
               <div className="grid grid-cols-2">
-                <div className="w-full flex flex-row gap-2 items-center justify-start">
+                {
+                  baseAsset &&  <div className="w-full flex flex-row gap-2 items-center justify-start">
+
                   <Image className="w-8 h-8" src={baseAsset ? baseAsset?.logoURI : DEFAULT_TOKEN_LOGO} />
                   <span>{baseAsset && baseAsset.balance} {baseAsset?.symbol}</span>
                 </div>
 
+                }
+               
                 <div className="w-full flex flex-row items-center justify-end gap-2">
 
 
