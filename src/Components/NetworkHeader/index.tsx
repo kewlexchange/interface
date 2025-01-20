@@ -48,9 +48,9 @@ export const NetworkHeader = (props: { className?: string, testMode?: boolean })
                 error={transaction.error}
             />
                 <ModalLoading isClosable={true} isShowing={isLoading} hide={toggleIsLoading} text={"Switching Network..."} />
-                <div className={"w-full items-center justify-center "}>
+                <div className={"w-full h-full items-center justify-center hidden lg:block"}>
 
-                    <div className="w-full items-center justify-center flex flex-row gap-2">
+                    <div className="w-full h-full  items-center justify-center flex flex-row gap-2">
                         <Tooltip color="danger" content={"Switch Network to Chiliz"}>
                         <Button 
                         radius="full"
