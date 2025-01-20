@@ -36,6 +36,7 @@ import { LandingBG } from './Components/Landing';
 import { LeftMenu } from './Components/LeftMenu';
 import { icons, Menu } from 'lucide-react';
 import Cobe from './Components/Cobe';
+import { NetworkHeader } from './Components/NetworkHeader';
 
 
 const ReactAudioPlayerEx = process.env.NODE_ENV === 'production' ? (ReactAudioPlayer as any).default : ReactAudioPlayer;
@@ -242,7 +243,9 @@ const App = () => {
                       <span className='text-md'>{t("Swap")}</span>
                     </Link>
                   </DropdownItem>
-                  {/* 
+
+
+                  { chainId && chainId == ChainId.CHILIZ_MAINNET  ?  <>
                   <DropdownItem key={"nfts"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
@@ -251,26 +254,18 @@ const App = () => {
                       <span className='text-md'>{t("NFTs")}</span>
                     </Link>
                   </DropdownItem>
-                  
+
                   <DropdownItem key={"earn"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
                       e.stopPropagation();
-                    }} color="foreground" as={NavLink} to={"/nfts"} >
+                    }} color="foreground" as={NavLink} to={"/earn"} >
                       <span className='text-md'>{t("Earn")}</span>
                     </Link>
                   </DropdownItem>
 
-                  <DropdownItem key={"earn"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                      e.stopPropagation();
-                    }} color="foreground" as={NavLink} to={"/cns"} >
-                      <span className='text-md'>{t("Domains")}</span>
-                    </Link>
-                  </DropdownItem>
 
-                  <DropdownItem key={"earn"}>
+                  <DropdownItem key={"launchpad"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
                       e.stopPropagation();
@@ -279,33 +274,19 @@ const App = () => {
                     </Link>
                   </DropdownItem>
 
-                  <DropdownItem key={"earn"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                      e.stopPropagation();
-                    }} color="foreground" as={NavLink} to={"/metamorph"} >
-                      <span className='text-md'>{t("Metamorph")}</span>
-                    </Link>
-                  </DropdownItem>
-
-                  <DropdownItem key={"earn"}>
+                  <DropdownItem key={"vesting"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
                       e.stopPropagation();
                     }} color="foreground" as={NavLink} to={"/vesting"} >
                       <span className='text-md'>{t("Vesting")}</span>
                     </Link>
-                  </DropdownItem> */}
-
-                  <DropdownItem key={"earn"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                      e.stopPropagation();
-                    }} color="foreground" as={NavLink} to={"/explorer"} >
-                      <span className='text-md'>{t("Explorer")}</span>
-                    </Link>
                   </DropdownItem>
-
+                  </>
+                  :<></>
+                }
+     
+                
 
                 </DropdownMenu>
               </Dropdown>
@@ -320,6 +301,9 @@ const App = () => {
                 <p className="hidden font-bold text-inherit">KEWL</p>
 
               </NavbarBrand>
+              <NavbarContent>
+                <NetworkHeader/>
+              </NavbarContent>
 
 
 
