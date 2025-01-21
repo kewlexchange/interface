@@ -90,7 +90,6 @@ const _EARN_TAB = () => {
         console.log(defaultAssets);
 
         let _tokens = [
-            "0xEd5740209FcF6974d6f3a5F11e295b5E468aC27c",
             "0xF3928e7871eb136DD6648Ad08aEEF6B6ea893001",
             "0x75D28E4c65aCD2EB6efCB0D200869E89C2c1ef1f",
             "0x2eBEc8E89BB4B9C3681BE4eAA85C391F1cd717cE",
@@ -111,7 +110,7 @@ const _EARN_TAB = () => {
 
 
     function isAllowedAsset(asset: any): boolean {
-        const wrappedSymbols = ['CHZINU','KWL','FAFO','DSWAP','CHSQUAD','FANFAN','SUCK'];
+        const wrappedSymbols = ['CHZINU','FAFO','DSWAP','CHSQUAD','FANFAN','SUCK'];
         return wrappedSymbols.includes(asset.toString().toUpperCase());
     }
 
