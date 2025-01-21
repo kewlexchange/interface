@@ -31,112 +31,116 @@ const TokenInfoComponent = () => {
         return formatNums(value, ',', '.', '[\\d\\u0660-\\u0669\\u06f0-\\u06f9]');
     }
 
+
+  
+    
     function drawGrid(canvasId: string) {
         const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
         if (!canvas) {
-          console.error("Canvas element not found.");
-          return;
+            console.error("Canvas element not found.");
+            return;
         }
-      
+    
         const ctx = canvas.getContext("2d");
         if (!ctx) {
-          console.error("Unable to get canvas context.");
-          return;
+            console.error("Unable to get canvas context.");
+            return;
         }
-      
-   
-      
-        const totalSquares = 1024; // Toplam kare sayısı
-        const sideLength = Math.sqrt(totalSquares); // Kare düzen için kenar uzunluğu
-        const canvasSize = Math.min(window.innerWidth, window.innerHeight) - 20; // Ekrana sığacak boyut
-        const squareSize = canvasSize / sideLength; // Her bir karenin boyutu
-      
-        // Token başına kare sayısını hesapla
-        const tokenPerSquare = totalTokens / totalSquares;
-      
+    
+        const totalCircles = 1024; // Toplam daire sayısı
+        const canvasSize = Math.min(window.innerWidth, window.innerHeight) - 20; // Ekran boyutu
+        const centerX = canvasSize / 2; // Spiral merkezi X
+        const centerY = canvasSize / 2; // Spiral merkezi Y
+        const maxRadius = canvasSize / 2.5; // Spiral için maksimum yarıçap (daha geniş spiral için artırıldı)
+        const circleSize = 20; // Daire çapı (daha büyük daireler)
+        const angleStep = 0.15; // Açının artış miktarı (daha sıkı spiral)
+        const radiusStep = maxRadius / totalCircles * 1.2; // Yarıçap artış miktarı (daha düzenli spiral)
+    
+        // Token başına düşen daire sayısını hesapla
+        const tokenPerCircle = totalTokens / totalCircles;
+    
         // Canvas boyutlarını ayarla
         canvas.width = canvasSize;
-        canvas.height = canvasSize+30;
-      
-        let squareIndex = 0;
-      
-        for (let row = 0; row < sideLength; row++) {
-          for (let col = 0; col < sideLength; col++) {
-            const x = col * squareSize;
-            const y = row * squareSize;
-      
+        canvas.height = canvasSize + 50;
+    
+        let angle = 0; // Başlangıç açısı
+        let radius = 0; // Başlangıç yarıçapı
+        let circleIndex = 0;
+    
+        // Spiral düzeninde daireleri çiz
+        for (let i = 0; i < totalCircles; i++) {
+            // Polar koordinatları kullanarak daire merkezi hesapla
+            const x = centerX + radius * Math.cos(angle);
+            const y = centerY + radius * Math.sin(angle);
+    
             let fillColor = "blue"; // Varsayılan renk mavi
-      
-            // Kırmızı renk için: Yakılmış token
-            if (squareIndex < burnedTokens / tokenPerSquare) {
-                fillColor = "rgba(255, 0, 0, 0.9)"; // Kırmızı renk ve alfa değeri
+    
+            // Kırmızı renk: Yakılmış token
+            if (circleIndex < burnedTokens / tokenPerCircle) {
+                fillColor = "rgba(255, 0, 0, 0.9)";
             }
-            // Yeşil renk için: Dolaşımdaki token
-            else if (squareIndex < (burnedTokens + circulatingTokens - lockedTokens) / tokenPerSquare) {
-              fillColor = "green"; // Dolaşımdaki, ama kilitli olmayan tokenler
+            // Yeşil renk: Dolaşımdaki token
+            else if (circleIndex < (burnedTokens + circulatingTokens - lockedTokens) / tokenPerCircle) {
+                fillColor = "green";
             }
-            // Mavi renk için: Kilitli token
-            else if (squareIndex < (burnedTokens + circulatingTokens) / tokenPerSquare) {
-              fillColor = "blue"; // Kilitli tokenler
+            // Mavi renk: Kilitli token
+            else if (circleIndex < (burnedTokens + circulatingTokens) / tokenPerCircle) {
+                fillColor = "blue";
             }
-      
-            // Dış hatları yuvarlatmak için path başlat
+    
+            // Daireyi çiz
             ctx.beginPath();
-            ctx.moveTo(x + 5, y); // Sol üst köşede 5px yuvarlak başlat
-            ctx.arcTo(x + squareSize, y, x + squareSize, y + squareSize, 5); // Üst sağ köşe
-            ctx.arcTo(x + squareSize, y + squareSize, x, y + squareSize, 5); // Alt sağ köşe
-            ctx.arcTo(x, y + squareSize, x, y, 5); // Alt sol köşe
-            ctx.arcTo(x, y, x + 5, y, 5); // Üst sol köşe
+            ctx.arc(x, y, circleSize / 2, 0, Math.PI * 2); // Dairenin dış hatları
             ctx.closePath();
-      
-            ctx.fillStyle = fillColor; // Renk seçimi
-            ctx.fill(); // Renk ile kareyi doldur
-      
-            ctx.strokeStyle = "black"; // Kare kenar rengi
-            ctx.lineWidth = 2; // Çizgi kalınlığı
-            ctx.stroke(); // Kenar çizgisi
-      
-            // Kırmızı karelere ateş emojisi ekle
-            if (squareIndex < burnedTokens / tokenPerSquare) {
-                ctx.font = `${squareSize * 0.6}px Arial`; // Emojiyi kareye uyacak şekilde boyutlandır
-              ctx.textAlign = "center"; // Ortalamak için
-              ctx.textBaseline = "middle"; // Ortalamak için
-              ctx.fillText("🔥", x + squareSize / 2, y + squareSize / 2); // Ateş emojisini çiz
+    
+            ctx.fillStyle = fillColor; // Dairenin rengi
+            ctx.fill();
+    
+            ctx.strokeStyle = "black"; // Kenar rengi
+            ctx.lineWidth = 1; // Çizgi kalınlığı
+            ctx.stroke();
+    
+            // Kırmızı dairelere ateş emojisi ekle
+            if (circleIndex < burnedTokens / tokenPerCircle) {
+                ctx.font = `${circleSize * 0.6}px Arial`; // Emoji boyutu
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("🔥", x, y);
             }
-      
-            squareIndex++;
-          }
+    
+            // Spiral için açıyı ve yarıçapı artır
+            angle += angleStep;
+            radius += radiusStep;
+    
+            circleIndex++;
         }
-     
-        
-  // Açıklama barı ekleyelim
-  const barHeight = 30;
-  const barMargin = 20;
-
-  // Bar için arka plan
-  ctx.fillStyle = "#f0f0f0"; // Açık gri
-  ctx.fillRect(0, canvas.height - barHeight, canvas.width, barHeight); // Barı çizin
-
-  // Renkli alanlar
-  const colorWidth = canvas.width / 3;
-  ctx.fillStyle = "red";
-  ctx.fillRect(0, canvas.height - barHeight, colorWidth, barHeight); // Kırmızı alan
-  ctx.fillStyle = "green";
-  ctx.fillRect(colorWidth, canvas.height - barHeight, colorWidth, barHeight); // Yeşil alan
-  ctx.fillStyle = "blue";
-  ctx.fillRect(colorWidth * 2, canvas.height - barHeight, colorWidth, barHeight); // Mavi alan
-
-  // Renkler için yazılar
-  ctx.font = "16px Arial";
-  ctx.fillStyle = "black";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText("Burned", colorWidth / 2, canvas.height - barHeight / 2);
-  ctx.fillText("Holders", colorWidth * 1.5, canvas.height - barHeight / 2);
-  ctx.fillText("Locked", colorWidth * 2.5, canvas.height - barHeight / 2);
-
-      }
-
+    
+        // Açıklama barı ekleyelim
+        const barHeight = 30;
+    
+        // Bar için arka plan
+        ctx.fillStyle = "#f0f0f0";
+        ctx.fillRect(0, canvas.height - barHeight, canvas.width, barHeight);
+    
+        // Renkli alanlar
+        const colorWidth = canvas.width / 3;
+        ctx.fillStyle = "red";
+        ctx.fillRect(0, canvas.height - barHeight, colorWidth, barHeight);
+        ctx.fillStyle = "green";
+        ctx.fillRect(colorWidth, canvas.height - barHeight, colorWidth, barHeight);
+        ctx.fillStyle = "blue";
+        ctx.fillRect(colorWidth * 2, canvas.height - barHeight, colorWidth, barHeight);
+    
+        // Renkler için yazılar
+        ctx.font = "16px Arial";
+        ctx.fillStyle = "black";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Burned", colorWidth / 2, canvas.height - barHeight / 2);
+        ctx.fillText("Holders", colorWidth * 1.5, canvas.height - barHeight / 2);
+        ctx.fillText("Locked", colorWidth * 2.5, canvas.height - barHeight / 2);
+    }
+      
     const initData = async () => {
 
         drawGrid("gridCanvas");
