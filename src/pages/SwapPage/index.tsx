@@ -15,7 +15,8 @@ import { TRADE_TAB } from "../../Components/SwapComponents/Trade";
 import { ARBITRAGE_TAB } from "../../Components/SwapComponents/Arbitrage";
 import { useSocket } from "../../hooks/useSocketProvider";
 import { generateTxLink } from "../../utils/web3Provider";
-import { Radar } from "lucide-react";
+import { Ghost, Radar, ReplaceAll, Settings } from "lucide-react";
+import { REFLECTOR_TAB } from "@/Components/SwapComponents/Reflector";
 
 
 const SwapPage: React.FunctionComponent<IPage> = props => {
@@ -85,7 +86,7 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                     <Card fullWidth   shadow="none"  className='bg-transparent flex gap-2 flex-col w-full'>
                         <CardBody>
                             <div className="w-full max-w-full">
-                                <Tabs radius="full"  fullWidth classNames={{
+                                <Tabs radius="full"    fullWidth classNames={{
                                     tabContent:'h-full',
                                 }} variant="bordered" color={"danger"} aria-label="Swap Tabs">
 
@@ -105,7 +106,8 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                  
                                     <Tab key="swap" title={
                                         <div className="w-full flex flex-row items-center justify-center gap-2">
-                                          <span translate="no" className="material-symbols-outlined">swap_horizontal_circle</span>
+
+                                            <ReplaceAll />
                                           <span className="text-xs">Swap</span>
                                       </div>
                                     }>
@@ -122,12 +124,11 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                         <POOL_TAB />
                                     </Tab>
 
+ 
                                    
                                     <Tab key="settings"  title={
                                         <div className="w-full flex flex-row items-center justify-center gap-2">
-                                            <span translate="no" className="material-symbols-outlined">
-                                                settings
-                                            </span>
+                                            <Settings />
                                             <span className="text-xs">Config</span>
                                         </div>
                                     }>

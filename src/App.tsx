@@ -255,6 +255,15 @@ const App = () => {
                     </Link>
                   </DropdownItem>
 
+                  <DropdownItem key={"nfts"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                      e.stopPropagation();
+                    }} color="foreground" as={NavLink} to={"/token"} >
+                      <span className='text-md'>{t("KWL Token")}</span>
+                    </Link>
+                  </DropdownItem>
+
                   <DropdownItem key={"earn"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)

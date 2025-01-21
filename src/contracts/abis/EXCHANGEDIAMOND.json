@@ -1401,6 +1401,78 @@
       "type": "function"
     },
     {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "amountIn",
+              "type": "uint256"
+            },
+            {
+              "internalType": "contract IWETH",
+              "name": "weth9",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "input",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "receiver",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct Reflection.SwapConfig",
+          "name": "config",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "side",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amountOut",
+              "type": "uint256"
+            },
+            {
+              "internalType": "contract IPAIR",
+              "name": "pair",
+              "type": "address"
+            },
+            {
+              "internalType": "contract IERC20",
+              "name": "input",
+              "type": "address"
+            },
+            {
+              "internalType": "contract IERC20",
+              "name": "token0",
+              "type": "address"
+            },
+            {
+              "internalType": "contract IERC20",
+              "name": "token1",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct Reflection.LiqudityPool[]",
+          "name": "pools",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "reflect",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
       "inputs": [],
       "name": "Ownable__NotOwner",
       "type": "error"

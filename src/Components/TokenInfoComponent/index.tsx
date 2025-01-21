@@ -6,9 +6,9 @@ const TokenInfoComponent = () => {
 
      // Token verileri
      const totalTokens = 1000000;
-     const circulatingTokens = 117000; // Dolaşımdaki token
-     const burnedTokens = 883000; // Yakılmış token
-     const lockedTokens = 20000; // Kilitli token
+     const circulatingTokens = 100000; // Dolaşımdaki token
+     const burnedTokens = 900000; // Yakılmış token
+     const lockedTokens = 11000; // Kilitli token
 
     const [blocks, setBlocks] = useState([]);
 
@@ -179,19 +179,19 @@ const TokenInfoComponent = () => {
                         </div>
                         <div className="w-full flex flex-row gap-2 justify-between items-center">
                             <span>Max Supply</span>
-                            <span>117.000.00 KWL</span>
+                            <span>100.000.00 KWL</span>
                         </div>
                         <div className="w-full flex flex-row gap-2 justify-between items-center">
                             <span>Circulating Supply</span>
-                            <span>97.000.00 KWL</span>
+                            <span>100.000.00 KWL</span>
                         </div>
                         <div className="w-full flex flex-row gap-2 justify-between items-center">
                             <span>Burned Tokens</span>
-                            <span>883.000.00 KWL</span>
+                            <span>900.000.00 KWL</span>
                         </div>
                         <div className="w-full flex flex-row gap-2 justify-between items-center">
                             <span>Locked Tokens</span>
-                            <span>20.000.00 KWL</span>
+                            <span>10.000.00 KWL</span>
                         </div>
                     </div>
                     </div>
