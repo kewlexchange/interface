@@ -50,9 +50,6 @@ const Cobe: React.FC<CobeProps> = React.memo(({ text, description }) => {
       mapBaseBrightness: 0.05,
       baseColor: theme == "light" ? [ 1.1, 1.1, 1.1] : [0.3,0.3,0.3],
       markerColor: [251 / 255, 100 / 255, 21 / 255],
-
- 
-
       glowColor: [1.1, 1.1, 1.1],
       markers: [],
       opacity: 0.7,

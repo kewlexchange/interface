@@ -259,7 +259,9 @@ const _TRADE_TAB = () => {
               <div className="flex flex-col items-center justify-start">
                 <div className="w-full flex flex-col items-start justify-center">
                   <span className="text-sm">{pair.exchangeInfo.dex}</span>
+                  <Tooltip  color='danger' content={`Price Impact : ${pair.trade.priceImpact.toFixed(2)}%`}>
                   <span className="px-2 text-xs rounded-lg bg-danger-500 text-white">{pair.trade.priceImpact.toFixed(2)}%</span>
+                  </Tooltip>
                 </div>
 
 
