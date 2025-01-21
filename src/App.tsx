@@ -264,6 +264,15 @@ const App = () => {
                     </Link>
                   </DropdownItem>
 
+                  <DropdownItem key={"metamorph"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                      e.stopPropagation();
+                    }} color="foreground" as={NavLink} to={"/metamorph"} >
+                      <span className='text-md'>{t("Metamorph")}</span>
+                    </Link>
+                  </DropdownItem>
+
                   <DropdownItem key={"earn"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
