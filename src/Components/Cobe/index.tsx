@@ -1,4 +1,5 @@
 import createGlobe from "cobe";
+import { useTheme } from "next-themes";
 import React, { useEffect, useRef } from "react";
 import { useSpring } from "react-spring";
 
@@ -11,6 +12,7 @@ const Cobe: React.FC<CobeProps> = React.memo(({ text, description }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerInteracting = useRef<number | null>(null);
   const pointerInteractionMovement = useRef<number>(0);
+  const { theme, setTheme } = useTheme();
 
   const [{ r }, api] = useSpring(() => ({
     r: 0,
@@ -46,8 +48,11 @@ const Cobe: React.FC<CobeProps> = React.memo(({ text, description }) => {
       mapSamples: 4000,
       mapBrightness: 1.8,
       mapBaseBrightness: 0.05,
-      baseColor: [1.1, 1.1, 1.1],
+      baseColor: theme == "light" ? [ 1.1, 1.1, 1.1] : [0.3,0.3,0.3],
       markerColor: [251 / 255, 100 / 255, 21 / 255],
+
+ 
+
       glowColor: [1.1, 1.1, 1.1],
       markers: [],
       opacity: 0.7,
@@ -66,7 +71,7 @@ const Cobe: React.FC<CobeProps> = React.memo(({ text, description }) => {
     });
 
     return () => globe.destroy();
-  }, [r]);
+  }, [r,theme]);
 
   return (
     <div
