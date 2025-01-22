@@ -322,15 +322,7 @@ const Domain = () => {
 
                         </DropdownSection>
 
-                        <DropdownSection title={"Network"} aria-label="Preferences" showDivider>
-                          <DropdownItem variant='light'
-
-                            key="connector"
-                            className="cursor-default hover:none">
-                            <DropdownNetwork />
-                          </DropdownItem>
-
-                        </DropdownSection>
+                  
 
                         <DropdownSection aria-label="Preferences" showDivider>
                           <DropdownItem
