@@ -10,7 +10,7 @@ const _MetadataItem = (props: { metadataJSON, contractInfo }) => {
     return (
 
 
-            <Accordion  selectionMode='multiple' fullWidth={true} isCompact={true} className='w-full' >
+            <Accordion variant='splitted'  selectionMode='multiple' fullWidth={true} isCompact={true} className='w-full' >
                 <AccordionItem className=''  startContent={
                     <ClipboardList />
                 } key="1" aria-label="Description" title="Description">
