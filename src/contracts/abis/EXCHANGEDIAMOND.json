@@ -1401,6 +1401,11 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "InvalidReserves",
+      "type": "error"
+    },
+    {
       "inputs": [
         {
           "components": [
