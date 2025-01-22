@@ -27,9 +27,12 @@ import { useTranslation } from 'react-i18next';
 import Web3Provider from "./Components/Web3Provider";
 import DomainsHead from './Components/Head/domains';
 import { Account } from './Components/Account';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react';
+import { Button,Image, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react';
 import { ThemeSwitch } from './Components/ThemeSwitch';
 import { Network } from '@ethersproject/providers';
+import { Menu } from 'lucide-react';
+import { NetworkHeader } from './Components/NetworkHeader';
+import { DropdownNetwork } from './Components/DropdownNetwork';
 
 const Domain = () => {
   const { state: isConnect, toggle: toggleConnectModal } = useModal()
@@ -47,6 +50,7 @@ const Domain = () => {
   const { t, i18n } = useTranslation(['home']);
   const [showBalance,setShowBalance] = useState(true)
 
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
@@ -165,7 +169,7 @@ const Domain = () => {
     i18n.changeLanguage('en')
   }, [])
   return (
-    <>
+    <div className='relative w-full h-full'>
       <BrowserRouter>
 
         <UniwalletModal />
@@ -178,32 +182,84 @@ const Domain = () => {
 
 
 
+<div className='w-full fixed   z-[1] bg-red-500 top-[5px]'>
+          <div className=" absolute top-3  px-2 w-full z-40 flex items-center justify-center">
 
-<Navbar
-  isBlurred={true}
-      isBordered shouldHideOnScroll={false} maxWidth={"full"} position="sticky"
-      isMenuOpen={isMenuOpen}
-    
-      onMenuOpenChange={setIsMenuOpen}
-    >
-      <NavbarContent className='sm:hidden' justify="start">
-        <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
-      </NavbarContent>
+            <Navbar
+              classNames={{
+                wrapper: "rounded-full pr-2",
+                base: "rounded-full z-990 flex gap-4 border border-1 flex-row relative flex-nowrap items-center h-[var(--navbar-height)] max-w-[1024px] px-0 w-full justify-center bg-transparent",
+              }
+              }
 
-      <NavbarContent className="sm:hidden pr-3" justify="center">
-        <NavbarBrand as={NavLink} to={"/"}>
-        <img className={"h-[45px] w-[45px]"} alt={"Intelligent Monsters Logo"} src={ICON_LOGO} />
-        </NavbarBrand>
-      </NavbarContent>
+              isBlurred={true} isBordered={true}
+              isMenuOpen={isDrawerOpen}
+              onMenuOpenChange={setIsDrawerOpen}
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-      <NavbarItem>
-      <NavbarBrand className='flex flex-row gap-2' as={NavLink} to={"/"}>
-          <img className={"h-[45px] w-[45px]"} alt={"Intelligent Monsters Logo"} src={ICON_LOGO} />
-        </NavbarBrand>
-        </NavbarItem>
-    
-        <NavbarItem className='flex flex-row items-center justify-center'>
+
+            >
+
+
+              <Dropdown
+                showArrow
+
+                radius="sm"
+                classNames={{
+                  base: "before:bg-default-200", // change arrow background
+                  content: "py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
+                }}
+              >
+                <NavbarItem>
+
+                  <DropdownTrigger>
+
+                    <Button
+                      isIconOnly
+                      radius="full"
+                      variant="light"
+                    >
+                      <Menu />
+                    </Button>
+                  </DropdownTrigger>
+                </NavbarItem>
+                <DropdownMenu
+                  aria-label="ACME features"
+                  className="w-[340px]"
+                  itemClasses={{
+                    base: "gap-4",
+                  }}
+                >
+                  <DropdownItem key={"Domains"}>
+                    <Link className='w-full' color="foreground" as={NavLink} to={"/cns"} >
+                      <span className='text-md'>{t("Domains")}</span>
+                    </Link>
+                  </DropdownItem>
+
+                  <DropdownItem key={"Marketplace"}>
+                    <Link className='w-full'  color="foreground" as={NavLink} to={"/nfts/2"} >
+                      <span className='text-md'>{t("Marketplace")}</span>
+                    </Link>
+                  </DropdownItem>
+
+ 
+     
+                
+
+                </DropdownMenu>
+              </Dropdown>
+
+
+              <NavbarBrand>
+                <Link href='/'>
+                  <Image className='cursor' onClick={() => {
+
+                  }} width={72} height={72} src={ICON_LOGO} />
+                </Link>
+                <p className="hidden font-bold text-inherit">KEWL</p>
+
+              </NavbarBrand>
+              <NavbarContent>
+              <NavbarItem className='flex flex-row items-center justify-center'>
         <Link color="foreground" as={NavLink} to={"/cns"}>
                  
                     <span>{t("Domains")}</span></Link>
@@ -214,143 +270,129 @@ const Domain = () => {
                 
                     <span>{t("Marketplace")}</span></Link>
         </NavbarItem>
-     
-    
-
-
-                
-      </NavbarContent>
-
-      <NavbarContent justify="end">
-
-      {
-          account ? <>
-
-<Dropdown
-      showArrow
-      radius="sm"
-      classNames={{
-        base: "before:bg-default-200", // change arrow background
-        content: "p-0 border-small border-divider bg-background",
-      }}
-    >
-      <DropdownTrigger>
-        <Button variant='flat' radius={"lg"} className='px-2'>
-            <Account/>
-            </Button>
-      </DropdownTrigger>
-      <DropdownMenu
-        aria-label="Custom item styles"
-        disabledKeys={["profile"]}
-        className="p-3"
-        itemClasses={{
-          base: [
-            "rounded-md",
-            "text-default-500",
-            "transition-opacity",
-            "data-[hover=true]:text-foreground",
-            "data-[hover=true]:bg-default-100",
-            "dark:data-[hover=true]:bg-default-50",
-            "data-[selectable=true]:focus:bg-default-50",
-            "data-[pressed=true]:opacity-70",
-            "data-[focus-visible=true]:ring-default-500",
-          ],
-        }}
-      >
-        <DropdownSection aria-label="Profile & Actions" showDivider>
-          <DropdownItem
-            showDivider
-            isReadOnly
-            key="profile"
-            className="gap-2 opacity-100"
-          >
-                  <div className='flex flex-row gap-2'>
-                <Identicon size={32} account={account}/>
-                <div className='flex flex-col gap-2'>
-                  <p className="font-semibold">{userBalance}</p>
-                  <p className="text-xs font-semibold">{account}</p>
-                </div>
-              </div>
-          </DropdownItem>
-          <DropdownItem as={NavLink}
-             description="View your wallet's tokens and NFTs in this section."
-            to="/account"  key="dashboard">
-                 <p className="font-semibold">Portfolio</p>
-          </DropdownItem>
-          
-  
-        </DropdownSection>
-
-
-     
-        <DropdownSection aria-label="Preferences" showDivider>
-          <DropdownItem
-            isReadOnly
-            key="theme"
-            className="cursor-default"
-            endContent={
-              <ThemeSwitch />
-            }
-          >
-            Theme
-          </DropdownItem>
-        </DropdownSection>  
-
-        <DropdownSection aria-label="Help & Feedback">
-          <DropdownItem onPress={()=>{
-            disconnect();
-          }} key="logout">Disconnect</DropdownItem>
-        </DropdownSection> 
-      </DropdownMenu>
-    </Dropdown>
-    
-              </> : <>
-              <Button variant='solid' color='default' onPress={async () => {
-                  await handleConnect();
-                }}>Connect</Button>
-              </>
-            }
-      </NavbarContent>
-
-      <NavbarMenu>
+              </NavbarContent>
 
 
 
-        <NavbarMenuItem className='flex flex-row items-center justify-start'>
-        <Link onPress={(e)=>{
-        setIsMenuOpen(false)
-        e.stopPropagation();
-      }} color="foreground" as={NavLink} to={"/cns"}>
-                 
-                    <span>{t("Domains")}</span></Link>
-        </NavbarMenuItem>
+              <NavbarContent justify="end">
+                {
+                  account ? <>
+
+                    <Dropdown
+                      showArrow
+
+                      radius="sm"
+                      classNames={{
+                        base: "before:bg-default-200", // change arrow background
+                        content: "py-1 px- border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
+                      }}
+                    >
+                      <DropdownTrigger>
+                        <Button variant='flat' radius={"full"} className='px-2'>
+                          <Account />
+                        </Button>
+                      </DropdownTrigger>
+                      <DropdownMenu
+                        disabledKeys={["profile"]}
+                        className="p-3"
+                        variant='faded'
+
+                      >
+                        <DropdownSection aria-label="Profile & Actions">
+                          <DropdownItem
+                            isReadOnly
+
+                            key="profile"
+                            className="gap-2 pb-4 opacity-100 focus-nonee outline-none"
+                          >
+                            <div className='flex flex-row gap-1'>
+                              <Identicon size={32} account={account} />
+                              <div className='flex flex-col gap-2'>
+                                <p className="font-semibold">{userBalance}</p>
+                                <p className="text-xs font-semibold">{account}</p>
+                              </div>
+                            </div>
+                          </DropdownItem>
+                          <DropdownItem as={NavLink}
+                            description="View your wallet's tokens and NFTs in this section."
+                            to="/account" key="dashboard">
+                            <p className="font-semibold">Portfolio</p>
+                          </DropdownItem>
 
 
-        <NavbarMenuItem className='flex flex-row items-center justify-start'>
-          <Link onPress={(e)=>{
-        setIsMenuOpen(false)
-        e.stopPropagation();
-      }} color="foreground" as={NavLink} to={"/nfts/2"}>
-                
-                    <span>{t("NFTs")}</span></Link>
-        </NavbarMenuItem>
- 
+                        </DropdownSection>
+
+                        <DropdownSection title={"Network"} aria-label="Preferences" showDivider>
+                          <DropdownItem variant='light'
+
+                            key="connector"
+                            className="cursor-default hover:none">
+                            <DropdownNetwork />
+                          </DropdownItem>
+
+                        </DropdownSection>
+
+                        <DropdownSection aria-label="Preferences" showDivider>
+                          <DropdownItem
+                            isReadOnly
+                            key="theme"
+                            className="cursor-default"
+                            endContent={
+                              <ThemeSwitch />
+                            }
+                          >
+                            Theme
+                          </DropdownItem>
+                        </DropdownSection>
+
+                        <DropdownSection aria-label="Help & Feedback">
+                          <DropdownItem onPress={() => {
+                            disconnect();
+                          }} key="logout">Disconnect</DropdownItem>
+                        </DropdownSection>
+                      </DropdownMenu>
+                    </Dropdown>
+
+                  </> : <>
+                    <Button radius='full' variant='solid' color='default' onPress={async () => {
+                      await handleConnect();
+                    }}>Connect</Button>
+                  </>
+                }
+              </NavbarContent>
 
 
-      </NavbarMenu>
-</Navbar>
+
+
+
+
+
+
+            </Navbar>
+          </div>
+
+        </div>
+
+
  
  
 
   
-        <div className={"pb-[70px]"}>
-          <Routes>
-            {
-              routes.map((route, index) => {
-                return (
-                  <Route key={`route${index}`} path={route.path} element={<route.component title={route.title} />} />
-                );
-              })}
+        <div className={"w-screen h-screen overflow-y-scroll  py-[88px] pb-[70px] flex flex-col items-center justify-center w-screen h-full"}>
+        <Routes>
+            {routes.map((route, index) => (
+              <Route
+                key={`route${index}`}
+                path={route.path}
+                element={
+                  <div className='relative w-full px-2 h-full  max-w-5xl'>
+
+
+                    <route.component title={route.title} />
+                  </div>
+                }
+              />
+            ))}
           </Routes>
         </div>
         <div className='mx-auto px-5 fixed bottom-0 w-full backdrop-blur-sm'>
@@ -368,7 +410,7 @@ const Domain = () => {
 
       </BrowserRouter>
 
-    </>
+    </div>
 
 
   );
