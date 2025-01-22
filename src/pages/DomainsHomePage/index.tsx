@@ -73,6 +73,7 @@ const DomainsHomePage: React.FunctionComponent<IPage> = props => {
                             <div className="w-full text-2xl sm:text-2xl">Welcome to</div>
                             <div className="w-full text-5xl whitespace-nowrap sm:text-3xl homeshimmer">CHZ <span className={"font-bold"}>DOMAINS</span></div>
                             <div className="sm:w-full text-left sm:text-justify mt-5">Decentralised naming for wallets, websites, & more.</div>
+                        
                         </section>
 
                         <div className="w-full grid grid-cols-3 gap-2 p-2">
@@ -87,7 +88,8 @@ const DomainsHomePage: React.FunctionComponent<IPage> = props => {
                                                         })
                                                     }
                         </div>
-
+                        
+                   
                         <section className="w-full flex flex-col gap-2 p-3">
 
                             {
@@ -108,6 +110,11 @@ const DomainsHomePage: React.FunctionComponent<IPage> = props => {
                         
 
                         </section>
+
+                        <div className="w-full mb-[100px] text-center bg-red-500 p-2 rounded-lg p-2">
+                            Disclaimer: The CHZ Domain Services are independently developed by the community and are not officially associated, endorsed, or affiliated with the Chiliz ecosystem or its official entities in any capacity.
+                            </div>
+
     
                         </div>
             </div>

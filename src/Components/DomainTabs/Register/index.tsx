@@ -148,7 +148,7 @@ const _DOMAIN_REGISTER_TAB = () => {
                 isShowing={isTransactionSuccess} />
 
 
-            <div className={"w-full swap"}>
+            <div className={"w-full flex flex-col gap-2 swap"}>
 
                 <div className="flex flex-col rounded-xl w-full gap-2">
                     <div className="w-full rounded-xl pb-0">
@@ -282,6 +282,11 @@ const _DOMAIN_REGISTER_TAB = () => {
 
 
                 </div>
+
+                <div className="w-full text-xs text-center bg-red-500 p-2 rounded-lg p-2">
+                            Disclaimer: CHZ Domain Services are independently developed by the community and are not officially associated, endorsed, or affiliated with the Chiliz ecosystem or its official entities in any capacity.
+                            </div>
+
 
             </div>
         </>
