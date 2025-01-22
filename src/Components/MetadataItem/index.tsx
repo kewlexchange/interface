@@ -2,20 +2,17 @@ import React, { memo, useEffect, useMemo, useState } from 'react';
 import { getIconByChainId, getNFTItemType, unixTimeToDateTime } from "../../utils";
 import { useWeb3React } from "@web3-react/core";
 import { Accordion, AccordionItem, Card, CardBody, CardHeader } from '@nextui-org/react';
+import { ClipboardList, ShieldCheck, TrainFrontTunnel } from 'lucide-react';
 
 const _MetadataItem = (props: { metadataJSON, contractInfo }) => {
     const { connector, account, provider, chainId } = useWeb3React()
 
     return (
-        <>
 
-            <Accordion selectionMode='multiple' fullWidth={true} isCompact={true} className='w-full' variant="splitted">
-                <AccordionItem  startContent={
-                    <div className='w-full h-full flex flex-col items-center justify-center'>
-                    <span translate={"no"} className="material-symbols-outlined">
-                        playlist_add_check
-                    </span>
-                    </div>
+
+            <Accordion  selectionMode='multiple' fullWidth={true} isCompact={true} className='w-full' >
+                <AccordionItem className=''  startContent={
+                    <ClipboardList />
                 } key="1" aria-label="Description" title="Description">
                     <div className="content w-full rounded-lg p-2 flex flex-col flex-wrap">
                         <div>By <span className="font-semibold">{props.metadataJSON?.created_by ? props.metadataJSON?.created_by : props.metadataJSON?.name}</span>  </div>
@@ -24,9 +21,7 @@ const _MetadataItem = (props: { metadataJSON, contractInfo }) => {
                     </div>
                 </AccordionItem>
                 <AccordionItem startContent={
-                    <span translate={"no"} className="material-symbols-outlined">
-                        label
-                    </span>
+                    <TrainFrontTunnel />
                 } key="2" aria-label="Traits" title="Traits">
                     <div className="grid grid-cols-2 gap-2 p-2 rounded-lg">
                         {
@@ -52,7 +47,7 @@ const _MetadataItem = (props: { metadataJSON, contractInfo }) => {
                     </div>
                 </AccordionItem>
                 <AccordionItem startContent={
-                    <span translate={"no"} className="material-symbols-outlined">display_settings</span>
+                    <ShieldCheck />
                 } key="3" aria-label="Details" title="Details">
                     <div className="content rounded-lg  flex flex-col gap-y-4 items-start">
                         <div className="w-full flex flex-col items-start justify-start">
@@ -77,7 +72,7 @@ const _MetadataItem = (props: { metadataJSON, contractInfo }) => {
 
 
 
-        </>
+      
     );
 }
 export const MetadataItem = memo(_MetadataItem)

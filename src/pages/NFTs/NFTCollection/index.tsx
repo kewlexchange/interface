@@ -159,8 +159,8 @@ const NFTCollection: React.FunctionComponent<IPage> = props => {
             <ModalLoading  text={"Waiting for confirmation..."} isClosable={true} hide={toggleLoading} isShowing={isShowLoading}/>
             <ModalSuccessTransaction transaction={transaction} hide={toggleTransactionSuccess} isShowing={isTransactionSuccess}/>
 
-            <div className={"w-full absolute sticky top-[5px] z-[20]"}>
-                    <Card shadow="none" isBlurred className={"w-full px-6 grid grid-cols-1 sm:grid-cols-2 sticky top-0 gap-2 py-2  rounded-lg border border-1 border-default items-center justify-start"}>
+            <div className={"w-full absolute sticky top-0 z-[20]"}>
+                    <Card shadow="none" isBlurred className={"w-full px-3 grid grid-cols-1 sm:grid-cols-2 sticky top-0 gap-2 py-2  rounded-full border border-1 border-default items-center justify-start"}>
                         
                         <div className={"w-full flex flex-row items-center justify-start gap-2"}>
                         <span>Sweep</span>
@@ -170,7 +170,7 @@ const NFTCollection: React.FunctionComponent<IPage> = props => {
                         }}
                         size="lg"
                         step={1}
-                        color="default"
+                        color="danger"
                         showSteps={true} 
                         maxValue={20} 
                         minValue={0} 
@@ -188,9 +188,9 @@ const NFTCollection: React.FunctionComponent<IPage> = props => {
                             <span>{sweepItem ? BigNumber.from(basketNFTAmount).toNumber() : 0}</span>
                             <span>NFT</span>
                         </div>
-                        <Button color={"default"} onPress={()=>{
+                        <Button radius="full" color={"danger"} variant="flat" onPress={()=>{
                             handleBuy()
-                        }} className={"w-full btn btn-primary"}>
+                        }} className={"w-full"}>
                             Buy
                         </Button>
                         </div>

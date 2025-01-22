@@ -18,7 +18,7 @@ import toggle = Simulate.toggle;
 import { parseEther } from "ethers/lib/utils";
 import { MetadataItem } from "../MetadataItem";
 import { getNFTItemType, uriToHttp, uriToIMONProxy } from "../../utils";
-import { Button, Card, Input, Skeleton, Snippet } from '@nextui-org/react';
+import { Button, Card, Input, Skeleton, Snippet,Image } from '@nextui-org/react';
 import Identicon from '../Identicon';
 import {Badge} from "@nextui-org/react";
 import { parseMetadata } from '../../utils/metadata';
@@ -225,7 +225,7 @@ const _NFT = (props: { itemType, contractAddress, tokenId, showMetadata, canSell
                                 isLoaded ? isMetadata ? metadata && <MetadataItem contractInfo={contractInfo} metadataJSON={metadata} /> :  
                                 <div className='w-full h-full rounded-lg'>   
                                 <Badge content={props.tokenAmount} color="secondary">
-                                <img alt='imon' className={"w-full h-full rounded-lg"} src={nftImage} />
+                                <Image alt='imon' className={"w-full h-full max-w-lg rounded-lg"} src={nftImage} />
                                 </Badge>
                                 </div>
                                 : <></>
@@ -236,17 +236,17 @@ const _NFT = (props: { itemType, contractAddress, tokenId, showMetadata, canSell
                             {
                                 isLoaded&& <>
                                 {
-                                !isLocked ? <Button size='sm' className='w-full' color='default' onPress={() => {
+                                !isLocked ? <Button radius='full' variant='flat' size='sm' className='w-full' color='danger' onPress={() => {
                                     handleUnlock()
                                 }}>Unlock to Sell</Button> :
-                                    <Button size='sm' color='default'  onPress={() => {
+                                    <Button size='sm' color='danger'  onPress={() => {
                                         toggleSell()
                                     }} className={"w-full"}>Sell</Button>
                             }
-                            <Button size='sm' color='default' onPress={() => {
+                            <Button radius='full' variant='flat' size='sm' color='danger' onPress={() => {
                                 toggleTransfer()
                             }} className={"w-full"}>Transfer</Button>
-                            <Button size='sm' color='default' onPress={() => {
+                            <Button radius='full' variant='flat' size='sm' color='danger' onPress={() => {
                                 toggleMetadata()
                             }} className={"w-full"}>{!isMetadata ? "Metadata" : "Image"}</Button>
                                 </>
@@ -256,8 +256,8 @@ const _NFT = (props: { itemType, contractAddress, tokenId, showMetadata, canSell
                         <div className='w-full flex flex-col col-span-4 gap-2'>
                         <div className={"flex flex-row items-start justify-start gap-2"}>
                             <div className='flex flex-col w-full gap-2'>
-                            <Input size='sm' className='w-full' type="text" variant={"faded"} label="Contract" value={props.contractAddress} />
-                            <Input  size='sm' className='w-full' type="text" variant={"faded"} label="TokenID" value={props.tokenId} />
+                            <Input radius='full' size='sm' className='w-full' type="text" variant={"faded"} label="Contract" value={props.contractAddress} />
+                            <Input radius='full' size='sm' className='w-full' type="text" variant={"faded"} label="TokenID" value={props.tokenId} />
                             </div>
                         </div>
                     </div>

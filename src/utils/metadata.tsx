@@ -52,7 +52,7 @@ export const parseMetadata = async(contractAddress : any, tokenId : any, assetUR
             message = "IPFS:METADATA:FAILED"
         }
     }else{
-        const metadataJSON = await (await fetch(uriToIMONProxy(assetURI +"?v=2"))).json();
+        const metadataJSON = await (await fetch(uriToIMONProxy(assetURI))).json();
         console.log("IMONPROXY",metadataJSON)
         try{
             image = metadataJSON?.image

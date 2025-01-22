@@ -333,9 +333,7 @@ export const ModalTransferNFT = ({ isShowing, hide, contractAddress, tokenId, to
                 <div className="rounded-xl w-full">
                     <div className="border border-default rounded-xl pb-0">
                         <div className="flex flex-col items-center p-2 gap-2">
-                            <div className="w-[20%] flex items-center justify-center">
-                                <NFT canStake={false} reloadFunction={null} showMetadata={false} itemType={tokenType} contractAddress={contractAddress} tokenId={tokenId} canSell={false} />
-                            </div>
+                          
                             <Input onChange={(e) => {
                                 handleChangeInput(e)
                             }
@@ -347,7 +345,7 @@ export const ModalTransferNFT = ({ isShowing, hide, contractAddress, tokenId, to
                                 onChange={(e) => {
                                     handleAmountChanged(e)
                                 }}
-                                color="default"
+                                color="danger"
                                 label="NFT Amount"
                                 showSteps={true}
                                 maxValue={parseInt(userNFTBalance)}

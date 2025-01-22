@@ -18,7 +18,7 @@ import toggle = Simulate.toggle;
 import {parseEther} from "ethers/lib/utils";
 import {MetadataItem} from "../MetadataItem";
 import {getNFTItemType, uriToHttp, uriToIMONProxy} from "../../utils";
-import {Card, Image} from "@nextui-org/react";
+import {Button, Card, Image} from "@nextui-org/react";
 import { parseMetadata } from '../../utils/metadata';
 const _NFT = (props: {itemType,contractAddress,tokenId,showMetadata,canSell,canStake ,reloadFunction,canView?}) => {
     const [isLoaded,setLoaded] = useState(false);
@@ -223,7 +223,7 @@ const _NFT = (props: {itemType,contractAddress,tokenId,showMetadata,canSell,canS
 
 
             {
-             <Card className={( (props.canView || props.canSell || props.canStake)? "w-full" : "w-full") + "  min-w-xl max-w-xl  p-2 flex flex-col items-center justify-center gap-2"}>
+             <div   className={( (props.canView || props.canSell || props.canStake)? "w-full" : "w-full") + "   min-w-xl max-w-xl  p-2 flex flex-col items-center justify-center gap-2"}>
                     {
                         isLoaded ? isAnimated ?  
                         <video className={"w-full rounded-lg"} src={animationURL} width="100%" height="100%" loop={true} autoPlay={true}>
@@ -231,7 +231,7 @@ const _NFT = (props: {itemType,contractAddress,tokenId,showMetadata,canSell,canS
                         : <Image alt={"IMON NFT"} 
                             isBlurred
                             isZoomed
-                            className='w-full h-full min-w-[350px] -z-1'
+                            className='w-full h-full   w-[350px] min-w-[350px]  max-w-[350px] -z-1'
                              src={nftImage}/> :  <ContentLoader
                             speed={2}
                             width={"100%"}
@@ -250,20 +250,20 @@ const _NFT = (props: {itemType,contractAddress,tokenId,showMetadata,canSell,canS
                     {
                         props.canSell &&
 
-                        <div className={"w-full grid grid-cols-2 gap-2"}>
+                        <div className={"w-full grid grid-cols-2 gap-2 p-2"}>
                             {
-                                !isLocked ? <button onPress={()=>{
+                                !isLocked ? <Button color='danger' variant='flat' radius='full' onPress={()=>{
                                         handleUnlock()
-                                }} className={"btn btn-primary"}>Unlock to Sell</button> :
-                                <button onPress={()=>{
+                                }}>Unlock to Sell</Button> :
+                                <Button color='danger' variant='flat'  radius='full' onPress={()=>{
                                     toggleSell()
-                                }} className={"btn btn-primary"}>Sell</button>
+                                }}>Sell</Button>
                             }
-                            <button onPress={()=>{
+                            <Button color='danger' variant='flat'  radius='full' onPress={()=>{
                                         toggleTransfer()
-                                    }} className={"btn btn-primary"}>Transfer</button>
+                                    }} >Transfer</Button>
                         </div>  }
-            </Card>
+            </div>
             }
         </>
     );

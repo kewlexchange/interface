@@ -194,7 +194,7 @@ const App = () => {
             <Navbar
               classNames={{
                 wrapper: "rounded-full pr-2",
-                base: "rounded-full z-40 flex gap-4 border border-1 flex-row relative flex-nowrap items-center h-[var(--navbar-height)] max-w-[1024px] px-0 w-full justify-center bg-transparent",
+                base: "rounded-full z-990 flex gap-4 border border-1 flex-row relative flex-nowrap items-center h-[var(--navbar-height)] max-w-[1024px] px-0 w-full justify-center bg-transparent",
               }
               }
 

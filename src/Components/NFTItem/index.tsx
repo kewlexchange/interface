@@ -80,7 +80,7 @@ const _NFTItem = (props: { isActive?, item, contractAddress, tokenId, itemType, 
     
             
                 <div className={(props.isActive ? "bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-pink-900 via-pink-100 to-pink-960 p-2 " : " ") + "  overflow-hidden w-full h-full min-h-[160px] flex flex-col rounded-xl hover:bg-white/30"}>
-                <Card isFooterBlurred className="w-full h-full col-span-12 sm:col-span-5">
+                <Card isFooterBlurred className="w-full z-0 h-full col-span-12 sm:col-span-5">
              
                     {
                         <Image

@@ -31,7 +31,7 @@ export const LandingBG = ()=> {
                     <div className="bg-balls">
                     { filteredList && filteredList.map((item,i) =>(
 
-                        <img className='rounded-full' src={item.logoURI} />
+                        <img key={`balls${i}`} className='rounded-full' src={item.logoURI} />
                         ))}
                     </div>
 
