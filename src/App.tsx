@@ -229,7 +229,7 @@ const App = () => {
                   </DropdownTrigger>
                 </NavbarItem>
                 <DropdownMenu
-                  aria-label="ACME features"
+                  aria-label="KEWL"
                   className="w-[340px]"
                   itemClasses={{
                     base: "gap-4",
@@ -289,7 +289,6 @@ const App = () => {
                   <DropdownItem key={"launchpad"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
-                      e.stopPropagation();
                     }} color="foreground" as={NavLink} to={"/launchpad"} >
                       <span className='text-md'>{t("Launchpad")}</span>
                     </Link>
@@ -298,7 +297,6 @@ const App = () => {
                   <DropdownItem key={"vesting"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
-                      e.stopPropagation();
                     }} color="foreground" as={NavLink} to={"/vesting"} >
                       <span className='text-md'>{t("Vesting")}</span>
                     </Link>
