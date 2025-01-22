@@ -8,6 +8,7 @@ import {BigNumber, ethers} from "ethers";
 import { NFT } from "../../Components/NFT";
 import { ChainId } from "../../constants/chains";
 import { getNativeCurrencyByChainId } from "../../utils";
+import { Button } from "@nextui-org/react";
 
 const DomainsHomePage: React.FunctionComponent<IPage> = props => {
     const { chainId,account } = useWeb3React()
@@ -77,12 +78,12 @@ const DomainsHomePage: React.FunctionComponent<IPage> = props => {
                         <div className="w-full grid grid-cols-3 gap-2 p-2">
                         {
                                                         tlds && tlds.map((domainItem, domainIndex) => {
-                                                            return (<button onPress={() => {
+                                                            return (<Button radius="full" onPress={() => {
                                                                 setCurrentTLD(domainItem)
 
-                                                            }} key={`domain${domainIndex}`} className={(currentTLD && currentTLD.name === domainItem.name ? "bg-gradient text-white" : "") + " rounded-lg border border-default p-2 min-w-[60px] hover:bg-gradient hover:text-white"}>
+                                                            }} key={`domain${domainIndex}`} className={(currentTLD && currentTLD.name === domainItem.name ? "bg-gradient text-white" : "")}>
                                                                 {domainItem.name}
-                                                            </button>)
+                                                            </Button>)
                                                         })
                                                     }
                         </div>

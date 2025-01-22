@@ -167,12 +167,12 @@ const _DOMAIN_REGISTER_TAB = () => {
                                 <div className="w-full gap-2 grid grid-cols-3 items-center justify-center">
                                     {
                                         tldDomains && tldDomains.map((domainItem, domainIndex) => {
-                                            return (<button onPress={() => {
+                                            return (<Button variant='flat'  radius='full' onPress={() => {
                                                 setCurrentTLD(domainItem)
 
-                                            }} key={`domain${domainIndex}`} className={(currentTLD && currentTLD.name === domainItem.name ? "bg-gradient text-white" : "") + " rounded-lg border-default border border-1 p-2 min-w-[60px] hover:bg-gradient hover:text-white"}>
+                                            }} key={`domain${domainIndex}`} className={(currentTLD && currentTLD.name === domainItem.name ? " bg-danger text-white" : "")}>
                                                 {domainItem.name}
-                                            </button>)
+                                            </Button>)
                                         })
                                     }
 
