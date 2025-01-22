@@ -238,7 +238,6 @@ const App = () => {
                   <DropdownItem key={"swap"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
-                      e.stopPropagation();
                     }} color="foreground" as={NavLink} to={"/swap"} >
                       <span className='text-md'>{t("Swap")}</span>
                     </Link>
@@ -249,7 +248,6 @@ const App = () => {
                   <DropdownItem key={"nfts"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
-                      e.stopPropagation();
                     }} color="foreground" as={NavLink} to={"/nfts"} >
                       <span className='text-md'>{t("NFTs")}</span>
                     </Link>
@@ -258,7 +256,6 @@ const App = () => {
                   <DropdownItem key={"nfts"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
-                      e.stopPropagation();
                     }} color="foreground" as={NavLink} to={"/token"} >
                       <span className='text-md'>{t("KWL Token")}</span>
                     </Link>
@@ -267,16 +264,22 @@ const App = () => {
                   <DropdownItem key={"metamorph"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
-                      e.stopPropagation();
                     }} color="foreground" as={NavLink} to={"/metamorph"} >
                       <span className='text-md'>{t("Metamorph")}</span>
+                    </Link>
+                  </DropdownItem>
+
+                  <DropdownItem key={"cns"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                    }} color="foreground" as={NavLink} to={"/cns"} >
+                      <span className='text-md'>{t("Domains")}</span>
                     </Link>
                   </DropdownItem>
 
                   <DropdownItem key={"earn"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
-                      e.stopPropagation();
                     }} color="foreground" as={NavLink} to={"/earn"} >
                       <span className='text-md'>{t("Earn")}</span>
                     </Link>

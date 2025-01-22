@@ -160,7 +160,7 @@ const NFTCollection: React.FunctionComponent<IPage> = props => {
             <ModalSuccessTransaction transaction={transaction} hide={toggleTransactionSuccess} isShowing={isTransactionSuccess}/>
 
             <div className={"w-full absolute sticky top-0 z-[20]"}>
-                    <Card shadow="none" isBlurred className={"w-full px-3 grid grid-cols-1 sm:grid-cols-2 sticky top-0 gap-2 py-2  rounded-full border border-1 border-default items-center justify-start"}>
+                    <Card shadow="none" isBlurred className={"w-full px-3 grid grid-cols-1 sm:grid-cols-2 sticky top-0 gap-2 py-2 rounded-xl sm:rounded-full border border-1 border-default items-center justify-start"}>
                         
                         <div className={"w-full flex flex-row items-center justify-start gap-2"}>
                         <span>Sweep</span>
