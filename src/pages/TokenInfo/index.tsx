@@ -208,7 +208,11 @@ const TokenInfo: React.FunctionComponent<IPage> = props => {
                         <CardHeader>
                             <span>KEWL Reflector</span>
                         </CardHeader>
-                        <CardBody className="flex flex-row gap-2">
+                        <CardBody className="flex flex-col gap-2">
+                            <div className="w-full bg-danger text-white text-center rounded-lg p-2 text-white">
+                            KEWL Reflector performs automatic swap transactions between the following pairs to create volume. It may not be a profitable operation. It is designed with CHZ as the input and KWL as the output.
+                            </div>
+                            <div className="w-full flex flex-row gap-2 p-2">
                             {
                                 liqudityPools.map((pair:any,index)=>(
                                     <div className="flex flex-row gap-2 items-center justify-center">
@@ -216,11 +220,12 @@ const TokenInfo: React.FunctionComponent<IPage> = props => {
                                         <Image className="w-8 h-8" src={getTokenLogo(!pair.side ? pair.token0 : pair.token1)}/>
                                         
                                     </Button>
-                                    <ChevronsRight />
+                                    <ChevronsRight className="text-danger" />
                                     </div>
 
                                 ))
                             }
+                            </div>
 
                               
                         </CardBody>
