@@ -244,7 +244,17 @@ const App = () => {
                   </DropdownItem>
 
 
+
                   { chainId && chainId == ChainId.CHILIZ_MAINNET  ?  <>
+
+                    <DropdownItem key={"reflection"}>
+                    <Link className='w-full' onPress={(e) => {
+                      setIsMenuOpen(false)
+                    }} color="foreground" as={NavLink} to={"/reflection"} >
+                      <span className='text-md'>{t("Reflection")}</span>
+                    </Link>
+                  </DropdownItem>
+
                   <DropdownItem key={"nfts"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)

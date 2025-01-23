@@ -56,6 +56,7 @@ import OldStakePage from "../pages/StakePage/oldstake";
 import PepperPage from "../pages/PepperPage";
 import TokenInfo from "../pages/TokenInfo";
 import HopPage from "@/pages/HopPage";
+import ReflectionPage from "@/pages/ReflectionPage";
 
 const routes: IRoute[] = [
     { path: "/", name: "HomePage", title: 'Home', component: isIMON() ? HomePage : isCHZDomains() ? DomainsHomePage : GamesPage, exact: true, full: true },
@@ -115,7 +116,7 @@ const routes: IRoute[] = [
     { path: "/euro2024", name: "Football Predictions", title: 'EURO 2024 Football Predictions', component: PredictionsPage, exact: true, full: false },
     { path: "/pepper", name: "PEPPER Claims", title: 'PEPPER Claims', component: PepperPage, exact: true, full: false },
     { path: "/token", name: "Token Info", title: 'Token Info', component: TokenInfo, exact: true, full: false },
-    { path: "/hop", name: "Hop Info", title: 'Hop Info', component: HopPage, exact: true, full: false }
+    { path: "/reflection", name: "KEWL Reflection", title: 'KEWL Reflection', component: ReflectionPage, exact: true, full: false }
 
   ];
 
