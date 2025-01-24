@@ -137,8 +137,12 @@ const ReflectionPage: React.FunctionComponent<IPage> = props => {
 
     const handleReflect = async () => {
 
+
+        return
+
         let swapConfig = {
             amountIn: parseEther(value.toString()),
+            amountOut:0,
             weth9: "0x677F7e16C7Dd57be1D4C8aD1244883214953DC47",
             input: "0x677F7e16C7Dd57be1D4C8aD1244883214953DC47",
             receiver: account
