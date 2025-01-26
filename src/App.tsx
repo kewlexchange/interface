@@ -263,7 +263,7 @@ const App = () => {
                     </Link>
                   </DropdownItem>
 
-                  <DropdownItem key={"nfts"}>
+                  <DropdownItem key={"token"}>
                     <Link className='w-full' onPress={(e) => {
                       setIsMenuOpen(false)
                     }} color="foreground" as={NavLink} to={"/token"} >

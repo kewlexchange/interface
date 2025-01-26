@@ -11,6 +11,8 @@ import { getIconByAsset, getTokenLogoBySymbol } from "@/utils";
 import { useAppSelector } from "@/state/hooks";
 import { DEFAULT_TOKEN_LOGO } from "@/constants/misc";
 import { ChevronsRight } from "lucide-react";
+import { ChainId } from "@/constants/chains";
+import Core from "./Reflection/Core";
 
 const ReflectionPage: React.FunctionComponent<IPage> = props => {
     const { account, provider, chainId } = useWeb3React()
@@ -23,7 +25,35 @@ const ReflectionPage: React.FunctionComponent<IPage> = props => {
     const { fetchTokens } = useFetchAllTokenList(chainId, account);
     const defaultAssets = useAppSelector((state) => state.user.tokenList && state.user.tokenList[chainId])
     const [value, setValue] = React.useState(5);
+    const [arbitrageCore, setCore] = useState<Core | null>(null);
 
+
+
+
+
+
+    const initializeCore = async () => {
+        if(!chainId){
+            return
+        }
+        var _arbitrageCore = new Core(chainId,account,"","",value.toString(),5)
+        await _arbitrageCore.initializeExchange(EXCHANGE);
+        await _arbitrageCore.fetchPairs();      
+        _arbitrageCore.generateArbitrageRoutes();
+        setCore(_arbitrageCore)
+         console.log("🔗 İşlem çiftleri başarıyla alındı!");
+
+    }
+
+  
+
+    useEffect(()=>{
+        if(chainId != ChainId.CHILIZ_MAINNET){
+            return
+        }
+        initializeCore()
+
+    },[chainId])
 
     let liqudityPools = [
 
@@ -210,7 +240,7 @@ const ReflectionPage: React.FunctionComponent<IPage> = props => {
                 <div className="w-full sticky top-5 flex flex-col gap-2 items-center justify-center">
                     <Card isBlurred  fullWidth>
                         <CardHeader>
-                            <span>KEWL Reflector</span>
+                            <span>KEWL Reflecto {arbitrageCore && arbitrageCore.Opportunities().length}</span>
                         </CardHeader>
                         <CardBody className="flex flex-col gap-2">
                             <div className="w-full bg-danger text-white text-center rounded-lg p-2 text-white">
@@ -218,12 +248,11 @@ const ReflectionPage: React.FunctionComponent<IPage> = props => {
                             </div>
                             <div className="w-full flex flex-row gap-2 p-2">
                             {
-                                liqudityPools.map((pair:any,index)=>(
-                                    <div className="flex flex-row gap-2 items-center justify-center">
-                                    <Button color="danger" variant="flat" isIconOnly radius="full" size="lg" key={`route${index}`}>
-                                        <Image className="w-8 h-8" src={getTokenLogo(!pair.side ? pair.token0 : pair.token1)}/>
-                                        
-                                    </Button>
+                                arbitrageCore && arbitrageCore.Opportunities().map((opportunity:any,index)=>(
+                                    <div key={`pool${index}`} className="flex flex-row gap-2 items-center justify-center">
+                                        {JSON.stringify(opportunity)}
+
+                                    
                                     <ChevronsRight className="text-danger" />
                                     </div>
 

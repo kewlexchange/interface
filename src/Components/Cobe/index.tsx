@@ -43,14 +43,14 @@ const Cobe: React.FC<CobeProps> = React.memo(({ text, description }) => {
       height: width * 2,
       phi: 0,
       theta: 0.2,
-      dark: 0.2,
+      dark:  theme === "light" ? 0.2 : 0.3,
       diffuse: 3,
       mapSamples: 4000,
       mapBrightness: 1.8,
       mapBaseBrightness: 0.05,
-      baseColor: theme == "light" ? [ 1.1, 1.1, 1.1] : [0.3,0.3,0.3],
-      markerColor: [251 / 255, 100 / 255, 21 / 255],
-      glowColor: [1.1, 1.1, 1.1],
+      baseColor: theme === "light" ? [1.1, 1.1, 1.1] : [0.3, 0.3, 0.3],
+      markerColor: theme === "light" ? [1, 0, 0] : [1, 0, 0], // Tema bazlı nokta renkleri
+      glowColor: theme === "light" ? [1, 1, 1] :[0, 0, 0], // Tema bazlı glowColor
       markers: [],
       opacity: 0.7,
       onRender: (state: any) => {
