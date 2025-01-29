@@ -851,7 +851,7 @@ const _TRADE_TAB = () => {
     }
 
     return (
-      <div className="w-full flex flex-col gap-3 overflow-x-none mb-[200px] overflow-y-auto scrollbar-hide">
+      <div className="w-full flex flex-col gap-3">
         {tradingPairs.length > 0 && (
           <>
             {/* Trade Options */}
@@ -1127,7 +1127,7 @@ const _TRADE_TAB = () => {
 
 
 
-      <div className="flex flex-col gap-4 w-full h-[calc(100vh-72px)] overflow-hidden">
+      <div className="flex flex-col gap-4 w-full">
         {/* Main input container - Sticky header */}
         <div className="sticky top-[0px] z-20 bg-white/80 dark:bg-black/80 backdrop-blur-xl py-2">
           <div className="w-full rounded-lg relative overflow-hidden group/container">
@@ -1339,11 +1339,13 @@ const _TRADE_TAB = () => {
           </div>
         </div>
 
-        {/* Trade container - Scrollable area */}
-        <ScrollShadow hideScrollBar className='w-full overflow-y-auto overflow-x-hidden flex-1'>
-          <TradeContainer />
-        </ScrollShadow>
+        <div className='w-full h-full pb-[100px]'>
+      <TradeContainer />
       </div>
+
+         
+      </div>
+
     </>
   );
 }
