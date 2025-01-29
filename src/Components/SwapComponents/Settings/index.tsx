@@ -5,6 +5,7 @@ import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, 
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import { updateTax, updateUserDeadline, updateUserSlippageTolerance } from '../../../state/user/reducer';
 import { Button, ButtonGroup, Card, Input, Switch } from '@nextui-org/react';
+import { Wallet2 } from '@nextui-org/react';
 
 
 
@@ -127,8 +128,10 @@ const _SETTINGS_TAB = () => {
                                   transition-all duration-300"
                     >
                         <div className="flex flex-col gap-2">
-                            <span className="text-violet-500 font-medium">Slippage Tolerance</span>
-                            <small className="text-violet-500/60">
+                            <span className="text-base font-medium bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                Slippage Tolerance
+                            </span>
+                            <small className="text-sm bg-gradient-to-r from-violet-600/60 via-fuchsia-500/60 to-violet-500/60 text-transparent bg-clip-text">
                                 Your transaction will revert if the price changes unfavorably by more than this percentage.
                             </small>
 
@@ -302,8 +305,10 @@ const _SETTINGS_TAB = () => {
                                   transition-all duration-300"
                     >
                         <div className="flex flex-col gap-2">
-                            <span className="text-violet-500 font-medium">Transaction Deadline</span>
-                            <small className="text-violet-500/60">
+                            <span className="text-base font-medium bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                Transaction Deadline
+                            </span>
+                            <small className="text-sm bg-gradient-to-r from-violet-600/60 via-fuchsia-500/60 to-violet-500/60 text-transparent bg-clip-text">
                                 Your transaction will revert if it is pending for more than this long.
                             </small>
 
@@ -377,8 +382,10 @@ const _SETTINGS_TAB = () => {
                                   transition-all duration-300"
                     >
                         <div className="flex flex-col gap-2">
-                            <span className="text-violet-500 font-medium">Tax Settings</span>
-                            <small className="text-violet-500/60">
+                            <span className="text-base font-medium bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                Tax Settings
+                            </span>
+                            <small className="text-sm bg-gradient-to-r from-violet-600/60 via-fuchsia-500/60 to-violet-500/60 text-transparent bg-clip-text">
                                 Allow trading of tokens that incur tax.
                             </small>
 
@@ -387,10 +394,14 @@ const _SETTINGS_TAB = () => {
                                     isSelected={taxesStatus} 
                                     onValueChange={setTaxesStatus}
                                     classNames={{
-                                        wrapper: "group-data-[selected=true]:bg-violet-500"
+                                        wrapper: [
+                                            "group-data-[selected=true]:bg-gradient-to-r",
+                                            "group-data-[selected=true]:from-violet-500",
+                                            "group-data-[selected=true]:to-fuchsia-500"
+                                        ]
                                     }}
                                 >
-                                    <span className="text-violet-500/80">
+                                    <span className="text-sm bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
                                         {taxesStatus ? "Enabled" : "Disabled"}
                                     </span>
                                 </Switch>
@@ -400,16 +411,17 @@ const _SETTINGS_TAB = () => {
 
                     <Button
                         onPress={handleSaveSettings}
-                        className="w-full h-11 rounded-xl
-                                 bg-violet-500/10 backdrop-blur-xl 
-                                 border border-violet-500/30 
-                                 text-violet-500 hover:text-violet-400
-                                 shadow-[0_0_15px_rgba(139,92,246,0.3)]
-                                 hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]
-                                 transition-all duration-500
-                                 group relative overflow-hidden"
+                        className="w-full h-12 rounded-xl
+                                 bg-gradient-to-r from-violet-500 to-fuchsia-500
+                                 text-white font-semibold
+                                 hover:opacity-90
+                                 active:scale-[0.98]
+                                 transition-all duration-200
+                                 relative overflow-hidden
+                                 group"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/10 to-violet-500/0 
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
                                       translate-x-[-100%] group-hover:translate-x-[100%] 
                                       transition-transform duration-1000" />
                         

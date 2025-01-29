@@ -1139,7 +1139,7 @@ const _TRADE_TAB = () => {
               {/* Input section */}
               <div className="space-y-2 sm:space-y-2.5">
                 <div className="flex items-center justify-between px-1">
-                  <span className="text-violet-500/70 dark:text-violet-400/70 text-sm font-medium tracking-wide">
+                  <span className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-transparent bg-clip-text text-sm font-medium tracking-wide">
                     Input Amount
                   </span>
                   {baseAsset && (

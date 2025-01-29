@@ -719,11 +719,13 @@ const _SWAP_TAB = () => {
                         <div className="space-y-2 sm:space-y-2.5">
                             <div className="flex items-center justify-between px-1">
                                 <div className="flex items-center gap-2">
-                                    <span className="text-xs sm:text-sm font-medium bg-gradient-to-r from-violet-600 to-fuchsia-600 text-transparent bg-clip-text">
-                                        You Pay
+                                    <span className="text-xs sm:text-sm font-medium bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                    You Pay
                                     </span>
                                     <div className="hidden sm:flex px-2 py-0.5 text-[10px] rounded-full bg-violet-500/5 border border-violet-500/10">
-                                        <span className="text-violet-600/70 dark:text-violet-300/70">Input</span>
+                                        <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                           Input
+                                        </span>
                                     </div>
                                 </div>
                                 {baseAsset && (
@@ -848,17 +850,18 @@ const _SWAP_TAB = () => {
                             </div>
                         </div>
 
-                        {/* Swap button - Improved positioning and styling */}
-                        <div className="relative my-6 sm:my-8">
-                            <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                        {/* Switch Button */}
+                        <div className="relative flex justify-center my-4 mt-8 sm:mt-10">
+                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-[64px]">
                                 <div className="relative group/swap-btn">
                                     {/* Glow effect */}
                                     <div className="absolute inset-0 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-violet-500 rounded-full opacity-0 group-hover/swap-btn:opacity-70 blur-md transition-opacity duration-300" />
                                     
                                     <Button
                                         className="w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-black backdrop-blur-xl border border-violet-500/20 
-                                            hover:border-violet-500/40 rounded-full relative
-                                            active:scale-95 transition-all duration-200"
+                                            hover:border-violet-500/40 rounded-full relative mx-auto
+                                            active:scale-95 transition-all duration-200
+                                            shadow-lg hover:shadow-violet-500/25"
                                         variant="flat"
                                         isIconOnly
                                         onPress={handleSwapAssets}
@@ -868,17 +871,22 @@ const _SWAP_TAB = () => {
                                     </Button>
                                 </div>
                             </div>
+                            
+                            {/* Divider lines */}
+                            <div className="w-full h-px bg-gradient-to-r from-transparent via-violet-500/10 to-transparent" />
                         </div>
 
                         {/* Quote Asset Input - You Receive */}
                         <div className="space-y-2 sm:space-y-2.5">
                             <div className="flex items-center justify-between px-1">
                                 <div className="flex items-center gap-2">
-                                    <span className="text-xs sm:text-sm font-medium bg-gradient-to-r from-violet-600 to-fuchsia-600 text-transparent bg-clip-text">
-                                        You Receive
+                                    <span className="text-xs sm:text-sm font-medium bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                    You Receive
                                     </span>
                                     <div className="hidden sm:flex px-2 py-0.5 text-[10px] rounded-full bg-violet-500/5 border border-violet-500/10">
-                                        <span className="text-violet-600/70 dark:text-violet-300/70">Output</span>
+                                        <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                            Output
+                                        </span>
                                     </div>
                                 </div>
                                 {quoteAsset && (

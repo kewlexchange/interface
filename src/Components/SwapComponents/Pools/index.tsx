@@ -19,6 +19,7 @@ import useBlockNumber from '../../../hooks/useBlockNumber';
 import { parseUnits } from 'ethers/lib/utils';
 import { Button, Card, Image } from '@nextui-org/react';
 import { BLACK_LIST } from '../../../constants/blacklist';
+import { ChevronDown, Wallet2, ArrowUpDown } from 'lucide-react';
 
 
 
@@ -293,7 +294,7 @@ const _POOL_TAB = () => {
             exchangePair &&
                 lpTotalSupply &&
                 userLiquidity &&
-                tokenB &&
+                quoteToken &&
                 JSBI.greaterThanOrEqual(lpTotalSupply.quotient, userLiquidity.quotient)
                 ? CurrencyAmount.fromRawAmount(quoteToken, exchangePair.getLiquidityValue(quoteToken, lpTotalSupply, userLiquidity, SWAP_FEE_ON, kLast).quotient)
                 : undefined
@@ -667,221 +668,368 @@ const _POOL_TAB = () => {
                 isShowing={isTransactionSuccess} />
 
 
-            <div className="w-full flex flex-col gap-2">
-                <div className="swap-inputs">
-                    <div className="input sm:order-1">
-
-                        {
-                            baseAsset &&
-
-                            <Button className="token-selector px-2" radius='full' variant="flat" color="default" onPress={() => {
-                                setIsBase(true)
-                                toggleSelectToken()
-                            }} startContent={
-                                <Image className='w-[32px] h-[32px] min-w-[32px] min-h-[32px] max-h-[32px] max-w-[32px]' src={baseAsset.logoURI} />
-                            }
-                                endContent={
-                                    <span translate={"no"} className="material-symbols-outlined ">
-                                        expand_more
+            <div className="flex flex-col gap-4 w-full">
+                {/* Main input container */}
+                <div className="w-full rounded-lg relative overflow-hidden group/container">
+                    {/* Animated gradient background */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-violet-500/[0.02] to-transparent dark:from-violet-500/[0.05] dark:to-transparent backdrop-blur-2xl" />
+                    <div className="absolute inset-0 border border-violet-500/[0.08] dark:border-violet-400/10 rounded-3xl" />
+                    
+                    <div className="relative p-3 sm:p-5 overflow-hidden">
+                        {/* Base Asset Input */}
+                        <div className="space-y-2 sm:space-y-2.5">
+                            <div className="flex items-center justify-between px-1">
+                                <div className="flex items-center gap-2">
+                                    <span className="text-base font-medium bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                        First Token
                                     </span>
-                                }
-                            >{baseAsset.symbol}
-                            </Button>
+                                    <div className="px-2 py-0.5 text-[10px] rounded-full bg-violet-500/5 border border-violet-500/10">
+                                        <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                            Input
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
 
-                        }
+                            {/* Input field */}
+                            <div className="group/input relative">
+                                {/* Glow effect */}
+                                <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-violet-500/10 rounded-2xl opacity-50 group-hover/input:opacity-100 blur-md transition-all duration-300" />
+                                
+                                {/* Background */}
+                                <div className="absolute inset-0 bg-white/40 dark:bg-black/40 rounded-2xl backdrop-blur-xl transition-colors duration-300" />
+                                
+                                {/* Border */}
+                                <div className="absolute inset-0 rounded-2xl border border-violet-500/10 dark:border-violet-400/10 
+                                    group-hover/input:border-violet-500/20 dark:group-hover/input:border-violet-400/20 
+                                    group-focus-within/input:border-violet-500/30 dark:group-focus-within/input:border-violet-400/30 
+                                    transition-colors duration-300" />
 
+                                <div className="relative flex items-center p-3">
+                                    <input
+                                        value={baseInputValue}
+                                        onChange={(e) => setInputValue(e.target.value, true)}
+                                        placeholder="0.00"
+                                        className="w-full bg-transparent text-2xl font-semibold text-violet-950 dark:text-violet-100 outline-none 
+                                            placeholder:text-violet-400/20 dark:placeholder:text-violet-300/20"
+                                        type="text"
+                                        pattern="^[0-9]*[.,]?[0-9]*$"
+                                        inputMode="decimal"
+                                        autoComplete="off"
+                                        autoCorrect="off"
+                                        spellCheck="false"
+                                    />
+                                    
+                                    {/* Token selector button */}
+                                    {baseAsset && (
+                                        <Button
+                                            className="h-10 min-w-fit px-3 bg-violet-500/[0.05] hover:bg-violet-500/10 
+                                                active:scale-95 transition-all duration-200 group/btn rounded-full ml-2"
+                                            variant="flat"
+                                            onPress={() => {
+                                                setIsBase(true)
+                                                toggleSelectToken()
+                                            }}
+                                        >
+                                            <div className="flex items-center gap-2 whitespace-nowrap">
+                                                <Image 
+                                                    src={baseAsset.logoURI} 
+                                                    className="w-8 h-8 min-w-[32px] min-h-[32px] rounded-full" 
+                                                />
+                                                <span className="font-medium text-violet-600 dark:text-violet-300">
+                                                    {baseAsset.symbol}
+                                                </span>
+                                                <ChevronDown className="w-4 h-4 text-violet-500/70 ml-1" />
+                                            </div>
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
 
-
-
-
-                        <div onClick={() => {
-                            setInputValue(baseAsset.balance, true)
-                        }} className="balance cursor-pointer">
-                            Balance: {baseAsset && baseAsset.balance}
+                            {/* Balance */}
+                            <div className="flex items-center justify-between px-1">
+                                <div className="flex items-center gap-2">
+                                    <Wallet2 className="w-4 h-4 text-violet-500/50 dark:text-violet-400/50" />
+                                    <span className="text-sm text-violet-600/70 dark:text-violet-300/70 cursor-pointer hover:text-violet-600 dark:hover:text-violet-300 transition-colors"
+                                        onClick={() => setInputValue(baseAsset?.balance, true)}>
+                                        Balance: {baseAsset?.balance}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
 
+                        {/* Switch Button */}
+                        <div className="relative flex justify-center my-4">
+                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full max-w-[64px]">
+                                <div className="relative group/swap-btn">
+                                    {/* Glow effect */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-violet-500 rounded-full opacity-0 group-hover/swap-btn:opacity-70 blur-md transition-opacity duration-300" />
+                                    
+                                    <Button
+                                        className="w-10 h-10 sm:w-12 sm:h-12 bg-white dark:bg-black backdrop-blur-xl border border-violet-500/20 
+                                            hover:border-violet-500/40 rounded-full relative mx-auto
+                                            active:scale-95 transition-all duration-200
+                                            shadow-lg hover:shadow-violet-500/25"
+                                        variant="flat"
+                                        isIconOnly
+                                        onPress={handleSwapAssets}
+                                    >
+                                        <ArrowUpDown className="w-5 h-5 sm:w-6 sm:h-6 text-violet-600 dark:text-violet-300 
+                                            group-hover/swap-btn:rotate-180 transition-transform duration-300" />
+                                    </Button>
+                                </div>
+                            </div>
+                            
+                            {/* Divider lines */}
+                            <div className="w-full h-px bg-gradient-to-r from-transparent via-violet-500/10 to-transparent" />
+                        </div>
 
+                        {/* Quote Asset Input */}
+                        <div className="space-y-2 sm:space-y-2.5">
+                            <div className="flex items-center justify-between px-1">
+                                <div className="flex items-center gap-2">
+                                    <span className="text-base font-medium bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                        Second Token
+                                    </span>
+                                    <div className="px-2 py-0.5 text-[10px] rounded-full bg-violet-500/5 border border-violet-500/10">
+                                        <span className="bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                            Input
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <input value={baseInputValue} onChange={(e) => {
-                            setInputValue(e.target.value, true)
-                        }} inputMode="decimal" autoComplete="off" autoCorrect="off" type="text"
-                            pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0" minLength={0} maxLength={100} spellCheck="false" />
+                            {/* Input field */}
+                            <div className="group/input relative">
+                                <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-violet-500/10 rounded-2xl opacity-50 group-hover/input:opacity-100 blur-md transition-all duration-300" />
+                                <div className="absolute inset-0 bg-white/40 dark:bg-black/40 rounded-2xl backdrop-blur-xl transition-colors duration-300" />
+                                <div className="absolute inset-0 rounded-2xl border border-violet-500/10 dark:border-violet-400/10 
+                                    group-hover/input:border-violet-500/20 dark:group-hover/input:border-violet-400/20 
+                                    group-focus-within/input:border-violet-500/30 dark:group-focus-within/input:border-violet-400/30 
+                                    transition-colors duration-300" />
+
+                                <div className="relative flex items-center p-3">
+                                    <input
+                                        value={quoteInputValue}
+                                        onChange={(e) => setInputValue(e.target.value, false)}
+                                        placeholder="0.00"
+                                        className="w-full bg-transparent text-2xl font-semibold text-violet-950 dark:text-violet-100 outline-none 
+                                            placeholder:text-violet-400/20 dark:placeholder:text-violet-300/20"
+                                        type="text"
+                                        pattern="^[0-9]*[.,]?[0-9]*$"
+                                        inputMode="decimal"
+                                        autoComplete="off"
+                                        autoCorrect="off"
+                                        spellCheck="false"
+                                    />
+                                    
+                                    {/* Token selector button */}
+                                    {quoteAsset && (
+                                        <Button
+                                            className="h-10 min-w-fit px-3 bg-violet-500/[0.05] hover:bg-violet-500/10 
+                                                active:scale-95 transition-all duration-200 group/btn rounded-full ml-2"
+                                            variant="flat"
+                                            onPress={() => {
+                                                setIsBase(false)
+                                                toggleSelectToken()
+                                            }}
+                                        >
+                                            <div className="flex items-center gap-2 whitespace-nowrap">
+                                                <Image 
+                                                    src={quoteAsset.logoURI} 
+                                                    className="w-8 h-8 min-w-[32px] min-h-[32px] rounded-full" 
+                                                />
+                                                <span className="font-medium text-violet-600 dark:text-violet-300">
+                                                    {quoteAsset.symbol}
+                                                </span>
+                                                <ChevronDown className="w-4 h-4 text-violet-500/70 ml-1" />
+                                            </div>
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Balance */}
+                            <div className="flex items-center justify-between px-1">
+                                <div className="flex items-center gap-2">
+                                    <Wallet2 className="w-4 h-4 text-violet-500/50 dark:text-violet-400/50" />
+                                    <span className="text-sm text-violet-600/70 dark:text-violet-300/70 cursor-pointer hover:text-violet-600 dark:hover:text-violet-300 transition-colors"
+                                        onClick={() => setInputValue(quoteAsset?.balance, false)}>
+                                        Balance: {quoteAsset?.balance}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <button onClick={() => {
-                        handleSwapAssets()
-                    }} className="swap-currencies sm:order-2  my-3 anim"
-                        style={{ "left": "calc(50% - 16px)" }}>
-                        <span translate={"no"} className="material-symbols-outlined ">
-                            arrow_downward
+                {/* Pool Info Card */}
+                {baseAsset && quoteAsset && (
+                    <div className="w-full rounded-2xl bg-white/50 dark:bg-black/40 backdrop-blur-xl border border-violet-500/10 dark:border-violet-400/10 p-4 space-y-4">
+                        <span className="text-base font-medium bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                            Prices and Pool Share
                         </span>
-                    </button>
 
-                    <div className="input sm:order-3">
+                        <div className="grid grid-cols-3 gap-3">
+                            {/* Price Cards */}
+                            <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-violet-500/[0.02] border border-violet-500/10">
+                                <span className="text-lg font-medium text-violet-900 dark:text-violet-100">{basePrice}</span>
+                                <span className="text-xs text-violet-600/70 dark:text-violet-300/70">
+                                    {quoteAsset.symbol} per {baseAsset.symbol}
+                                </span>
+                            </div>
+                            
+                            <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-violet-500/[0.02] border border-violet-500/10">
+                                <span className="text-lg font-medium text-violet-900 dark:text-violet-100">{quotePrice}</span>
+                                <span className="text-xs text-violet-600/70 dark:text-violet-300/70">
+                                    {baseAsset.symbol} per {quoteAsset.symbol}
+                                </span>
+                            </div>
 
-                        {
-                            quoteAsset &&
-
-                            <Button className="token-selector px-2" radius='full' variant="flat" color="default" onPress={() => {
-                                setIsBase(false)
-                                toggleSelectToken()
-                            }} startContent={
-                                <Image className='w-[32px] h-[32px] min-w-[32px] min-h-[32px] max-h-[32px] max-w-[32px]' src={quoteAsset.logoURI} />
-                            }
-                                endContent={
-                                    <span translate={"no"} className="material-symbols-outlined ">
-                                        expand_more
-                                    </span>
-                                }
-                            >{quoteAsset.symbol}
-                            </Button>
-
-                        }
-
-                        <div onClick={() => {
-                            setInputValue(quoteAsset.balance, false)
-                        }} className="balance cursor-pointer">
-                            Balance: {quoteAsset && quoteAsset.balance}
+                            <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-violet-500/[0.02] border border-violet-500/10">
+                                <span className="text-lg font-medium text-violet-900 dark:text-violet-100">{shareOfPool}%</span>
+                                <span className="text-xs text-violet-600/70 dark:text-violet-300/70">Share of Pool</span>
+                            </div>
                         </div>
 
-
-
-                        <input value={quoteInputValue} onChange={(e) => {
-                            setInputValue(e.target.value, false)
-                        }} inputMode="decimal" autoComplete="off" autoCorrect="off" type="text"
-                            pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0" minLength={0} maxLength={100} spellCheck="false" />
-                    </div>
-                </div>
-                <div className="rounded-xl w-full">
-                    <div className="rounded-xl pb-0">
-
-                        {
-                            baseAsset && quoteAsset &&
-                            <Card shadow='none' className="w-full border border-default-100 flex flex-col gap-2 rounded-lg p-2">
-                                <span className="text-sm">Prices and Pool Share</span>
-
-                                <div className={"grid grid-cols-3 gap-2 text-center"}>
-                                    <Card shadow="none" className={"flex border border-default-100 flex-col w-full rounded-lg py-2"}>
-                                        <span>{basePrice}</span>
-                                        <span className="text-xs">{quoteAsset.symbol} per {baseAsset.symbol}</span>
-                                    </Card>
-                                    <Card shadow="none" className={"flex border border-default-100 flex-col w-full rounded-lg py-2"}>
-                                        <span>{quotePrice}</span>
-                                        <span className="text-xs">{baseAsset.symbol} per {quoteAsset.symbol}</span>
-                                    </Card>
-                                    <Card shadow="none" className={"flex border border-default-100 flex-col w-full rounded-lg py-2"}>
-                                        <span>{shareOfPool} % </span>
-                                        <span className="text-xs">Share of Pool</span>
-                                    </Card>
-                                </div>
-                                <div className="w-full flex flex-col gap-2">
-                                    <span className="text-sm">Your Liquidity</span>
-
-                                    <div className="w-full grid grid-cols-2 gap-2">
-                                        <Card shadow="none" className="rounded-lg border border-default-100 flex flex-row items-center justify-start gap-2 px-2">
-                                            <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
-                                            <small className={"w-full text-start py-2"} >{userBaseLiquidity} {baseAsset?.symbol}</small>
-                                        </Card>
-                                        <Card shadow="none" className="rounded-lg border border-default-100 flex flex-row items-center justify-start gap-2 px-2">
-                                            <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
-                                            <small className={"w-full text-start py-2"} >{userQuoteLiquidity} {quoteAsset?.symbol}</small>
-                                        </Card>
-
+                        {/* Liquidity Sections */}
+                        <div className="space-y-3">
+                            {/* Your Liquidity */}
+                            <div className="space-y-2">
+                                <span className="text-base font-medium bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                    Your Liquidity
+                                </span>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {/* Base Asset Card */}
+                                    <div className="flex items-center gap-2 p-2 rounded-xl bg-violet-500/[0.02] border border-violet-500/10">
+                                        <Image src={baseAsset?.logoURI} className="w-6 h-6 rounded-full" alt={baseAsset?.symbol} />
+                                        <div className="flex flex-col">
+                                            <span className="text-sm font-medium text-violet-900 dark:text-violet-100">
+                                                {userBaseLiquidity}
+                                            </span>
+                                            <span className="text-xs text-violet-600/70 dark:text-violet-300/70">
+                                                {baseAsset?.symbol}
+                                            </span>
+                                        </div>
                                     </div>
 
-                                    <Card shadow="none" className={"w-full border border-default-100 flex flex-row gap-2 px-2 rounded-lg p-2"}>
-
-                                        <div className="w-full flex flex-row gap-2">
-                                            <div className="flex flex-row">
-                                                <DoubleCurrencyIcon baseIcon={baseAsset?.logoURI} quoteIcon={quoteAsset?.logoURI} />
-                                            </div>
-                                            <div className="w-full px-2">
-                                                <span className="sm:text-xs">{baseAsset?.symbol}x{quoteAsset?.symbol}</span>
-                                            </div>
+                                    {/* Quote Asset Card */}
+                                    <div className="flex items-center gap-2 p-2 rounded-xl bg-violet-500/[0.02] border border-violet-500/10">
+                                        <Image src={quoteAsset?.logoURI} className="w-6 h-6 rounded-full" alt={quoteAsset?.symbol} />
+                                        <div className="flex flex-col">
+                                            <span className="text-sm font-medium text-violet-900 dark:text-violet-100">
+                                                {userQuoteLiquidity}
+                                            </span>
+                                            <span className="text-xs text-violet-600/70 dark:text-violet-300/70">
+                                                {quoteAsset?.symbol}
+                                            </span>
                                         </div>
-                                        <div className="w-full flex items-end justify-end">
-                                            <span className="text-pink-960 sm:text-xs">{userLiquidity}</span>
-                                        </div>
-                                    </Card>
-                                    <span className="text-sm">Total Liquidity</span>
-                                    <div className="w-full grid grid-cols-2 gap-2">
-                                        <Card shadow='none' className="rounded-lg border border-default-100 flex flex-row items-center justify-start gap-2 px-2">
-                                            <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
-                                            <small className={"w-full text-start py-2"} >{baseLiquidity} {baseAsset?.symbol}</small>
-                                        </Card>
-                                        <Card shadow='none' className="rounded-lg border border-default-100 flex flex-row items-center justify-start gap-2 px-2">
-                                            <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
-                                            <small className={"w-full text-start py-2"} >{quoteLiquidity} {quoteAsset?.symbol}</small>
-                                        </Card>
-
                                     </div>
-
-                                    <Card shadow='none' className={"w-full border border-default-100 flex flex-row gap-2 px-2 rounded-lg p-2"}>
-                                        <div className="w-full  flex flex-row gap-2">
-                                            <div className="flex flex-row">
-                                                <DoubleCurrencyIcon baseIcon={baseAsset?.logoURI} quoteIcon={quoteAsset?.logoURI} />
-                                            </div>
-                                            <div className="w-full px-2">
-                                                <span className="text-xs sm:text-sm">{baseAsset?.symbol}x{quoteAsset?.symbol}</span>
-                                            </div>
-                                        </div>
-                                        <div className="w-full flex items-end justify-end">
-                                            <span className="text-pink-960 sm:text-xs">{totalLiquidity}</span>
-                                        </div>
-                                    </Card>
-
                                 </div>
-                            </Card>
-                        }
+                            </div>
 
+                            {/* LP Token Info */}
+                            <div className="flex items-center justify-between p-3 rounded-xl bg-violet-500/[0.02] border border-violet-500/10">
+                                <div className="flex items-center gap-2">
+                                    <DoubleCurrencyIcon baseIcon={baseAsset?.logoURI} quoteIcon={quoteAsset?.logoURI} />
+                                    <span className="text-sm text-violet-900 dark:text-violet-100">
+                                        {baseAsset?.symbol}x{quoteAsset?.symbol}
+                                    </span>
+                                </div>
+                                <span className="text-sm font-medium text-violet-900 dark:text-violet-100">
+                                    {userLiquidity}
+                                </span>
+                            </div>
+                        </div>
 
+                        {/* Total Liquidity Section */}
+                        <div className="space-y-2">
+                            <span className="text-base font-medium bg-gradient-to-r from-violet-600 via-fuchsia-500 to-violet-500 text-transparent bg-clip-text">
+                                Total Liquidity
+                            </span>
+                            <div className="grid grid-cols-2 gap-2">
+                                <div className="flex items-center gap-2 p-2 rounded-xl bg-violet-500/[0.02] border border-violet-500/10">
+                                    <Image src={baseAsset?.logoURI} className="w-6 h-6 rounded-full" alt={baseAsset?.symbol} />
+                                    <div className="flex flex-col">
+                                        <span className="text-sm font-medium text-violet-900 dark:text-violet-100">
+                                            {baseLiquidity}
+                                        </span>
+                                        <span className="text-xs text-violet-600/70 dark:text-violet-300/70">
+                                            {baseAsset?.symbol}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-2 p-2 rounded-xl bg-violet-500/[0.02] border border-violet-500/10">
+                                    <Image src={quoteAsset?.logoURI} className="w-6 h-6 rounded-full" alt={quoteAsset?.symbol} />
+                                    <div className="flex flex-col">
+                                        <span className="text-sm font-medium text-violet-900 dark:text-violet-100">
+                                            {quoteLiquidity}
+                                        </span>
+                                        <span className="text-xs text-violet-600/70 dark:text-violet-300/70">
+                                            {quoteAsset?.symbol}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        {/* Total LP Token Info */}
+                        <div className="flex items-center justify-between p-3 rounded-xl bg-violet-500/[0.02] border border-violet-500/10">
+                            <div className="flex items-center gap-2">
+                                <DoubleCurrencyIcon baseIcon={baseAsset?.logoURI} quoteIcon={quoteAsset?.logoURI} />
+                                <span className="text-sm text-violet-900 dark:text-violet-100">
+                                    {baseAsset?.symbol}x{quoteAsset?.symbol}
+                                </span>
+                            </div>
+                            <span className="text-sm font-medium text-violet-900 dark:text-violet-100">
+                                {totalLiquidity}
+                            </span>
+                        </div>
 
-                    </div>
-                </div>
-                <div className="w-full flex flex-col gap-2 items-center justify-center">
+                        {/* Approve Buttons */}
+                        <div className="w-full space-y-2">
+                            {baseAsset && quoteAsset && baseAsset.address !== ETHER_ADDRESS && !hasBaseAllowance && (
+                                <Button
+                                    className="w-full h-12 bg-gradient-to-r from-violet-500 to-fuchsia-500 
+                                        text-white font-semibold rounded-xl"
+                                    onPress={() => handleApprove(baseAsset.address)}
+                                >
+                                    Approve {baseAsset.symbol}
+                                </Button>
+                            )}
+                            
+                            {baseAsset && quoteAsset && quoteAsset.address !== ETHER_ADDRESS && !hasQuoteAllowance && (
+                                <Button
+                                    className="w-full h-12 bg-gradient-to-r from-violet-500 to-fuchsia-500 
+                                        text-white font-semibold rounded-xl"
+                                    onPress={() => handleApprove(quoteAsset.address)}
+                                >
+                                    Approve {quoteAsset.symbol}
+                                </Button>
+                            )}
+                        </div>
 
-
-                    <div className={"w-full grid grid-cols-1 gap-2"}>
-                        {
-                            baseAsset && quoteAsset && baseAsset.address !== ETHER_ADDRESS && hasBaseAllowance === false &&
-                            <Button className={"w-full"} onPress={() => {
-                                handleApprove(baseAsset.address);
-                            }} color="default">
-                                Unlock {baseAsset.symbol}
+                        {/* Action Buttons */}
+                        <div className="grid grid-cols-2 gap-2">
+                            <Button
+                                className="h-12 bg-gradient-to-r from-violet-500 to-fuchsia-500 
+                                    text-white font-semibold rounded-xl"
+                                onPress={handleAddLiquidity}
+                                disabled={!hasBaseAllowance || !hasQuoteAllowance}
+                            >
+                                Add Liquidity
                             </Button>
-                        }
-                        {
-                            baseAsset && quoteAsset && quoteAsset.address !== ETHER_ADDRESS && hasQuoteAllowance === false &&
-                            <Button className={"w-full"} onPress={() => {
-                                handleApprove(quoteAsset.address);
-                            }} color="default">
-                                Unlock {quoteAsset.symbol}
+                            <Button
+                                className="h-12 bg-gradient-to-r from-violet-500 to-fuchsia-500 
+                                    text-white font-semibold rounded-xl"
+                                onPress={handleRemoveLiquidity}
+                                disabled={!hasBaseAllowance || !hasQuoteAllowance}
+                            >
+                                Remove Liquidity
                             </Button>
-                        }
-
-
+                        </div>
                     </div>
-
-
-                    <div className={"w-full grid grid-cols-2 gap-2"}>
-                        <Button className={"w-full"} onPress={() => {
-                            handleAddLiquidity()
-                        }} color="default">
-                            Add Liquidity
-                        </Button>
-                        <Button className={"w-full"} onPress={() => {
-                            handleRemoveLiquidity()
-                        }} color="default">
-                            Remove Liquidity
-                        </Button>
-                    </div>
-
-
-
-
-
-                </div>
+                )}
             </div>
 
 
