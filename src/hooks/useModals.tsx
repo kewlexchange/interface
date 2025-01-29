@@ -1493,4 +1493,3 @@ export const ModalSelectExchangePair = ({ isShowing, disableToken, hide, tokenLi
         </CustomModal>
     )
 }
-
