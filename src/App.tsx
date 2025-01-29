@@ -37,6 +37,7 @@ import { LeftMenu } from './Components/LeftMenu';
 import { icons, Menu, WalletIcon } from 'lucide-react';
 import Cobe from './Components/Cobe';
 import { NetworkHeader } from './Components/NetworkHeader';
+import { GitCompareArrows, ScanEye, Image as ImageIcon, Coins, Sparkles, Globe, PiggyBank, Rocket, Clock } from 'lucide-react';
 
 
 const ReactAudioPlayerEx = process.env.NODE_ENV === 'production' ? (ReactAudioPlayer as any).default : ReactAudioPlayer;
@@ -188,150 +189,613 @@ const App = () => {
         }} isClosable={true} address={account} isShowing={isShowWallet} hide={toggleWalletModal} />
 
 
-        <div className='w-full fixed   z-[1] bg-red-500 top-[5px]'>
-          <div className=" absolute top-3  px-2 w-full z-40 flex items-center justify-center">
-
+        <div className='w-full fixed z-[1] top-[5px]'>
+          <div className="absolute top-3 px-2 w-full z-40 flex items-center justify-center">
             <Navbar
               classNames={{
-                wrapper: "rounded-full pr-2",
-                base: "rounded-full z-990 flex gap-4 bg-violet-500/10 backdrop-blur-xl border border-1 flex-row relative flex-nowrap items-center h-[var(--navbar-height)] max-w-[1024px] px-0 w-full justify-center bg-transparent",
-              }
-              }
-
-              isBlurred={true} isBordered={true}
+                wrapper: [
+                  "rounded-full px-2",
+                  "bg-white/[0.05] dark:bg-black/[0.05]",
+                  "backdrop-blur-xl",
+                  "border border-violet-500/20",
+                  "shadow-[0_0_15px_rgba(139,92,246,0.1)]",
+                  "hover:shadow-[0_0_30px_rgba(139,92,246,0.2)]",
+                  "transition-all duration-300"
+                ].join(" "),
+                base: [
+                  "rounded-full z-990",
+                  "flex gap-4",
+                  "flex-row relative flex-nowrap",
+                  "items-center h-[var(--navbar-height)]",
+                  "max-w-[1024px] px-0 w-full justify-center",
+                  "bg-transparent"
+                ].join(" ")
+              }}
+              isBlurred={true}
+              isBordered={false}
               isMenuOpen={isDrawerOpen}
               onMenuOpenChange={setIsDrawerOpen}
-
-
             >
-
-
               <Dropdown
                 showArrow
-
                 radius="sm"
                 classNames={{
-                  base: "before:bg-default-200", // change arrow background
-                  content: "py-1 px-1 border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
+                  base: [
+                    "before:bg-gradient-to-r before:from-violet-500/20 before:to-fuchsia-500/20",
+                    "before:blur-sm"
+                  ].join(" "),
+                  content: [
+                    "py-3 px-2",
+                    "border border-violet-500/20",
+                    "bg-white/80 dark:bg-black/80",
+                    "backdrop-blur-2xl",
+                    "shadow-[0_0_25px_rgba(139,92,246,0.15)]",
+                    "dark:shadow-[0_0_25px_rgba(139,92,246,0.1)]",
+                    "group",
+                    "relative",
+                    "after:absolute after:inset-0 after:rounded-xl",
+                    "after:bg-gradient-to-b after:from-violet-500/[0.03] after:to-transparent",
+                    "after:pointer-events-none"
+                  ].join(" "),
+                  item: [
+                    "text-sm",
+                    "text-violet-600 dark:text-violet-300",
+                    "transition-all duration-300",
+                    "data-[hover=true]:bg-gradient-to-r",
+                    "data-[hover=true]:from-violet-500/10",
+                    "data-[hover=true]:to-fuchsia-500/10",
+                    "data-[hover=true]:text-violet-600 dark:data-[hover=true]:text-violet-200",
+                    "rounded-lg",
+                    "gap-2",
+                    "relative",
+                    "overflow-hidden",
+                    "group/item"
+                  ].join(" ")
                 }}
               >
-                <NavbarItem>
-
-                  <DropdownTrigger>
-
-                    <Button
-                      isIconOnly
-                      radius="full"
-                      variant="light"
-                    >
-                      <Menu />
-                    </Button>
-                  </DropdownTrigger>
-                </NavbarItem>
+                <DropdownTrigger>
+                  <Button
+                    isIconOnly
+                    radius="full"
+                    variant="light"
+                    className="bg-violet-500/10 hover:bg-violet-500/20 transition-colors group"
+                  >
+                    <Menu className="w-5 h-5 text-violet-500 group-hover:text-violet-600 transition-colors" />
+                  </Button>
+                </DropdownTrigger>
                 <DropdownMenu
                   aria-label="KEWL"
-                  className="w-[340px]"
+                  className="w-[340px] p-2"
                   itemClasses={{
-                    base: "gap-4",
+                    base: [
+                      "gap-4",
+                      "data-[hover=true]:scale-[0.98]",
+                      "active:scale-95",
+                      "rounded-lg",
+                      "transition-all duration-200",
+                      "data-[hover=true]:text-violet-500",
+                      "dark:data-[hover=true]:text-violet-300",
+                      "relative"
+                    ].join(" "),
                   }}
                 >
-                  <DropdownItem key={"swap"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                    }} color="foreground" as={NavLink} to={"/swap"} >
-                      <span className='text-md'>{t("Swap")}</span>
+                  <DropdownItem key={"swap"} className="group/item">
+                    <Link 
+                      className="w-full flex items-center gap-3 relative p-2" 
+                      onPress={() => setIsMenuOpen(false)} 
+                      color="foreground" 
+                      as={NavLink} 
+                      to={"/swap"}
+                    >
+                      {/* Hover background effect */}
+                      <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                        bg-gradient-to-r from-violet-500/[0.03] via-fuchsia-500/[0.05] to-violet-500/[0.03]
+                        transition-opacity duration-300" />
+
+                      {/* Hover border glow */}
+                      <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                        bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20
+                        blur-xl transition-opacity duration-300" />
+
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                        bg-gradient-to-r from-transparent via-white/5 to-transparent
+                        translate-x-[-100%] group-hover/item:translate-x-[100%]
+                        transition-all duration-1000 ease-in-out" />
+
+                      {/* Icon container */}
+                      <div className="relative w-10 h-10 rounded-xl 
+                        bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]
+                        group-hover/item:from-violet-500/[0.1] group-hover/item:to-fuchsia-500/[0.1]
+                        flex items-center justify-center
+                        overflow-hidden transition-all duration-300
+                        shadow-[0_0_0_1px_rgba(139,92,246,0.1)]
+                        group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                        <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 
+                          opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                        <GitCompareArrows className="w-5 h-5 text-violet-500 group-hover/item:text-violet-400 
+                          transition-colors relative z-10" />
+                      </div>
+
+                      {/* Text content */}
+                      <div className="relative flex flex-col z-10">
+                        <span className="text-sm font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500
+                          bg-clip-text text-transparent
+                          group-hover/item:from-violet-400 group-hover/item:to-fuchsia-400
+                          transition-all duration-300">
+                          {t("Swap")}
+                        </span>
+                        <span className="text-xs text-violet-500/60 group-hover/item:text-violet-400/80 
+                          transition-colors">
+                          Exchange your tokens
+                        </span>
+                      </div>
                     </Link>
                   </DropdownItem>
 
+                  {chainId && chainId == ChainId.CHILIZ_MAINNET && (
+                    <>
+                      <DropdownItem key={"reflection"} className="group/item">
+                        <Link 
+                          className="w-full flex items-center gap-3 relative p-2" 
+                          onPress={() => setIsMenuOpen(false)} 
+                          color="foreground" 
+                          as={NavLink} 
+                          to={"/reflection"}
+                        >
+                          {/* Hover background effect */}
+                          <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                            bg-gradient-to-r from-violet-500/[0.03] via-fuchsia-500/[0.05] to-violet-500/[0.03]
+                            transition-opacity duration-300" />
 
+                          {/* Hover border glow */}
+                          <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                            bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20
+                            blur-xl transition-opacity duration-300" />
 
-                  { chainId && chainId == ChainId.CHILIZ_MAINNET  ?  <>
+                          {/* Shimmer effect */}
+                          <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                            bg-gradient-to-r from-transparent via-white/5 to-transparent
+                            translate-x-[-100%] group-hover/item:translate-x-[100%]
+                            transition-all duration-1000 ease-in-out" />
 
-                    <DropdownItem key={"reflection"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                    }} color="foreground" as={NavLink} to={"/reflection"} >
-                      <span className='text-md'>{t("Reflection")}</span>
-                    </Link>
-                  </DropdownItem>
+                          {/* Icon container */}
+                          <div className="relative w-10 h-10 rounded-xl 
+                            bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]
+                            group-hover/item:from-violet-500/[0.1] group-hover/item:to-fuchsia-500/[0.1]
+                            flex items-center justify-center
+                            overflow-hidden transition-all duration-300
+                            shadow-[0_0_0_1px_rgba(139,92,246,0.1)]
+                            group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 
+                              opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                            <ScanEye className="w-5 h-5 text-violet-500 group-hover/item:text-violet-400 
+                              transition-colors relative z-10" />
+                          </div>
 
-                  <DropdownItem key={"nfts"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                    }} color="foreground" as={NavLink} to={"/nfts"} >
-                      <span className='text-md'>{t("NFTs")}</span>
-                    </Link>
-                  </DropdownItem>
+                          {/* Text content */}
+                          <div className="relative flex flex-col z-10">
+                            <span className="text-sm font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500
+                              bg-clip-text text-transparent
+                              group-hover/item:from-violet-400 group-hover/item:to-fuchsia-400
+                              transition-all duration-300">
+                              {t("Reflection")}
+                            </span>
+                            <span className="text-xs text-violet-500/60 group-hover/item:text-violet-400/80 
+                              transition-colors">
+                              Multi hop trading
+                            </span>
+                          </div>
+                        </Link>
+                      </DropdownItem>
+                    </>
+                  )}
 
-                  <DropdownItem key={"token"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                    }} color="foreground" as={NavLink} to={"/token"} >
-                      <span className='text-md'>{t("KWL Token")}</span>
-                    </Link>
-                  </DropdownItem>
+                  {chainId && chainId == ChainId.CHILIZ_MAINNET ? <>
 
-                  <DropdownItem key={"metamorph"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                    }} color="foreground" as={NavLink} to={"/metamorph"} >
-                      <span className='text-md'>{t("Metamorph")}</span>
-                    </Link>
-                  </DropdownItem>
+                    <DropdownItem key={"nfts"} className="group/item">
+                      <Link 
+                        className="w-full flex items-center gap-3 relative p-2" 
+                        onPress={() => setIsMenuOpen(false)} 
+                        color="foreground" 
+                        as={NavLink} 
+                        to={"/nfts"}
+                      >
+                        {/* Hover background effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/[0.03] via-fuchsia-500/[0.05] to-violet-500/[0.03]
+                          transition-opacity duration-300" />
 
-                  <DropdownItem key={"cns"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                    }} color="foreground" as={NavLink} to={"/cns"} >
-                      <span className='text-md'>{t("Domains")}</span>
-                    </Link>
-                  </DropdownItem>
+                        {/* Hover border glow */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20
+                          blur-xl transition-opacity duration-300" />
 
-                  <DropdownItem key={"earn"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                    }} color="foreground" as={NavLink} to={"/earn"} >
-                      <span className='text-md'>{t("Earn")}</span>
-                    </Link>
-                  </DropdownItem>
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-transparent via-white/5 to-transparent
+                          translate-x-[-100%] group-hover/item:translate-x-[100%]
+                          transition-all duration-1000 ease-in-out" />
 
+                        {/* Icon container */}
+                        <div className="relative w-10 h-10 rounded-xl 
+                          bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]
+                          group-hover/item:from-violet-500/[0.1] group-hover/item:to-fuchsia-500/[0.1]
+                          flex items-center justify-center
+                          overflow-hidden transition-all duration-300
+                          shadow-[0_0_0_1px_rgba(139,92,246,0.1)]
+                          group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 
+                            opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                          <ImageIcon className="w-5 h-5 text-violet-500 group-hover/item:text-violet-400 
+                            transition-colors relative z-10" />
+                        </div>
 
-                  <DropdownItem key={"launchpad"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                    }} color="foreground" as={NavLink} to={"/launchpad"} >
-                      <span className='text-md'>{t("Launchpad")}</span>
-                    </Link>
-                  </DropdownItem>
+                        {/* Text content */}
+                        <div className="relative flex flex-col z-10">
+                          <span className="text-sm font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500
+                            bg-clip-text text-transparent
+                            group-hover/item:from-violet-400 group-hover/item:to-fuchsia-400
+                            transition-all duration-300">
+                            {t("NFTs")}
+                          </span>
+                          <span className="text-xs text-violet-500/60 group-hover/item:text-violet-400/80 
+                            transition-colors">
+                            Browse NFT collections
+                          </span>
+                        </div>
+                      </Link>
+                    </DropdownItem>
 
-                  <DropdownItem key={"vesting"}>
-                    <Link className='w-full' onPress={(e) => {
-                      setIsMenuOpen(false)
-                    }} color="foreground" as={NavLink} to={"/vesting"} >
-                      <span className='text-md'>{t("Vesting")}</span>
-                    </Link>
-                  </DropdownItem>
+                    <DropdownItem key={"token"} className="group/item">
+                      <Link 
+                        className="w-full flex items-center gap-3 relative p-2" 
+                        onPress={() => setIsMenuOpen(false)} 
+                        color="foreground" 
+                        as={NavLink} 
+                        to={"/token"}
+                      >
+                        {/* Hover background effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/[0.03] via-fuchsia-500/[0.05] to-violet-500/[0.03]
+                          transition-opacity duration-300" />
+
+                        {/* Hover border glow */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20
+                          blur-xl transition-opacity duration-300" />
+
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-transparent via-white/5 to-transparent
+                          translate-x-[-100%] group-hover/item:translate-x-[100%]
+                          transition-all duration-1000 ease-in-out" />
+
+                        {/* Icon container */}
+                        <div className="relative w-10 h-10 rounded-xl 
+                          bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]
+                          group-hover/item:from-violet-500/[0.1] group-hover/item:to-fuchsia-500/[0.1]
+                          flex items-center justify-center
+                          overflow-hidden transition-all duration-300
+                          shadow-[0_0_0_1px_rgba(139,92,246,0.1)]
+                          group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 
+                            opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                          <Coins className="w-5 h-5 text-violet-500 group-hover/item:text-violet-400 
+                            transition-colors relative z-10" />
+                        </div>
+
+                        {/* Text content */}
+                        <div className="relative flex flex-col z-10">
+                          <span className="text-sm font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500
+                            bg-clip-text text-transparent
+                            group-hover/item:from-violet-400 group-hover/item:to-fuchsia-400
+                            transition-all duration-300">
+                            {t("KWL Token")}
+                          </span>
+                          <span className="text-xs text-violet-500/60 group-hover/item:text-violet-400/80 
+                            transition-colors">
+                            Token information
+                          </span>
+                        </div>
+                      </Link>
+                    </DropdownItem>
+
+                    <DropdownItem key={"metamorph"} className="group/item">
+                      <Link 
+                        className="w-full flex items-center gap-3 relative p-2" 
+                        onPress={() => setIsMenuOpen(false)} 
+                        color="foreground" 
+                        as={NavLink} 
+                        to={"/metamorph"}
+                      >
+                        {/* Hover background effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/[0.03] via-fuchsia-500/[0.05] to-violet-500/[0.03]
+                          transition-opacity duration-300" />
+
+                        {/* Hover border glow */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20
+                          blur-xl transition-opacity duration-300" />
+
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-transparent via-white/5 to-transparent
+                          translate-x-[-100%] group-hover/item:translate-x-[100%]
+                          transition-all duration-1000 ease-in-out" />
+
+                        {/* Icon container */}
+                        <div className="relative w-10 h-10 rounded-xl 
+                          bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]
+                          group-hover/item:from-violet-500/[0.1] group-hover/item:to-fuchsia-500/[0.1]
+                          flex items-center justify-center
+                          overflow-hidden transition-all duration-300
+                          shadow-[0_0_0_1px_rgba(139,92,246,0.1)]
+                          group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 
+                            opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                          <Sparkles className="w-5 h-5 text-violet-500 group-hover/item:text-violet-400 
+                            transition-colors relative z-10" />
+                        </div>
+
+                        {/* Text content */}
+                        <div className="relative flex flex-col z-10">
+                          <span className="text-sm font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500
+                            bg-clip-text text-transparent
+                            group-hover/item:from-violet-400 group-hover/item:to-fuchsia-400
+                            transition-all duration-300">
+                            {t("Metamorph")}
+                          </span>
+                          <span className="text-xs text-violet-500/60 group-hover/item:text-violet-400/80 
+                            transition-colors">
+                            Transform your assets
+                          </span>
+                        </div>
+                      </Link>
+                    </DropdownItem>
+
+                    <DropdownItem key={"cns"} className="group/item">
+                      <Link 
+                        className="w-full flex items-center gap-3 relative p-2" 
+                        onPress={() => setIsMenuOpen(false)} 
+                        color="foreground" 
+                        as={NavLink} 
+                        to={"/cns"}
+                      >
+                        {/* Hover background effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/[0.03] via-fuchsia-500/[0.05] to-violet-500/[0.03]
+                          transition-opacity duration-300" />
+
+                        {/* Hover border glow */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20
+                          blur-xl transition-opacity duration-300" />
+
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-transparent via-white/5 to-transparent
+                          translate-x-[-100%] group-hover/item:translate-x-[100%]
+                          transition-all duration-1000 ease-in-out" />
+
+                        {/* Icon container */}
+                        <div className="relative w-10 h-10 rounded-xl 
+                          bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]
+                          group-hover/item:from-violet-500/[0.1] group-hover/item:to-fuchsia-500/[0.1]
+                          flex items-center justify-center
+                          overflow-hidden transition-all duration-300
+                          shadow-[0_0_0_1px_rgba(139,92,246,0.1)]
+                          group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 
+                            opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                          <Globe className="w-5 h-5 text-violet-500 group-hover/item:text-violet-400 
+                            transition-colors relative z-10" />
+                        </div>
+
+                        {/* Text content */}
+                        <div className="relative flex flex-col z-10">
+                          <span className="text-sm font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500
+                            bg-clip-text text-transparent
+                            group-hover/item:from-violet-400 group-hover/item:to-fuchsia-400
+                            transition-all duration-300">
+                            {t("Domains")}
+                          </span>
+                          <span className="text-xs text-violet-500/60 group-hover/item:text-violet-400/80 
+                            transition-colors">
+                            Manage your domains
+                          </span>
+                        </div>
+                      </Link>
+                    </DropdownItem>
+
+                    <DropdownItem key={"earn"} className="group/item">
+                      <Link 
+                        className="w-full flex items-center gap-3 relative p-2" 
+                        onPress={() => setIsMenuOpen(false)} 
+                        color="foreground" 
+                        as={NavLink} 
+                        to={"/earn"}
+                      >
+                        {/* Hover background effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/[0.03] via-fuchsia-500/[0.05] to-violet-500/[0.03]
+                          transition-opacity duration-300" />
+
+                        {/* Hover border glow */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20
+                          blur-xl transition-opacity duration-300" />
+
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-transparent via-white/5 to-transparent
+                          translate-x-[-100%] group-hover/item:translate-x-[100%]
+                          transition-all duration-1000 ease-in-out" />
+
+                        {/* Icon container */}
+                        <div className="relative w-10 h-10 rounded-xl 
+                          bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]
+                          group-hover/item:from-violet-500/[0.1] group-hover/item:to-fuchsia-500/[0.1]
+                          flex items-center justify-center
+                          overflow-hidden transition-all duration-300
+                          shadow-[0_0_0_1px_rgba(139,92,246,0.1)]
+                          group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 
+                            opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                          <PiggyBank className="w-5 h-5 text-violet-500 group-hover/item:text-violet-400 
+                            transition-colors relative z-10" />
+                        </div>
+
+                        {/* Text content */}
+                        <div className="relative flex flex-col z-10">
+                          <span className="text-sm font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500
+                            bg-clip-text text-transparent
+                            group-hover/item:from-violet-400 group-hover/item:to-fuchsia-400
+                            transition-all duration-300">
+                            {t("Earn")}
+                          </span>
+                          <span className="text-xs text-violet-500/60 group-hover/item:text-violet-400/80 
+                            transition-colors">
+                            Stake and earn rewards
+                          </span>
+                        </div>
+                      </Link>
+                    </DropdownItem>
+
+                    <DropdownItem key={"launchpad"} className="group/item">
+                      <Link 
+                        className="w-full flex items-center gap-3 relative p-2" 
+                        onPress={() => setIsMenuOpen(false)} 
+                        color="foreground" 
+                        as={NavLink} 
+                        to={"/launchpad"}
+                      >
+                        {/* Hover background effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/[0.03] via-fuchsia-500/[0.05] to-violet-500/[0.03]
+                          transition-opacity duration-300" />
+
+                        {/* Hover border glow */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20
+                          blur-xl transition-opacity duration-300" />
+
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-transparent via-white/5 to-transparent
+                          translate-x-[-100%] group-hover/item:translate-x-[100%]
+                          transition-all duration-1000 ease-in-out" />
+
+                        {/* Icon container */}
+                        <div className="relative w-10 h-10 rounded-xl 
+                          bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]
+                          group-hover/item:from-violet-500/[0.1] group-hover/item:to-fuchsia-500/[0.1]
+                          flex items-center justify-center
+                          overflow-hidden transition-all duration-300
+                          shadow-[0_0_0_1px_rgba(139,92,246,0.1)]
+                          group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 
+                            opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                          <Rocket className="w-5 h-5 text-violet-500 group-hover/item:text-violet-400 
+                            transition-colors relative z-10" />
+                        </div>
+
+                        {/* Text content */}
+                        <div className="relative flex flex-col z-10">
+                          <span className="text-sm font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500
+                            bg-clip-text text-transparent
+                            group-hover/item:from-violet-400 group-hover/item:to-fuchsia-400
+                            transition-all duration-300">
+                            {t("Launchpad")}
+                          </span>
+                          <span className="text-xs text-violet-500/60 group-hover/item:text-violet-400/80 
+                            transition-colors">
+                            Discover new projects
+                          </span>
+                        </div>
+                      </Link>
+                    </DropdownItem>
+
+                    <DropdownItem key={"vesting"} className="group/item">
+                      <Link 
+                        className="w-full flex items-center gap-3 relative p-2" 
+                        onPress={() => setIsMenuOpen(false)} 
+                        color="foreground" 
+                        as={NavLink} 
+                        to={"/vesting"}
+                      >
+                        {/* Hover background effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/[0.03] via-fuchsia-500/[0.05] to-violet-500/[0.03]
+                          transition-opacity duration-300" />
+
+                        {/* Hover border glow */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20
+                          blur-xl transition-opacity duration-300" />
+
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-transparent via-white/5 to-transparent
+                          translate-x-[-100%] group-hover/item:translate-x-[100%]
+                          transition-all duration-1000 ease-in-out" />
+
+                        {/* Icon container */}
+                        <div className="relative w-10 h-10 rounded-xl 
+                          bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]
+                          group-hover/item:from-violet-500/[0.1] group-hover/item:to-fuchsia-500/[0.1]
+                          flex items-center justify-center
+                          overflow-hidden transition-all duration-300
+                          shadow-[0_0_0_1px_rgba(139,92,246,0.1)]
+                          group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 
+                            opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                          <Clock className="w-5 h-5 text-violet-500 group-hover/item:text-violet-400 
+                            transition-colors relative z-10" />
+                        </div>
+
+                        {/* Text content */}
+                        <div className="relative flex flex-col z-10">
+                          <span className="text-sm font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500
+                            bg-clip-text text-transparent
+                            group-hover/item:from-violet-400 group-hover/item:to-fuchsia-400
+                            transition-all duration-300">
+                            {t("Vesting")}
+                          </span>
+                          <span className="text-xs text-violet-500/60 group-hover/item:text-violet-400/80 
+                            transition-colors">
+                            Token vesting schedule
+                          </span>
+                        </div>
+                      </Link>
+                    </DropdownItem>
                   </>
-                  :<></>
-                }
-     
-                
+                    : <></>
+                  }
+
+
 
                 </DropdownMenu>
               </Dropdown>
 
 
               <NavbarBrand>
-                <Link href='/'>
-                  <Image className='cursor' onClick={() => {
-
-                  }} width={72} height={72} src={ICON_LOGO} />
+                <Link href='/' className="group">
+                  <div className="relative">
+                    <div className="absolute -inset-2 bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20 
+                      rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <Image
+                      className='cursor relative transform group-hover:scale-105 transition-transform duration-300'
+                      width={72}
+                      height={72}
+                      src={ICON_LOGO}
+                    />
+                  </div>
                 </Link>
-                <p className="hidden font-bold text-inherit">KEWL</p>
-
               </NavbarBrand>
               <NavbarContent>
-                <NetworkHeader/>
+                <NetworkHeader />
               </NavbarContent>
 
 
@@ -342,28 +806,50 @@ const App = () => {
 
                     <Dropdown
                       showArrow
-
                       radius="sm"
                       classNames={{
-                        base: "before:bg-default-200", // change arrow background
-                        content: "py-1 px- border border-default-200 bg-gradient-to-br from-white to-default-200 dark:from-default-50 dark:to-black",
+                        base: "before:bg-gradient-to-r before:from-violet-500/20 before:to-fuchsia-500/20",
+                        content: [
+                          "py-2 px-1",
+                          "border border-violet-500/20",
+                          "bg-white/90 dark:bg-black/90",
+                          "backdrop-blur-xl",
+                          "shadow-[0_0_25px_rgba(139,92,246,0.1)]",
+                          "dark:shadow-[0_0_25px_rgba(139,92,246,0.05)]"
+                        ].join(" ")
                       }}
                     >
                       <DropdownTrigger>
-                        <Button variant='flat' radius={"full"} className='px-2'>
-                          <Account />
+                        <Button
+                          onPress={async () => {
+                            await handleConnect();
+                          }}
+                          radius="full"
+                          size="lg"
+                          className="bg-violet-500/10 backdrop-blur-xl
+                         border border-violet-500/30
+                         text-violet-500 hover:text-violet-400
+                         rounded-full
+                         shadow-[0_0_15px_rgba(139,92,246,0.3)]
+                         hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]
+                         transition-all duration-500
+                         group relative overflow-hidden"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/10 to-violet-500/0
+                             translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                          <span className="relative flex flex-col justify-center items-center gap-2">
+                            <Account />
+                          </span>
                         </Button>
                       </DropdownTrigger>
                       <DropdownMenu
                         disabledKeys={["profile"]}
                         className="p-3"
                         variant='faded'
-
                       >
                         <DropdownSection aria-label="Profile & Actions">
                           <DropdownItem
                             isReadOnly
-
                             key="profile"
                             className="gap-2 pb-4 opacity-100 focus-nonee outline-none"
                           >
@@ -380,18 +866,14 @@ const App = () => {
                             to="/account" key="dashboard">
                             <p className="font-semibold">Portfolio</p>
                           </DropdownItem>
-
-
                         </DropdownSection>
 
                         <DropdownSection title={"Network"} aria-label="Preferences" showDivider>
                           <DropdownItem variant='light'
-
                             key="connector"
                             className="cursor-default hover:none">
                             <DropdownNetwork />
                           </DropdownItem>
-
                         </DropdownSection>
 
                         <DropdownSection aria-label="Preferences" showDivider>
@@ -416,14 +898,14 @@ const App = () => {
                     </Dropdown>
 
                   </> : <>
-                
-                     <Button
-                     onPress={async () => {
-                      await handleConnect();
-                    }}
-                            radius="full"
-                                size="lg"
-                                className="bg-violet-500/10 backdrop-blur-xl
+
+                    <Button
+                      onPress={async () => {
+                        await handleConnect();
+                      }}
+                      radius="full"
+                      size="lg"
+                      className="bg-violet-500/10 backdrop-blur-xl
                          border border-violet-500/30
                          text-violet-500 hover:text-violet-400
                          rounded-full
@@ -431,14 +913,14 @@ const App = () => {
                          hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]
                          transition-all duration-500
                          group relative overflow-hidden"
-                            >
-                                <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/10 to-violet-500/0
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/10 to-violet-500/0
                              translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                                <span className="relative flex items-center gap-2">
-                                    <WalletIcon className="w-5 h-5" />
-                                    Connect
-                                </span>
-                            </Button>
+                      <span className="relative flex items-center gap-2">
+                        <WalletIcon className="w-5 h-5" />
+                        Connect
+                      </span>
+                    </Button>
                   </>
                 }
               </NavbarContent>
@@ -464,89 +946,89 @@ const App = () => {
 
 
 
-        <section className=" absolute left-0 top-0 z-[0] w-screen h-screen  w-full rounded-lg min-h-[90vh] py-32 overflow-hidden">
-                {/* Alien Tech Background */}
-                <div className="absolute inset-0">
-                    {/* Base Layer */}
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] 
+          <section className=" absolute left-0 top-0 z-[0] w-screen h-screen  w-full rounded-lg min-h-[90vh] py-32 overflow-hidden">
+            {/* Alien Tech Background */}
+            <div className="absolute inset-0">
+              {/* Base Layer */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] 
                         from-violet-500/[0.12] via-violet-500/[0.08] to-transparent
                         dark:from-violet-900/20 dark:via-black dark:to-black" />
 
-                    {/* Tech Grid */}
-                    <div className="absolute inset-0 bg-[url('/alien-grid.svg')] bg-repeat opacity-[0.07]
+              {/* Tech Grid */}
+              <div className="absolute inset-0 bg-[url('/alien-grid.svg')] bg-repeat opacity-[0.07]
                         dark:opacity-[0.05] animate-pulse-slow" />
 
-                    {/* Light Theme Specific Effects */}
-                    <div className="absolute inset-0 dark:hidden">
-                        <div className="absolute inset-0 backdrop-blur-3xl opacity-30" />
-                        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-white/80" />
-                    </div>
+              {/* Light Theme Specific Effects */}
+              <div className="absolute inset-0 dark:hidden">
+                <div className="absolute inset-0 backdrop-blur-3xl opacity-30" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-white/80" />
+              </div>
 
-                    {/* Energy Lines */}
-                    <div className="absolute inset-0">
-                        {[...Array(8)].map((_, i) => (
-                            <div key={i}
-                                className="absolute h-[1px] w-full
+              {/* Energy Lines */}
+              <div className="absolute inset-0">
+                {[...Array(8)].map((_, i) => (
+                  <div key={i}
+                    className="absolute h-[1px] w-full
                             bg-gradient-to-r from-transparent via-violet-500/40 to-transparent
                             animate-scan-line"
-                                style={{
-                                    top: `${i * 12.5}%`,
-                                    animationDelay: `${i * 0.5}s`,
-                                    opacity: 0.3
-                                }} />
-                        ))}
-                    </div>
+                    style={{
+                      top: `${i * 12.5}%`,
+                      animationDelay: `${i * 0.5}s`,
+                      opacity: 0.3
+                    }} />
+                ))}
+              </div>
 
-                    {/* Alien Tech Circles */}
-                    <div className="absolute inset-0">
-                        {[...Array(5)].map((_, i) => (
-                            <div key={i}
-                                className="absolute w-[500px] h-[500px] rounded-full
+              {/* Alien Tech Circles */}
+              <div className="absolute inset-0">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i}
+                    className="absolute w-[500px] h-[500px] rounded-full
                             border border-violet-500/20
                             animate-tech-pulse"
-                                style={{
-                                    top: `${Math.random() * 100}%`,
-                                    left: `${Math.random() * 100}%`,
-                                    transform: 'translate(-50%, -50%)',
-                                    animationDelay: `${i * 1}s`
-                                }} />
-                        ))}
-                    </div>
+                    style={{
+                      top: `${Math.random() * 100}%`,
+                      left: `${Math.random() * 100}%`,
+                      transform: 'translate(-50%, -50%)',
+                      animationDelay: `${i * 1}s`
+                    }} />
+                ))}
+              </div>
 
-                    {/* Floating Particles */}
-                    <div className="absolute inset-0">
-                        {[...Array(30)].map((_, i) => (
-                            <div key={i}
-                                className="absolute w-1 h-1 bg-violet-500/40
+              {/* Floating Particles */}
+              <div className="absolute inset-0">
+                {[...Array(30)].map((_, i) => (
+                  <div key={i}
+                    className="absolute w-1 h-1 bg-violet-500/40
                             animate-float-particle"
-                                style={{
-                                    top: `${Math.random() * 100}%`,
-                                    left: `${Math.random() * 100}%`,
-                                    animationDuration: `${3 + Math.random() * 5}s`,
-                                    animationDelay: `${Math.random() * 2}s`
-                                }} />
-                        ))}
-                    </div>
+                    style={{
+                      top: `${Math.random() * 100}%`,
+                      left: `${Math.random() * 100}%`,
+                      animationDuration: `${3 + Math.random() * 5}s`,
+                      animationDelay: `${Math.random() * 2}s`
+                    }} />
+                ))}
+              </div>
 
-                    {/* Glowing Orbs */}
-                    <div className="absolute inset-0 overflow-hidden">
-                        <div className="absolute top-1/4 -right-20 w-80 h-80
+              {/* Glowing Orbs */}
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-1/4 -right-20 w-80 h-80
                           rounded-full bg-violet-500/10 blur-3xl
                           animate-pulse-slow mix-blend-screen" />
-                        <div className="absolute bottom-1/4 -left-20 w-80 h-80
+                <div className="absolute bottom-1/4 -left-20 w-80 h-80
                           rounded-full bg-blue-500/10 blur-3xl
                           animate-pulse-slow animation-delay-1000 mix-blend-screen" />
-                    </div>
-                </div>
+              </div>
+            </div>
 
-          
-            </section>
+
+          </section>
 
           <div className="hidden absolute left-0 top-0 z-[0] w-screen h-screen  flex flex-col gap-2 items-center justify-center">
             <div className="w-full ">
               <Cobe text="KEWL" description="EXCHANGE" />
             </div>
-            <LandingBG/>
+            <LandingBG />
           </div>
 
           <Routes>

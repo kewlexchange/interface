@@ -83,55 +83,117 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
         <>
             <div className={"w-full swap"}>
                 <div className={"min-w-xl max-w-xl w-full sm:w-full mx-auto flex flex-col gap-5"}>
-                    <Card fullWidth   shadow="none"  className='bg-transparent flex gap-2 flex-col w-full'>
+                    <Card fullWidth shadow="none" className='bg-transparent flex gap-2 flex-col w-full'>
                         <CardBody>
                             <div className="w-full max-w-full">
-                                <Tabs radius="full"    fullWidth classNames={{
-                                    tabContent:'h-full',
-                                }} variant="bordered" color={"danger"} aria-label="Swap Tabs">
-
-
-                                 <Tab key={"trade"} title={
-                                        <div className="w-full flex flex-row items-center justify-center gap-2">
-                                            <Radar />                                        
-                                        <span className="text-xs">Fushion</span>
-                                    </div>  
-                                    }>
+                                <Tabs 
+                                    disableAnimation
+                                    radius="lg" 
+                                    fullWidth 
+                                    classNames={{
+                                        base: "w-full",
+                                        tabList: [
+                                            "relative",
+                                            "bg-white/[0.01] dark:bg-black/[0.01]",
+                                            "backdrop-blur-xl",
+                                            "border border-violet-500/10",
+                                            "p-1",
+                                            "rounded-2xl",
+                                            "flex",
+                                            "gap-1"
+                                        ].join(" "),
+                                        cursor: "hidden",
+                                        tab: [
+                                            "flex-1",
+                                            "h-9",
+                                            "px-4",
+                                            "rounded-xl",
+                                            "flex items-center justify-center",
+                                            "gap-2",
+                                            "text-xs font-medium",
+                                            "text-violet-600/50 dark:text-violet-400/50",
+                                            "group",
+                                            "relative",
+                                            "overflow-hidden",
+                                            "transition-all duration-200",
+                                            "data-[selected=true]:bg-violet-500/[0.02] dark:data-[selected=true]:bg-violet-400/[0.02]",
+                                            "data-[selected=true]:backdrop-blur-xl",
+                                            "data-[selected=true]:text-violet-500 dark:data-[selected=true]:text-violet-400",
+                                            "before:absolute",
+                                            "before:inset-0",
+                                            "before:rounded-xl",
+                                            "before:opacity-0",
+                                            "before:pointer-events-none",
+                                            "before:z-[-1]",
+                                            "data-[selected=true]:before:opacity-100",
+                                            "before:bg-gradient-to-r",
+                                            "before:from-violet-500/0",
+                                            "before:via-violet-500/[0.07]",
+                                            "before:to-violet-500/0",
+                                            "before:transition-opacity",
+                                            "data-[selected=true]:before:animate-shimmer",
+                                            "before:bg-[length:200%_100%]",
+                                            "hover:bg-violet-500/[0.01] dark:hover:bg-violet-400/[0.01]",
+                                            "hover:text-violet-500/70"
+                                        ].join(" "),
+                                        tabContent: "relative z-10",
+                                        panel: "pt-4"
+                                    }}
+                                    aria-label="Swap Tabs"
+                                >
+                                    <Tab 
+                                        key={"trade"} 
+                                        title={
+                                            <div className="flex items-center gap-2">
+                                                <div className="p-1.5 rounded-lg">
+                                                    <Radar className="w-4 h-4" />
+                                                </div>
+                                                <span>Fusion</span>
+                                            </div>
+                                        }
+                                    >
                                         <TRADE_TAB />
-                                </Tab>{/*
-                                    
-                                     <Tab key={"arbitrage"} title={"Arbitrage"}>
-                                    <ARBITRAGE_TAB/>
-                                </Tab>  */}
-                                 
-                                    <Tab key="swap" title={
-                                        <div className="w-full flex flex-row items-center justify-center gap-2">
+                                    </Tab>
 
-                                            <ReplaceAll />
-                                          <span className="text-xs">Swap</span>
-                                      </div>
-                                    }>
+                                    <Tab 
+                                        key="swap"
+                                        title={
+                                            <div className="flex items-center gap-2">
+                                                <div className="p-1.5 rounded-lg">
+                                                    <ReplaceAll className="w-4 h-4" />
+                                                </div>
+                                                <span>Swap</span>
+                                            </div>
+                                        }
+                                    >
                                         <SWAP_TAB />
                                     </Tab>
 
-                                    <Tab key="pools" title=
-                                    {
-                                        <div className="w-full flex flex-row items-center justify-center gap-2">
-                                            <span translate="no" className="material-symbols-outlined">waves</span>
-                                            <span className="text-xs">Pools</span>
-                                        </div>
-                                    }>
+                                    <Tab 
+                                        key="pools"
+                                        title={
+                                            <div className="flex items-center gap-2">
+                                                <div className="p-1.5 rounded-lg">
+                                                    <span translate="no" className="material-symbols-outlined text-[18px]">waves</span>
+                                                </div>
+                                                <span>Pools</span>
+                                            </div>
+                                        }
+                                    >
                                         <POOL_TAB />
                                     </Tab>
 
- 
-                                   
-                                    <Tab key="settings"  title={
-                                        <div className="w-full flex flex-row items-center justify-center gap-2">
-                                            <Settings />
-                                            <span className="text-xs">Config</span>
-                                        </div>
-                                    }>
+                                    <Tab 
+                                        key="settings"
+                                        title={
+                                            <div className="flex items-center gap-2">
+                                                <div className="p-1.5 rounded-lg">
+                                                    <Settings className="w-4 h-4" />
+                                                </div>
+                                                <span>Config</span>
+                                            </div>
+                                        }
+                                    >
                                         <SETTINGS_TAB />
                                     </Tab>
                                 </Tabs>
@@ -150,3 +212,18 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
 
 
 export default SwapPage;
+
+<style jsx global>{`
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2.5s infinite linear;
+  }
+`}</style>

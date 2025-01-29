@@ -13,7 +13,7 @@ import { debounce, getNativeCurrencyByChainId, parseFloatWithDefault } from '../
 import UniwalletModal from '../../Modal/UniwalletModal';
 import { Badge, Accordion, AccordionItem, Avatar, Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Image, Input, ScrollShadow, Switch, Tooltip } from '@nextui-org/react';
 import { formatEther, formatUnits, parseEther, parseUnits } from '@ethersproject/units';
-import { ChevronsRight, CirclePercent, GitCompareArrows, Hand, ScanEye, ScanSearch } from 'lucide-react';
+import { ChevronsRight, ChevronUp, ChevronDown, CirclePercent, GitCompareArrows, Hand, ScanEye, ScanSearch, Wallet2 } from 'lucide-react';
 import { PairInfo, Router, TCustomPair, TradeItemProps } from '../../../interfaces/tokenId';
 import { useToken, useTokenContext } from '@/contexts/tokenListContext';
 
@@ -169,13 +169,10 @@ const _TRADE_TAB = () => {
 
 
   const TradeContainer = () => {
-
-
     const [tradingPairs, setTradingPairs] = useState<TCustomPair[]>([])
-
+    const [expandedPair, setExpandedPair] = useState<number | null>(null)
 
     const TradeItem: React.FC<TradeItemProps> = ({ pair }) => {
-      const [expanded, setExpanded] = useState<boolean>(false)
       const handleSwap = async () => {
 
         if (!baseAsset) {
@@ -243,82 +240,216 @@ const _TRADE_TAB = () => {
 
       }
 
-      return (<div className=" group  flex flex-col items-center justify-center">
+      return (
+        <div className="group/option relative">
+          {/* Ana glow efekti */}
+          <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-500/5 via-fuchsia-500/5 to-violet-500/5 rounded-2xl blur-sm group-hover/option:blur-md transition-all duration-300" />
+          
+          {/* Ana container */}
+          <div className="relative rounded-2xl bg-white/50 dark:bg-black/40 backdrop-blur-2xl border border-violet-500/10 dark:border-violet-400/10 
+            hover:border-violet-500/20 dark:hover:border-violet-400/20 
+            transition-all duration-300 overflow-hidden">
+            
+            {/* Hover gradient animasyonu */}
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-fuchsia-500/[0.03] to-violet-500/0 
+              opacity-0 group-hover/option:opacity-100
+              translate-x-[-100%] group-hover/option:translate-x-[100%]
+              transition-all duration-1000 ease-in-out" />
 
-        <div className={(expanded ? "border-b-0" : "") + " w-full cursor-pointer  bg-default/70 backdrop-blur-lg group-hover:bg-default/50 border border-1 border-default  rounded-full flex items-center justify-center p-2"}>
-          <div className="w-full flex flex-row items-center justify-center gap-2">
-            <div className="w-full flex flex-row gap-2 items-center justify-start">
-              <Button onPress={() => {
-                setExpanded(!expanded)
-              }} color="default"
-                className="border border-1 border-default/30 hover:border-default"
-                variant="light" radius="full" size="lg" isIconOnly>
-                {expanded ? <ScanSearch /> : <ScanEye />}
-              </Button>
-              <Image src={pair.exchangeInfo.logo} className="min-w-10 min-h-10 w-10 h-10 border border-1 border-default p-1 rounded-full" />
-              <div className="flex flex-col items-center justify-start">
-                <div className="w-full flex flex-col items-start justify-center">
-                  <span className="text-sm">{pair.exchangeInfo.dex}</span>
-                  <Tooltip  color='danger' content={`Price Impact : ${pair.trade.priceImpact.toFixed(2)}%`}>
-                  <span className="px-2 text-xs rounded-lg bg-danger-500 text-white">{pair.trade.priceImpact.toFixed(2)}%</span>
-                  </Tooltip>
+            {/* Ana içerik */}
+            <div className="relative p-4">
+              {/* Main content */}
+              <div className="flex items-center justify-between gap-3">
+                {/* Left side - Exchange info */}
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="relative shrink-0">
+                    <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 rounded-full blur-sm animate-pulse-slow" />
+                    <Image 
+                      src={pair.exchangeInfo.logo} 
+                      className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-violet-500/20 p-1.5" 
+                    />
+                  </div>
+                  
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-sm sm:text-base font-medium text-violet-900 dark:text-violet-100 truncate">
+                        {pair.exchangeInfo.dex}
+                      </span>
+                      <div className="px-2 py-0.5 text-xs rounded-full bg-violet-500/10 border border-violet-500/20 shrink-0">
+                        <span className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-transparent bg-clip-text">
+                          {pair.trade.priceImpact.toFixed(2)}% Impact
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70 truncate">
+                      1 {baseAsset?.symbol} = {pair.trade.executionPrice.toSignificant()} {quoteAsset?.symbol}
+                    </div>
+                  </div>
                 </div>
 
+                {/* Right side - Amount and buttons */}
+                <div className="flex items-center gap-3 shrink-0">
+                  <div className="text-right">
+                    <div className="text-base sm:text-lg font-semibold text-violet-900 dark:text-violet-100">
+                      {pair.outputAmount}
+                    </div>
+                    <div className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                      {quoteAsset?.symbol}
+                    </div>
+                  </div>
 
-              </div>
-            </div>
-            <div className="w-full flex flex-row gap-2 items-center justify-end">
-              <div className="w-full  flex flex-col sm:flex-row items-center justify-end gap-2   rounded-lg p-2">
-                <span className="sm:text-sm text-xs ">{pair.outputAmount}</span>
-                <span className="sm:text-xs text-[8px]">{quoteAsset?.symbol}</span>
-              </div>
-              <Button onPress={() => {
-                handleSwap()
-              }} color="danger" variant="light" radius="full" size="lg" isIconOnly>
-                <ChevronsRight />
-              </Button>
-            </div>
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    {/* Buttons */}
+                    <Button
+                      className={[
+                        "h-8 w-8 sm:h-9 sm:w-9",
+                        "bg-violet-500/10",
+                        "hover:bg-violet-500/20",
+                        "active:scale-95",
+                        "transition-all duration-200",
+                        "group/btn",
+                        "rounded-xl",
+                        "relative overflow-hidden"
+                      ].join(" ")}
+                      variant="flat"
+                      isIconOnly
+                      onPress={() => setExpandedPair(expandedPair === pair.index ? null : pair.index)}
+                    >
+                      {expandedPair === pair.index ? 
+                        <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-violet-600 dark:text-violet-300" /> :
+                        <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-violet-600 dark:text-violet-300" />
+                      }
+                    </Button>
 
+                    <Button
+                      className={[
+                        "h-8 w-8 sm:h-9 sm:w-9",
+                        "bg-violet-500/10",
+                        "hover:bg-violet-500/20",
+                        "active:scale-95",
+                        "transition-all duration-200",
+                        "group/btn",
+                        "rounded-xl",
+                        "relative overflow-hidden"
+                      ].join(" ")}
+                      variant="flat"
+                      isIconOnly
+                      onPress={() => handleSwap(pair)}
+                    >
+                      <ChevronsRight className="w-4 h-4 sm:w-5 sm:h-5 text-violet-600 dark:text-violet-300" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Expanded content - Mobil için optimize edilmiş */}
+              {expandedPair === pair.index && (
+                <div className="overflow-hidden">
+                  <div className="animate-slideDown">
+                    <div className="mt-3 pt-3 border-t border-violet-500/10 dark:border-violet-400/10">
+                      <div className="grid grid-cols-1 gap-4">
+                        {/* Price details */}
+                        <div className="space-y-2 animate-fadeIn" style={{ animationDelay: '0.1s' }}>
+                          <span className="text-xs sm:text-sm font-medium text-violet-600 dark:text-violet-400">
+                            Price Details
+                          </span>
+                          <div className="space-y-2 bg-violet-500/[0.02] dark:bg-violet-400/[0.02] rounded-xl p-2.5 
+                            animate-slideInFromRight" style={{ animationDelay: '0.2s' }}>
+                            {/* Price Impact */}
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                                Price Impact
+                              </span>
+                              <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                {pair.trade.priceImpact.toFixed(2)}%
+                              </span>
+                            </div>
+
+                            {/* Base Price */}
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                                {baseAsset?.symbol} Price
+                              </span>
+                              <div className="flex items-center gap-2">
+                                <Image src={quoteAsset?.logoURI} className="w-4 h-4 rounded-full" alt={quoteAsset?.symbol} />
+                                <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                  {pair.trade.executionPrice.toSignificant()} {quoteAsset?.symbol}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Quote Price */}
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                                {quoteAsset?.symbol} Price
+                              </span>
+                              <div className="flex items-center gap-2">
+                                <Image src={baseAsset?.logoURI} className="w-4 h-4 rounded-full" alt={baseAsset?.symbol} />
+                                <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                  {pair.trade.executionPrice.invert().toSignificant()} {baseAsset?.symbol}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Liquidity Info */}
+                        <div className="space-y-2 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+                          <span className="text-xs sm:text-sm font-medium text-violet-600 dark:text-violet-400">
+                            Pool Liquidity
+                          </span>
+                          <div className="space-y-2 bg-violet-500/[0.02] dark:bg-violet-400/[0.02] rounded-xl p-2.5 
+                            animate-slideInFromRight" style={{ animationDelay: '0.4s' }}>
+                            {/* Base Asset Liquidity */}
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                                {baseAsset?.symbol} Liquidity
+                              </span>
+                              <div className="flex items-center gap-2">
+                                <Image src={baseAsset?.logoURI} className="w-4 h-4 rounded-full" alt={baseAsset?.symbol} />
+                                <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                  {pair.baseLiqudity} {baseAsset?.symbol}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Quote Asset Liquidity */}
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                                {quoteAsset?.symbol} Liquidity
+                              </span>
+                              <div className="flex items-center gap-2">
+                                <Image src={quoteAsset?.logoURI} className="w-4 h-4 rounded-full" alt={quoteAsset?.symbol} />
+                                <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                  {pair.quoteLiquidity} {quoteAsset?.symbol}
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Route Info */}
+                            <div className="flex items-center gap-2 mt-3 p-2 rounded-xl bg-violet-500/5 dark:bg-violet-400/5">
+                              <Image src={baseAsset?.logoURI} className="w-5 h-5 rounded-full" alt={baseAsset?.symbol} />
+                              <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                {baseAsset?.symbol}
+                              </span>
+                              <ChevronsRight className="w-4 h-4 text-violet-400" />
+                              <Image src={quoteAsset?.logoURI} className="w-5 h-5 rounded-full" alt={quoteAsset?.symbol} />
+                              <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                {quoteAsset?.symbol}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        {
-          expanded && <div className=" w-full bg-default/70 backdrop-blur-lg group-hover:bg-default/50  border-t-0 border border-1 border-default max-w-[90%] justify-center items-center rounded-b-lg text-sm  flex flex-col gap-2 p-2">
-
-            <div className="w-full flex flex-col gap-2 p-2">
-              <span className="text-sm">Price</span>
-              <div className="w-full grid grid-cols-2 items-center p-1">
-
-                <div className="w-full flex flex-row items-center justify-start gap-2 ">
-                  <img className="w-5 h-5" src={baseAsset?.logoURI} alt={baseAsset?.symbol} />
-                  <small className="text-sm">{pair.trade.executionPrice.invert().toSignificant()} {baseAsset?.symbol} per {quoteAsset?.symbol}</small>
-                </div>
-                <div className="flex flex-row items-center justify-start gap-2">
-                  <img className="w-5 h-5" src={quoteAsset?.logoURI} alt={quoteAsset?.symbol} />
-                  <small className=" text-sm">{pair.trade.executionPrice.toSignificant()}  {quoteAsset?.symbol} per {baseAsset?.symbol}</small>
-                </div>
-
-              </div>
-            </div>
-
-
-            <div className="w-full flex flex-col gap-2 p-2">
-              <span className="text-sm">Liquidity</span>
-              <div className="w-full grid grid-cols-2 items-center justify-center">
-                <div className="flex flex-row gap-2">
-                  <Image src={baseAsset?.logoURI} className="w-5 h-5 border border-1 border-default  rounded-full" />
-                  <span className="text-sm">{pair.baseLiqudity} {baseAsset?.symbol}</span>
-                </div>
-                <div className="flex flex-row gap-2">
-                  <Image src={quoteAsset?.logoURI} className="w-5 h-5 border border-1 border-default rounded-full" />
-                  <span className="text-sm">{pair.quoteLiquidity} {quoteAsset?.symbol} </span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        }
-
-      </div>)
+      );
     }
 
     useEffect(() => {
@@ -647,42 +778,326 @@ const _TRADE_TAB = () => {
 
     }
 
-    return (<ScrollShadow hideScrollBar className="max-h-[550px]">
-      <div
 
-        className="w-full flex flex-col gap-2">
+    const handleSwap = async (pair:any) => {
 
+      if (!baseAsset) {
+        return
+      }
+
+      if (!quoteAsset) {
+        return
+      }
+
+      if(!chainId){
+        return
+      }
+
+      if (!EXCHANGE) {
+        return
+      }
+
+
+      let WRAPPER = CHILIZWRAPPER[chainId].address
+      toggleLoading();
+
+      let DEPOSIT_AMOUNT = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals)
+      let IS_NATIVE = (baseAsset.address === ETHER_ADDRESS || baseAsset.address === ethers.constants.AddressZero)
+      let outputAmount = parseUnits(pair.outputAmount, quoteAsset?.decimals)
+
+      let INPUT_TOKEN = IS_NATIVE ? pair.pair.weth : baseAsset.address;
+      let swapParam = {
+        amountIn: DEPOSIT_AMOUNT,
+        amountOut:outputAmount,
+        weth9: pair.pair.weth,
+        wrapper: WRAPPER,
+        pair: pair.pair.pair,
+        input: INPUT_TOKEN
+      }
+      let overrides = {
+        value: IS_NATIVE ? DEPOSIT_AMOUNT : 0
+      }
+
+      if ((!IS_NATIVE) && (swapParam.input != ethers.constants.AddressZero)) {
+        const tokenContract = ERC20Contract(swapParam.input);
+
+        const allowance = await tokenContract.allowance(account, EXCHANGE.address);
+        if (allowance.lt(DEPOSIT_AMOUNT)) {
+          const approveTx = await tokenContract.approve(EXCHANGE.address, ethers.constants.MaxUint256)
+          await approveTx.wait();
+        }
+
+      }
+
+      
+
+      console.log("EXCHANGE",swapParam)
+
+      await EXCHANGE.swap(swapParam, overrides).then(async (tx) => {
+        await tx.wait();
+        const summary = `Swapping : ${tx.hash}`
+        setTransaction({ hash: tx.hash, summary: summary, error: null });
+        toggleTransactionSuccess();
+      }).catch((error: Error) => {
+        setTransaction({ hash: '', summary: '', error: error });
+        toggleError();
+      }).finally(async () => {
+        toggleLoading();
+      });
+
+      fetchTokens();
+
+
+    }
+
+    return (
+      <div className="w-full flex flex-col gap-3 max-h-[550px] overflow-y-auto scrollbar-hide">
         {tradingPairs.length > 0 && (
           <>
-            {tradingPairs.map((pair, index) => (
-              <TradeItem
-                key={`pair${index}`}
-                pair={pair}
-              />
-            ))}
-            <Button
-              radius="full"
-              onPress={handleSwapAll}
-              fullWidth
-              size="lg"
-              color="danger"
-            >
-              Swap All
-            </Button>
+            {/* Trade Options */}
+            <div className="space-y-3">
+              {tradingPairs.map((pair, index) => (
+                <div key={`pair${index}`} className="group/option relative">
+                  {/* Hover glow effect */}
+                  <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-500/5 via-fuchsia-500/5 to-violet-500/5 rounded-2xl opacity-0 group-hover/option:opacity-100 blur-md transition-opacity duration-300" />
+                  
+                  {/* Main container */}
+                  <div className="relative rounded-2xl bg-white/5 dark:bg-black/40 backdrop-blur-xl border border-violet-500/10 dark:border-violet-400/10 
+                    hover:border-violet-500/20 dark:hover:border-violet-400/20 overflow-hidden transition-all duration-300">
+                    
+                    {/* Shimmer effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent 
+                      translate-x-[-200%] group-hover/option:translate-x-[200%] transition-all duration-1000" />
+                    
+                    {/* Content */}
+                    <div className="relative p-3 sm:p-4">
+                      {/* Main content */}
+                      <div className="flex items-center justify-between gap-3">
+                        {/* Left side - Exchange info */}
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="relative shrink-0">
+                            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 rounded-full blur-sm animate-pulse-slow" />
+                            <Image 
+                              src={pair.exchangeInfo.logo} 
+                              className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-violet-500/20 p-1.5" 
+                            />
+                          </div>
+                          
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="text-sm sm:text-base font-medium text-violet-900 dark:text-violet-100 truncate">
+                                {pair.exchangeInfo.dex}
+                              </span>
+                              <div className="px-2 py-0.5 text-xs rounded-full bg-violet-500/10 border border-violet-500/20 shrink-0">
+                                <span className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-transparent bg-clip-text">
+                                  {pair.trade.priceImpact.toFixed(2)}% Impact
+                                </span>
+                              </div>
+                            </div>
+                            
+                            <div className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70 truncate">
+                              1 {baseAsset?.symbol} = {pair.trade.executionPrice.toSignificant()} {quoteAsset?.symbol}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Right side - Amount and buttons */}
+                        <div className="flex items-center gap-3 shrink-0">
+                          <div className="text-right">
+                            <div className="text-base sm:text-lg font-semibold text-violet-900 dark:text-violet-100">
+                              {pair.outputAmount}
+                            </div>
+                            <div className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                              {quoteAsset?.symbol}
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-1.5 sm:gap-2">
+                            {/* Buttons */}
+                            <Button
+                              className={[
+                                "h-8 w-8 sm:h-9 sm:w-9",
+                                "bg-violet-500/10",
+                                "hover:bg-violet-500/20",
+                                "active:scale-95",
+                                "transition-all duration-200",
+                                "group/btn",
+                                "rounded-xl",
+                                "relative overflow-hidden"
+                              ].join(" ")}
+                              variant="flat"
+                              isIconOnly
+                              onPress={() => setExpandedPair(expandedPair === index ? null : index)}
+                            >
+                              {expandedPair === index ? 
+                                <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-violet-600 dark:text-violet-300" /> :
+                                <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-violet-600 dark:text-violet-300" />
+                              }
+                            </Button>
+
+                            <Button
+                              className={[
+                                "h-8 w-8 sm:h-9 sm:w-9",
+                                "bg-violet-500/10",
+                                "hover:bg-violet-500/20",
+                                "active:scale-95",
+                                "transition-all duration-200",
+                                "group/btn",
+                                "rounded-xl",
+                                "relative overflow-hidden"
+                              ].join(" ")}
+                              variant="flat"
+                              isIconOnly
+                              onPress={() => handleSwap(pair)}
+                            >
+                              <ChevronsRight className="w-4 h-4 sm:w-5 sm:h-5 text-violet-600 dark:text-violet-300" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Expanded content - Mobil için optimize edilmiş */}
+                      {expandedPair === index && (
+                        <div className="overflow-hidden">
+                          <div className="animate-slideDown">
+                            <div className="mt-3 pt-3 border-t border-violet-500/10 dark:border-violet-400/10">
+                              <div className="grid grid-cols-1 gap-4">
+                                {/* Price details */}
+                                <div className="space-y-2 animate-fadeIn" style={{ animationDelay: '0.1s' }}>
+                                  <span className="text-xs sm:text-sm font-medium text-violet-600 dark:text-violet-400">
+                                    Price Details
+                                  </span>
+                                  <div className="space-y-2 bg-violet-500/[0.02] dark:bg-violet-400/[0.02] rounded-xl p-2.5 
+                                    animate-slideInFromRight" style={{ animationDelay: '0.2s' }}>
+                                    {/* Price Impact */}
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                                        Price Impact
+                                      </span>
+                                      <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                        {pair.trade.priceImpact.toFixed(2)}%
+                                      </span>
+                                    </div>
+
+                                    {/* Base Price */}
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                                        {baseAsset?.symbol} Price
+                                      </span>
+                                      <div className="flex items-center gap-2">
+                                        <Image src={quoteAsset?.logoURI} className="w-4 h-4 rounded-full" alt={quoteAsset?.symbol} />
+                                        <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                          {pair.trade.executionPrice.toSignificant()} {quoteAsset?.symbol}
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    {/* Quote Price */}
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                                        {quoteAsset?.symbol} Price
+                                      </span>
+                                      <div className="flex items-center gap-2">
+                                        <Image src={baseAsset?.logoURI} className="w-4 h-4 rounded-full" alt={baseAsset?.symbol} />
+                                        <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                          {pair.trade.executionPrice.invert().toSignificant()} {baseAsset?.symbol}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Liquidity Info */}
+                                <div className="space-y-2 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+                                  <span className="text-xs sm:text-sm font-medium text-violet-600 dark:text-violet-400">
+                                    Pool Liquidity
+                                  </span>
+                                  <div className="space-y-2 bg-violet-500/[0.02] dark:bg-violet-400/[0.02] rounded-xl p-2.5 
+                                    animate-slideInFromRight" style={{ animationDelay: '0.4s' }}>
+                                    {/* Base Asset Liquidity */}
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                                        {baseAsset?.symbol} Liquidity
+                                      </span>
+                                      <div className="flex items-center gap-2">
+                                        <Image src={baseAsset?.logoURI} className="w-4 h-4 rounded-full" alt={baseAsset?.symbol} />
+                                        <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                          {pair.baseLiqudity} {baseAsset?.symbol}
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    {/* Quote Asset Liquidity */}
+                                    <div className="flex items-center justify-between">
+                                      <span className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
+                                        {quoteAsset?.symbol} Liquidity
+                                      </span>
+                                      <div className="flex items-center gap-2">
+                                        <Image src={quoteAsset?.logoURI} className="w-4 h-4 rounded-full" alt={quoteAsset?.symbol} />
+                                        <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                          {pair.quoteLiquidity} {quoteAsset?.symbol}
+                                        </span>
+                                      </div>
+                                    </div>
+
+                                    {/* Route Info */}
+                                    <div className="flex items-center gap-2 mt-3 p-2 rounded-xl bg-violet-500/5 dark:bg-violet-400/5">
+                                      <Image src={baseAsset?.logoURI} className="w-5 h-5 rounded-full" alt={baseAsset?.symbol} />
+                                      <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                        {baseAsset?.symbol}
+                                      </span>
+                                      <ChevronsRight className="w-4 h-4 text-violet-400" />
+                                      <Image src={quoteAsset?.logoURI} className="w-5 h-5 rounded-full" alt={quoteAsset?.symbol} />
+                                      <span className="text-xs sm:text-sm font-medium text-violet-900 dark:text-violet-100">
+                                        {quoteAsset?.symbol}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Swap All Button */}
+            <div className="relative mt-4 group/swap">
+              {/* Button glow effect */}
+              <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-500 via-fuchsia-500 to-violet-500 rounded-2xl opacity-70 blur-md 
+                group-hover/swap:opacity-100 transition-opacity duration-300" />
+              
+              <Button
+                className={[
+                  "relative w-full h-12",
+                  "bg-gradient-to-r from-violet-500 to-fuchsia-500",
+                  "hover:opacity-95",
+                  "active:scale-[0.99]",
+                  "transition-all duration-200",
+                  "rounded-xl",
+                  "font-semibold",
+                  "text-white",
+                  "overflow-hidden"
+                ].join(" ")}
+                onPress={handleSwapAll}
+              >
+                {/* Button shimmer effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent 
+                  translate-x-[-100%] group-hover/swap:translate-x-[100%] transition-transform duration-1000" />
+                
+                <div className="relative flex items-center justify-center gap-2">
+                  <span className="text-lg">Swap All</span>
+                </div>
+              </Button>
+            </div>
           </>
         )}
-
-
-
-
-
-
       </div>
-
-
-
-
-    </ScrollShadow>)
+    );
   }
 
   const debouncedSetInputValue = useCallback(
@@ -712,176 +1127,230 @@ const _TRADE_TAB = () => {
 
 
 
-      <div className="flex flex-col gap-2 rounded-xl w-full">
-        <div className="w-full rounded-xl flex flex-col gap-2">
-          <div className='w-full flex flex-col gap-2'>
-            <div className="w-full">
-              <Input
-                onChange={(val) => {
-                  setInputValue(val.target.value, TradeType.EXACT_INPUT)
-                }}
-                value={baseInputValue}
-                label={`Input ${baseAsset ? baseAsset.symbol : ""}->${quoteAsset ? quoteAsset.symbol : ""}`}
-                endContent={
-                  <div className="flex flex-row gap-2 items-center justify-center">
-                    <Tooltip  color='danger' content='Select Base Asset'>
-
-                    <Button onPress={() => {
-                      setTokenSelector(prevState => ({
-                        ...prevState,
-                        showTokenSelector: true,
-                        side: TradeType.EXACT_INPUT
-                      }));
-                      toggleSelectToken()
-                    }} size="md" className="opacity-100" variant="faded" isIconOnly radius="full">
-                      {
-                        baseAsset ? <Avatar className="opacity-100" isBordered size="sm" src={baseAsset.logoURI} />: <Hand />
-                      }
-                      
-                    </Button>
-                    </Tooltip>
-                    <Tooltip  color='danger' content='Switch Assets'>
-
-                    <Button onPress={() => {
-                      handleSwapAssets()
-                    }} size="md" className="opacity-100" variant="faded" isIconOnly radius="full">
-                      <GitCompareArrows />
-                    </Button>
-                    </Tooltip>
-                    <Tooltip  color='danger' content='Select Quote Asset'>
-                    <Button onPress={() => {
-                      setTokenSelector(prevState => ({
-                        ...prevState,
-                        showTokenSelector: true,
-                        side: TradeType.EXACT_OUTPUT
-                      }));
-                      toggleSelectToken()
-                    }} size="md" variant="faded" isIconOnly radius="full">
-                      {quoteAsset ? <Avatar className="opacity-100" isBordered size="sm" src={quoteAsset.logoURI} />: <Hand />}
-
-                    </Button>
-                    </Tooltip>
-
+      <div className="flex flex-col gap-4 w-full">
+        {/* Main input container */}
+        <div className="w-full rounded-lg relative overflow-hidden group/container">
+          {/* Animated gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-violet-500/[0.02] to-transparent dark:from-violet-500/[0.05] dark:to-transparent backdrop-blur-2xl" />
+          <div className="absolute inset-0 border border-violet-500/[0.08] dark:border-violet-400/10 rounded-3xl" />
+          
+          <div className="relative p-3 sm:p-5 overflow-hidden">
+            {/* Input section */}
+            <div className="space-y-2 sm:space-y-2.5">
+              <div className="flex items-center justify-between px-1">
+                <span className="text-violet-500/70 dark:text-violet-400/70 text-sm font-medium tracking-wide">
+                  Input Amount
+                </span>
+                {baseAsset && (
+                  <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 dark:bg-violet-400/10 border border-violet-500/20 dark:border-violet-400/20">
+                    <Image src={baseAsset.logoURI} className="w-4 h-4" alt={baseAsset.symbol} />
+                    <span className="text-violet-600 dark:text-violet-300 text-sm font-medium">
+                      {baseAsset.symbol}
+                    </span>
                   </div>
-                }
-                fullWidth variant="faded"
-                radius="full"
-                className="w-full flex flex-col gap-2 items-center justify-center"
-                size={"lg"} type="text" />
-
-            </div>
-            <div className="w-full flex flex-col gap-2">
-              <div className="grid grid-cols-2">
-               <div className="w-full flex flex-row gap-2 items-center justify-start">
-               {
-                  baseAsset && <>
-                  <Image className="w-8 h-8" src={baseAsset ? baseAsset?.logoURI : DEFAULT_TOKEN_LOGO} />
-                  <span>{baseAsset && baseAsset.balance} {baseAsset?.symbol}</span></>
-                }
-                </div>
-
-               
-               
-                <div className="w-full flex flex-row items-center pt-2 justify-end gap-2">
-
-
-
-                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent  />} placement="top-right">
-
-                    <Button
-                      className="max-w-[40px] min-w-[40px] min-h-[40px] border border-1 border-default/30 hover:border-default"
-                      fullWidth
-                      size="sm"
-                      variant="flat"
-                      onPress={() => {
-                        setTradeInputPercent(25)
-                      }}
-                      radius="full"
-                    >
-                      25
-
-                    </Button>
-                  </Badge>
-
-
-                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent />} placement="top-right">
-
-                    <Button
-                      className="max-w-[40px] min-w-[40px] min-h-[40px] border border-1 border-default/30 hover:border-default"
-                      fullWidth
-                      size="sm"
-                      variant="flat"
-                      onPress={() => {
-                        setTradeInputPercent(50)
-                      }}
-                      radius="full"
-                    >
-                      50
-
-                    </Button>
-                  </Badge>
-
-
-                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent />} placement="top-right">
-
-                    <Button
-                      className="max-w-[40px] min-w-[40px] min-h-[40px] border border-1 border-default/30 hover:border-default"
-                      fullWidth
-                      size="sm"
-                      variant="flat"
-                      onPress={() => {
-                        setTradeInputPercent(75)
-
-                      }}
-                      radius="full"
-                    >
-                      75
-
-                    </Button>
-                  </Badge>
-
-
-                  <Badge isOneChar color="default" className="bg-default/60 border-1 border-default/30" content={<CirclePercent />} placement="top-right">
-
-                    <Button
-                      className="max-w-[40px] min-w-[40px] min-h-[40px] border border-1 border-default/30 hover:border-default"
-                      fullWidth
-                      size="sm"
-                      variant="flat"
-                      onPress={() => {
-                        setTradeInputPercent(100)
-
-                      }}
-                      radius="full"
-                    >
-                      100
-
-                    </Button>
-                  </Badge>
-
-                </div>
+                )}
               </div>
 
+              {/* Custom input container with glow effect */}
+              <div className="group/input relative">
+                {/* Animasyonlu glow border efekti */}
+                <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-violet-500/10 rounded-full blur-sm group-hover/input:blur-md group-focus-within/input:blur-md transition-all duration-300" />
+                
+                {/* Ana background */}
+                <div className="absolute inset-0 bg-violet-500/[0.02] dark:bg-violet-400/[0.02] rounded-full transition-all duration-300 
+                  group-focus-within/input:bg-violet-500/[0.05] dark:group-focus-within/input:bg-violet-400/[0.05]
+                  group-hover/input:bg-violet-500/[0.03] dark:group-hover/input:bg-violet-400/[0.03]" />
+                
+                {/* Animasyonlu border */}
+                <div className="absolute inset-0 rounded-full border border-violet-500/10 dark:border-violet-400/10
+                  group-hover/input:border-violet-500/20 dark:group-hover/input:border-violet-400/20
+                  group-focus-within/input:border-violet-500/30 dark:group-focus-within/input:border-violet-400/30
+                  transition-colors duration-300" />
+                
+                {/* Animasyonlu gradient overlay */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-500/0 via-fuchsia-500/[0.05] to-violet-500/0 
+                  opacity-0 group-hover/input:opacity-100 group-focus-within/input:opacity-100
+                  translate-x-[-100%] group-hover/input:translate-x-[100%] group-focus-within/input:translate-x-[100%]
+                  transition-all duration-1000 ease-in-out" />
+                
+                <div className="relative flex items-center p-1">
+                  <input
+                    type="text"
+                    value={baseInputValue}
+                    onChange={(e) => setInputValue(e.target.value, TradeType.EXACT_INPUT)}
+                    placeholder="0.00"
+                    className="w-full rounded-full bg-transparent text-2xl font-semibold px-3 py-2.5 text-violet-950 dark:text-violet-100 outline-none 
+                      placeholder:text-violet-400/20 dark:placeholder:text-violet-300/20
+                      relative z-10"
+                  />
+                  
+                  {/* Token selector buttons */}
+                  <div className="flex items-center gap-1.5 bg-violet-500/[0.03] dark:bg-violet-400/[0.03] rounded-full p-1 mr-1 relative z-10">
+                    <Tooltip content='Select Base Asset' placement="top" delay={0}>
+                      <Button 
+                        onPress={() => {
+                          setTokenSelector({
+                            showTokenSelector: true,
+                            side: TradeType.EXACT_INPUT
+                          });
+                          toggleSelectToken()
+                        }} 
+                        className={[
+                          "h-9 w-9",
+                          "bg-violet-500/[0.05] dark:bg-violet-400/[0.05]",
+                          "hover:bg-violet-500/10 dark:hover:bg-violet-400/10",
+                          "active:scale-95",
+                          "transition-all duration-200",
+                          "group/btn",
+                          "flex items-center justify-center",
+                          "overflow-hidden"
+                        ].join(" ")}
+                        variant="flat"
+                        isIconOnly 
+                        radius="full"
+                      >
+                        {baseAsset ? 
+                          <Avatar 
+                            className="w-7 h-7 group-hover/btn:scale-105 transition-transform"
+                            src={baseAsset.logoURI} 
+                            size="sm"
+                            radius="full"
+                          /> : 
+                          <Hand className="w-4 h-4 text-violet-500/70 dark:text-violet-400/70 group-hover/btn:text-violet-600 dark:group-hover/btn:text-violet-300" />
+                        }
+                      </Button>
+                    </Tooltip>
+
+                    <Button 
+                      onPress={handleSwapAssets} 
+                      className={[
+                        "h-9 w-9",
+                        "bg-violet-500/[0.05] dark:bg-violet-400/[0.05]",
+                        "hover:bg-violet-500/10 dark:hover:bg-violet-400/10",
+                        "active:scale-95",
+                        "transition-all duration-200",
+                        "group/btn",
+                        "flex items-center justify-center"
+                      ].join(" ")}
+                      variant="flat"
+                      isIconOnly 
+                      radius="full"
+                    >
+                      <GitCompareArrows className="w-4 h-4 text-violet-500/70 dark:text-violet-400/70 
+                        group-hover/btn:text-violet-600 dark:group-hover/btn:text-violet-300 
+                        group-hover/btn:rotate-180 transition-all duration-300" />
+                    </Button>
+
+                    <Tooltip content='Select Quote Asset' placement="top" delay={0}>
+                      <Button 
+                        onPress={() => {
+                          setTokenSelector({
+                            showTokenSelector: true,
+                            side: TradeType.EXACT_OUTPUT
+                          });
+                          toggleSelectToken()
+                        }}
+                        className={[
+                          "h-9 w-9",
+                          "bg-violet-500/[0.05] dark:bg-violet-400/[0.05]",
+                          "hover:bg-violet-500/10 dark:hover:bg-violet-400/10",
+                          "active:scale-95",
+                          "transition-all duration-200",
+                          "group/btn",
+                          "flex items-center justify-center",
+                          "overflow-hidden"
+                        ].join(" ")}
+                        variant="flat"
+                        isIconOnly 
+                        radius="full"
+                      >
+                        {quoteAsset ? 
+                          <Avatar 
+                            className="w-7 h-7 group-hover/btn:scale-105 transition-transform"
+                            src={quoteAsset.logoURI} 
+                            size="sm"
+                            radius="full"
+                          /> : 
+                          <Hand className="w-4 h-4 text-violet-500/70 dark:text-violet-400/70 group-hover/btn:text-violet-600 dark:group-hover/btn:text-violet-300" />
+                        }
+                      </Button>
+                    </Tooltip>
+                  </div>
+                </div>
+              </div>
             </div>
 
-          </div>
-          <div className='w-full'>
-            <TradeContainer />
+            {/* Balance and percentage buttons */}
+            <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+              {baseAsset && (
+                <div className="w-full sm:w-auto">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/5 dark:bg-violet-400/5 border border-violet-500/10 dark:border-violet-400/10">
+                    <Wallet2 className="w-4 h-4 text-violet-500/50 dark:text-violet-400/50" />
+                    <span className="text-sm text-violet-600/70 dark:text-violet-300/70">
+                      Balance: {baseAsset.balance} {baseAsset.symbol}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex items-center gap-1.5 w-full sm:w-auto justify-end">
+                {[25, 50, 75, 100].map((percent) => (
+                  <Button
+                    key={percent}
+                    className={[
+                      "h-8 min-w-[52px]",
+                      "bg-gradient-to-r from-violet-500/[0.03] to-fuchsia-500/[0.03]",
+                      "hover:from-violet-500/[0.08] hover:to-fuchsia-500/[0.08]",
+                      "active:scale-95",
+                      "transition-all duration-200",
+                      "group/btn",
+                      "relative overflow-hidden",
+                      "border border-violet-500/10 dark:border-violet-400/10",
+                      "hover:border-violet-500/20 dark:hover:border-violet-400/20",
+                      "backdrop-blur-sm"
+                    ].join(" ")}
+                    variant="flat"
+                    onPress={() => setTradeInputPercent(percent)}
+                    radius="full"
+                  >
+                    {/* Shimmer effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+                      opacity-0 group-hover/btn:opacity-100 translate-x-[-100%] group-hover/btn:translate-x-[100%] 
+                      transition-all duration-700" />
+                    
+                    {/* Glow effect */}
+                    <div className="absolute inset-0 rounded-full opacity-0 group-hover/btn:opacity-100 
+                      bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 blur-md transition-opacity" />
+                    
+                    {/* Content */}
+                    <div className="relative flex items-center justify-center gap-1">
+                      <span className="text-xs font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500 
+                        text-transparent bg-clip-text group-hover/btn:text-violet-100 dark:group-hover/btn:text-violet-100 
+                        transition-colors">
+                        {percent}%
+                      </span>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
-
-
-
-
-
-
+        <div className='w-full'>
+          <TradeContainer />
+        </div>
       </div>
+
+
+
+
+
+
 
     </>
   );
 }
 export const TRADE_TAB = memo(_TRADE_TAB)
-
 
 

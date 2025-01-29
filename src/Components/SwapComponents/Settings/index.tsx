@@ -1,19 +1,8 @@
 import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
-import { ETHER_ADDRESS, TradeType } from '../../../constants/misc';
-import { ethers } from 'ethers';
 import { useWeb3React } from '@web3-react/core';
-import JSBI from 'jsbi';
-import moment from 'moment';
-import { Route as ReactRoute, NavLink } from 'react-router-dom';
-import { isSupportedChain } from '../../../constants/chains';
-import { WETH9, Token, CurrencyAmount, Pair, Price, Trade, Currency, Percent, Route } from '../../../entities';
 import { useDiamondContract, useExchangeContract, useERC20Contract, usePAIRContract } from '../../../hooks/useContract';
 import useModal, { ModalNoProvider, ModalSelectToken, ModalConnect, ModalError, ModalLoading, ModalSuccessTransaction, ModalInfo } from '../../../hooks/useModals';
 import { useAppDispatch, useAppSelector } from '../../../state/hooks';
-import { useFetchAllTokenList } from '../../../state/user/hooks';
-import { getNativeCurrencyByChainId, parseFloatWithDefault } from '../../../utils';
-import { DoubleCurrencyIcon } from '../../DoubleCurrency';
-import UniwalletModal from '../../Modal/UniwalletModal';
 import { updateTax, updateUserDeadline, updateUserSlippageTolerance } from '../../../state/user/reducer';
 import { Button, ButtonGroup, Card, Input, Switch } from '@nextui-org/react';
 
@@ -22,16 +11,13 @@ import { Button, ButtonGroup, Card, Input, Switch } from '@nextui-org/react';
 const _SETTINGS_TAB = () => {
 
     const { connector, account, provider, chainId } = useWeb3React()
-    const IMONDIAMOND = useDiamondContract(chainId, true);
-    const EXCHANGE = useExchangeContract(chainId, true)
-    const ERC20Contract = useERC20Contract()
+
     const defaultAssets = useAppSelector((state) => state.user.tokenList && state.user.tokenList[chainId])
     const { state: isTransactionSuccess, toggle: toggleTransactionSuccess } = useModal();
     const { state: isShowLoading, toggle: toggleLoading } = useModal();
     const { state: isErrorShowing, toggle: toggleError } = useModal()
     const [transaction, setTransaction] = useState({ hash: '', summary: '', error: null })
-    const { state: isNoProvider, toggle: toggleNoProvider } = useModal()
-    const { state: isSelectToken, toggle: toggleSelectToken } = useModal()
+
     const dispatch = useAppDispatch()
 
 
@@ -129,113 +115,324 @@ const _SETTINGS_TAB = () => {
                 isShowing={isTransactionSuccess} />
 
 
-            <div className="w-full rounded-xl pb-0">
-                <div className="rounded-xl pb-0 flex gap-2 flex-col">
+            <div className="w-full rounded-2xl">
+                <div className="rounded-2xl flex gap-3 flex-col">
+                    <Card 
+                        shadow='none' 
+                        className="w-full bg-white/[0.02] dark:bg-black/[0.02]
+                                  border border-violet-500/10
+                                  backdrop-blur-xl
+                                  p-4 rounded-2xl
+                                  hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]
+                                  transition-all duration-300"
+                    >
+                        <div className="flex flex-col gap-2">
+                            <span className="text-violet-500 font-medium">Slippage Tolerance</span>
+                            <small className="text-violet-500/60">
+                                Your transaction will revert if the price changes unfavorably by more than this percentage.
+                            </small>
 
+                            <div className="flex flex-col gap-3 mt-2">
+                                <div className="grid grid-cols-4 gap-1.5">
+                                    {[
+                                        { value: 10, label: '0.1%' },
+                                        { value: 50, label: '0.5%' },
+                                        { value: 100, label: '1%' },
+                                        { value: 200, label: '2%' }
+                                    ].map((preset) => (
+                                        <Button 
+                                            key={preset.value}
+                                            onPress={() => {
+                                                setSlippageInput('')
+                                                setRawSlippage(preset.value)
+                                            }}
+                                            className={`
+                                                h-9 rounded-xl
+                                                relative overflow-hidden
+                                                group
+                                                transition-all duration-200
+                                                ${rawSlippage === preset.value 
+                                                    ? 'bg-violet-500/10 text-violet-500 border-violet-500/20' 
+                                                    : 'bg-white/[0.02] dark:bg-black/[0.02] border-violet-500/10 text-violet-500/60'}
+                                                border
+                                                backdrop-blur-xl
+                                                hover:bg-violet-500/[0.05]
+                                                hover:border-violet-500/20
+                                                hover:text-violet-500/80
+                                            `}
+                                        >
+                                            {/* Background Glow Effect */}
+                                            {rawSlippage === preset.value && (
+                                                <div className="absolute inset-0 bg-violet-500/5 blur-md" />
+                                            )}
+                                            
+                                            {/* Shimmer Effect */}
+                                            <div className={`
+                                                absolute inset-0 
+                                                bg-gradient-to-r from-transparent via-white/[0.05] to-transparent
+                                                translate-x-[-100%]
+                                                ${rawSlippage === preset.value ? 'animate-shimmer' : 'group-hover:translate-x-[100%]'}
+                                                transition-transform duration-1000
+                                            `} />
 
+                                            {/* Border Glow */}
+                                            {rawSlippage === preset.value && (
+                                                <div className="absolute inset-0 rounded-xl opacity-50
+                                                    shadow-[0_0_15px_rgba(139,92,246,0.3)]
+                                                    transition-opacity duration-200" />
+                                            )}
+                                            
+                                            {/* Content */}
+                                            <span className="relative z-10 font-medium">{preset.label}</span>
+                                        </Button>
+                                    ))}
+                                </div>
 
-                    <Card shadow='none' className="w-full border border-default-100 flex flex-col gap-2 p-2 rounded-lg">
-                        <span className="text-pink-960">Slippage Tolerance</span>
-                        <small>Your transaction will revert if the price changes unfavorably by more than this percentage.</small>
-
-                        <div className="w-full gap-2 flex flex-col gap-2 items-start justify-center">
-                           
-                            <div className={"w-full col-span-2 flex flex-row items-center text-center gap-2"}>
-                                <Input
-                                    startContent={
-                                        <ButtonGroup size='sm' fullWidth={true}>
-                                        <Button onPress={() => {
-                                            setSlippageInput('')
-                                            setRawSlippage(10)
-                                        }} color={(rawSlippage === 10 ? "default" : "default")}>0.1%</Button>
-                                        <Button onPress={() => {
-                                            setSlippageInput('')
-                                            setRawSlippage(50)
-                                        }} color={(rawSlippage === 50 ? "default" : "default")}>0.5%</Button>
-                                        <Button onPress={() => {
-                                            setSlippageInput('')
-                                            setRawSlippage(100)
-                                        }} color={(rawSlippage === 100 ? "default" : "default")}>1%</Button>
-            
-                                        <Button onPress={() => {
-                                            setSlippageInput('')
-                                            setRawSlippage(200)
-                                        }} color={(rawSlippage === 200 ? "default" : "default")}>2%</Button>
-                                        </ButtonGroup>
-                                    }
-                                    ref={inputRef as any}
-                                    placeholder={(rawSlippage / 100).toFixed(2)}
-                                    value={slippageInput}
-                                    onBlur={() => {
-                                        parseCustomSlippage((rawSlippage / 100).toFixed(2))
-                                    }}
-                                    onChange={e => parseCustomSlippage(e.target.value)}
-                                    color={!slippageInputIsValid ? 'red' : ''}
-
-                                    type="text"></Input>
-                                <span translate={"no"} className="material-symbols-outlined">percent</span>
+                                <div className="flex flex-col gap-3">
+                                    <div className="flex items-center">
+                                        <Input
+                                            ref={inputRef as any}
+                                            placeholder={(rawSlippage / 100).toFixed(2)}
+                                            value={slippageInput}
+                                            onBlur={() => parseCustomSlippage((rawSlippage / 100).toFixed(2))}
+                                            onChange={e => parseCustomSlippage(e.target.value)}
+                                            variant="bordered"
+                                            endContent={
+                                                <div className="flex items-center gap-2 pr-2">
+                                                    <span className="text-violet-500/60">%</span>
+                                                </div>
+                                            }
+                                            classNames={{
+                                                base: [
+                                                    "h-9",
+                                                    "group/input",
+                                                ],
+                                                input: [
+                                                    "text-violet-500",
+                                                    "placeholder:text-violet-500/40",
+                                                    "bg-transparent !important",
+                                                    "selection:bg-violet-500/10",
+                                                ],
+                                                innerWrapper: [
+                                                    "bg-transparent !important",
+                                                    "data-[hover=true]:bg-transparent !important",
+                                                ],
+                                                mainWrapper: [
+                                                    "bg-transparent !important",
+                                                    "data-[hover=true]:bg-transparent !important",
+                                                ],
+                                                inputWrapper: [
+                                                    "h-9",
+                                                    "bg-white/[0.02] dark:bg-black/[0.02] !important",
+                                                    "backdrop-blur-xl",
+                                                    "border border-violet-500/10",
+                                                    "data-[hover=true]:border-violet-500/20",
+                                                    "group-data-[focused=true]:border-violet-500/30 !important",
+                                                    "group-data-[focused=true]:bg-violet-500/[0.02] !important",
+                                                    "group-data-[focused=true]:shadow-[0_0_15px_rgba(139,92,246,0.1)]",
+                                                    "group-focus-within:border-violet-500/30 !important",
+                                                    "group-focus-within:bg-violet-500/[0.02] !important",
+                                                    "group-focus-within:shadow-[0_0_15px_rgba(139,92,246,0.1)]",
+                                                    "!cursor-text",
+                                                    "rounded-xl",
+                                                    "transition-all duration-200",
+                                                    "data-[hover=true]:bg-violet-500/[0.02] !important",
+                                                    "data-[hover=true]:border-violet-500/20",
+                                                    "focus:!bg-violet-500/[0.02]",
+                                                    "active:!bg-violet-500/[0.02]",
+                                                    "group-hover/input:border-violet-500/20",
+                                                    "group-hover/input:bg-violet-500/[0.02] !important",
+                                                    !slippageInputIsValid ? [
+                                                        "!border-red-500/50",
+                                                        "hover:!border-red-500/50",
+                                                        "group-data-[focused=true]:!border-red-500/50",
+                                                        "group-data-[focused=true]:!shadow-[0_0_15px_rgba(239,68,68,0.1)]",
+                                                        "hover:!bg-red-500/[0.02]",
+                                                        "group-data-[focused=true]:!bg-red-500/[0.02]",
+                                                        "group-focus-within:!border-red-500/50",
+                                                        "group-focus-within:!bg-red-500/[0.02]",
+                                                        "group-focus-within:!shadow-[0_0_15px_rgba(239,68,68,0.1)]",
+                                                    ] : []
+                                                ],
+                                                endContent: [
+                                                    "text-violet-500/60",
+                                                    "bg-transparent !important"
+                                                ]
+                                            }}
+                                        />
+                                    </div>
+                                    
+                                    {!!slippageError && (
+                                        <div className={`
+                                            text-xs py-1.5 px-3
+                                            rounded-lg
+                                            flex items-center gap-2
+                                            ${slippageError === SlippageError.InvalidInput 
+                                                ? 'bg-red-500/5 text-red-500 border border-red-500/10' 
+                                                : 'bg-orange-500/5 text-orange-500 border border-orange-500/10'}
+                                            backdrop-blur-xl
+                                            shadow-[0_2px_10px_rgba(0,0,0,0.1)]
+                                            animate-slideDown
+                                        `}>
+                                            <span className="material-symbols-outlined text-base">
+                                                {slippageError === SlippageError.InvalidInput ? 'error' : 'warning'}
+                                            </span>
+                                            
+                                            <span className="font-medium">
+                                                {slippageError === SlippageError.InvalidInput
+                                                    ? 'Enter a valid slippage percentage'
+                                                    : slippageError === SlippageError.RiskyLow
+                                                        ? 'Transaction may fail due to low slippage'
+                                                        : 'High slippage - transaction may be frontrun'}
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                        <div className="w-full">
+                    </Card>
 
-                            {!!slippageError && (
-                                <div
-                                    style={{
-                                        fontSize: '14px',
-                                        paddingTop: '7px',
-                                        color: slippageError === SlippageError.InvalidInput ? 'red' : '#F3841E'
+                    <Card 
+                        shadow='none' 
+                        className="w-full bg-white/[0.02] dark:bg-black/[0.02]
+                                  border border-violet-500/10
+                                  backdrop-blur-xl
+                                  p-4 rounded-2xl
+                                  hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]
+                                  transition-all duration-300"
+                    >
+                        <div className="flex flex-col gap-2">
+                            <span className="text-violet-500 font-medium">Transaction Deadline</span>
+                            <small className="text-violet-500/60">
+                                Your transaction will revert if it is pending for more than this long.
+                            </small>
+
+                            <div className="flex items-center gap-2 mt-2">
+                                <Input
+                                    placeholder={(deadline / 60).toString()}
+                                    value={deadlineInput}
+                                    onBlur={() => parseCustomDeadline((deadline / 60).toString())}
+                                    onChange={e => parseCustomDeadline(e.target.value)}
+                                    variant="bordered"
+                                    classNames={{
+                                        base: "h-9",
+                                        input: [
+                                            "text-violet-500",
+                                            "placeholder:text-violet-500/40",
+                                            "bg-transparent",
+                                            "selection:bg-violet-500/10",
+                                        ],
+                                        innerWrapper: [
+                                            "bg-transparent",
+                                            "hover:bg-transparent",
+                                            "focus:bg-transparent",
+                                        ],
+                                        mainWrapper: [
+                                            "bg-transparent",
+                                            "hover:bg-transparent",
+                                            "focus:bg-transparent",
+                                        ],
+                                        inputWrapper: [
+                                            "h-9",
+                                            "bg-white/[0.02] dark:bg-black/[0.02]",
+                                            "hover:bg-violet-500/[0.02] dark:hover:bg-violet-500/[0.02]",
+                                            "backdrop-blur-xl",
+                                            "border border-violet-500/10",
+                                            "hover:border-violet-500/20",
+                                            "group-data-[focused=true]:border-violet-500/30",
+                                            "group-data-[focused=true]:bg-violet-500/[0.02]",
+                                            "group-data-[focused=true]:shadow-[0_0_15px_rgba(139,92,246,0.1)]",
+                                            "!cursor-text",
+                                            "rounded-xl",
+                                            "transition-all duration-200",
+                                            "data-[hover=true]:bg-violet-500/[0.02]",
+                                            "data-[hover=true]:border-violet-500/20",
+                                            "focus:!bg-violet-500/[0.02]",
+                                            "active:!bg-violet-500/[0.02]",
+                                            !!deadlineError && [
+                                                "!border-red-500/50",
+                                                "hover:!border-red-500/50",
+                                                "group-data-[focused=true]:!border-red-500/50",
+                                                "group-data-[focused=true]:!shadow-[0_0_15px_rgba(239,68,68,0.1)]"
+                                            ]
+                                        ],
+                                        endContent: [
+                                            "text-violet-500/60",
+                                            "bg-transparent"
+                                        ]
+                                    }}
+                                />
+                                <span className="text-violet-500/60">Minutes</span>
+                            </div>
+                        </div>
+                    </Card>
+
+                    <Card 
+                        shadow='none' 
+                        className="w-full bg-white/[0.02] dark:bg-black/[0.02]
+                                  border border-violet-500/10
+                                  backdrop-blur-xl
+                                  p-4 rounded-2xl
+                                  hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]
+                                  transition-all duration-300"
+                    >
+                        <div className="flex flex-col gap-2">
+                            <span className="text-violet-500 font-medium">Tax Settings</span>
+                            <small className="text-violet-500/60">
+                                Allow trading of tokens that incur tax.
+                            </small>
+
+                            <div className="mt-2">
+                                <Switch 
+                                    isSelected={taxesStatus} 
+                                    onValueChange={setTaxesStatus}
+                                    classNames={{
+                                        wrapper: "group-data-[selected=true]:bg-violet-500"
                                     }}
                                 >
-                                    {slippageError === SlippageError.InvalidInput
-                                        ? 'Enter a valid slippage percentage'
-                                        : slippageError === SlippageError.RiskyLow
-                                            ? 'Your transaction may fail'
-                                            : 'Your transaction may be frontrun'}
-                                </div>
-                            )}
-
-
-                        </div>
-
-                    </Card>
-
-                    <Card shadow='none' className="w-full flex border border-default-100 flex-col gap-2 p-2 rounded-lg">
-                        <span className="text-pink-960">Transaction Deadline</span>
-                        <small>Your transaction will revert if it is pending for more than this long.</small>
-                        <div className="w-full gap-2 flex flex-row items-center justify-start">
-                            <Input color={!!deadlineError ? 'red' : undefined}
-                                onBlur={() => {
-                                    parseCustomDeadline((deadline / 60).toString())
-                                }}
-                                placeholder={(deadline / 60).toString()}
-                                value={deadlineInput}
-                                onChange={e => parseCustomDeadline(e.target.value)}/>
-                            <span>Minutes</span>
+                                    <span className="text-violet-500/80">
+                                        {taxesStatus ? "Enabled" : "Disabled"}
+                                    </span>
+                                </Switch>
+                            </div>
                         </div>
                     </Card>
 
-                    <Card shadow='none' className="w-full flex border border-default-100 flex-col gap-2 p-2 rounded-lg">
-                        <span className="text-pink-960">Taxes Contracts</span>
-                        <small>Allow trading of tokens that incur tax.</small>
-                        <div className="w-full gap-2 flex flex-row items-center justify-start">
-                        <Switch isSelected={taxesStatus} onValueChange={setTaxesStatus} color="default">{taxesStatus? "On" : "Off"}</Switch>
-                        </div>
-                    </Card>
-
-                    <div className="w-full">
-                        <Button className={"w-full"} onPress={() => {
-                            handleSaveSettings()
-                        }} color="default">
-                            Save Settings
-                        </Button>
-
-                    </div>
-
+                    <Button
+                        onPress={handleSaveSettings}
+                        className="w-full h-11 rounded-xl
+                                 bg-violet-500/10 backdrop-blur-xl 
+                                 border border-violet-500/30 
+                                 text-violet-500 hover:text-violet-400
+                                 shadow-[0_0_15px_rgba(139,92,246,0.3)]
+                                 hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]
+                                 transition-all duration-500
+                                 group relative overflow-hidden"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/10 to-violet-500/0 
+                                      translate-x-[-100%] group-hover:translate-x-[100%] 
+                                      transition-transform duration-1000" />
+                        
+                        <span className="relative">Save Settings</span>
+                    </Button>
                 </div>
-
-
             </div>
 
+            {/* Keyframes ekleyin (eğer yoksa) */}
+            <style jsx global>{`
+                @keyframes shimmer {
+                    0% {
+                        transform: translateX(-100%);
+                    }
+                    100% {
+                        transform: translateX(100%);
+                    }
+                }
+
+                .animate-shimmer {
+                    animation: shimmer 2s infinite;
+                }
+            `}</style>
         </>
     );
 }
