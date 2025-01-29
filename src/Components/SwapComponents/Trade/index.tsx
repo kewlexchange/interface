@@ -1339,7 +1339,7 @@ const _TRADE_TAB = () => {
           </div>
         </div>
 
-        <div className='w-full h-full pb-[100px]'>
+        <div className='w-full h-full mb-[200px]  pb-[200px]'>
       <TradeContainer />
       </div>
 
