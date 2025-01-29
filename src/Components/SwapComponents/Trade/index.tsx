@@ -851,7 +851,7 @@ const _TRADE_TAB = () => {
     }
 
     return (
-      <div className="w-full flex flex-col gap-3 max-h-[550px] overflow-y-auto scrollbar-hide">
+      <div className="w-full flex flex-col gap-3 overflow-x-none mb-[200px] overflow-y-auto scrollbar-hide">
         {tradingPairs.length > 0 && (
           <>
             {/* Trade Options */}
@@ -1078,7 +1078,7 @@ const _TRADE_TAB = () => {
                   "hover:opacity-95",
                   "active:scale-[0.99]",
                   "transition-all duration-200",
-                  "rounded-xl",
+                  "rounded-full",
                   "font-semibold",
                   "text-white",
                   "overflow-hidden"
@@ -1127,74 +1127,103 @@ const _TRADE_TAB = () => {
 
 
 
-      <div className="flex flex-col gap-4 w-full">
-        {/* Main input container */}
-        <div className="w-full rounded-lg relative overflow-hidden group/container">
-          {/* Animated gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-violet-500/[0.02] to-transparent dark:from-violet-500/[0.05] dark:to-transparent backdrop-blur-2xl" />
-          <div className="absolute inset-0 border border-violet-500/[0.08] dark:border-violet-400/10 rounded-3xl" />
-          
-          <div className="relative p-3 sm:p-5 overflow-hidden">
-            {/* Input section */}
-            <div className="space-y-2 sm:space-y-2.5">
-              <div className="flex items-center justify-between px-1">
-                <span className="text-violet-500/70 dark:text-violet-400/70 text-sm font-medium tracking-wide">
-                  Input Amount
-                </span>
-                {baseAsset && (
-                  <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 dark:bg-violet-400/10 border border-violet-500/20 dark:border-violet-400/20">
-                    <Image src={baseAsset.logoURI} className="w-4 h-4" alt={baseAsset.symbol} />
-                    <span className="text-violet-600 dark:text-violet-300 text-sm font-medium">
-                      {baseAsset.symbol}
-                    </span>
-                  </div>
-                )}
-              </div>
+      <div className="flex flex-col gap-4 w-full h-[calc(100vh-72px)] overflow-hidden">
+        {/* Main input container - Sticky header */}
+        <div className="sticky top-[0px] z-20 bg-white/80 dark:bg-black/80 backdrop-blur-xl py-2">
+          <div className="w-full rounded-lg relative overflow-hidden group/container">
+            {/* Animated gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-b from-violet-500/[0.02] to-transparent dark:from-violet-500/[0.05] dark:to-transparent backdrop-blur-2xl" />
+            <div className="absolute inset-0 border border-violet-500/[0.08] dark:border-violet-400/10 rounded-3xl" />
+            
+            <div className="relative p-3 sm:p-5 overflow-hidden">
+              {/* Input section */}
+              <div className="space-y-2 sm:space-y-2.5">
+                <div className="flex items-center justify-between px-1">
+                  <span className="text-violet-500/70 dark:text-violet-400/70 text-sm font-medium tracking-wide">
+                    Input Amount
+                  </span>
+                  {baseAsset && (
+                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 dark:bg-violet-400/10 border border-violet-500/20 dark:border-violet-400/20">
+                      <Image src={baseAsset.logoURI} className="w-4 h-4" alt={baseAsset.symbol} />
+                      <span className="text-violet-600 dark:text-violet-300 text-sm font-medium">
+                        {baseAsset.symbol}
+                      </span>
+                    </div>
+                  )}
+                </div>
 
-              {/* Custom input container with glow effect */}
-              <div className="group/input relative">
-                {/* Animasyonlu glow border efekti */}
-                <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-violet-500/10 rounded-full blur-sm group-hover/input:blur-md group-focus-within/input:blur-md transition-all duration-300" />
-                
-                {/* Ana background */}
-                <div className="absolute inset-0 bg-violet-500/[0.02] dark:bg-violet-400/[0.02] rounded-full transition-all duration-300 
-                  group-focus-within/input:bg-violet-500/[0.05] dark:group-focus-within/input:bg-violet-400/[0.05]
-                  group-hover/input:bg-violet-500/[0.03] dark:group-hover/input:bg-violet-400/[0.03]" />
-                
-                {/* Animasyonlu border */}
-                <div className="absolute inset-0 rounded-full border border-violet-500/10 dark:border-violet-400/10
-                  group-hover/input:border-violet-500/20 dark:group-hover/input:border-violet-400/20
-                  group-focus-within/input:border-violet-500/30 dark:group-focus-within/input:border-violet-400/30
-                  transition-colors duration-300" />
-                
-                {/* Animasyonlu gradient overlay */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-500/0 via-fuchsia-500/[0.05] to-violet-500/0 
-                  opacity-0 group-hover/input:opacity-100 group-focus-within/input:opacity-100
-                  translate-x-[-100%] group-hover/input:translate-x-[100%] group-focus-within/input:translate-x-[100%]
-                  transition-all duration-1000 ease-in-out" />
-                
-                <div className="relative flex items-center p-1">
-                  <input
-                    type="text"
-                    value={baseInputValue}
-                    onChange={(e) => setInputValue(e.target.value, TradeType.EXACT_INPUT)}
-                    placeholder="0.00"
-                    className="w-full rounded-full bg-transparent text-2xl font-semibold px-3 py-2.5 text-violet-950 dark:text-violet-100 outline-none 
-                      placeholder:text-violet-400/20 dark:placeholder:text-violet-300/20
-                      relative z-10"
-                  />
+                {/* Custom input container with glow effect */}
+                <div className="group/input relative">
+                  {/* Animasyonlu glow border efekti */}
+                  <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-violet-500/10 rounded-full blur-sm group-hover/input:blur-md group-focus-within/input:blur-md transition-all duration-300" />
                   
-                  {/* Token selector buttons */}
-                  <div className="flex items-center gap-1.5 bg-violet-500/[0.03] dark:bg-violet-400/[0.03] rounded-full p-1 mr-1 relative z-10">
-                    <Tooltip content='Select Base Asset' placement="top" delay={0}>
+                  {/* Ana background */}
+                  <div className="absolute inset-0 bg-violet-500/[0.02] dark:bg-violet-400/[0.02] rounded-full transition-all duration-300 
+                    group-focus-within/input:bg-violet-500/[0.05] dark:group-focus-within/input:bg-violet-400/[0.05]
+                    group-hover/input:bg-violet-500/[0.03] dark:group-hover/input:bg-violet-400/[0.03]" />
+                  
+                  {/* Animasyonlu border */}
+                  <div className="absolute inset-0 rounded-full border border-violet-500/10 dark:border-violet-400/10
+                    group-hover/input:border-violet-500/20 dark:group-hover/input:border-violet-400/20
+                    group-focus-within/input:border-violet-500/30 dark:group-focus-within/input:border-violet-400/30
+                    transition-colors duration-300" />
+                  
+                  {/* Animasyonlu gradient overlay */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-500/0 via-fuchsia-500/[0.05] to-violet-500/0 
+                    opacity-0 group-hover/input:opacity-100 group-focus-within/input:opacity-100
+                    translate-x-[-100%] group-hover/input:translate-x-[100%] group-focus-within/input:translate-x-[100%]
+                    transition-all duration-1000 ease-in-out" />
+                  
+                  <div className="relative flex items-center p-1">
+                    <input
+                      type="text"
+                      value={baseInputValue}
+                      onChange={(e) => setInputValue(e.target.value, TradeType.EXACT_INPUT)}
+                      placeholder="0.00"
+                      className="w-full rounded-full bg-transparent text-2xl font-semibold px-3 py-2.5 text-violet-950 dark:text-violet-100 outline-none 
+                        placeholder:text-violet-400/20 dark:placeholder:text-violet-300/20
+                        relative z-10"
+                    />
+                    
+                    {/* Token selector buttons */}
+                    <div className="flex items-center gap-1.5 bg-violet-500/[0.03] dark:bg-violet-400/[0.03] rounded-full p-1 mr-1 relative z-10">
+                      <Tooltip content='Select Base Asset' placement="top" delay={0}>
+                        <Button 
+                          onPress={() => {
+                            setTokenSelector({
+                              showTokenSelector: true,
+                              side: TradeType.EXACT_INPUT
+                            });
+                            toggleSelectToken()
+                          }} 
+                          className={[
+                            "h-9 w-9",
+                            "bg-violet-500/[0.05] dark:bg-violet-400/[0.05]",
+                            "hover:bg-violet-500/10 dark:hover:bg-violet-400/10",
+                            "active:scale-95",
+                            "transition-all duration-200",
+                            "group/btn",
+                            "flex items-center justify-center",
+                            "overflow-hidden"
+                          ].join(" ")}
+                          variant="flat"
+                          isIconOnly 
+                          radius="full"
+                        >
+                          {baseAsset ? 
+                            <Avatar 
+                              className="w-7 h-7 group-hover/btn:scale-105 transition-transform"
+                              src={baseAsset.logoURI} 
+                              size="sm"
+                              radius="full"
+                            /> : 
+                            <Hand className="w-4 h-4 text-violet-500/70 dark:text-violet-400/70 group-hover/btn:text-violet-600 dark:group-hover/btn:text-violet-300" />
+                          }
+                        </Button>
+                      </Tooltip>
+
                       <Button 
-                        onPress={() => {
-                          setTokenSelector({
-                            showTokenSelector: true,
-                            side: TradeType.EXACT_INPUT
-                          });
-                          toggleSelectToken()
-                        }} 
+                        onPress={handleSwapAssets} 
                         className={[
                           "h-9 w-9",
                           "bg-violet-500/[0.05] dark:bg-violet-400/[0.05]",
@@ -1202,155 +1231,121 @@ const _TRADE_TAB = () => {
                           "active:scale-95",
                           "transition-all duration-200",
                           "group/btn",
-                          "flex items-center justify-center",
-                          "overflow-hidden"
+                          "flex items-center justify-center"
                         ].join(" ")}
                         variant="flat"
                         isIconOnly 
                         radius="full"
                       >
-                        {baseAsset ? 
-                          <Avatar 
-                            className="w-7 h-7 group-hover/btn:scale-105 transition-transform"
-                            src={baseAsset.logoURI} 
-                            size="sm"
-                            radius="full"
-                          /> : 
-                          <Hand className="w-4 h-4 text-violet-500/70 dark:text-violet-400/70 group-hover/btn:text-violet-600 dark:group-hover/btn:text-violet-300" />
-                        }
+                        <GitCompareArrows className="w-4 h-4 text-violet-500/70 dark:text-violet-400/70 
+                          group-hover/btn:text-violet-600 dark:group-hover/btn:text-violet-300 
+                          group-hover/btn:rotate-180 transition-all duration-300" />
                       </Button>
-                    </Tooltip>
 
-                    <Button 
-                      onPress={handleSwapAssets} 
+                      <Tooltip content='Select Quote Asset' placement="top" delay={0}>
+                        <Button 
+                          onPress={() => {
+                            setTokenSelector({
+                              showTokenSelector: true,
+                              side: TradeType.EXACT_OUTPUT
+                            });
+                            toggleSelectToken()
+                          }}
+                          className={[
+                            "h-9 w-9",
+                            "bg-violet-500/[0.05] dark:bg-violet-400/[0.05]",
+                            "hover:bg-violet-500/10 dark:hover:bg-violet-400/10",
+                            "active:scale-95",
+                            "transition-all duration-200",
+                            "group/btn",
+                            "flex items-center justify-center",
+                            "overflow-hidden"
+                          ].join(" ")}
+                          variant="flat"
+                          isIconOnly 
+                          radius="full"
+                        >
+                          {quoteAsset ? 
+                            <Avatar 
+                              className="w-7 h-7 group-hover/btn:scale-105 transition-transform"
+                              src={quoteAsset.logoURI} 
+                              size="sm"
+                              radius="full"
+                            /> : 
+                            <Hand className="w-4 h-4 text-violet-500/70 dark:text-violet-400/70 group-hover/btn:text-violet-600 dark:group-hover/btn:text-violet-300" />
+                          }
+                        </Button>
+                      </Tooltip>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Balance and percentage buttons */}
+              <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                {baseAsset && (
+                  <div className="w-full sm:w-auto">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/5 dark:bg-violet-400/5 border border-violet-500/10 dark:border-violet-400/10">
+                      <Wallet2 className="w-4 h-4 text-violet-500/50 dark:text-violet-400/50" />
+                      <span className="text-sm text-violet-600/70 dark:text-violet-300/70">
+                        Balance: {baseAsset.balance} {baseAsset.symbol}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-1.5 w-full sm:w-auto justify-end">
+                  {[25, 50, 75, 100].map((percent) => (
+                    <Button
+                      key={percent}
                       className={[
-                        "h-9 w-9",
-                        "bg-violet-500/[0.05] dark:bg-violet-400/[0.05]",
-                        "hover:bg-violet-500/10 dark:hover:bg-violet-400/10",
+                        "h-8 min-w-[52px]",
+                        "bg-gradient-to-r from-violet-500/[0.03] to-fuchsia-500/[0.03]",
+                        "hover:from-violet-500/[0.08] hover:to-fuchsia-500/[0.08]",
                         "active:scale-95",
                         "transition-all duration-200",
                         "group/btn",
-                        "flex items-center justify-center"
+                        "relative overflow-hidden",
+                        "border border-violet-500/10 dark:border-violet-400/10",
+                        "hover:border-violet-500/20 dark:hover:border-violet-400/20",
+                        "backdrop-blur-sm"
                       ].join(" ")}
                       variant="flat"
-                      isIconOnly 
+                      onPress={() => setTradeInputPercent(percent)}
                       radius="full"
                     >
-                      <GitCompareArrows className="w-4 h-4 text-violet-500/70 dark:text-violet-400/70 
-                        group-hover/btn:text-violet-600 dark:group-hover/btn:text-violet-300 
-                        group-hover/btn:rotate-180 transition-all duration-300" />
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+                        opacity-0 group-hover/btn:opacity-100 translate-x-[-100%] group-hover/btn:translate-x-[100%] 
+                        transition-all duration-700" />
+                      
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 rounded-full opacity-0 group-hover/btn:opacity-100 
+                        bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 blur-md transition-opacity" />
+                      
+                      {/* Content */}
+                      <div className="relative flex items-center justify-center gap-1">
+                        <span className="text-xs font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500 
+                          text-transparent bg-clip-text group-hover/btn:text-violet-100 dark:group-hover/btn:text-violet-100 
+                          transition-colors">
+                          {percent}%
+                        </span>
+                      </div>
                     </Button>
-
-                    <Tooltip content='Select Quote Asset' placement="top" delay={0}>
-                      <Button 
-                        onPress={() => {
-                          setTokenSelector({
-                            showTokenSelector: true,
-                            side: TradeType.EXACT_OUTPUT
-                          });
-                          toggleSelectToken()
-                        }}
-                        className={[
-                          "h-9 w-9",
-                          "bg-violet-500/[0.05] dark:bg-violet-400/[0.05]",
-                          "hover:bg-violet-500/10 dark:hover:bg-violet-400/10",
-                          "active:scale-95",
-                          "transition-all duration-200",
-                          "group/btn",
-                          "flex items-center justify-center",
-                          "overflow-hidden"
-                        ].join(" ")}
-                        variant="flat"
-                        isIconOnly 
-                        radius="full"
-                      >
-                        {quoteAsset ? 
-                          <Avatar 
-                            className="w-7 h-7 group-hover/btn:scale-105 transition-transform"
-                            src={quoteAsset.logoURI} 
-                            size="sm"
-                            radius="full"
-                          /> : 
-                          <Hand className="w-4 h-4 text-violet-500/70 dark:text-violet-400/70 group-hover/btn:text-violet-600 dark:group-hover/btn:text-violet-300" />
-                        }
-                      </Button>
-                    </Tooltip>
-                  </div>
+                  ))}
                 </div>
-              </div>
-            </div>
-
-            {/* Balance and percentage buttons */}
-            <div className="mt-3 sm:mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-              {baseAsset && (
-                <div className="w-full sm:w-auto">
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/5 dark:bg-violet-400/5 border border-violet-500/10 dark:border-violet-400/10">
-                    <Wallet2 className="w-4 h-4 text-violet-500/50 dark:text-violet-400/50" />
-                    <span className="text-sm text-violet-600/70 dark:text-violet-300/70">
-                      Balance: {baseAsset.balance} {baseAsset.symbol}
-                    </span>
-                  </div>
-                </div>
-              )}
-
-              <div className="flex items-center gap-1.5 w-full sm:w-auto justify-end">
-                {[25, 50, 75, 100].map((percent) => (
-                  <Button
-                    key={percent}
-                    className={[
-                      "h-8 min-w-[52px]",
-                      "bg-gradient-to-r from-violet-500/[0.03] to-fuchsia-500/[0.03]",
-                      "hover:from-violet-500/[0.08] hover:to-fuchsia-500/[0.08]",
-                      "active:scale-95",
-                      "transition-all duration-200",
-                      "group/btn",
-                      "relative overflow-hidden",
-                      "border border-violet-500/10 dark:border-violet-400/10",
-                      "hover:border-violet-500/20 dark:hover:border-violet-400/20",
-                      "backdrop-blur-sm"
-                    ].join(" ")}
-                    variant="flat"
-                    onPress={() => setTradeInputPercent(percent)}
-                    radius="full"
-                  >
-                    {/* Shimmer effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
-                      opacity-0 group-hover/btn:opacity-100 translate-x-[-100%] group-hover/btn:translate-x-[100%] 
-                      transition-all duration-700" />
-                    
-                    {/* Glow effect */}
-                    <div className="absolute inset-0 rounded-full opacity-0 group-hover/btn:opacity-100 
-                      bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 blur-md transition-opacity" />
-                    
-                    {/* Content */}
-                    <div className="relative flex items-center justify-center gap-1">
-                      <span className="text-xs font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500 
-                        text-transparent bg-clip-text group-hover/btn:text-violet-100 dark:group-hover/btn:text-violet-100 
-                        transition-colors">
-                        {percent}%
-                      </span>
-                    </div>
-                  </Button>
-                ))}
               </div>
             </div>
           </div>
         </div>
 
-        <div className='w-full'>
+        {/* Trade container - Scrollable area */}
+        <ScrollShadow hideScrollBar className='w-full overflow-y-auto overflow-x-hidden flex-1'>
           <TradeContainer />
-        </div>
+        </ScrollShadow>
       </div>
-
-
-
-
-
-
-
     </>
   );
 }
 export const TRADE_TAB = memo(_TRADE_TAB)
-
 
