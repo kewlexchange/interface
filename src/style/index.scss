@@ -471,7 +471,7 @@ svg:not(:root) {
         background: 
           linear-gradient(
             0deg,
-            hsla(0, 0%, 100%, 0.2) 0,
+            hsl(0, 0%, 0%) 0,
             #000 min(110vw, 800px)
           ),
           fixed repeating-radial-gradient(
@@ -479,9 +479,10 @@ svg:not(:root) {
             #050505 0,
             #000 40px
           );
+    
       }
 
-
+      
 
     .search-input{
         border: 1px solid #e5e7eb !important

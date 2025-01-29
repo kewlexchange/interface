@@ -34,7 +34,7 @@ import { Network } from './Components/Network';
 import { DropdownNetwork } from './Components/DropdownNetwork';
 import { LandingBG } from './Components/Landing';
 import { LeftMenu } from './Components/LeftMenu';
-import { icons, Menu } from 'lucide-react';
+import { icons, Menu, WalletIcon } from 'lucide-react';
 import Cobe from './Components/Cobe';
 import { NetworkHeader } from './Components/NetworkHeader';
 
@@ -194,7 +194,7 @@ const App = () => {
             <Navbar
               classNames={{
                 wrapper: "rounded-full pr-2",
-                base: "rounded-full z-990 flex gap-4 border border-1 flex-row relative flex-nowrap items-center h-[var(--navbar-height)] max-w-[1024px] px-0 w-full justify-center bg-transparent",
+                base: "rounded-full z-990 flex gap-4 bg-violet-500/10 backdrop-blur-xl border border-1 flex-row relative flex-nowrap items-center h-[var(--navbar-height)] max-w-[1024px] px-0 w-full justify-center bg-transparent",
               }
               }
 
@@ -416,9 +416,29 @@ const App = () => {
                     </Dropdown>
 
                   </> : <>
-                    <Button radius='full' variant='solid' color='default' onPress={async () => {
+                
+                     <Button
+                     onPress={async () => {
                       await handleConnect();
-                    }}>Connect</Button>
+                    }}
+                            radius="full"
+                                size="lg"
+                                className="bg-violet-500/10 backdrop-blur-xl
+                         border border-violet-500/30
+                         text-violet-500 hover:text-violet-400
+                         rounded-full
+                         shadow-[0_0_15px_rgba(139,92,246,0.3)]
+                         hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]
+                         transition-all duration-500
+                         group relative overflow-hidden"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/10 to-violet-500/0
+                             translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                                <span className="relative flex items-center gap-2">
+                                    <WalletIcon className="w-5 h-5" />
+                                    Connect
+                                </span>
+                            </Button>
                   </>
                 }
               </NavbarContent>
@@ -442,7 +462,87 @@ const App = () => {
 
         <div className={"w-screen h-screen overflow-y-scroll  py-[88px] pb-[70px] flex flex-col items-center justify-center w-screen h-full"}>
 
-          <div className="absolute left-0 top-0 z-[0] w-screen h-screen  flex flex-col gap-2 items-center justify-center">
+
+
+        <section className=" absolute left-0 top-0 z-[0] w-screen h-screen  w-full rounded-lg min-h-[90vh] py-32 overflow-hidden">
+                {/* Alien Tech Background */}
+                <div className="absolute inset-0">
+                    {/* Base Layer */}
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] 
+                        from-violet-500/[0.12] via-violet-500/[0.08] to-transparent
+                        dark:from-violet-900/20 dark:via-black dark:to-black" />
+
+                    {/* Tech Grid */}
+                    <div className="absolute inset-0 bg-[url('/alien-grid.svg')] bg-repeat opacity-[0.07]
+                        dark:opacity-[0.05] animate-pulse-slow" />
+
+                    {/* Light Theme Specific Effects */}
+                    <div className="absolute inset-0 dark:hidden">
+                        <div className="absolute inset-0 backdrop-blur-3xl opacity-30" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-white/80" />
+                    </div>
+
+                    {/* Energy Lines */}
+                    <div className="absolute inset-0">
+                        {[...Array(8)].map((_, i) => (
+                            <div key={i}
+                                className="absolute h-[1px] w-full
+                            bg-gradient-to-r from-transparent via-violet-500/40 to-transparent
+                            animate-scan-line"
+                                style={{
+                                    top: `${i * 12.5}%`,
+                                    animationDelay: `${i * 0.5}s`,
+                                    opacity: 0.3
+                                }} />
+                        ))}
+                    </div>
+
+                    {/* Alien Tech Circles */}
+                    <div className="absolute inset-0">
+                        {[...Array(5)].map((_, i) => (
+                            <div key={i}
+                                className="absolute w-[500px] h-[500px] rounded-full
+                            border border-violet-500/20
+                            animate-tech-pulse"
+                                style={{
+                                    top: `${Math.random() * 100}%`,
+                                    left: `${Math.random() * 100}%`,
+                                    transform: 'translate(-50%, -50%)',
+                                    animationDelay: `${i * 1}s`
+                                }} />
+                        ))}
+                    </div>
+
+                    {/* Floating Particles */}
+                    <div className="absolute inset-0">
+                        {[...Array(30)].map((_, i) => (
+                            <div key={i}
+                                className="absolute w-1 h-1 bg-violet-500/40
+                            animate-float-particle"
+                                style={{
+                                    top: `${Math.random() * 100}%`,
+                                    left: `${Math.random() * 100}%`,
+                                    animationDuration: `${3 + Math.random() * 5}s`,
+                                    animationDelay: `${Math.random() * 2}s`
+                                }} />
+                        ))}
+                    </div>
+
+                    {/* Glowing Orbs */}
+                    <div className="absolute inset-0 overflow-hidden">
+                        <div className="absolute top-1/4 -right-20 w-80 h-80
+                          rounded-full bg-violet-500/10 blur-3xl
+                          animate-pulse-slow mix-blend-screen" />
+                        <div className="absolute bottom-1/4 -left-20 w-80 h-80
+                          rounded-full bg-blue-500/10 blur-3xl
+                          animate-pulse-slow animation-delay-1000 mix-blend-screen" />
+                    </div>
+                </div>
+
+          
+            </section>
+
+          <div className="hidden absolute left-0 top-0 z-[0] w-screen h-screen  flex flex-col gap-2 items-center justify-center">
             <div className="w-full ">
               <Cobe text="KEWL" description="EXCHANGE" />
             </div>

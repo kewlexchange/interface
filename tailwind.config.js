@@ -35,6 +35,78 @@ module.exports = {
         "gradient-radial-top": "radial-gradient(100% 60% at 100% 0%, var(--tw-gradient-stops))",
       },
       keyframes: {
+        blob: {
+          "0%": {
+            transform: "translate(0px, 0px) scale(1)",
+          },
+          "33%": {
+            transform: "translate(30px, -50px) scale(1.1)",
+          },
+          "66%": {
+            transform: "translate(-20px, 20px) scale(0.9)",
+          },
+          "100%": {
+            transform: "translate(0px, 0px) scale(1)",
+          },
+        },
+        'glow-line-x': {
+          '0%, 100%': {
+            opacity: 0,
+            transform: 'translateX(-100%)',
+          },
+          '50%': {
+            opacity: 1,
+            transform: 'translateX(100%)',
+          },
+        },
+        'glow-line-y': {
+          '0%, 100%': {
+            opacity: 0,
+            transform: 'translateY(-100%)',
+          },
+          '50%': {
+            opacity: 1,
+            transform: 'translateY(100%)',
+          },
+        },
+        'float': {
+          '0%, 100%': {
+            transform: 'translateY(0) scale(1)',
+            opacity: 0.3,
+          },
+          '50%': {
+            transform: 'translateY(-20px) scale(1.1)',
+            opacity: 0.6,
+          }
+        },
+        'scan-line': {
+          '0%': {
+            transform: 'translateX(-100%)',
+          },
+          '100%': {
+            transform: 'translateX(100%)',
+          },
+        },
+        'tech-pulse': {
+          '0%, 100%': {
+            transform: 'translate(-50%, -50%) scale(0.8)',
+            opacity: 0.2,
+          },
+          '50%': {
+            transform: 'translate(-50%, -50%) scale(1.2)',
+            opacity: 0.4,
+          },
+        },
+        'float-particle': {
+          '0%, 100%': {
+            transform: 'translate(0, 0) scale(1)',
+            opacity: 0.3,
+          },
+          '50%': {
+            transform: 'translate(20px, -20px) scale(1.5)',
+            opacity: 0.6,
+          },
+        },
         "accordion-down": {
           from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -62,12 +134,23 @@ module.exports = {
       },
       animation: {
         endless: "endless 20s linear infinite",
-
+        'gradient-x': 'gradient-x 15s ease infinite',
+        'gradient-y': 'gradient-y 15s ease infinite',
+        'gradient-xy': 'gradient-xy 15s ease infinite',
+        blob: "blob 7s infinite",
+        'glow-line-x': 'glow-line-x 3s ease-in-out infinite',
+        'glow-line-y': 'glow-line-y 3s ease-in-out infinite',
+        'float': 'float 10s ease-in-out infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'scan-line': 'scan-line 3s linear infinite',
+        'tech-pulse': 'tech-pulse 4s ease-in-out infinite',
+        'float-particle': 'float-particle 5s ease-in-out infinite',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         disco: "disco 1.5s linear infinite",
         "spin-forward": "spin 2s linear infinite",
       },
+
       colors:{
         primary:{
           '50': '#fafafa',
