@@ -62,7 +62,7 @@ const CustomModal = ({ isShowing, hide, header = null, closable, children }) => 
                                     <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/10 to-violet-500/0
                                         translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                                     <span className="relative">
-                                        Kapat
+                                        Close
                                     </span>
                                 </Button>
                             </ModalFooter>

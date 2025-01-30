@@ -156,13 +156,6 @@ export const ModalSuccessTransaction = ({ isShowing, hide, transaction }) => {
 
                         <p>Transaction has been completed.</p>
                         <a className={"my-2 text-blue-500"} href={generateTxLink(chainId, transaction.hash)} target={"_blank"}>View on Explorer</a>
-
-                        <Button color="default" size="lg" className={"w-full"} onPress={() => {
-                            hide();
-                        }
-                        }>
-                            Close
-                        </Button>
                     </div>
                 </div>
             </div>
