@@ -110,7 +110,14 @@ export const DECENTRALIZED_EXCHANGES = [
     },
 
     
- 
+
+    {
+        logo:"/images/dex/kewl.svg",
+        chainId:43114,
+        dex:"KEWL",
+        router:"0xA0BB8f9865f732C277d0C162249A4F6c157ae9D0",
+        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
+    },
     {
         logo:"/images/dex/traderjoe.svg",
         chainId:43114,
