@@ -104,12 +104,7 @@ export const ModalError = ({ isShowing, hide, error }) => {
                         <p className='text-xs'>
                             Transaction attempt failed with an Error
                         </p>
-                        <Button color="default" size="lg" className={"w-full"} onPress={() => {
-                            hide();
-                        }
-                        }>
-                            Close
-                        </Button>
+                    
                     </div>
                 </div>
             </div>
@@ -131,12 +126,7 @@ export const ModalInfo = ({ isShowing, hide, error }) => {
                         <textarea defaultValue={error?.data ? error.data?.message : error?.message} rows={5} cols={5} className={"w-full h-20 rounded-xl p-2 "} />
 
 
-                        <Button color="default" size="lg" className={"w-full"} onPress={() => {
-                            hide();
-                        }
-                        }>
-                            Close
-                        </Button>
+        
                     </div>
                 </div>
             </div>
