@@ -139,7 +139,14 @@ export const DECENTRALIZED_EXCHANGES = [
         router:"0x9e5A52f57b3038F1B8EeE45F28b3C1967e22799C",
         weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
     }
-    
+    ,
+    {
+        logo:"/images/dex/sushi.svg",
+        chainId:43114,
+        dex:"SUSHI",
+        router:"0xc35DADB65012eC5796536bD9864eD8773aBc74C4",
+        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
+    }
 
 
     
