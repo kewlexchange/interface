@@ -842,40 +842,79 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                 <Tab key="pairs" title="Pairs">
                     <Card className="border border-violet-500/10 bg-white/5 dark:bg-black/5 backdrop-blur-xl mt-4">
                         <CardBody>
-                            <ScrollShadow orientation="horizontal" className="w-full h-[350px] max-h-[350px]">
-                                <Listbox className="w-full" variant="flat">
-                                    {allExchangePairs && (
-                                        <ListboxSection 
-                                            title="Exchange Pairs"
-                                            classNames={{
-                                                base: "text-violet-400/70",
-                                                heading: "text-violet-400/50 font-medium"
-                                            }}
-                                        >
-                                            {allExchangePairs.map((exchangeItem, exchangeIndex) => {
-                                                return (
-                                                    canDisplayExchangePair(exchangeItem) &&
-                                                    canDisplay(exchangeItem.pair) &&
-                                                    <ListboxItem
-                                                        key={`exchangeItem${exchangeIndex}`}
-                                                        onPress={() => handleSelectPair(exchangeItem)}
-                                                        className="group data-[hover=true]:bg-violet-500/10 rounded-lg"
-                                                        startContent={
-                                                            <DoubleCurrencyIcon 
-                                                                baseIcon={getIconPath(exchangeItem.base.symbol)} 
-                                                                quoteIcon={getIconPath(exchangeItem.quote.symbol)}
-                                                            />
-                                                        }
-                                                    >
-                                                        <span className="text-violet-400 group-data-[hover=true]:text-violet-300">
-                                                            {exchangeItem.base.symbol} x {exchangeItem.quote.symbol}
-                                                        </span>
-                                                    </ListboxItem>
-                                                )
-                                            })}
-                                        </ListboxSection>
-                                    )}
-                                </Listbox>
+                            <ScrollShadow hideScrollBar orientation="horizontal" className="w-full h-[350px] max-h-[350px]">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    {allExchangePairs && allExchangePairs.map((exchangeItem, exchangeIndex) => {
+                                        return (
+                                            canDisplayExchangePair(exchangeItem) &&
+                                            canDisplay(exchangeItem.pair) && (
+                                                <button
+                                                    key={`exchangeItem${exchangeIndex}`}
+                                                    onClick={() => handleSelectPair(exchangeItem)}
+                                                    className="group flex items-center gap-3 p-3
+                                                        border border-violet-500/10 
+                                                        hover:border-violet-500/30
+                                                        bg-violet-500/[0.02] hover:bg-violet-500/[0.05]
+                                                        rounded-xl
+                                                        transition-all duration-300
+                                                        backdrop-blur-xl
+                                                        relative overflow-hidden"
+                                                >
+                                                    {/* Hover Animation Gradient */}
+                                                    <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/[0.05] to-violet-500/0
+                                                        translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" 
+                                                    />
+                                                    
+                                                    {/* Pair Icons */}
+                                                    <div className="relative shrink-0">
+                                                        <DoubleCurrencyIcon 
+                                                            baseIcon={getIconPath(exchangeItem.base.symbol)} 
+                                                            quoteIcon={getIconPath(exchangeItem.quote.symbol)}
+                                                            className="group-hover:shadow-[0_0_15px_rgba(139,92,246,0.3)]
+                                                                transition-all duration-300"
+                                                        />
+                                                    </div>
+
+                                                    {/* Pair Info */}
+                                                    <div className="flex-1 flex items-center justify-between min-w-0">
+                                                        <div className="flex flex-col min-w-0 flex-shrink">
+                                                            {/* Symbols */}
+                                                            <div className="flex items-center gap-2 mb-0.5">
+                                                                <p className="font-semibold text-violet-400 group-hover:text-violet-300
+                                                                    transition-colors duration-300 truncate">
+                                                                    {exchangeItem.base.symbol}
+                                                                </p>
+                                                                <span className="text-violet-400/50 shrink-0">×</span>
+                                                                <p className="font-semibold text-violet-400 group-hover:text-violet-300
+                                                                    transition-colors duration-300 truncate">
+                                                                    {exchangeItem.quote.symbol}
+                                                                </p>
+                                                            </div>
+                                                            {/* Names */}
+                                                            <div className="flex items-center w-full min-w-0">
+                                                                <p className="text-xs text-violet-400/50 truncate">
+                                                                    {exchangeItem.base.name}
+                                                                </p>
+                                                                <div className="h-1 w-1 rounded-full bg-violet-500/30 shrink-0 mx-2" />
+                                                                <p className="text-xs text-violet-400/50 truncate">
+                                                                    {exchangeItem.quote.name}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        {/* Arrow Icon */}
+                                                        <div className="hidden sm:block opacity-0 group-hover:opacity-100
+                                                            transition-opacity duration-300 ml-2 shrink-0">
+                                                            <span className="material-symbols-outlined text-violet-400/70 text-sm">
+                                                                arrow_forward
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            )
+                                        )
+                                    })}
+                                </div>
                             </ScrollShadow>
                         </CardBody>
                     </Card>
@@ -938,12 +977,11 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                                     Please conduct your own research. Otherwise, you may risk losing your assets.
                                 </p>
                             </div>
-                            <div className="flex items-center justify-between">
+                            <div className="flex flex-row gap-2 items-between w-full justify-between">
                                 <Switch
                                     isSelected={isSelected}
                                     onValueChange={setIsSelected}
                                     classNames={{
-                                        base: "bg-violet-500/10",
                                         wrapper: "group-data-[selected=true]:bg-violet-500"
                                     }}
                                 >
