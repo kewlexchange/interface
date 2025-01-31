@@ -131,6 +131,47 @@ module.exports = {
           "0%": { transform: "translateY(0)" },
           "100%": { transform: "translateY(-245px)" },
         },
+        'float-reverse': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(20px)' },
+        },
+        'digital-rain': {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
+        'quantum-float': {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '25%': { transform: 'translate(10px, 10px)' },
+          '50%': { transform: 'translate(-5px, 15px)' },
+          '75%': { transform: 'translate(-15px, -5px)' },
+        },
+        'energy-pulse': {
+          '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+          '50%': { opacity: '0.6', transform: 'scale(1.2)' },
+        },
+        'data-stream': {
+          '0%': { opacity: '0', transform: 'translateX(-100%) translateY(-100%)' },
+          '50%': { opacity: '1' },
+          '100%': { opacity: '0', transform: 'translateX(100%) translateY(100%)' },
+        },
+        circuit: {
+          '0%': { backgroundPosition: '0% 0%' },
+          '100%': { backgroundPosition: '100% 100%' },
+        },
+        scroll: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-50%)' },
+        },
+        'scan-vertical': {
+          '0%': { transform: 'translateY(0)', opacity: '0.5' },
+          '50%': { transform: 'translateY(100vh)', opacity: '0.8' },
+          '100%': { transform: 'translateY(0)', opacity: '0.5' },
+        },
+        'scan-horizontal': {
+          '0%': { transform: 'translateX(0)', opacity: '0.5' },
+          '50%': { transform: 'translateX(100vw)', opacity: '0.8' },
+          '100%': { transform: 'translateX(0)', opacity: '0.5' },
+        },
       },
       animation: {
         endless: "endless 20s linear infinite",
@@ -149,6 +190,20 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         disco: "disco 1.5s linear infinite",
         "spin-forward": "spin 2s linear infinite",
+        'float-slow': 'float 20s linear infinite',
+        'float-slow-reverse': 'float-reverse 25s linear infinite',
+        'digital-rain': 'digital-rain 3s linear infinite',
+        'scan-line-bright': 'scan-line 3s linear infinite',
+        'tech-pulse-bright': 'tech-pulse 4s ease-in-out infinite',
+        'quantum-float': 'quantum-float 5s ease-in-out infinite',
+        'energy-pulse': 'energy-pulse 4s ease-in-out infinite',
+        'data-stream': 'data-stream 6s linear infinite',
+        'spin-slow': 'spin 20s linear infinite',
+        'circuit-flow': 'circuit 15s linear infinite',
+        'energy-pulse-fast': 'energy-pulse 2s ease-in-out infinite',
+        'scroll-slow': 'scroll 20s linear infinite',
+        'scan-vertical': 'scan-vertical 8s linear infinite',
+        'scan-horizontal': 'scan-horizontal 8s linear infinite',
       },
 
       colors:{

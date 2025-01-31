@@ -453,34 +453,12 @@ svg:not(:root) {
         display: flex;
         justify-content: center; /* Yatayda ortalama */
         align-items: center;    /* Dikeyde ortalama */
-        background: 
-          linear-gradient(
-            180deg,
-            hsla(0, 0%, 100%, 0) 0,
-            #fff min(110vw, 800px)
-          ),
-          repeating-radial-gradient(
-            circle at 50% 50%, /* Ortada başlar */
-            #f5f5f5 0,
-            #fff 40px
-          );
+    
         background-size: cover; /* Arka planın ekranı kaplamasını sağlar */
         background-attachment: fixed; /* Arka plan sabit kalır */
     }
-    html.dark  body {
-        background: 
-          linear-gradient(
-            0deg,
-            hsl(0, 0%, 0%) 0,
-            #000 min(110vw, 800px)
-          ),
-          fixed repeating-radial-gradient(
-            circle at 50% min(calc(50vw + 3.5rem), calc(300px + 5rem)),
-            #050505 0,
-            #000 40px
-          );
+
     
-      }
 
       
 
