@@ -1129,16 +1129,16 @@ const _TRADE_TAB = () => {
 
       <div className="flex flex-col gap-4 w-full">
         {/* Main input container - Sticky header */}
-        <div className="sticky top-[0px] z-20 bg-white/80 dark:bg-black/80 backdrop-blur-xl py-2">
+        <div className="sticky top-[0px] z-20 py-2">
           <div className="w-full rounded-lg relative overflow-hidden group/container">
             {/* Animated gradient background */}
             <div className="absolute inset-0 bg-gradient-to-b from-violet-500/[0.02] to-transparent dark:from-violet-500/[0.05] dark:to-transparent backdrop-blur-2xl" />
-            <div className="absolute inset-0 border border-violet-500/[0.08] dark:border-violet-400/10 rounded-3xl" />
+            <div className="absolute   inset-0 border border-violet-500/[0.08] dark:border-violet-400/10 rounded-3xl" />
             
-            <div className="relative p-3 sm:p-5 overflow-hidden">
+            <div className="relative  p-3 sm:p-5 overflow-hidden rounded-lg">
               {/* Input section */}
-              <div className="space-y-2 sm:space-y-2.5">
-                <div className="flex items-center justify-between px-1">
+              <div className="space-y-2 overflow-hidden sm:space-y-2.5">
+                <div className="flex overflow-hidden items-center justify-between px-1">
                   <span className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-transparent bg-clip-text text-sm font-medium tracking-wide">
                     Input Amount
                   </span>
@@ -1153,7 +1153,7 @@ const _TRADE_TAB = () => {
                 </div>
 
                 {/* Custom input container with glow effect */}
-                <div className="group/input relative">
+                <div className="group/input rounded-full relative overflow-hidden">
                   {/* Animasyonlu glow border efekti */}
                   <div className="absolute -inset-[1px] bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-violet-500/10 rounded-full blur-sm group-hover/input:blur-md group-focus-within/input:blur-md transition-all duration-300" />
                   
