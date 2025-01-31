@@ -760,59 +760,80 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                             />
                         </CardHeader>
                         <CardBody>
-                            <ScrollShadow orientation="horizontal" className="w-full h-[270px] max-h-[270px]">
-                                <Listbox 
-                                    className="w-full" 
-                                    variant="flat" 
-                                    aria-label="Token list"
-                                >
-                                    <ListboxSection 
-                                        title="Tokens"
-                                        classNames={{
-                                            base: "text-violet-400/70",
-                                            heading: "text-violet-400/50 font-medium"
-                                        }}
-                                    >
-                                        {filteredItems && filteredItems.map((tokenItem) => {
-                                            if (disableToken?.address !== tokenItem.address) {
-                                                return (
-                                                    <ListboxItem
-                                                        key={`token${tokenItem.address}`}
-                                                        onPress={() => {
-                                                            onSelect(tokenItem);
-                                                            setSearchText("");
-                                                        }}
-                                                        className="group data-[hover=true]:bg-violet-500/10 rounded-lg"
-                                                        startContent={
-                                                            <AvatarGroup size='sm'>
+                            <ScrollShadow hideScrollBar orientation="horizontal" className="w-full h-[270px] max-h-[270px]">
+                              
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                            {filteredItems && filteredItems.map((tokenItem) => {
+                                                if (disableToken?.address !== tokenItem.address) {
+                                                    return (
+                                                        <button
+                                                            key={`token${tokenItem.address}`}
+                                                            onClick={() => {
+                                                                onSelect(tokenItem);
+                                                                setSearchText("");
+                                                            }}
+                                                            className="group flex items-center gap-3 p-3
+                                                                border border-violet-500/10 
+                                                                hover:border-violet-500/30
+                                                                bg-violet-500/[0.02] hover:bg-violet-500/[0.05]
+                                                                rounded-xl
+                                                                transition-all duration-300
+                                                                backdrop-blur-xl
+                                                                relative overflow-hidden"
+                                                        >
+                                                            {/* Hover Animation Gradient */}
+                                                            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/[0.05] to-violet-500/0
+                                                                translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" 
+                                                            />
+                                                            
+                                                            {/* Token Icon */}
+                                                            <div className="relative">
                                                                 <Avatar 
                                                                     size='sm' 
                                                                     src={tokenItem.logoURI}
-                                                                    className="border border-violet-500/20 group-data-[hover=true]:border-violet-500/40"
+                                                                    className="border-2 border-violet-500/20 group-hover:border-violet-500/40
+                                                                        group-hover:shadow-[0_0_15px_rgba(139,92,246,0.3)]
+                                                                        transition-all duration-300"
                                                                 />
-                                                            </AvatarGroup>
-                                                        }
-                                                    >
-                                                        <div className="flex justify-between items-center w-full">
-                                                            <div className="flex flex-col">
-                                                                <span className="font-medium text-violet-400 group-data-[hover=true]:text-violet-300">
-                                                                    {tokenItem.symbol}
-                                                                </span>
-                                                                <span className="text-xs text-violet-400/70">
-                                                                    {tokenItem.name}
-                                                                </span>
                                                             </div>
-                                                            <span className="text-sm text-violet-400/70">
-                                                                {tokenItem.balance}
-                                                            </span>
-                                                        </div>
-                                                    </ListboxItem>
-                                                );
-                                            }
-                                            return null;
-                                        })}
-                                    </ListboxSection>
-                                </Listbox>
+
+                                                            {/* Token Info */}
+                                                            <div className="flex-1 flex items-center justify-between min-w-0">
+                                                                <div className="flex flex-col min-w-0">
+                                                                    <div className="flex items-center gap-2">
+                                                                        <p className="font-semibold text-violet-400 group-hover:text-violet-300
+                                                                            transition-colors duration-300 truncate">
+                                                                            {tokenItem.symbol}
+                                                                        </p>
+                                                                        <div className="h-1 w-1 rounded-full bg-violet-500/30 shrink-0" />
+                                                                        <p className="text-xs text-violet-400/50 truncate">
+                                                                            ${tokenItem.price || '0.00'}
+                                                                        </p>
+                                                                    </div>
+                                                                    <p className="text-xs w-full text-start text-violet-400/50 truncate">
+                                                                        {tokenItem.name}
+                                                                    </p>
+                                                                </div>
+                                                                
+                                                                {/* Balance Badge with Arrow */}
+                                                                <div className="flex items-center gap-2">
+                                                                    <div className="shrink-0 bg-violet-500/10 rounded-lg px-2 py-1
+                                                                        border border-violet-500/20 text-xs text-violet-400/90
+                                                                        group-hover:border-violet-500/30 transition-colors duration-300">
+                                                                        {tokenItem.balance}
+                                                                    </div>
+                                                              
+                                                                </div>
+                                                            </div>
+
+                                     
+                                                        </button>
+                                                    );
+                                                }
+                                                return null;
+                                            })}
+                                        </div>
+                                 
                             </ScrollShadow>
                         </CardBody>
                     </Card>
@@ -1365,7 +1386,7 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
                         </CardBody>
                         <CardFooter className="flex flex-col gap-2">
                             <div className="w-full flex flex-row gap-2 items-center justify-center rounded-lg bg-danger-500/30 text-danger-500 p-2">
-                                <Image className="h-[128px] w-[128px]" src={DEFAULT_TOKEN_LOGO} />
+                                <Image className="h-[128px] w-24" src={DEFAULT_TOKEN_LOGO} />
                                 <span>External tokens are likely added for testing purposes or as potential scams. Please conduct your own research. Otherwise, you may risk losing your assets. Please refrain from making purchases.</span>
                             </div>
                             <div className="w-full flex flex-row items-center justify-between">
