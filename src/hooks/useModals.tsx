@@ -844,7 +844,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                         <CardBody>
                             <ScrollShadow hideScrollBar orientation="horizontal" className="w-full h-[350px] max-h-[350px]">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                    {allExchangePairs && allExchangePairs.map((exchangeItem, exchangeIndex) => {
+                                    {allExchangePairs && allExchangePairs.slice().reverse().map((exchangeItem, exchangeIndex) => {
                                         return (
                                             canDisplayExchangePair(exchangeItem) &&
                                             canDisplay(exchangeItem.pair) && (
