@@ -49,7 +49,7 @@ const CustomModal = ({ isShowing, hide, header = null, closable, children }) => 
                                     variant="light"
                                     onPress={onClose}
                                     radius="full"
-                                    size="lg"
+                                    size="sm"
                                     className="bg-violet-500/10 backdrop-blur-xl
                                         border border-violet-500/30
                                         text-violet-500 hover:text-violet-400
