@@ -104,7 +104,7 @@ export const ModalError = ({ isShowing, hide, error }) => {
                         <p className='text-xs'>
                             Transaction attempt failed with an Error
                         </p>
-                    
+
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@ export const ModalInfo = ({ isShowing, hide, error }) => {
                         <textarea defaultValue={error?.data ? error.data?.message : error?.message} rows={5} cols={5} className={"w-full h-20 rounded-xl p-2 "} />
 
 
-        
+
                     </div>
                 </div>
             </div>
@@ -316,7 +316,7 @@ export const ModalTransferNFT = ({ isShowing, hide, contractAddress, tokenId, to
                 <div className="rounded-xl w-full">
                     <div className="border border-default rounded-xl pb-0">
                         <div className="flex flex-col items-center p-2 gap-2">
-                          
+
                             <Input onChange={(e) => {
                                 handleChangeInput(e)
                             }
@@ -409,13 +409,13 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
     var customTokens = useAppSelector((state) => state.user.customTokenList && state.user.customTokenList[chainId])
     const { state: isErrorShowing, toggle: toggleError } = useModal()
     const { state: isInfoShowing, toggle: toggleInfo } = useModal()
-    const [transaction, setTransaction] = useState({hash: '',summary: '',error: null})
+    const [transaction, setTransaction] = useState({ hash: '', summary: '', error: null })
     const [isSelected, setIsSelected] = useState(false);
 
 
 
     useEffect(() => {
-        if(!tokenList){
+        if (!tokenList) {
             return;
         }
         if (searchText !== "") {
@@ -446,8 +446,8 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
         const quoteItem = tokenList.filter((item) => item.address.toLowerCase().includes(exchangeItem.quote.token.toLowerCase()));
 
 
-        if(baseItem.length == 0){
-            baseItem.push( {
+        if (baseItem.length == 0) {
+            baseItem.push({
                 "chainId": chainId,
                 "address": exchangeItem.base.token,
                 "name": exchangeItem.base.name,
@@ -457,8 +457,8 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
                 "balance": "0"
             })
         }
-        if(quoteItem.length == 0){
-            quoteItem.push( {
+        if (quoteItem.length == 0) {
+            quoteItem.push({
                 "chainId": chainId,
                 "address": exchangeItem.quote.token,
                 "name": exchangeItem.quote.name,
@@ -469,7 +469,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
             })
         }
 
-        console.log(baseItem,quoteItem,exchangeItem)
+        console.log(baseItem, quoteItem, exchangeItem)
         if (onSelectPair) {
             if (baseItem.length > 0 && quoteItem.length > 0) {
                 onSelectPair(exchangeItem, baseItem[0], quoteItem[0]);
@@ -573,7 +573,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
 
         dispatch(updateCustomTokenList({ chainId: chainId, tokens: customTokenList }))
 
-        setTransaction({ hash: '', summary: '', error:{message:`Token has been imported.`}});
+        setTransaction({ hash: '', summary: '', error: { message: `Token has been imported.` } });
         toggleInfo();
 
     }
@@ -584,13 +584,13 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
         const baseItem = filteredItems.filter((item) => item.address.toLowerCase().includes(pair.base.token.toLowerCase()));
         const quoteItem = filteredItems.filter((item) => item.address.toLowerCase().includes(pair.quote.token.toLowerCase()));
 
-     
-        
-        if(baseItem.length == 0){
+
+
+        if (baseItem.length == 0) {
             return false
         }
 
-        if(quoteItem.length == 0){
+        if (quoteItem.length == 0) {
             return false
         }
 
@@ -661,7 +661,7 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
 
     useEffect(() => {
 
-        console.log("chainId:tokens",chainId,tokenList)
+        console.log("chainId:tokens", chainId, tokenList)
         if (tokenList) {
             setFilteredItems(tokenList)
             setAllTokenList(tokenList)
@@ -675,150 +675,282 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
             hide={toggleInfo}
             error={transaction.error}
         />
-            <ModalError
-                isShowing={isErrorShowing}
-                hide={toggleError}
-                error={transaction.error}
-            />
+        <ModalError
+            isShowing={isErrorShowing}
+            hide={toggleError}
+            error={transaction.error}
+        />
         <CustomModal header={"Select Token"} isShowing={isShowing} hide={hide} closable={isClosable}>
-            <div className={"w-full"}>
-
-
-
-            <Tabs color="default" aria-label="Options">
-                            <Tab key="tokens" title="Tokens">
-                                <Card shadow="sm">
-                                    <CardHeader>
-                                        <Input startContent={
-                                            <span translate="no" className="material-symbols-outlined">
-                                                search
-                                            </span>
-                                        }
-
-                                            label="Search" variant="flat" size="lg" value={searchText}
-                                            onChange={handleInputChange}
-                                            className="w-full" type="text" placeholder="" />
-
-                                    </CardHeader>
-                                    <CardBody>
-                                        <ScrollShadow orientation="horizontal" className="w-full h-[270px] max-h-[270px]">
-
-                                            <Listbox className="w-full" variant="flat" aria-label="Listbox menu with sections">
-   
-   
-                                            <ListboxSection title="Tokens">
-  {
-    filteredItems && filteredItems.map((tokenItem) => {
-      // Check if disableToken is null or address is different
-      if (disableToken?.address !== tokenItem.address) {
-        return (
-          <ListboxItem 
-            startContent={
-              <AvatarGroup size='sm' isBordered>
-                <Avatar size='sm' src={tokenItem.logoURI} />
-              </AvatarGroup>
-            }
-            key={`token${tokenItem.address}`}
-            onPress={() => {
-              onSelect(tokenItem);
-              setSearchText("");
-            }}
-            className={"w-full flex flex-row items-center justify-between gap-2"}
-          >
-            <div className={"flex flex-row items-center justify-between gap-2 w-full"}>
-              <div className={"w-full flex flex-col items-center justify-center gap-2"}>
-                <div className={"w-full flex flex-col items-start justify-start whitespace-nowrap overflow-ellipsis"}>
-                  <span className="font-bold">{tokenItem.symbol}</span>
-                  <span className={"text-xs whitespace-nowrap overflow-ellipsis"}>{tokenItem.name}</span>
-                </div>
-              </div>
-              <div className={"w-full text-xs text-end"}>
-                {tokenItem.balance}
-              </div>
-            </div>
-          </ListboxItem>
-        );
-      }
-      return null;  // This ensures nothing is rendered if the token is disabled
-    })
-  }
-</ListboxSection>
-
-                                            </Listbox>
-                                        </ScrollShadow>
-                                    </CardBody>
-                                </Card>
-                            </Tab>
-                            <Tab key="pairs" title="Pairs">
-                                <Card>
-                                    <CardBody>
-
-                                        <ScrollShadow orientation="horizontal" className="w-full h-[350px] max-h-[350px]">
-
-                                            <Listbox className="w-full" variant="flat" aria-label="Listbox menu with sections">
-                                                {
-                                                    allExchangePairs && <ListboxSection title="Exchange Pairs">
-                                                        {
-
-
-                                                            allExchangePairs.map((exchangeItem, exchangeIndex) => {
-                                                                return (
-                                                                    canDisplayExchangePair(exchangeItem) &&
-                                                                    canDisplay(exchangeItem.pair) &&
-                                                                    <ListboxItem
-                                                                        startContent={
-                                                                            <DoubleCurrencyIcon baseIcon={getIconPath(exchangeItem.base.symbol)} quoteIcon={getIconPath(exchangeItem.quote.symbol)} />
-                                                                        }
-                                                                        key={`exchangeItem${exchangeIndex}`} onPress={() => {
-                                                                            handleSelectPair(exchangeItem)
-                                                                        }} className="w-full">
-                                                                        <span className={"sm:text-sm"}>{exchangeItem.base.symbol} x {exchangeItem.quote.symbol}</span>
-                                                                    </ListboxItem>
-                                                                )
-                                                            })
-
+            <Tabs 
+                 disableAnimation
+                 radius="lg" 
+                 fullWidth 
+                 classNames={{
+                     base: "w-full",
+                     tabList: [
+                         "relative",
+                         "bg-white/[0.01] dark:bg-black/[0.01]",
+                         "backdrop-blur-xl",
+                         "border border-violet-500/10",
+                         "p-1",
+                         "rounded-2xl",
+                         "flex",
+                         "gap-1"
+                     ].join(" "),
+                     cursor: "hidden",
+                     tab: [
+                         "flex-1",
+                         "h-9",
+                         "px-4",
+                         "rounded-xl",
+                         "flex items-center justify-center",
+                         "gap-2",
+                         "text-xs font-medium",
+                         "text-violet-600/50 dark:text-violet-400/50",
+                         "group",
+                         "relative",
+                         "overflow-hidden",
+                         "transition-all duration-200",
+                         "data-[selected=true]:bg-violet-500/[0.02] dark:data-[selected=true]:bg-violet-400/[0.02]",
+                         "data-[selected=true]:backdrop-blur-xl",
+                         "data-[selected=true]:text-violet-500 dark:data-[selected=true]:text-violet-400",
+                         "before:absolute",
+                         "before:inset-0",
+                         "before:rounded-xl",
+                         "before:opacity-0",
+                         "before:pointer-events-none",
+                         "before:z-[-1]",
+                         "data-[selected=true]:before:opacity-100",
+                         "before:bg-gradient-to-r",
+                         "before:from-violet-500/0",
+                         "before:via-violet-500/[0.07]",
+                         "before:to-violet-500/0",
+                         "before:transition-opacity",
+                         "data-[selected=true]:before:animate-shimmer",
+                         "before:bg-[length:200%_100%]",
+                         "hover:bg-violet-500/[0.01] dark:hover:bg-violet-400/[0.01]",
+                         "hover:text-violet-500/70"
+                     ].join(" "),
+                     tabContent: "relative z-10",
+                     panel: "pt-4"
+                 }}
+            >
+                <Tab key="tokens" title="Tokens">
+                    <Card 
+                        shadow="none"
+                        className="border border-violet-500/10 bg-white/5 dark:bg-black/5 backdrop-blur-xl mt-4"
+                    >
+                        <CardHeader>
+                            <Input 
+                                startContent={
+                                    <span translate="no" className="material-symbols-outlined text-violet-400">
+                                        search
+                                    </span>
+                                }
+                                label="Search" 
+                                variant="bordered"
+                                size="lg" 
+                                value={searchText}
+                                onChange={handleInputChange}
+                                classNames={{
+                                    input: "text-violet-400",
+                                    inputWrapper: "border-violet-500/20 bg-violet-500/5 hover:border-violet-500/30 group-data-[focused=true]:border-violet-500/40"
+                                }}
+                                placeholder="Search token or paste address" 
+                            />
+                        </CardHeader>
+                        <CardBody>
+                            <ScrollShadow orientation="horizontal" className="w-full h-[270px] max-h-[270px]">
+                                <Listbox 
+                                    className="w-full" 
+                                    variant="flat" 
+                                    aria-label="Token list"
+                                >
+                                    <ListboxSection 
+                                        title="Tokens"
+                                        classNames={{
+                                            base: "text-violet-400/70",
+                                            heading: "text-violet-400/50 font-medium"
+                                        }}
+                                    >
+                                        {filteredItems && filteredItems.map((tokenItem) => {
+                                            if (disableToken?.address !== tokenItem.address) {
+                                                return (
+                                                    <ListboxItem
+                                                        key={`token${tokenItem.address}`}
+                                                        onPress={() => {
+                                                            onSelect(tokenItem);
+                                                            setSearchText("");
+                                                        }}
+                                                        className="group data-[hover=true]:bg-violet-500/10 rounded-lg"
+                                                        startContent={
+                                                            <AvatarGroup size='sm'>
+                                                                <Avatar 
+                                                                    size='sm' 
+                                                                    src={tokenItem.logoURI}
+                                                                    className="border border-violet-500/20 group-data-[hover=true]:border-violet-500/40"
+                                                                />
+                                                            </AvatarGroup>
                                                         }
-                                                    </ListboxSection>
-                                                }
+                                                    >
+                                                        <div className="flex justify-between items-center w-full">
+                                                            <div className="flex flex-col">
+                                                                <span className="font-medium text-violet-400 group-data-[hover=true]:text-violet-300">
+                                                                    {tokenItem.symbol}
+                                                                </span>
+                                                                <span className="text-xs text-violet-400/70">
+                                                                    {tokenItem.name}
+                                                                </span>
+                                                            </div>
+                                                            <span className="text-sm text-violet-400/70">
+                                                                {tokenItem.balance}
+                                                            </span>
+                                                        </div>
+                                                    </ListboxItem>
+                                                );
+                                            }
+                                            return null;
+                                        })}
+                                    </ListboxSection>
+                                </Listbox>
+                            </ScrollShadow>
+                        </CardBody>
+                    </Card>
+                </Tab>
 
-                                            </Listbox>
-                                        </ScrollShadow>
-                                    </CardBody>
-                                </Card>
-                            </Tab>
-                            <Tab key={"import"} title={"Import Token"}>
-                                <Card>
-                                    <CardBody className="flex flex-col gap-2">
-                                        <Input onChange={handleContractAddressChange} size="lg" type="text" label="Contract Address" placeholder="0x" />
-                                        <Input isDisabled isReadOnly size="lg" type="text" label="Name" placeholder="" value={externalTokenName} />
-                                        <div className="grid grid-cols-2 gap-2">
-                                        <Input isDisabled isReadOnly size="lg" type="text" label="Symbol" placeholder="" value={externalTokenSymbol} />
-                                        <Input isDisabled isReadOnly size="lg" type="text" label="Decimals" placeholder="" value={externalTokenDecimals} />
-                                        </div>
-                                    </CardBody>
-                                    <CardFooter className="flex flex-col gap-2">
-                                        <div className="w-full flex flex-row gap-2 items-center justify-center rounded-lg bg-danger-500/30 text-danger-500 p-2">
-                                            <Image className="h-[128px] w-[128px]"  src={DEFAULT_TOKEN_LOGO}/>
-                                            <span>External tokens are likely added for testing purposes or as potential scams. Please conduct your own research. Otherwise, you may risk losing your assets. Please refrain from making purchases.</span>
-                                        </div>
-                                        <div className="w-full flex flex-row items-center justify-between">
-                                        <Switch  isSelected={isSelected} onValueChange={setIsSelected} defaultSelected color="default">I understand. I promise not to buy, I swear to God.</Switch>
+                <Tab key="pairs" title="Pairs">
+                    <Card className="border border-violet-500/10 bg-white/5 dark:bg-black/5 backdrop-blur-xl mt-4">
+                        <CardBody>
+                            <ScrollShadow orientation="horizontal" className="w-full h-[350px] max-h-[350px]">
+                                <Listbox className="w-full" variant="flat">
+                                    {allExchangePairs && (
+                                        <ListboxSection 
+                                            title="Exchange Pairs"
+                                            classNames={{
+                                                base: "text-violet-400/70",
+                                                heading: "text-violet-400/50 font-medium"
+                                            }}
+                                        >
+                                            {allExchangePairs.map((exchangeItem, exchangeIndex) => {
+                                                return (
+                                                    canDisplayExchangePair(exchangeItem) &&
+                                                    canDisplay(exchangeItem.pair) &&
+                                                    <ListboxItem
+                                                        key={`exchangeItem${exchangeIndex}`}
+                                                        onPress={() => handleSelectPair(exchangeItem)}
+                                                        className="group data-[hover=true]:bg-violet-500/10 rounded-lg"
+                                                        startContent={
+                                                            <DoubleCurrencyIcon 
+                                                                baseIcon={getIconPath(exchangeItem.base.symbol)} 
+                                                                quoteIcon={getIconPath(exchangeItem.quote.symbol)}
+                                                            />
+                                                        }
+                                                    >
+                                                        <span className="text-violet-400 group-data-[hover=true]:text-violet-300">
+                                                            {exchangeItem.base.symbol} x {exchangeItem.quote.symbol}
+                                                        </span>
+                                                    </ListboxItem>
+                                                )
+                                            })}
+                                        </ListboxSection>
+                                    )}
+                                </Listbox>
+                            </ScrollShadow>
+                        </CardBody>
+                    </Card>
+                </Tab>
 
-                                            <Button isDisabled={!isSelected} onPress={() => {
-                                                handleImportToken()
-                                            }} size="lg" color="default">Import Token</Button>
-                                        </div>
+                <Tab key="import" title="Import Token">
+                    <Card className="border border-violet-500/10 bg-white/5 dark:bg-black/5 backdrop-blur-xl mt-4">
+                        <CardBody className="flex flex-col gap-3">
+                            <Input
+                                onChange={handleContractAddressChange}
+                                size="lg"
+                                label="Contract Address"
+                                placeholder="0x"
+                                classNames={{
+                                    input: "text-violet-400",
+                                    inputWrapper: "border-violet-500/20 bg-violet-500/5 hover:border-violet-500/30"
+                                }}
+                            />
+                            <Input
+                                isDisabled
+                                isReadOnly
+                                size="lg"
+                                label="Name"
+                                value={externalTokenName}
+                                classNames={{
+                                    input: "text-violet-400/50",
+                                    inputWrapper: "border-violet-500/10 bg-violet-500/5"
+                                }}
+                            />
+                            <div className="grid grid-cols-2 gap-2">
+                                <Input
+                                    isDisabled
+                                    isReadOnly
+                                    size="lg"
+                                    label="Symbol"
+                                    value={externalTokenSymbol}
+                                    classNames={{
+                                        input: "text-violet-400/50",
+                                        inputWrapper: "border-violet-500/10 bg-violet-500/5"
+                                    }}
+                                />
+                                <Input
+                                    isDisabled
+                                    isReadOnly
+                                    size="lg"
+                                    label="Decimals"
+                                    value={externalTokenDecimals}
+                                    classNames={{
+                                        input: "text-violet-400/50",
+                                        inputWrapper: "border-violet-500/10 bg-violet-500/5"
+                                    }}
+                                />
+                            </div>
+                        </CardBody>
+                        <CardFooter className="flex flex-col gap-3">
+                            <div className="flex gap-4 items-center p-4 rounded-xl bg-red-500/10 border border-red-500/20">
+                                <Image className="h-24 w-24" src={DEFAULT_TOKEN_LOGO}/>
+                                <p className="text-red-400 text-sm">
+                                    External tokens are likely added for testing purposes or as potential scams. 
+                                    Please conduct your own research. Otherwise, you may risk losing your assets.
+                                </p>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <Switch
+                                    isSelected={isSelected}
+                                    onValueChange={setIsSelected}
+                                    classNames={{
+                                        base: "bg-violet-500/10",
+                                        wrapper: "group-data-[selected=true]:bg-violet-500"
+                                    }}
+                                >
+                                    <span className="text-violet-400 text-sm">
+                                        I understand and accept the risks
+                                    </span>
+                                </Switch>
 
-                                    
-                                    </CardFooter>
-                                </Card>
-                            </Tab>
-
-                        </Tabs>
-
-
-
-            </div>
+                                <Button
+                                    isDisabled={!isSelected}
+                                    onPress={handleImportToken}
+                                    className="bg-violet-500/10 backdrop-blur-xl
+                                        border border-violet-500/30
+                                        text-violet-500 hover:text-violet-400
+                                        shadow-[0_0_15px_rgba(139,92,246,0.3)]
+                                        hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]
+                                        transition-all duration-500
+                                        group relative overflow-hidden"
+                                >
+                                    <div className="absolute inset-0 bg-gradient-to-r from-violet-500/0 via-violet-500/10 to-violet-500/0
+                                        translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                                    <span className="relative">Import Token</span>
+                                </Button>
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </Tab>
+            </Tabs>
         </CustomModal>
     </>
 
@@ -839,11 +971,11 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
     const ERC20Contract = useERC20Contract()
     const dispatch = useAppDispatch()
     var customTokens = useAppSelector((state) => state.user.customTokenList && state.user.customTokenList[chainId])
-    const {state:isTransactionSuccess, toggle:toggleTransactionSuccess } = useModal();
-    const {state:isShowLoading, toggle:toggleLoading } = useModal();
+    const { state: isTransactionSuccess, toggle: toggleTransactionSuccess } = useModal();
+    const { state: isShowLoading, toggle: toggleLoading } = useModal();
     const { state: isErrorShowing, toggle: toggleError } = useModal()
     const { state: isInfoShowing, toggle: toggleInfo } = useModal()
-    const [transaction, setTransaction] = useState({hash: '',summary: '',error: null})
+    const [transaction, setTransaction] = useState({ hash: '', summary: '', error: null })
     const [isSelected, setIsSelected] = useState(false);
 
     const CNS_DOMAIN_CONTRACT = useDomainContract(chainId, true);
@@ -878,8 +1010,8 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
         const quoteItem = tokenList.filter((item) => item.address.toLowerCase().includes(exchangeItem.quote.token.toLowerCase()));
 
 
-        if(baseItem.length == 0){
-            baseItem.push( {
+        if (baseItem.length == 0) {
+            baseItem.push({
                 "chainId": chainId,
                 "address": exchangeItem.base.token,
                 "name": exchangeItem.base.name,
@@ -889,8 +1021,8 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
                 "balance": "0"
             })
         }
-        if(quoteItem.length == 0){
-            quoteItem.push( {
+        if (quoteItem.length == 0) {
+            quoteItem.push({
                 "chainId": chainId,
                 "address": exchangeItem.quote.token,
                 "name": exchangeItem.quote.name,
@@ -901,7 +1033,7 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
             })
         }
 
-        console.log(baseItem,quoteItem,exchangeItem)
+        console.log(baseItem, quoteItem, exchangeItem)
         if (onSelectPair) {
             if (baseItem.length > 0 && quoteItem.length > 0) {
                 onSelectPair(exchangeItem, baseItem[0], quoteItem[0]);
@@ -1013,7 +1145,7 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
 
         dispatch(updateCustomTokenList({ chainId: chainId, tokens: customTokenList }))
 
-        setTransaction({ hash: '', summary: '', error:{message:`Token has been imported.`}});
+        setTransaction({ hash: '', summary: '', error: { message: `Token has been imported.` } });
         toggleInfo();
 
     }
@@ -1024,13 +1156,13 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
         const baseItem = filteredItems.filter((item) => item.address.toLowerCase().includes(pair.base.token.toLowerCase()));
         const quoteItem = filteredItems.filter((item) => item.address.toLowerCase().includes(pair.quote.token.toLowerCase()));
 
-     
-        
-        if(baseItem.length == 0){
+
+
+        if (baseItem.length == 0) {
             return false
         }
 
-        if(quoteItem.length == 0){
+        if (quoteItem.length == 0) {
             return false
         }
 
@@ -1114,115 +1246,142 @@ export const ModalSelectFanToken = ({ isShowing, disableToken, hide, tokenList, 
             hide={toggleInfo}
             error={transaction.error}
         />
-            <ModalError
-                isShowing={isErrorShowing}
-                hide={toggleError}
-                error={transaction.error}
-            />
+        <ModalError
+            isShowing={isErrorShowing}
+            hide={toggleError}
+            error={transaction.error}
+        />
         <CustomModal header={"Select Token"} isShowing={isShowing} hide={hide} closable={isClosable}>
-            <div className={"w-full"}>
+            <Tabs color="default" aria-label="Options">
+                <Tab key="tokens" title="Tokens">
+                    <Card shadow="sm">
+                        <CardHeader>
+                            <Input startContent={
+                                <span translate="no" className="material-symbols-outlined">
+                                    search
+                                </span>
+                            }
+
+                                label="Search" variant="flat" size="lg" value={searchText}
+                                onChange={handleInputChange}
+                                className="w-full" type="text" placeholder="" />
+
+                        </CardHeader>
+                        <CardBody>
+                            <ScrollShadow orientation="horizontal" className="w-full h-[270px] max-h-[270px]">
+
+                                <Listbox className="w-full" variant="flat" aria-label="Listbox menu with sections">
 
 
-
-
-                <Card shadow="sm" fullWidth={true}>
-
-                    <CardBody>
-                        <Tabs color="default" aria-label="Options">
-                            <Tab key="tokens" title="Tokens">
-                                <Card shadow="sm">
-                                    <CardHeader>
-                                        <Input startContent={
-                                            <span translate="no" className="material-symbols-outlined">
-                                                search
-                                            </span>
-                                        }
-
-                                            label="Search" variant="flat" size="lg" value={searchText}
-                                            onChange={handleInputChange}
-                                            className="w-full" type="text" placeholder="" />
-
-                                    </CardHeader>
-                                    <CardBody>
-                                        <ScrollShadow orientation="horizontal" className="w-full h-[270px] max-h-[270px]">
-
-                                            <Listbox className="w-full" variant="flat" aria-label="Listbox menu with sections">
-
-                                                <ListboxSection title="Tokens">
-
-                                                    {
-                                                        disableToken && filteredItems && filteredItems.map((tokenItem) => {
-                                                            return (tokenItem.decimals < 18 && canDisplay(tokenItem.address)) &&
-                                                                <ListboxItem startContent={
-                                                                    <AvatarGroup size='sm' isBordered>
-
-                                                                        <Avatar size='sm' src={tokenItem.logoURI} />
-
-                                                                    </AvatarGroup>
-
-                                                                }
-                                                                    key={`token${tokenItem.address}`} onPress={() => {
-                                                                        onSelect(tokenItem)
-                                                                        setSearchText("")
-                                                                    }} className={"w-full flex flex-row items-center justify-between gap-2"}>
-                                                                    <div className={"flex flex-row items-center justify-between gap-2 w-full"}>
-                                                                        <div className={"w-full flex flex-col items-center justify-center gap-2"}>
-                                                                            <div className={"w-full flex flex-col items-start justify-start whitespace-nowrap overflow-ellipsis"}>
-                                                                                <span className="font-bold">{tokenItem.symbol}</span>
-                                                                                <span className={"text-xs whitespace-nowrap overflow-ellipsis"}>{tokenItem.name}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className={"w-full text-xs text-end "}>
-                                                                            {tokenItem.balance}
-                                                                        </div>
+                                    <ListboxSection title="Tokens">
+                                        {
+                                            filteredItems && filteredItems.map((tokenItem) => {
+                                                // Check if disableToken is null or address is different
+                                                if (disableToken?.address !== tokenItem.address) {
+                                                    return (
+                                                        <ListboxItem
+                                                            startContent={
+                                                                <AvatarGroup size='sm' isBordered>
+                                                                    <Avatar size='sm' src={tokenItem.logoURI} />
+                                                                </AvatarGroup>
+                                                            }
+                                                            key={`token${tokenItem.address}`}
+                                                            onPress={() => {
+                                                                onSelect(tokenItem);
+                                                                setSearchText("");
+                                                            }}
+                                                            className={"w-full flex flex-row items-center justify-between gap-2"}
+                                                        >
+                                                            <div className={"flex flex-row items-center justify-between gap-2 w-full"}>
+                                                                <div className={"w-full flex flex-col items-center justify-center gap-2"}>
+                                                                    <div className={"w-full flex flex-col items-start justify-start whitespace-nowrap overflow-ellipsis"}>
+                                                                        <span className="font-bold">{tokenItem.symbol}</span>
+                                                                        <span className={"text-xs whitespace-nowrap overflow-ellipsis"}>{tokenItem.name}</span>
                                                                     </div>
+                                                                </div>
+                                                                <div className={"w-full text-xs text-end"}>
+                                                                    {tokenItem.balance}
+                                                                </div>
+                                                            </div>
+                                                        </ListboxItem>
+                                                    );
+                                                }
+                                                return null;  // This ensures nothing is rendered if the token is disabled
+                                            })
+                                        }
+                                    </ListboxSection>
 
-                                                                </ListboxItem>
-                                                        })
-                                                    }
-                                                </ListboxSection>
-                                            </Listbox>
-                                        </ScrollShadow>
-                                    </CardBody>
-                                </Card>
-                            </Tab>
-                        
-                            <Tab key={"import"} title={"Import Token"}>
-                                <Card>
-                                    <CardBody className="flex flex-col gap-2">
-                                        <Input onChange={handleContractAddressChange} size="lg" type="text" label="Contract Address" placeholder="0x" />
-                                        <Input isDisabled isReadOnly size="lg" type="text" label="Name" placeholder="" value={externalTokenName} />
-                                        <div className="grid grid-cols-2 gap-2">
-                                        <Input isDisabled isReadOnly size="lg" type="text" label="Symbol" placeholder="" value={externalTokenSymbol} />
-                                        <Input isDisabled isReadOnly size="lg" type="text" label="Decimals" placeholder="" value={externalTokenDecimals} />
-                                        </div>
-                                    </CardBody>
-                                    <CardFooter className="flex flex-col gap-2">
-                                        <div className="w-full flex flex-row gap-2 items-center justify-center rounded-lg bg-danger-500/30 text-danger-500 p-2">
-                                            <Image className="h-[128px] w-[128px]"  src={DEFAULT_TOKEN_LOGO}/>
-                                            <span>External tokens are likely added for testing purposes or as potential scams. Please conduct your own research. Otherwise, you may risk losing your assets. Please refrain from making purchases.</span>
-                                        </div>
-                                        <div className="w-full flex flex-row items-center justify-between">
-                                        <Switch  isSelected={isSelected} onValueChange={setIsSelected} defaultSelected color="default">I understand. I promise not to buy, I swear to God.</Switch>
+                                </Listbox>
+                            </ScrollShadow>
+                        </CardBody>
+                    </Card>
+                </Tab>
+                <Tab key="pairs" title="Pairs">
+                    <Card>
+                        <CardBody>
 
-                                            <Button isDisabled={!isSelected} onPress={() => {
-                                                handleImportToken()
-                                            }} size="lg" color="default">Import Token</Button>
-                                        </div>
+                            <ScrollShadow orientation="horizontal" className="w-full h-[350px] max-h-[350px]">
 
-                                    
-                                    </CardFooter>
-                                </Card>
-                            </Tab>
-
-                        </Tabs>
-                    </CardBody>
-                </Card>
+                                <Listbox className="w-full" variant="flat" aria-label="Listbox menu with sections">
+                                    {
+                                        allExchangePairs && <ListboxSection title="Exchange Pairs">
+                                            {
 
 
+                                                allExchangePairs.map((exchangeItem, exchangeIndex) => {
+                                                    return (
+                                                        canDisplayExchangePair(exchangeItem) &&
+                                                        canDisplay(exchangeItem.pair) &&
+                                                        <ListboxItem
+                                                            startContent={
+                                                                <DoubleCurrencyIcon baseIcon={getIconPath(exchangeItem.base.symbol)} quoteIcon={getIconPath(exchangeItem.quote.symbol)} />
+                                                            }
+                                                            key={`exchangeItem${exchangeIndex}`} onPress={() => {
+                                                                handleSelectPair(exchangeItem)
+                                                            }} className="w-full">
+                                                            <span className={"sm:text-sm"}>{exchangeItem.base.symbol} x {exchangeItem.quote.symbol}</span>
+                                                        </ListboxItem>
+                                                    )
+                                                })
+
+                                            }
+                                        </ListboxSection>
+                                    }
+
+                                </Listbox>
+                            </ScrollShadow>
+                        </CardBody>
+                    </Card>
+                </Tab>
+                <Tab key={"import"} title={"Import Token"}>
+                    <Card>
+                        <CardBody className="flex flex-col gap-2">
+                            <Input onChange={handleContractAddressChange} size="lg" type="text" label="Contract Address" placeholder="0x" />
+                            <Input isDisabled isReadOnly size="lg" type="text" label="Name" placeholder="" value={externalTokenName} />
+                            <div className="grid grid-cols-2 gap-2">
+                                <Input isDisabled isReadOnly size="lg" type="text" label="Symbol" placeholder="" value={externalTokenSymbol} />
+                                <Input isDisabled isReadOnly size="lg" type="text" label="Decimals" placeholder="" value={externalTokenDecimals} />
+                            </div>
+                        </CardBody>
+                        <CardFooter className="flex flex-col gap-2">
+                            <div className="w-full flex flex-row gap-2 items-center justify-center rounded-lg bg-danger-500/30 text-danger-500 p-2">
+                                <Image className="h-[128px] w-[128px]" src={DEFAULT_TOKEN_LOGO} />
+                                <span>External tokens are likely added for testing purposes or as potential scams. Please conduct your own research. Otherwise, you may risk losing your assets. Please refrain from making purchases.</span>
+                            </div>
+                            <div className="w-full flex flex-row items-center justify-between">
+                                <Switch isSelected={isSelected} onValueChange={setIsSelected} defaultSelected color="default">I understand. I promise not to buy, I swear to God.</Switch>
+
+                                <Button isDisabled={!isSelected} onPress={() => {
+                                    handleImportToken()
+                                }} size="lg" color="default">Import Token</Button>
+                            </div>
 
 
-            </div>
+                        </CardFooter>
+                    </Card>
+                </Tab>
+
+            </Tabs>
         </CustomModal>
     </>
 
@@ -1443,26 +1602,26 @@ export const ModalSelectExchangePair = ({ isShowing, disableToken, hide, tokenLi
 
                             <div className="w-full grid  grid-cols-1 sm:grid-cols-3 p-2 gap-4">
                                 {
-                                    allExchangePairs && 
+                                    allExchangePairs &&
 
 
-                                            allExchangePairs.map((exchangeItem, exchangeIndex) => {
-                                                return (
-                                                    canDisplay(exchangeItem.pair) &&
-                                                    <Button  size="lg" variant="flat"
-                                                        
-                                                        key={`exchangeItem${exchangeIndex}`} onPress={() => {
-                                                            handleSelectPair(exchangeItem)
-                                                        }} className="w-full flex flex-col gap-2 h-[100px]">
-                                                            <DoubleCurrencyIcon baseIcon={getIconPath(exchangeItem.base.symbol)} quoteIcon={getIconPath(exchangeItem.quote.symbol)} />
-                                                        <span className={"sm:text-sm"}>{exchangeItem.base.symbol} x {exchangeItem.quote.symbol}</span>
-                                                    </Button>
-                                                )
-                                            })
+                                    allExchangePairs.map((exchangeItem, exchangeIndex) => {
+                                        return (
+                                            canDisplay(exchangeItem.pair) &&
+                                            <Button size="lg" variant="flat"
 
-                                        }
-                                 
-                              
+                                                key={`exchangeItem${exchangeIndex}`} onPress={() => {
+                                                    handleSelectPair(exchangeItem)
+                                                }} className="w-full flex flex-col gap-2 h-[100px]">
+                                                <DoubleCurrencyIcon baseIcon={getIconPath(exchangeItem.base.symbol)} quoteIcon={getIconPath(exchangeItem.quote.symbol)} />
+                                                <span className={"sm:text-sm"}>{exchangeItem.base.symbol} x {exchangeItem.quote.symbol}</span>
+                                            </Button>
+                                        )
+                                    })
+
+                                }
+
+
 
                             </div>
                         </ScrollShadow>
