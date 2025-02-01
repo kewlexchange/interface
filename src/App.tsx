@@ -959,18 +959,31 @@ const App = () => {
                           animate-spin-slow" />
               </div>
 
-              {/* Enhanced Cyber Grid with Multiple Layers */}
-              <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-[url('/cyber-grid.svg')] bg-repeat opacity-[0.15]
-                          dark:opacity-[0.08] animate-float-slow" />
-                <div className="absolute inset-0 bg-[url('/cyber-grid.svg')] bg-repeat opacity-[0.15] scale-75 rotate-45
-                          dark:opacity-[0.08] animate-float-slow-reverse" />
-                <div className="absolute inset-0 bg-[url('/circuit-pattern.svg')] bg-repeat opacity-[0.1]
-                          dark:opacity-[0.05] animate-circuit-flow" />
+             
+              {/* Enhanced Energy Cores - Moved behind grid */}
+              <div className="absolute inset-0 overflow-hidden z-[1]">
+                <div className="absolute top-1/4 -right-20 w-[500px] h-[500px]
+                          rounded-full bg-violet-500/20 blur-[120px]
+                          animate-energy-pulse mix-blend-screen" />
+                <div className="absolute bottom-1/4 -left-20 w-[500px] h-[500px]
+                          rounded-full bg-blue-500/20 blur-[120px]
+                          animate-energy-pulse animation-delay-1000 mix-blend-screen" />
+                <div className="absolute top-1/2 left-1/2 w-[300px] h-[300px]
+                          rounded-full bg-fuchsia-500/20 blur-[100px]
+                          animate-energy-pulse-fast mix-blend-screen" />
               </div>
 
-              {/* Matrix-style Digital Rain */}
-              <div className="absolute inset-0">
+       
+              {/* Enhanced Hexagonal Pattern - Moved to front */}
+              <div className="absolute inset-0 z-[2]">
+                <div className="absolute inset-0 bg-[url('/images/hex-pattern.svg')] bg-repeat opacity-[0.07]
+                          dark:opacity-[0.04] animate-float-slow scale-150" />
+                <div className="absolute inset-0 bg-[url('/images/hex-pattern-bold.svg')] bg-repeat opacity-[0.05]
+                          dark:opacity-[0.03] animate-float-slow-reverse scale-100" />
+              </div>
+
+              {/* Matrix-style Digital Rain - Moved behind radar */}
+              <div className="absolute inset-0 z-[0]">
                 {[...Array(25)].map((_, i) => (
                   <div key={i}
                     className="absolute w-[1px] h-full
@@ -985,111 +998,7 @@ const App = () => {
                 ))}
               </div>
 
-              {/* Enhanced Neon Energy Lines */}
-              <div className="absolute inset-0">
-                {[...Array(15)].map((_, i) => (
-                  <div key={i}
-                    className="absolute h-[2px] w-full
-                            bg-gradient-to-r from-transparent via-violet-500/50 to-transparent
-                            animate-scan-line-bright"
-                    style={{
-                      top: `${i * 6.66}%`,
-                      animationDelay: `${i * 0.3}s`,
-                      opacity: 0.4,
-                      boxShadow: '0 0 20px rgba(139,92,246,0.6)'
-                    }} />
-                ))}
-              </div>
-
-              {/* Advanced Holographic Circles */}
-              <div className="absolute inset-0">
-                {[...Array(10)].map((_, i) => (
-                  <div key={i}
-                    className="absolute rounded-full
-                            border-2 border-violet-500/30
-                            animate-tech-pulse-bright"
-                    style={{
-                      width: `${200 + i * 100}px`,
-                      height: `${200 + i * 100}px`,
-                      top: `${Math.random() * 100}%`,
-                      left: `${Math.random() * 100}%`,
-                      transform: 'translate(-50%, -50%) rotate(45deg)',
-                      animationDelay: `${i * 0.5}s`,
-                      boxShadow: 'inset 0 0 50px rgba(139,92,246,0.3), 0 0 30px rgba(139,92,246,0.3)',
-                      borderStyle: i % 2 === 0 ? 'dashed' : 'solid'
-                    }} />
-                ))}
-              </div>
-
-              {/* Enhanced Quantum Particles */}
-              <div className="absolute inset-0">
-                {[...Array(60)].map((_, i) => (
-                  <div key={i}
-                    className="absolute bg-violet-400
-                            animate-quantum-float"
-                    style={{
-                      width: `${1 + Math.random() * 4}px`,
-                      height: `${1 + Math.random() * 4}px`,
-                      top: `${Math.random() * 100}%`,
-                      left: `${Math.random() * 100}%`,
-                      animationDuration: `${3 + Math.random() * 7}s`,
-                      animationDelay: `${Math.random() * 2}s`,
-                      boxShadow: '0 0 15px rgba(139,92,246,0.9)',
-                      filter: 'blur(0.5px)'
-                    }} />
-                ))}
-              </div>
-
-              {/* Enhanced Energy Cores */}
-              <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-1/4 -right-20 w-[500px] h-[500px]
-                          rounded-full bg-violet-500/20 blur-[120px]
-                          animate-energy-pulse mix-blend-screen" />
-                <div className="absolute bottom-1/4 -left-20 w-[500px] h-[500px]
-                          rounded-full bg-blue-500/20 blur-[120px]
-                          animate-energy-pulse animation-delay-1000 mix-blend-screen" />
-                <div className="absolute top-1/2 left-1/2 w-[300px] h-[300px]
-                          rounded-full bg-fuchsia-500/20 blur-[100px]
-                          animate-energy-pulse-fast mix-blend-screen" />
-              </div>
-
-              {/* Enhanced Hexagonal Pattern */}
-              <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-[url('/hex-pattern.svg')] bg-repeat opacity-[0.07]
-                          dark:opacity-[0.04] animate-float-slow scale-150" />
-                <div className="absolute inset-0 bg-[url('/hex-pattern-bold.svg')] bg-repeat opacity-[0.05]
-                          dark:opacity-[0.03] animate-float-slow-reverse scale-100" />
-              </div>
-
-              {/* Enhanced Data Streams */}
-              <div className="absolute inset-0">
-                {[...Array(30)].map((_, i) => (
-                  <div key={i}
-                    className="absolute h-[20px] 
-                            bg-gradient-to-r from-transparent via-violet-500/10 to-transparent
-                            animate-data-stream"
-                    style={{
-                      width: `${80 + Math.random() * 250}px`,
-                      top: `${Math.random() * 100}%`,
-                      left: `${Math.random() * 100}%`,
-                      transform: `rotate(${Math.random() * 360}deg)`,
-                      animationDuration: `${4 + Math.random() * 6}s`,
-                      animationDelay: `${Math.random() * 3}s`,
-                      boxShadow: '0 0 30px rgba(139,92,246,0.2)'
-                    }} />
-                ))}
-              </div>
-
-              {/* Binary Code Overlay */}
-              <div className="absolute inset-0 mix-blend-overlay opacity-[0.02]">
-                <div className="h-full w-full bg-[url('/binary-pattern.svg')] bg-repeat animate-scroll-slow" />
-              </div>
-
-              {/* Scanning Lines */}
-              <div className="absolute inset-0 overflow-hidden">
-                <div className="w-full h-[2px] bg-violet-500/10 absolute top-0 animate-scan-vertical" />
-                <div className="w-[2px] h-full bg-violet-500/10 absolute left-0 animate-scan-horizontal" />
-              </div>
+          
             </div>
           </section>
 
