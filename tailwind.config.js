@@ -9,6 +9,14 @@ module.exports = {
 
   ],
   theme: {
+    screens: {
+      'xs': '375px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       fontFamily: {
         'poppins': ["Poppins", 'sans-serif'],
@@ -488,8 +496,8 @@ module.exports = {
           '100%': { top: '100%', opacity: '0' },
         },
         scanMinimal: {
-          '0%': { transform: 'translateY(-100vh)' },
-          '100%': { transform: 'translateY(100vh)' },
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100%)' }
         },
         floatMinimal: {
           '0%, 100%': { transform: 'translate(0, 0)' },
@@ -511,7 +519,7 @@ module.exports = {
         'float-orb': 'float-orb 8s ease-in-out infinite',
         'glow-line-x': 'glow-line-x 3s ease-in-out infinite',
         'glow-line-y': 'glow-line-y 3s ease-in-out infinite',
-        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'pulse-reverse': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite reverse',
         'spin-extremely-slow': 'spin 30s linear infinite',
         'spin-slow': 'spin 15s linear infinite',
@@ -680,6 +688,14 @@ module.exports = {
             transform: 'scale(1.5)',
             opacity: 0
           }
+        },
+        'grid-scan': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(50px)' }
+        },
+        'scan': {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100%)' }
         }
       },
       animation: {
@@ -776,7 +792,7 @@ module.exports = {
         'plasma-pulse': 'plasmaPulse 8s ease-in-out infinite',
         'distortion-pulse': 'distortionPulse 15s ease-in-out infinite',
         'scan-subtle': 'scanSubtle 8s cubic-bezier(0.4, 0, 0.2, 1) infinite',
-        'scan-minimal': 'scanMinimal 15s linear infinite',
+        'scan-minimal': 'scanMinimal 2s linear infinite',
         'float-minimal': 'floatMinimal 8s ease-in-out infinite',
         'mist-minimal': 'mistMinimal 8s ease-in-out infinite',
         'twinkle': 'twinkle 4s ease-in-out infinite',
