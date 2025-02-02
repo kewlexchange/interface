@@ -471,6 +471,30 @@ const HomePage: React.FunctionComponent<IPage> = props => {
         };
     }, []);
 
+    // Ana renk değişiklikleri için örnekler:
+
+    // 1. Gradient renk düzenlemeleri
+    const gradientClasses = {
+        primary: "from-violet-500/20 to-purple-500/20",
+        secondary: "from-violet-400/20 to-fuchsia-400/20",
+        accent: "from-fuchsia-400/20 to-pink-400/20",
+        glass: "from-white/[0.02] to-transparent",
+        glow: "from-violet-500/10 via-fuchsia-500/10 to-pink-500/10"
+    };
+
+    // 2. Border ve background renk düzenlemeleri
+    const borderClasses = {
+        default: "border-white/[0.05]",
+        hover: "border-violet-500/20",
+        active: "border-violet-600/30"
+    };
+
+    const bgClasses = {
+        card: "bg-[#0A0A1B]/60",
+        button: "bg-violet-500/[0.02]",
+        hover: "bg-violet-500/[0.08]"
+    };
+
     return (
         <div className="relative w-full min-h-screen">
             {/* Main Content - Adjusted top padding for mobile */}
@@ -690,7 +714,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                             {tradingFeatures.map((feature, idx) => (
                                 <motion.div
                                     key={idx}
-                                    className="group relative bg-gradient-to-br from-[#0A0A1B]/90 to-[#0A0A1B]/70 backdrop-blur-xl rounded-2xl sm:rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 border border-white/[0.05]"
+                                    className={`group relative ${bgClasses.card} backdrop-blur-xl rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 ${borderClasses.default} hover:${borderClasses.hover}`}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: idx * 0.1 }}
@@ -763,13 +787,13 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                         {tradingAdvantages.map((advantage, idx) => (
                             <motion.div
                                 key={idx}
-                                className="group relative bg-[#0A0A1B]/60 backdrop-blur-xl rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 border border-white/[0.05]"
+                                className={`group relative ${bgClasses.card} backdrop-blur-xl rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 ${borderClasses.default} hover:${borderClasses.hover}`}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: idx * 0.1 }}
                             >
                                 {/* Ambient Glow */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-fuchsia-500/5 to-pink-500/5 opacity-5 group-hover:opacity-15 transition-opacity duration-500 blur-2xl" />
+                                <div className={`absolute inset-0 ${gradientClasses.glow} opacity-5 group-hover:opacity-15 transition-opacity duration-500 blur-2xl`} />
                                 
                                 {/* Shine Effect */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-all duration-1000" />
@@ -836,13 +860,13 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                         {features[1].items.map((item, idx) => (
                             <motion.div
                                 key={idx}
-                                className="group relative bg-[#0A0A1B]/60 backdrop-blur-xl rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 border border-white/[0.05]"
+                                className={`group relative ${bgClasses.card} backdrop-blur-xl rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 ${borderClasses.default} hover:${borderClasses.hover}`}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: idx * 0.1 }}
                             >
                                 {/* Ambient Glow */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 via-fuchsia-500/5 to-pink-500/5 opacity-5 group-hover:opacity-15 transition-opacity duration-500 blur-2xl" />
+                                <div className={`absolute inset-0 ${gradientClasses.glow} opacity-5 group-hover:opacity-15 transition-opacity duration-500 blur-2xl`} />
                                 
                                 {/* Shine Effect */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-all duration-1000" />
@@ -911,7 +935,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                             {walletOptions.map((wallet, idx) => (
                                 <motion.button
                                     key={wallet.id}
-                                    className="group relative flex w-full bg-[#0A0A1B]/60 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/[0.02] hover:border-violet-500/20 transition-all duration-500"
+                                    className={`group relative flex w-full ${bgClasses.card} backdrop-blur-xl rounded-2xl overflow-hidden ${borderClasses.default} hover:${borderClasses.hover} transition-all duration-500`}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: idx * 0.1 }}
@@ -919,10 +943,10 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                                     whileTap={{ scale: 0.98 }}
                                 >
                                     {/* Glass Morphism Background */}
-                                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                                    <div className={`absolute inset-0 ${gradientClasses.glass} opacity-0 group-hover:opacity-100 transition-all duration-500`} />
                                     
                                     {/* Glow Effect */}
-                                    <div className="absolute -inset-px bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500" />
+                                    <div className={`absolute -inset-px ${gradientClasses.glow} opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500`} />
                                     
                                     {/* Content Container */}
                                     <div className="relative flex items-center w-full p-4 sm:p-5">
