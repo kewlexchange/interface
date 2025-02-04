@@ -707,14 +707,14 @@ const _SWAP_TAB = () => {
 
 
 
-            <div className="flex flex-col gap-3 sm:gap-4 w-full p-2 sm:p-0">
+            <div className="flex flex-col w-full  gap-2 overflow-hidden">
                 {/* Input container */}
-                <div className="relative p-2 sm:p-3 md:p-5 overflow-hidden">
+                <div className="relative p-2 overflow-hidden">
                     {/* Animated gradient background */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-violet-500/[0.02] to-transparent dark:from-violet-500/[0.05] dark:to-transparent backdrop-blur-2xl" />
+                    <div className="absolute  rounded-3xl inset-0 bg-gradient-to-b from-violet-500/[0.02] to-transparent dark:from-violet-500/[0.05] dark:to-transparent backdrop-blur-2xl" />
                     <div className="absolute inset-0 border border-violet-500/[0.08] dark:border-violet-400/10 rounded-3xl" />
                     
-                    <div className="relative p-3 sm:p-5 overflow-hidden">
+                    <div className="relative p-2 sm:p-5 overflow-hidden">
                         {/* Base Asset Input - You Pay */}
                         <div className="space-y-2 sm:space-y-2.5">
                             <div className="flex items-center justify-between px-1">
@@ -728,21 +728,7 @@ const _SWAP_TAB = () => {
                                         </span>
                                     </div>
                                 </div>
-                                {baseAsset && (
-                                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-violet-500/[0.03] to-fuchsia-500/[0.03] border border-violet-500/10 backdrop-blur-sm group/token hover:from-violet-500/[0.05] hover:to-fuchsia-500/[0.05] transition-all duration-300">
-                                        <div className="relative w-8 h-8 min-w-[32px] min-h-[32px] shrink-0">
-                                            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 rounded-full blur-sm animate-pulse-slow" />
-                                            <Image 
-                                                src={baseAsset.logoURI} 
-                                                className="relative w-8 h-8 min-w-[32px] min-h-[32px] rounded-full object-cover"
-                                                alt={baseAsset.symbol} 
-                                            />
-                                        </div>
-                                        <span className="text-sm font-medium bg-gradient-to-r from-violet-600 to-fuchsia-600 text-transparent bg-clip-text">
-                                            {baseAsset.symbol}
-                                        </span>
-                                    </div>
-                                )}
+                               
                             </div>
 
                             {/* Input field container */}
@@ -889,21 +875,7 @@ const _SWAP_TAB = () => {
                                         </span>
                                     </div>
                                 </div>
-                                {quoteAsset && (
-                                    <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-violet-500/[0.03] to-fuchsia-500/[0.03] border border-violet-500/10 backdrop-blur-sm group/token hover:from-violet-500/[0.05] hover:to-fuchsia-500/[0.05] transition-all duration-300">
-                                        <div className="relative w-8 h-8 min-w-[32px] min-h-[32px] shrink-0">
-                                            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 rounded-full blur-sm animate-pulse-slow" />
-                                            <Image 
-                                                src={quoteAsset.logoURI} 
-                                                className="relative w-8 h-8 min-w-[32px] min-h-[32px] rounded-full object-cover"
-                                                alt={quoteAsset.symbol} 
-                                            />
-                                        </div>
-                                        <span className="text-sm font-medium bg-gradient-to-r from-violet-600 to-fuchsia-600 text-transparent bg-clip-text">
-                                            {quoteAsset.symbol}
-                                        </span>
-                                    </div>
-                                )}
+                              
                             </div>
 
                             {/* Quote Input field container */}
