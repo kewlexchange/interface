@@ -75,8 +75,60 @@ const AccountPage: React.FunctionComponent<IPage> = props => {
             <div className={"w-full px-2 py-5"}>
                 <div className={"min-w-xl max-w-xl w-full sm:w-full mx-auto flex flex-col gap-5 my-5"}>
 
-                <Card  className="flex rounded-xl p-2  w-full flex-col">
-                    <Tabs color="default" aria-label="Wallet">
+                     <Tabs
+                     disableAnimation
+                     radius="lg" 
+                     fullWidth 
+                     classNames={{
+                         base: "w-full",
+                         tabList: [
+                             "relative",
+                             "bg-white/[0.01] dark:bg-black/[0.01]",
+                             "backdrop-blur-xl",
+                             "border border-violet-500/10",
+                             "p-1",
+                             "rounded-2xl",
+                             "flex",
+                             "gap-1"
+                         ].join(" "),
+                         cursor: "hidden",
+                         tab: [
+                             "flex-1",
+                             "h-9",
+                             "px-4",
+                             "rounded-xl",
+                             "flex items-center justify-center",
+                             "gap-2",
+                             "text-xs font-medium",
+                             "text-violet-600/50 dark:text-violet-400/50",
+                             "group",
+                             "relative",
+                             "overflow-hidden",
+                             "transition-all duration-200",
+                             "data-[selected=true]:bg-violet-500/[0.02] dark:data-[selected=true]:bg-violet-400/[0.02]",
+                             "data-[selected=true]:backdrop-blur-xl",
+                             "data-[selected=true]:text-violet-500 dark:data-[selected=true]:text-violet-400",
+                             "before:absolute",
+                             "before:inset-0",
+                             "before:rounded-xl",
+                             "before:opacity-0",
+                             "before:pointer-events-none",
+                             "before:z-[-1]",
+                             "data-[selected=true]:before:opacity-100",
+                             "before:bg-gradient-to-r",
+                             "before:from-violet-500/0",
+                             "before:via-violet-500/[0.07]",
+                             "before:to-violet-500/0",
+                             "before:transition-opacity",
+                             "data-[selected=true]:before:animate-shimmer",
+                             "before:bg-[length:200%_100%]",
+                             "hover:bg-violet-500/[0.01] dark:hover:bg-violet-400/[0.01]",
+                             "hover:text-violet-500/70"
+                         ].join(" "),
+                         tabContent: "relative z-10",
+                         panel: "pt-4"
+                     }}
+                     aria-label="Swap Tabs">
                         <Tab key="tokens" title="Tokens">
                             <TokenBalances account={account}/>
                         </Tab>
@@ -87,7 +139,7 @@ const AccountPage: React.FunctionComponent<IPage> = props => {
                             <WrapTab account={account}/>
                         </Tab>
                     </Tabs>
-                </Card>  
+           
 
              
                 </div>
