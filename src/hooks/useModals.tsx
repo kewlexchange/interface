@@ -80,12 +80,8 @@ export const ModalConnect = ({ isShowing, hide }) => {
     return (
         <CustomModal isShowing={isShowing} hide={hide} header="Connect" closable={true}>
             <div className={"w-full"}>
-                <div className="m-2 border border-default rounded-xl p-4">
                     <WalletModal />
-                </div>
             </div>
-
-
         </CustomModal>
     )
 }

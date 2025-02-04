@@ -696,6 +696,9 @@ module.exports = {
         'scan': {
           '0%': { transform: 'translateY(-100%)' },
           '100%': { transform: 'translateY(100%)' }
+        },
+        dropShadow: {
+          'glow': '0 0 10px rgba(124, 58, 237, 0.3)',
         }
       },
       animation: {

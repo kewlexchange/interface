@@ -17,8 +17,26 @@ import {
     ShieldCheck,
     Gem,
     Timer,
-    Layers
+    Layers,
+    Building2,
+    Repeat,
+    ChartLine,
+    Percent,
+    TrendingUp,
+    PieChart,
+    FileText,
+    Code2,
+    Check,
+    ArrowLeftRight,
+    Image,
+    ImagePlus,
+    Link,
+    DollarSign,
+    Trophy,
+    CheckCircle,
+    Settings
 } from 'lucide-react';
+import WalletModal from '@/Components/WalletModal';
 
 interface HexagonIconProps {
     children: React.ReactNode;
@@ -38,13 +56,13 @@ const HexagonIcon: React.FC<HexagonIconProps> = ({
             <div className={`absolute inset-0 ${glowColor} opacity-0 group-hover:opacity-30 blur-2xl transition-all duration-700`} />
             
             {/* Alien tech border effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.1] to-transparent rotate-180 group-hover:rotate-360 transition-all duration-2000" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-200/20 dark:via-white/[0.1] to-transparent rotate-180 group-hover:rotate-360 transition-all duration-2000" />
             
             {/* Enhanced Icon container with advanced glass effect */}
             <div className="relative flex items-center justify-center transform transition-all duration-500 will-change-transform">
                 {/* Futuristic background with scanning effect */}
                 <div className="absolute inset-0 before:absolute before:inset-0 before:bg-gradient-to-t before:from-violet-500/10 before:via-transparent before:to-transparent before:animate-scan">
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.08] to-transparent rounded-xl backdrop-blur-md border border-white/[0.08]" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-100/80 to-white/80 dark:from-white/[0.08] dark:to-transparent rounded-xl backdrop-blur-md border border-gray-200 dark:border-white/[0.08]" />
                 </div>
                 
                 {/* Enhanced Icon wrapper with holographic effect */}
@@ -92,44 +110,43 @@ interface WalletOption {
     comingSoon?: boolean;
 }
 
-const walletOptions: WalletOption[] = [
+const walletOptions = [
     {
         id: 'metamask',
         name: 'MetaMask',
         icon: '/images/wallets/metamask-icon.svg',
-        description: 'The most popular Web3 wallet with 30M+ users worldwide',
-        popular: true
-    },
-    {
-        id: 'trustwallet',
-        name: 'Trust Wallet',
-        icon: '/images/wallets/trustwallet-icon.svg',
-        description: 'The most trusted & secure crypto wallet',
+        description: 'The most popular and secure wallet',
         popular: true
     },
     {
         id: 'walletconnect',
         name: 'WalletConnect',
         icon: '/images/wallets/walletconnect-icon.svg',
-        description: 'Open protocol for connecting wallets',
-    },
-    {
-        id: 'coin98',
-        name: 'Coin98',
-        icon: '/images/wallets/coin98.svg',
-        description: 'All-in-one DeFi solution',
+        description: 'Connect multiple wallets seamlessly'
     },
     {
         id: 'coinbase',
         name: 'Coinbase Wallet',
         icon: '/images/wallets/coinbase-icon.svg',
-        description: 'Professional-grade crypto wallet',
+        description: 'The easiest way to get started'
+    },
+    {
+        id: 'trustwallet',
+        name: 'Trust Wallet',
+        icon: '/images/wallets/trustwallet-icon.svg',
+        description: 'The most trusted DeFi wallet'
     },
     {
         id: 'uniswap',
-        name: 'UniSwap Wallet',
+        name: 'Uniswap',
         icon: '/images/wallets/uniswap-wallet-icon.png',
-        description: 'Trade and swap directly from your wallet',
+        description: 'The best wallet experience'
+    },
+    {
+        id: 'coin98',
+        name: 'Coin98',
+        icon: '/images/wallets/coin98.svg',
+        description: 'The gateway to the DeFi ecosystem'
     }
 ];
 
@@ -281,7 +298,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
         {
             title: 'Institutional-Grade DEX',
             description: 'Professional trading infrastructure with deep liquidity and advanced order types',
-            icon: '🏛️',
+            icon: <Building2 className="w-6 h-6 text-[#C084FC]" />,
             metrics: [
                 { value: '$10B+', label: 'Liquidity Depth' },
                 { value: '500ms', label: 'Order Execution' },
@@ -292,7 +309,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
         {
             title: 'Smart Order Routing',
             description: 'AI-powered routing across multiple liquidity pools for best execution price',
-            icon: '🔄',
+            icon: <Repeat className="w-6 h-6 text-[#C084FC]" />,
             metrics: [
                 { value: '0.01%', label: 'Price Impact' },
                 { value: '99.9%', label: 'Fill Rate' },
@@ -303,7 +320,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
         {
             title: 'Cross-Chain Architecture',
             description: 'Seamless trading across major blockchains with unified liquidity',
-            icon: '⛓️',
+            icon: <Network className="w-6 h-6 text-[#C084FC]" />,
             metrics: [
                 { value: '12+', label: 'Networks' },
                 { value: '1-Click', label: 'Bridge' },
@@ -313,114 +330,118 @@ const HomePage: React.FunctionComponent<IPage> = props => {
         }
     ];
 
-    const tradingFeatures = [
+    const tradingTools = [
         {
-            title: 'Smart Swap',
-            icon: <Zap className="w-8 h-8 text-violet-200 transition-colors duration-300" />,
-            description: 'Optimize your trades across all liquidity pools in the ecosystem for maximum returns',
+            title: 'Swap',
+            icon: <ArrowLeftRight className="w-10 h-10 text-[#C084FC]" />,
+            description: 'Lightning-fast token swaps with minimal slippage and best execution across multiple DEXs',
             metrics: [
                 { 
-                    value: '0.1s', 
-                    label: 'Execution Time',
-                    icon: <Clock className="w-5 h-5 text-violet-200 transition-colors duration-300" />,
-                    glowColor: 'from-violet-400/40 to-fuchsia-400/40'
-                },
-                { 
-                    value: '100+', 
-                    label: 'Liquidity Pools',
-                    icon: <Layers className="w-6 h-6 text-violet-300" />,
-                    glowColor: 'from-blue-400/40 to-violet-400/40'
-                },
-                { 
-                    value: '0.01%', 
+                    value: '0.1%', 
                     label: 'Min Slippage',
-                    icon: <Activity className="w-6 h-6 text-violet-300" />,
-                    glowColor: 'from-fuchsia-400/40 to-pink-400/40'
+                    icon: <Percent className="w-6 h-6 text-[#C084FC]" />
+                },
+                { 
+                    value: '10+', 
+                    label: 'DEX Aggregators',
+                    icon: <Network className="w-6 h-6 text-[#C084FC]" />
+                },
+                { 
+                    value: '1000+', 
+                    label: 'Token Pairs',
+                    icon: <Coins className="w-6 h-6 text-[#C084FC]" />
                 }
             ],
-            highlight: 'Best execution guaranteed',
-            gradient: 'from-violet-400/10 via-fuchsia-400/10 to-pink-400/10'
+            features: [
+                'Cross-chain swaps',
+                'Gas optimization',
+                'Price impact protection'
+            ],
+            highlight: 'Best Price Execution'
         },
         {
-            title: 'NFT Market',
-            icon: <Palette className="w-10 h-10 text-rose-200 drop-shadow-[0_0_10px_rgba(251,113,133,0.3)]" />,
-            description: 'Trade exclusive NFTs with zero platform fees and instant settlements',
+            title: 'NFT Marketplace',
+            icon: <Image className="w-10 h-10 text-[#C084FC]" />,
+            description: 'Trade NFTs across multiple chains with advanced collection analytics and rarity tracking',
             metrics: [
                 { 
-                    value: '10K+', 
-                    label: 'Collections',
-                    icon: <Gem className="w-6 h-6 text-rose-300" />,
-                    glowColor: 'from-rose-400/40 to-orange-400/40'
+                    value: '100K+', 
+                    label: 'NFTs Listed',
+                    icon: <ImagePlus className="w-6 h-6 text-[#C084FC]" />
                 },
                 { 
-                    value: '0%', 
-                    label: 'Platform Fee',
-                    icon: <Coins className="w-6 h-6 text-rose-300" />,
-                    glowColor: 'from-orange-400/40 to-amber-400/40'
+                    value: '5+', 
+                    label: 'Chains',
+                    icon: <Link className="w-6 h-6 text-[#C084FC]" />
                 },
                 { 
-                    value: '100%', 
-                    label: 'Verified',
-                    icon: <ShieldCheck className="w-6 h-6 text-rose-300" />,
-                    glowColor: 'from-amber-400/40 to-yellow-400/40'
+                    value: 'Real-time', 
+                    label: 'Floor Price',
+                    icon: <LineChart className="w-6 h-6 text-[#C084FC]" />
                 }
             ],
-            highlight: 'Zero Fee NFT Trading',
-            gradient: 'from-rose-400/10 via-orange-400/10 to-amber-400/10'
+            features: [
+                'Collection analytics',
+                'Rarity tracking',
+                'Bulk trading'
+            ],
+            highlight: 'Cross-Chain NFT Trading'
         },
         {
             title: 'Token Vesting',
-            icon: <Timer className="w-10 h-10 text-cyan-300" />,
+            icon: <Clock className="w-10 h-10 text-[#C084FC]" />,
             description: 'Secure and transparent token vesting solution for teams and investors',
             metrics: [
                 { 
                     value: '100%', 
                     label: 'Automated',
-                    icon: <Activity className="w-6 h-6 text-cyan-300" />,
-                    glowColor: 'from-cyan-400/40 to-teal-400/40'
+                    icon: <Settings className="w-6 h-6 text-[#C084FC]" />
                 },
                 { 
                     value: '24/7', 
                     label: 'Monitoring',
-                    icon: <BarChart4 className="w-6 h-6 text-cyan-300" />,
-                    glowColor: 'from-teal-400/40 to-emerald-400/40'
+                    icon: <Activity className="w-6 h-6 text-[#C084FC]" />
                 },
                 { 
                     value: '0 Risk', 
                     label: 'Smart Contract',
-                    icon: <ShieldCheck className="w-6 h-6 text-cyan-300" />,
-                    glowColor: 'from-emerald-400/40 to-green-400/40'
+                    icon: <ShieldCheck className="w-6 h-6 text-[#C084FC]" />
                 }
             ],
-            highlight: 'Enterprise-grade vesting',
-            gradient: 'from-cyan-400/10 via-teal-400/10 to-emerald-400/10'
+            features: [
+                'Custom vesting schedules',
+                'Multi-token support',
+                'Cliff periods'
+            ],
+            highlight: 'Enterprise-grade Vesting'
         },
         {
             title: 'Launchpad',
-            icon: <Rocket className="w-10 h-10 text-indigo-300" />,
+            icon: <Rocket className="w-10 h-10 text-[#C084FC]" />,
             description: 'Launch your project with institutional-grade infrastructure and support',
             metrics: [
                 { 
                     value: '20+', 
                     label: 'Successful IDOs',
-                    icon: <Rocket className="w-6 h-6 text-indigo-300" />,
-                    glowColor: 'from-indigo-400/40 to-blue-400/40'
+                    icon: <Trophy className="w-6 h-6 text-[#C084FC]" />
                 },
                 { 
                     value: '$50M+', 
                     label: 'Total Raised',
-                    icon: <Coins className="w-6 h-6 text-indigo-300" />,
-                    glowColor: 'from-blue-400/40 to-sky-400/40'
+                    icon: <DollarSign className="w-6 h-6 text-[#C084FC]" />
                 },
                 { 
                     value: '100%', 
                     label: 'Success Rate',
-                    icon: <ShieldCheck className="w-6 h-6 text-indigo-300" />,
-                    glowColor: 'from-sky-400/40 to-cyan-400/40'
+                    icon: <CheckCircle className="w-6 h-6 text-[#C084FC]" />
                 }
             ],
-            highlight: 'Your gateway to success',
-            gradient: 'from-indigo-400/10 via-blue-400/10 to-sky-400/10'
+            features: [
+                'KYC integration',
+                'Multi-round sales',
+                'Automated distribution'
+            ],
+            highlight: 'Your Gateway to Success'
         }
     ];
 
@@ -471,52 +492,309 @@ const HomePage: React.FunctionComponent<IPage> = props => {
         };
     }, []);
 
-    // Ana renk değişiklikleri için örnekler:
-
-    // 1. Gradient renk düzenlemeleri
+    // Update the color classes and gradients
     const gradientClasses = {
-        primary: "from-violet-500/20 to-purple-500/20",
-        secondary: "from-violet-400/20 to-fuchsia-400/20",
-        accent: "from-fuchsia-400/20 to-pink-400/20",
-        glass: "from-white/[0.02] to-transparent",
-        glow: "from-violet-500/10 via-fuchsia-500/10 to-pink-500/10"
+        primary: "from-[#7C3AED] to-[#C084FC]", // Ana mor gradient
+        secondary: "from-[#C084FC] to-[#E879F9]", // Açık mor gradient
+        glass: "from-black/5 to-black/10",
+        glow: "from-[#7C3AED]/10 via-[#C084FC]/10 to-[#E879F9]/10"
     };
 
-    // 2. Border ve background renk düzenlemeleri
     const borderClasses = {
-        default: "border-white/[0.05]",
-        hover: "border-violet-500/20",
-        active: "border-violet-600/30"
+        default: "border-white/10",
+        hover: "hover:border-[#7C3AED]/50",
+        active: "border-[#7C3AED]"
     };
 
     const bgClasses = {
-        card: "bg-[#0A0A1B]/60",
-        button: "bg-violet-500/[0.02]",
-        hover: "bg-violet-500/[0.08]"
+        card: "bg-[#050510]/95",
+        button: "bg-[#7C3AED]",
+        hover: "hover:bg-[#6D28D9]"
     };
+
+    // Update card components
+    const FeatureCard = ({ feature }) => (
+        <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="group relative backdrop-blur-xl rounded-2xl overflow-hidden"
+        >
+            {/* Glass background */}
+            <div className="absolute inset-0 bg-white/[0.02] border border-white/[0.05] rounded-2xl" />
+            
+            <div className="relative p-8">
+                {/* Card Header */}
+                <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/20">
+                        {feature.icon}
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">
+                        {feature.title}
+                    </h3>
+                </div>
+
+                {/* Description */}
+                <p className="text-[#C084FC]/80 mb-8 leading-relaxed">
+                    {feature.description}
+                </p>
+
+                {/* Metrics Grid */}
+                <div className="grid grid-cols-3 gap-4">
+                    {feature.metrics.map((metric, idx) => (
+                        <div 
+                            key={idx}
+                            className="flex flex-col items-center p-4 rounded-xl bg-[#7C3AED]/5 border border-[#7C3AED]/10 hover:border-[#7C3AED]/20 transition-all duration-300"
+                        >
+                            <div className="mb-2">
+                                {metric.icon}
+                            </div>
+                            <span className="text-xl font-bold text-white mb-1">
+                                {metric.value}
+                            </span>
+                            <span className="text-sm text-[#C084FC]/80 text-center">
+                                {metric.label}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Highlight badge */}
+                <div className="mt-6 inline-flex items-center px-4 py-2 rounded-full bg-[#7C3AED]/10 border border-[#7C3AED]/20">
+                    <span className="text-sm font-medium text-[#C084FC]">
+                        {feature.highlight}
+                    </span>
+                </div>
+            </div>
+        </motion.div>
+    );
+
+    // Trading Advantages card component
+    const TradingAdvantageCard = ({ advantage }) => (
+        <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="group relative backdrop-blur-xl rounded-2xl overflow-hidden"
+        >
+            {/* Glass background with subtle gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#7C3AED]/10 via-[#C084FC]/5 to-[#E879F9]/10 border border-white/[0.05] rounded-2xl" />
+            
+            <div className="relative p-8">
+                {/* Card Header */}
+                <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/20">
+                        {advantage.icon}
+                    </div>
+                    <h3 className="text-2xl font-bold text-white tracking-tight">
+                        {advantage.title}
+                    </h3>
+                </div>
+
+                {/* Description */}
+                <p className="text-lg text-white/80 leading-relaxed mb-8">
+                    {advantage.description}
+                </p>
+
+                {/* Metrics */}
+                <div className="space-y-3">
+                    {advantage.metrics.map((metric, idx) => (
+                        <div 
+                            key={idx} 
+                            className="group/metric flex justify-between items-center p-4 rounded-xl bg-[#7C3AED]/5 border border-[#7C3AED]/10 hover:border-[#7C3AED]/30 transition-all duration-300"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 rounded-lg bg-[#7C3AED]/10 group-hover/metric:bg-[#7C3AED]/20 transition-colors duration-300">
+                                    {metric.icon}
+                                </div>
+                                <span className="text-white/80 text-base group-hover/metric:text-white transition-colors duration-300">
+                                    {metric.label}
+                                </span>
+                            </div>
+                            <span className="font-bold text-xl text-white group-hover/metric:text-[#C084FC] transition-colors duration-300">
+                                {metric.value}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Highlight badge */}
+                <div className="mt-6 inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#7C3AED]/20 to-[#C084FC]/20 border border-[#7C3AED]/30">
+                    <span className="text-sm font-medium text-white">
+                        {advantage.highlight}
+                    </span>
+                </div>
+            </div>
+
+            {/* Hover effect overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#7C3AED]/0 via-[#C084FC]/0 to-[#E879F9]/0 group-hover:from-[#7C3AED]/5 group-hover:via-[#C084FC]/5 group-hover:to-[#E879F9]/5 transition-all duration-500" />
+        </motion.div>
+    );
+
+    // Stil tanımlamaları
+    const styles = {
+        heading: "text-4xl sm:text-5xl font-bold text-white drop-shadow-glow mb-6",
+        subheading: "text-lg text-white/90 font-medium max-w-2xl mx-auto",
+        sectionContainer: "relative px-4 sm:px-6 py-16 sm:py-24",
+    };
+
+    // Tailwind config'e eklenecek
+    const tailwindConfig = {
+        theme: {
+            extend: {
+                dropShadow: {
+                    'glow': '0 0 10px rgba(124, 58, 237, 0.3)',
+                }
+            }
+        }
+    };
+
+    const ToolCard = ({ tool }) => (
+        <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="group relative backdrop-blur-xl rounded-2xl overflow-hidden"
+        >
+            {/* Glass background with subtle gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#7C3AED]/10 via-[#C084FC]/5 to-[#E879F9]/10 border border-white/[0.05] rounded-2xl" />
+            
+            <div className="relative p-8">
+                {/* Card Header */}
+                <div className="flex items-center gap-5 mb-8">
+                    <div className="p-4 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/20 backdrop-blur-xl">
+                        {tool.icon}
+                    </div>
+                    <h3 className="text-3xl font-bold text-white tracking-tight">
+                        {tool.title}
+                    </h3>
+                </div>
+
+                {/* Description */}
+                <p className="text-lg text-white/80 leading-relaxed mb-10">
+                    {tool.description}
+                </p>
+
+                {/* Metrics Grid */}
+                <div className="grid grid-cols-3 gap-4 mb-10">
+                    {tool.metrics.map((metric, idx) => (
+                        <div 
+                            key={idx}
+                            className="group/metric flex flex-col items-center p-4 rounded-xl bg-[#7C3AED]/5 border border-[#7C3AED]/10 hover:border-[#7C3AED]/30 transition-all duration-300"
+                        >
+                            <div className="mb-3 p-2 rounded-lg bg-[#7C3AED]/10 group-hover/metric:bg-[#7C3AED]/20 transition-colors duration-300">
+                                {metric.icon}
+                            </div>
+                            <span className="text-2xl font-bold text-white mb-1 group-hover/metric:text-[#C084FC] transition-colors duration-300">
+                                {metric.value}
+                            </span>
+                            <span className="text-sm text-white/60 text-center group-hover/metric:text-white/80 transition-colors duration-300">
+                                {metric.label}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Features List */}
+                <div className="space-y-4 mb-8">
+                    {tool.features.map((feature, idx) => (
+                        <div 
+                            key={idx} 
+                            className="flex items-center gap-3 text-white/70 hover:text-white transition-colors duration-300"
+                        >
+                            <div className="p-1 rounded-full bg-[#7C3AED]/20">
+                                <Check className="w-4 h-4 text-[#C084FC]" />
+                            </div>
+                            <span className="text-base">
+                                {feature}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Highlight badge */}
+                <div className="inline-flex items-center px-5 py-2.5 rounded-full bg-gradient-to-r from-[#7C3AED]/20 to-[#C084FC]/20 border border-[#7C3AED]/30">
+                    <span className="text-sm font-medium text-white">
+                        {tool.highlight}
+                    </span>
+                </div>
+            </div>
+
+            {/* Hover effect overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#7C3AED]/0 via-[#C084FC]/0 to-[#E879F9]/0 group-hover:from-[#7C3AED]/5 group-hover:via-[#C084FC]/5 group-hover:to-[#E879F9]/5 transition-all duration-500" />
+        </motion.div>
+    );
+
+    const WalletOption = ({ wallet }) => (
+        <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="group relative backdrop-blur-xl rounded-2xl overflow-hidden"
+        >
+            {/* Glass background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#7C3AED]/10 via-[#C084FC]/5 to-[#E879F9]/10 border border-white/[0.05] rounded-2xl" />
+            
+            <div className="relative p-6 flex items-center gap-4">
+                {/* Wallet Icon */}
+                <div className="relative flex-shrink-0">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#7C3AED]/20 to-[#C084FC]/20 rounded-xl blur-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300" />
+                    <div className="relative w-12 h-12 rounded-xl bg-white/[0.05] border border-white/[0.05] p-2 flex items-center justify-center">
+                    <img
+                            src={wallet.icon}
+                            alt={wallet.name}
+                            width={32}
+                            height={32}
+                            className="w-full rounded-full h-full object-contain"
+                        />
+                    </div>
+                </div>
+
+                {/* Wallet Info */}
+                <div className="flex-grow">
+                    <div className="flex items-center gap-2 mb-1">
+                        <h3 className="text-lg font-semibold text-white">
+                            {wallet.name}
+                        </h3>
+                        {wallet.popular && (
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#7C3AED]/20 text-[#C084FC] border border-[#7C3AED]/30">
+                                Popular
+                            </span>
+                        )}
+                    </div>
+                    <p className="text-sm text-white/70">
+                        {wallet.description}
+                    </p>
+                </div>
+
+                {/* Connect Button */}
+                <button className="flex-shrink-0 px-4 py-2 rounded-xl bg-[#7C3AED]/20 hover:bg-[#7C3AED]/30 border border-[#7C3AED]/30 text-white/90 hover:text-white text-sm font-medium transition-all duration-300">
+                    Connect
+                </button>
+            </div>
+
+            {/* Hover effect overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#7C3AED]/0 via-[#C084FC]/0 to-[#E879F9]/0 group-hover:from-[#7C3AED]/5 group-hover:via-[#C084FC]/5 group-hover:to-[#E879F9]/5 transition-all duration-500" />
+        </motion.div>
+    );
 
     return (
         <div className="relative w-full min-h-screen">
-            {/* Main Content - Adjusted top padding for mobile */}
-            <main className="relative rounded-lg">
-                {/* Hero Section */}
+            <main className="relative">
+                {/* Hero Section - siyah container kaldırıldı */}
                 <section className="relative flex flex-col items-center justify-center px-4 sm:px-6 min-h-[90vh] sm:min-h-screen">
-                    {/* Alien tech background effects */}
-                    <div className="absolute inset-0 ">
-                        <div className="absolute inset-0 opacity-30">
-                            {/* Mobil için daha küçük ve optimize edilmiş blob'lar */}
-                            <div className="absolute top-0 -left-4 w-48 sm:w-72 h-48 sm:h-72 bg-violet-500 rounded-full mix-blend-multiply filter blur-xl animate-blob" />
-                            <div className="absolute top-0 -right-4 w-48 sm:w-72 h-48 sm:h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000" />
-                            <div className="absolute -bottom-8 left-20 w-48 sm:w-72 h-48 sm:h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000" />
-                        </div>
+                    {/* Background Effects */}
+                    <div className="absolute inset-0 overflow-hidden">
+                        {/* Ana gradient arka plan */}
+                        <div className="absolute inset-0 bg-gradient-radial from-[#7C3AED]/40 via-[#7C3AED]/20 to-transparent" />
                         
-                        {/* Mobil için optimize edilmiş grid overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0A1B]/50 to-[#0A0A1B]" />
-                        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:30px_30px] sm:bg-[length:50px_50px] animate-grid-scan" />
+                        {/* Mor glow katmanları */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="absolute w-[1000px] h-[1000px] bg-gradient-radial from-[#C084FC]/30 via-[#C084FC]/10 to-transparent" />
+                            <div className="absolute w-[800px] h-[800px] bg-gradient-radial from-[#E879F9]/30 via-[#E879F9]/10 to-transparent rotate-45" />
+                            <div className="absolute w-[800px] h-[800px] bg-gradient-radial from-[#7C3AED]/30 via-[#7C3AED]/10 to-transparent -rotate-45" />
+                        </div>
+
+                        {/* İnce grid overlay */}
+                        <div className="absolute inset-0 bg-grid-white/[0.02] opacity-20" />
                     </div>
 
-                    <div className="relative max-w-7xl mx-auto text-center">
-                        <motion.div
+                    {/* Hero Content */}
+                    <div className="relative max-w-7xl mx-auto text-center space-y-8 sm:space-y-12">
+                  
+                    <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="space-y-6 sm:space-y-8"
@@ -561,450 +839,102 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                                     </span>
                                 </div>
                             </div>
-
-                            {/* Rest of the hero content */}
-                            <h2 className="text-4xl sm:text-7xl md:text-8xl font-bold tracking-tight">
-                                <span className="inline-block bg-gradient-to-r from-white via-violet-200 to-cyan-200 bg-clip-text text-transparent">
-                                    Future of
-                                </span>
-                                <br />
-                                <span className="inline-block bg-gradient-to-r from-cyan-200 via-purple-200 to-pink-200 bg-clip-text text-transparent">
-                                    Decentralized Trading
-                                </span>
-                            </h2>
-
-                            {/* Mobil için optimize edilmiş açıklama */}
-                            <p className="text-base sm:text-xl text-violet-200/80 max-w-2xl mx-auto leading-relaxed backdrop-blur-sm px-4 sm:px-0">
-                                Experience quantum-speed trading with AI-powered execution, 
-                                cross-chain capabilities, and institutional-grade security.
-                            </p>
-
-                            {/* Mobil için optimize edilmiş butonlar */}
-                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-6 px-4 sm:px-0">
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="group relative w-full sm:w-auto px-8 sm:px-12 py-4 rounded-xl bg-[#0A0A1B] overflow-hidden"
-                                    onClick={() => window.location.href = '/swap'}
-                                >
-                                    {/* Base layer */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 via-fuchsia-600/20 to-pink-600/20" />
-                                    
-                                    {/* Animated gradient border */}
-                                    <div className="absolute inset-[1px] rounded-[10px] bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500" />
-                                    <div className="absolute inset-[2px] rounded-[9px] bg-[#0A0A1B]" />
-                                    
-                                    {/* Shine effect */}
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                        <div className="absolute inset-[1px] rounded-[10px] bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000" />
-                                    </div>
-                                    
-                                    {/* Top glass highlight */}
-                                    <div className="absolute inset-[2px] rounded-[9px]">
-                                        <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                                    </div>
-
-                                    {/* Content wrapper */}
-                                    <div className="relative flex items-center justify-center gap-2 text-white">
-                                        {/* Icon */}
-                                        <div className="relative w-5 h-5 mr-1">
-                                            <div className="absolute inset-0 rotate-0 group-hover:rotate-90 transform transition-all duration-300">
-                                                <svg 
-                                                    viewBox="0 0 24 24" 
-                                                    fill="none" 
-                                                    stroke="currentColor" 
-                                                    className="w-5 h-5"
-                                                >
-                                                    <path 
-                                                        strokeLinecap="round" 
-                                                        strokeLinejoin="round" 
-                                                        strokeWidth={2} 
-                                                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-
-                                        {/* Text */}
-                                        <span className="relative font-semibold tracking-wide text-sm">
-                                            Launch Platform
-                                        </span>
-
-                                        {/* Arrow */}
-                                        <div className="relative w-5 h-5 ml-1 transform translate-x-0 group-hover:translate-x-1 transition-transform duration-300">
-                                            <svg 
-                                                viewBox="0 0 24 24" 
-                                                fill="none" 
-                                                stroke="currentColor" 
-                                                className="w-5 h-5"
-                                            >
-                                                <path 
-                                                    strokeLinecap="round" 
-                                                    strokeLinejoin="round" 
-                                                    strokeWidth={2} 
-                                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                                                />
-                                            </svg>
-                                        </div>
-                                    </div>
-
-                                    {/* Glow effect */}
-                                    <div className="absolute -inset-2 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 opacity-0 group-hover:opacity-20 blur-xl transition-all duration-300" />
-
-                                    {/* Bottom light bar */}
-                                    <div className="absolute bottom-[2px] left-[2px] right-[2px] h-[1px]">
-                                        <div className="h-full w-full bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                                    </div>
-
-                                    {/* Side light bars */}
-                                    <div className="absolute top-[2px] bottom-[2px] left-[2px] w-[1px]">
-                                        <div className="h-full w-full bg-gradient-to-b from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                                    </div>
-                                    <div className="absolute top-[2px] bottom-[2px] right-[2px] w-[1px]">
-                                        <div className="h-full w-full bg-gradient-to-b from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                                    </div>
-
-                                    {/* Corner accents */}
-                                    <div className="absolute top-[2px] left-[2px] w-2 h-2 border-t border-l border-white/30 rounded-tl" />
-                                    <div className="absolute top-[2px] right-[2px] w-2 h-2 border-t border-r border-white/30 rounded-tr" />
-                                    <div className="absolute bottom-[2px] left-[2px] w-2 h-2 border-b border-l border-white/30 rounded-bl" />
-                                    <div className="absolute bottom-[2px] right-[2px] w-2 h-2 border-b border-r border-white/30 rounded-br" />
-                                </motion.button>
-                                
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    className="group relative w-full sm:w-auto px-6 sm:px-8 py-4 rounded-xl border border-white/[0.05] bg-white/[0.02] backdrop-blur-lg hover:bg-white/[0.05] transition-all duration-500"
-                                >
-                                    <span className="relative text-violet-200 font-semibold group-hover:text-white transition-colors duration-500">
-                                        View Documentation
-                                    </span>
-                                </motion.button>
-                            </div>
-                        </motion.div>
-                    </div>
-                </section>
-
-                {/* Features Section */}
-                <section className="relative px-4 sm:px-6 py-16 sm:py-24">
-                    <div className="max-w-7xl mx-auto">
-                        {/* Mobil için optimize edilmiş section başlığı */}
-                        <div className="text-center mb-12 sm:mb-16">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-violet-500/10 text-violet-300 text-xs sm:text-sm font-medium mb-4 sm:mb-6"
-                            >
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500" />
-                                </span>
-                                Enterprise Features
                             </motion.div>
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent mb-4 sm:mb-6">
-                                Professional Trading Tools
-                            </h2>
-                            <p className="text-base sm:text-xl text-violet-300/80 max-w-2xl mx-auto px-4 sm:px-0">
-                                Experience institutional-grade trading with advanced features and deep liquidity
-                            </p>
-                        </div>
 
-                        {/* Mobil için optimize edilmiş feature grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-                            {tradingFeatures.map((feature, idx) => (
-                                <motion.div
-                                    key={idx}
-                                    className={`group relative ${bgClasses.card} backdrop-blur-xl rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 ${borderClasses.default} hover:${borderClasses.hover}`}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: idx * 0.1 }}
-                                >
-                                    {/* İçerik aynı kalacak, sadece padding ve spacing değişecek */}
-                                    <div className="relative p-6 sm:p-10">
-                                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 mb-6 sm:mb-10">
-                                            <HexagonIcon 
-                                                glowColor={feature.gradient}
-                                                className="transform group-hover:scale-105 transition-transform duration-500"
-                                            >
-                                                {feature.icon}
-                                            </HexagonIcon>
-                                            <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-br from-white via-violet-200 to-violet-300 bg-clip-text text-transparent group-hover:to-white transition-colors duration-500">
-                                                {feature.title}
-                                            </h3>
-                                        </div>
+                        {/* Main Title */}
+                        <h1 className="text-4xl sm:text-7xl font-bold tracking-tight">
+                            <span className="inline-block bg-gradient-to-r from-[#7C3AED] to-[#C084FC] bg-clip-text text-transparent">
+                                Future of
+                            </span>
+                            <br />
+                            <span className="inline-block bg-gradient-to-r from-[#C084FC] to-[#E879F9] bg-clip-text text-transparent">
+                                Decentralized Trading
+                            </span>
+                        </h1>
 
-                                        <p className="text-base sm:text-lg text-violet-300/70 mb-8 sm:mb-12 leading-relaxed group-hover:text-violet-300/90 transition-colors duration-500">
-                                            {feature.description}
-                                        </p>
-
-                                        {/* Mobil için optimize edilmiş metrics grid */}
-                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-                                            {feature.metrics.map((metric, metricIdx) => (
-                                                <div 
-                                                    key={metricIdx} 
-                                                    className="group/metric relative flex sm:flex-col items-center justify-between sm:justify-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-violet-500/[0.02] hover:bg-violet-500/[0.08] transition-all duration-500 border border-white/[0.02]"
-                                                >
-                                                    <div className={`absolute inset-0 bg-gradient-to-br ${metric.glowColor} opacity-0 group-hover/metric:opacity-20 blur-xl transition-all duration-500`} />
-                                                    
-                                                    <div className="relative z-10 flex sm:flex-col items-center gap-4 sm:gap-0">
-                                                        <SmallHexagonIcon 
-                                                            glowColor={metric.glowColor}
-                                                            className="transform group-hover/metric:scale-110 transition-transform duration-500"
-                                                        >
-                                                            {metric.icon}
-                                                        </SmallHexagonIcon>
-                                                        <div className="flex flex-col sm:items-center">
-                                                            <div className="text-xl sm:text-2xl font-bold bg-gradient-to-br from-white to-violet-200 bg-clip-text text-transparent sm:mt-4 sm:mb-2 group-hover/metric:to-white transition-colors duration-500">
-                                                                {metric.value}
-                                                            </div>
-                                                            <div className="text-xs sm:text-sm text-violet-400/70 sm:text-center whitespace-nowrap group-hover/metric:text-violet-300 transition-colors duration-500">
-                                                                {metric.label}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* Trading Advantages Section */}
-                <section className="relative px-6 py-24 bg-gradient-to-b from-[#0A0A1B]/50 to-[#0A0A1B]">
-                    <div className="max-w-7xl mx-auto mb-16 text-center">
-                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent mb-6">
-                            Trading Advantages
-                        </h2>
-                        <p className="text-xl text-violet-300/80 max-w-2xl mx-auto">
-                            Experience institutional-grade trading with advanced features and deep liquidity
+                        {/* Description */}
+                        <p className="text-lg sm:text-xl text-[#C084FC]/80 max-w-2xl mx-auto">
+                            Experience quantum-speed trading with AI-powered execution, 
+                            cross-chain capabilities, and institutional-grade security.
                         </p>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {tradingAdvantages.map((advantage, idx) => (
-                            <motion.div
-                                key={idx}
-                                className={`group relative ${bgClasses.card} backdrop-blur-xl rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 ${borderClasses.default} hover:${borderClasses.hover}`}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: idx * 0.1 }}
+
+                        {/* CTA Buttons */}
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                            <motion.button
+                            onClick={()=>{
+                                window.location.href = '/swap'
+                            }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="px-8 py-4 rounded-2xl bg-[#7C3AED] text-white font-semibold shadow-lg shadow-[#7C3AED]/25 hover:shadow-xl hover:bg-[#6D28D9] transition-all duration-300"
                             >
-                                {/* Ambient Glow */}
-                                <div className={`absolute inset-0 ${gradientClasses.glow} opacity-5 group-hover:opacity-15 transition-opacity duration-500 blur-2xl`} />
-                                
-                                {/* Shine Effect */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-all duration-1000" />
-                                
-                                {/* Content */}
-                                <div className="relative p-10">
-                                    <div className="flex items-center gap-8 mb-10">
-                                        <HexagonIcon glowColor="from-violet-500/20 to-fuchsia-500/20">
-                                            <div className="text-3xl">{advantage.icon}</div>
-                                        </HexagonIcon>
-                                        <h3 className="text-2xl font-bold bg-gradient-to-br from-white via-violet-200 to-violet-300 bg-clip-text text-transparent">
-                                            {advantage.title}
-                                        </h3>
-                                    </div>
-
-                                    <p className="text-lg text-violet-300/70 mb-10 leading-relaxed group-hover:text-violet-300/90 transition-colors duration-500">
-                                        {advantage.description}
-                                    </p>
-
-                                    <div className="space-y-4">
-                                        {advantage.metrics.map((metric, metricIdx) => (
-                                            <div 
-                                                key={metricIdx}
-                                                className="group/metric relative flex items-center justify-between p-6 rounded-2xl bg-violet-500/[0.02] hover:bg-violet-500/[0.05] transition-all duration-500 border border-white/[0.02]"
-                                            >
-                                                <div className={`absolute inset-0 bg-gradient-to-br from-violet-500/5 to-fuchsia-500/5 opacity-0 group-hover/metric:opacity-10 blur-xl transition-all duration-500`} />
-                                                <span className="relative z-10 text-violet-300/90 group-hover/metric:text-violet-200 transition-colors duration-500">{metric.label}</span>
-                                                <span className="relative z-10 text-xl font-bold bg-gradient-to-br from-white to-violet-200 bg-clip-text text-transparent group-hover/metric:to-white transition-colors duration-500">{metric.value}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    {advantage.highlight && (
-                                        <div className="mt-12 flex justify-center">
-                                            <div className="relative group/badge">
-                                                <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-pink-500/20 blur-xl opacity-0 group-hover/badge:opacity-100 transition-opacity duration-500" />
-                                                <span className="relative px-8 py-4 rounded-2xl bg-violet-500/[0.03] text-violet-300/90 text-sm font-medium border border-white/[0.05] hover:bg-violet-500/[0.08] hover:border-violet-500/20 transition-all duration-500">
-                                                    {advantage.highlight}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Border Effect */}
-                                <div className="absolute inset-0 rounded-[2.5rem] ring-1 ring-white/[0.05] group-hover:ring-violet-500/20 transition-colors duration-500" />
-                            </motion.div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Launchpad Section */}
-                <section className="relative px-6 py-24 bg-gradient-to-b from-[#0A0A1B] to-[#0A0A1B]/50">
-                    <div className="max-w-7xl mx-auto mb-16 text-center">
-                        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent mb-6">
-                            Launch Your Project
-                        </h2>
-                        <p className="text-xl text-violet-300/80 max-w-2xl mx-auto">
-                            Everything you need to launch and grow your blockchain project
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {features[1].items.map((item, idx) => (
-                            <motion.div
-                                key={idx}
-                                className={`group relative ${bgClasses.card} backdrop-blur-xl rounded-[2.5rem] overflow-hidden hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-500 ${borderClasses.default} hover:${borderClasses.hover}`}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: idx * 0.1 }}
+                                Launch Platform →
+                            </motion.button>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="px-8 py-4 rounded-2xl bg-[#0A0A1B]/60 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 border border-[#7C3AED]/20"
                             >
-                                {/* Ambient Glow */}
-                                <div className={`absolute inset-0 ${gradientClasses.glow} opacity-5 group-hover:opacity-15 transition-opacity duration-500 blur-2xl`} />
-                                
-                                {/* Shine Effect */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-all duration-1000" />
-                                
-                                {/* Content */}
-                                <div className="relative p-10">
-                                    <div className="flex items-center gap-8 mb-10">
-                                        <HexagonIcon glowColor="from-violet-500/20 to-fuchsia-500/20">
-                                            <div className="text-3xl">{item.image}</div>
-                                        </HexagonIcon>
-                                        <h3 className="text-2xl font-bold bg-gradient-to-br from-white via-violet-200 to-violet-300 bg-clip-text text-transparent">
-                                            {item.title}
-                                        </h3>
-                                    </div>
-
-                                    <p className="text-lg text-violet-300/70 mb-10 leading-relaxed group-hover:text-violet-300/90 transition-colors duration-500">
-                                        {item.description}
-                                    </p>
-
-                                    <div className="space-y-4">
-                                        {item.stats.map((stat, statIdx) => (
-                                            <div 
-                                                key={statIdx}
-                                                className="group/stat relative flex items-center p-6 rounded-2xl bg-violet-500/[0.02] hover:bg-violet-500/[0.05] transition-all duration-500 border border-white/[0.02]"
-                                            >
-                                                <div className={`absolute inset-0 bg-gradient-to-br from-violet-500/5 to-fuchsia-500/5 opacity-0 group-hover/stat:opacity-10 blur-xl transition-all duration-500`} />
-                                                <span className="relative z-10 text-lg text-violet-300/90 group-hover/stat:text-violet-200 transition-colors duration-500">{stat}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Border Effect */}
-                                <div className="absolute inset-0 rounded-[2.5rem] ring-1 ring-white/[0.05] group-hover:ring-violet-500/20 transition-colors duration-500" />
-                            </motion.div>
-                        ))}
+                                View Documentation
+                            </motion.button>
+                        </div>
                     </div>
                 </section>
 
                 {/* Wallet Section */}
-                <section className="relative px-4 sm:px-6 py-16 sm:py-24 bg-gradient-to-b from-[#0A0A1B] to-[#0A0A1B]/90">
+                <section className="relative px-4 sm:px-6 py-20">
                     <div className="max-w-7xl mx-auto">
-                        {/* Section Header */}
-                        <div className="text-center mb-12 sm:mb-16">
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-violet-500/10 text-violet-300 text-xs sm:text-sm font-medium mb-4 sm:mb-6"
-                            >
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75" />
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500" />
-                                </span>
-                                Multi-Wallet Support
-                            </motion.div>
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent mb-4 sm:mb-6">
-                                Connect Your Preferred Wallet
+                        <div className="text-center mb-16">
+                            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 tracking-tight">
+                                Connect Your Wallet
                             </h2>
-                            <p className="text-base sm:text-xl text-violet-300/80 max-w-2xl mx-auto px-4 sm:px-0">
-                                Seamlessly connect with multiple wallet options for secure and convenient trading
+                            <p className="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+                                Choose from our wide range of supported wallets
                             </p>
                         </div>
 
-                        {/* Wallets Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {walletOptions.map((wallet, idx) => (
-                                <motion.button
-                                    key={wallet.id}
-                                    className={`group relative flex w-full ${bgClasses.card} backdrop-blur-xl rounded-2xl overflow-hidden ${borderClasses.default} hover:${borderClasses.hover} transition-all duration-500`}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: idx * 0.1 }}
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                >
-                                    {/* Glass Morphism Background */}
-                                    <div className={`absolute inset-0 ${gradientClasses.glass} opacity-0 group-hover:opacity-100 transition-all duration-500`} />
-                                    
-                                    {/* Glow Effect */}
-                                    <div className={`absolute -inset-px ${gradientClasses.glow} opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500`} />
-                                    
-                                    {/* Content Container */}
-                                    <div className="relative flex items-center w-full p-4 sm:p-5">
-                                        {/* Left Section - Icon */}
-                                        <div className="relative mr-3 sm:mr-4 mt-6">
-                                            <div className="relative w-12 h-12 rounded-xl bg-gradient-to-br from-white/[0.08] to-transparent backdrop-blur-sm border border-white/[0.05] flex items-center justify-center group-hover:border-violet-500/20 transition-all duration-500">
-                                                <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                                                <img 
-                                                    src={wallet.icon} 
-                                                    alt={wallet.name} 
-                                                    className="w-7 h-7 object-contain transform group-hover:scale-110 transition-transform duration-500"
-                                                />
-                                            </div>
-                                            
-                                       
-                                        </div>
+                        <div className="w-full gap-4">
+                            <WalletModal/>
+                        </div>
+                    </div>
+                </section>
 
-                                        {/* Middle Section - Info */}
-                                        <div className="flex-1 min-w-0 mr-2">
-                                            <h3 className="text-base font-bold bg-gradient-to-br from-white via-violet-100 to-violet-200 bg-clip-text text-transparent truncate group-hover:to-white transition-colors duration-500">
-                                                {wallet.name}
-                                            </h3>
-                                            <p className="mt-0.5 text-xs text-violet-300/70 line-clamp-2 group-hover:text-violet-200/90 transition-colors duration-500">
-                                                {wallet.description}
-                                            </p>
-                                        </div>
+                {/* Features Grid */}
+                <section className="relative px-4 sm:px-6 py-20">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 tracking-tight">
+                                Professional Trading Tools
+                            </h2>
+                            <p className="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+                                Advanced features for professional traders
+                            </p>
+                        </div>
 
-                                        {/* Right Section - Arrow */}
-                                        <div className="flex-shrink-0">
-                                            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500/5 to-transparent flex items-center justify-center border border-white/[0.05] group-hover:border-violet-500/20 transition-all duration-500">
-                                                <svg 
-                                                    className="w-4 h-4 text-violet-300 transform group-hover:translate-x-0.5 group-hover:text-violet-200 transition-all duration-500" 
-                                                    fill="none" 
-                                                    viewBox="0 0 24 24" 
-                                                    stroke="currentColor"
-                                                >
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Hover Border Effect */}
-                                    <div className="absolute inset-0 rounded-2xl ring-1 ring-violet-500/0 group-hover:ring-violet-500/20 transition-all duration-500" />
-                                    
-                                    {/* Subtle Scan Effect */}
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-violet-500/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500" />
-                                    </div>
-                                </motion.button>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {tradingTools.map((tool, idx) => (
+                                <ToolCard key={idx} tool={tool} />
                             ))}
                         </div>
+                    </div>
+                </section>
 
-                        {/* Additional Info */}
-                        <div className="mt-8 text-center">
-                            <p className="text-sm text-violet-300/60">
-                                Don't see your wallet? We're constantly adding more options.
+                {/* Trading Advantages */}
+                <section className="relative px-4 sm:px-6 py-20">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 tracking-tight">
+                                Trading Advantages
+                            </h2>
+                            <p className="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+                                Experience seamless trading with our advanced features
                             </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {tradingAdvantages.map((advantage, idx) => (
+                                <TradingAdvantageCard key={idx} advantage={advantage} />
+                            ))}
                         </div>
                     </div>
                 </section>

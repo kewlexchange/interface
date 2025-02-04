@@ -30,14 +30,14 @@ export default function WalletModal() {
               <div className={"w-full flex flex-col gap-2 mb-2"}>
                 <span className={"text-sm"}>Connect wallet in one click to start using KEWL</span>
               </div>
-              <div className={"w-full grid sm:grid-cols-2 grid-cols-1 gap-4 rounded-lg border border-default p-4 mb-2"}>
+              <div className={"w-full grid sm:grid-cols-2 grid-cols-1 gap-4 rounded-lg p-4 mb-2"}>
                 {connections
                     .filter((connection) => connection.shouldDisplay())
                     .map((connection) => (
                         <Option key={connection.getName()} connection={connection} />
                     ))}
               </div>
-              <div className={"w-full border border-default p-2 flex flex-col gap-2 rounded-lg"}>
+              <div className={"w-full  p-2 flex flex-col gap-2 rounded-lg"}>
                 <span className={"flex text-sm flex-row gap-2"}>
                   <span translate={"no"} className="material-symbols-outlined">visibility</span>
                   View only permissions. We cannot do anything without your approval.
