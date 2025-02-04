@@ -324,7 +324,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
             description: 'Seamless trading across major blockchains with unified liquidity',
             icon: <Network className="w-6 h-6 text-[#C084FC]" />,
             metrics: [
-                { value: '12+', label: 'Networks' },
+                { value: '2+', label: 'Networks' },
                 { value: '1-Click', label: 'Bridge' },
                 { value: '100%', label: 'Security' }
             ],
