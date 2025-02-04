@@ -37,6 +37,8 @@ import {
     Settings
 } from 'lucide-react';
 import WalletModal from '@/Components/WalletModal';
+import { useWeb3React } from '@web3-react/core';
+import { TokenBalances } from '@/Components/AccountTabs/TokenBalances';
 
 interface HexagonIconProps {
     children: React.ReactNode;
@@ -770,6 +772,9 @@ const HomePage: React.FunctionComponent<IPage> = props => {
         </motion.div>
     );
 
+
+    const { connector, chainId,account } = useWeb3React()
+
     return (
         <div className="relative w-full min-h-screen">
             <main className="relative">
@@ -894,7 +899,10 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                         </div>
 
                         <div className="w-full gap-4">
-                            <WalletModal/>
+                            {
+                                !account ?  <WalletModal/> : <TokenBalances/>
+                            }
+                           
                         </div>
                     </div>
                 </section>
