@@ -890,7 +890,7 @@ const _TRADE_TAB = () => {
                               </span>
                               <div className="px-2 py-0.5 text-xs rounded-full bg-violet-500/10 border border-violet-500/20 shrink-0">
                                 <span className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-transparent bg-clip-text">
-                                  {pair.trade.priceImpact.toFixed(2)}% Impact
+                                  {pair.trade.priceImpact.toSignificant(2)}% Impact
                                 </span>
                               </div>
                             </div>
