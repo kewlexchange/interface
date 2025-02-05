@@ -905,7 +905,7 @@ const _TRADE_TAB = () => {
                         <div className="flex items-center gap-3 shrink-0">
                           <div className="text-right">
                             <div className="text-base sm:text-lg font-semibold text-violet-900 dark:text-violet-100">
-                              {pair.outputAmount}
+                              {pair.trade.outputAmount.toSignificant(6)}
                             </div>
                             <div className="text-xs sm:text-sm text-violet-600/70 dark:text-violet-300/70">
                               {quoteAsset?.symbol}
