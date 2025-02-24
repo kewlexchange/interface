@@ -18,7 +18,7 @@ import { CurrencyAmount, Token, WETH9 } from "../entities";
 import { ChainId, isSupportedChain } from "../constants/chains";
 import { TCommandTypes } from "../constants/commands";
 import { DoubleCurrencyIcon } from "../Components/DoubleCurrency";
-import { Avatar, AvatarGroup, Button, Card, CardBody, CardFooter, CardHeader, Image, Input, Listbox, ListboxItem, ListboxSection, ScrollShadow, Slider, Switch, Tab, Tabs } from "@nextui-org/react";
+import { Avatar, AvatarGroup, Button, Card, CardBody, CardFooter, CardHeader, Image, Input, Listbox, ListboxItem, ListboxSection, ScrollShadow, Slider, Switch, Tab, Tabs, Textarea } from "@nextui-org/react";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import { updateCustomTokenList } from "../state/user/reducer";
 import { useFetchAllTokenList } from "../state/user/hooks";
@@ -119,7 +119,7 @@ export const ModalInfo = ({ isShowing, hide, error }) => {
 
 
 
-                        <textarea defaultValue={error?.data ? error.data?.message : error?.message} rows={5} cols={5} className={"w-full h-20 rounded-xl p-2 "} />
+                        <Textarea variant="faded" color="default" defaultValue={error?.data ? error.data?.message : error?.message} rows={5} cols={5} className={"w-full h-full rounded-xl p-2 "} />
 
 
 
