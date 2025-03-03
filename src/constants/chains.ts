@@ -31,7 +31,9 @@ export enum ChainId {
 
   CHILIZ_MAINNET = 88888,
   CHILIZ_SPICY_TESTNET = 88882,
-  ABSTRACT_TESTNET = 11124
+  ABSTRACT_TESTNET = 11124,
+
+  SONIC_MAINNET = 146
 }
 
 export const DEFAULT_CHAIN_ASSETS_URL = "https://raw.githubusercontent.com/kewlexchange/nfts/main/chiliz/index.json"
@@ -251,6 +253,31 @@ export const BLOCKCHAINS = {
       },
       rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
       blockExplorerUrls: ['https://mumbai.polygonscan.com'],
+    }
+  },
+  SONIC:{
+    MAIN: {
+      enabled:true,
+      chainId: '0x92',
+      chainName: 'SONIC',
+      nativeCurrency: {
+        name: 'S',
+        decimals: 18,
+        symbol: 'S'
+      },
+      rpcUrls: ['https://rpc.soniclabs.com'],
+      blockExplorerUrls: ['https://sonicscan.org'],
+    },
+    TEST: {
+      chainId: '0xfa2',
+      chainName: 'Fantom Testnet',
+      nativeCurrency: {
+        name: 'FTM',
+        decimals: 18,
+        symbol: 'FTM'
+      },
+      rpcUrls: ['https://rpc.testnet.fantom.network'],
+      blockExplorerUrls: ['https://testnet.ftmscan.com'],
     }
   },
   FTM:{
@@ -515,11 +542,13 @@ export const CHAIN_IDS_TO_NAMES = {
   [ChainId.BITCI_TEST]: 'bitcitest',
   [ChainId.CHILIZ_MAINNET]: 'chiliz',
   [ChainId.CHILIZ_SPICY_TESTNET]: 'chiliztest',
-  [ChainId.ABSTRACT_TESTNET]: 'abstestnet'
+  [ChainId.ABSTRACT_TESTNET]: 'abstestnet',
+  [ChainId.SONIC_MAINNET]: 'sonic'
+
 } as const
 
 export function isSupportedChain(chainId: number | null | undefined | ChainId): chainId is SupportedChainsType {
-  return !!chainId && ChainId.BITCI === chainId || ChainId.BITCI_TEST === chainId || ChainId.ARBITRUM_ONE === chainId  || ChainId.CHILIZ_MAINNET === chainId || ChainId.CHILIZ_SPICY_TESTNET === chainId  || ChainId.ABSTRACT_TESTNET === chainId || ChainId.AVALANCHE === chainId
+  return !!chainId && ChainId.BITCI === chainId || ChainId.BITCI_TEST === chainId || ChainId.ARBITRUM_ONE === chainId  || ChainId.CHILIZ_MAINNET === chainId || ChainId.CHILIZ_SPICY_TESTNET === chainId  || ChainId.ABSTRACT_TESTNET === chainId || ChainId.AVALANCHE === chainId || ChainId.SONIC_MAINNET === chainId
 }
 
 export function asSupportedChain(chainId: number | null | undefined | ChainId): SupportedChainsType | undefined {
@@ -535,7 +564,8 @@ export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [
   ChainId.BNB,
   ChainId.AVALANCHE,
   ChainId.CHILIZ_MAINNET,
-  ChainId.ABSTRACT_TESTNET
+  ChainId.ABSTRACT_TESTNET,
+  ChainId.SONIC_MAINNET
 ] as const
 
 /**
@@ -578,7 +608,8 @@ export const L1_CHAIN_IDS = [
   ChainId.BITCI,
   ChainId.BITCI_TEST,
   ChainId.CHILIZ_MAINNET,
-  ChainId.ABSTRACT_TESTNET
+  ChainId.ABSTRACT_TESTNET,
+  ChainId.SONIC_MAINNET
 ] as const
 
 export type SupportedL1ChainId = (typeof L1_CHAIN_IDS)[number]

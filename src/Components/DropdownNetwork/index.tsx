@@ -21,7 +21,7 @@ export const DropdownNetwork = (props: { className?: string, testMode?: boolean 
 
     }, [chainId])
 
-    const handleChangeActiveNetwork = async (chainId) => {
+    const handleChangeActiveNetwork = async (chainId:any) => {
         if (chainId) {
             toggleIsLoading();
             try {
@@ -52,6 +52,19 @@ export const DropdownNetwork = (props: { className?: string, testMode?: boolean 
 
                     <div className="grid grid-cols-2 gap-3 p-2">
 
+
+                    <Card shadow="none"  isPressable className={chainId == ChainId.SONIC_MAINNET ? "bg-danger text-white" : ""}
+                            onPress={() => {
+                                handleChangeActiveNetwork(ChainId.SONIC_MAINNET);
+                            }}>
+                            <div className="flex flex-row gap-2 p-2">
+                                <img className={"w-10 h-10 p-2"} src="/images/coins/sonic.svg" alt="SONIC" />
+                                <div className="flex w-full flex-col items-start justify-start">
+                                    <span>SONIC</span>
+                                    <small>SONIC Main Network</small>
+                                </div>
+                            </div>
+                        </Card>
 
                     <Card shadow="none"  isPressable className={chainId == ChainId.AVALANCHE ? "bg-danger text-white" : ""}
                             onPress={() => {

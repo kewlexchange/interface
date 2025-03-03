@@ -71,5 +71,7 @@ export const RPC_PROVIDERS: { [key in SupportedChainsType]: StaticJsonRpcProvide
   [ChainId.BITCI]: new AppJsonRpcProvider(ChainId.BITCI),
   [ChainId.BITCI_TEST]: new AppJsonRpcProvider(ChainId.BITCI_TEST),
   [ChainId.CHILIZ_MAINNET]: new AppJsonRpcProvider(ChainId.CHILIZ_MAINNET),
-  [ChainId.CHILIZ_SPICY_TESTNET]:new JsonRpcProvider(ChainId.CHILIZ_SPICY_TESTNET)
+  [ChainId.CHILIZ_SPICY_TESTNET]:new JsonRpcProvider(ChainId.CHILIZ_SPICY_TESTNET),
+  [ChainId.SONIC_MAINNET]:new JsonRpcProvider(ChainId.SONIC_MAINNET)
+
 }

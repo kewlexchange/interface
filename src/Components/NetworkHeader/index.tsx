@@ -51,6 +51,8 @@ export const NetworkHeader = (props: { className?: string, testMode?: boolean })
                 <div className={"w-full h-full items-center justify-center hidden lg:block"}>
 
                     <div className="w-full h-full  items-center justify-center flex flex-row gap-2">
+
+                        
                         <Tooltip color="danger" content={"Switch Network to Chiliz"}>
                         <Button 
                         radius="full"
@@ -62,6 +64,20 @@ export const NetworkHeader = (props: { className?: string, testMode?: boolean })
                             handleChangeActiveNetwork(ChainId.CHILIZ_MAINNET);
                         }}>
                              <Image className={"w-8 h-8"} src="/images/coins/chz.svg" alt="CHILIZ" />
+                        </Button>
+                        </Tooltip>
+
+                        <Tooltip color="danger" content={"Switch Network to SONIC"}>
+                        <Button 
+                        radius="full"
+                        isIconOnly
+                        variant={chainId === ChainId.SONIC_MAINNET ? "flat" : "light"}
+                        color={chainId === ChainId.SONIC_MAINNET ? "danger" : "default"}
+                        className={chainId === ChainId.SONIC_MAINNET ? "p-2 animate animate-pulse" : "p-2"} 
+                        onPress={() => {
+                            handleChangeActiveNetwork(ChainId.SONIC_MAINNET);
+                        }}>
+                             <Image className={"w-8 h-8"} src="/images/coins/sonic.svg" alt="SONIC" />
                         </Button>
                         </Tooltip>
 

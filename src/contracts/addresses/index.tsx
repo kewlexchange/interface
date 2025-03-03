@@ -510,6 +510,50 @@ export const CONTRACT_ADRESSES = {
                 TRADETOEARN:""
             }
         },
+        SONIC:{
+            MAIN:{
+                DIAMOND:"",
+                TOKEN:"",
+                EXCHANGE:"0xA0BB8f9865f732C277d0C162249A4F6c157ae9D0",
+                TRADE:"",
+                MARKET:"",
+                CHILIMON:"",
+                PLINKO:"",
+                DOMAIN:"",
+                STAKE:"",
+                LAUNCHPAD:"",
+                IMON404:"",
+                FAN_TOKEN_WRAPPER:"0x81e28dCAAC553Fce9225c266731FC450E0954e47",
+                METAMORPH:"",
+                CHILIATOR:"",
+                BRIDGE:"",
+                MIGRATOR:"",
+                LISTING:"",
+                REFLECTOR:"",
+                TRADETOEARN:""
+            },
+            FUJI:{
+                DIAMOND:"",
+                TOKEN:"",
+                EXCHANGE:"",
+                TRADE:"",
+                MARKET:"",
+                CHILIMON:"",
+                PLINKO:"",
+                DOMAIN:"",
+                STAKE:"",
+                LAUNCHPAD:"",
+                IMON404:"",
+                FAN_TOKEN_WRAPPER:"",
+                METAMORPH:"",
+                CHILIATOR:"",
+                BRIDGE:"",
+                MIGRATOR:"",
+                LISTING:"",
+                REFLECTOR:"",
+                TRADETOEARN:""
+            }
+        },
         BITCI:{
             MAIN:{
                 DIAMOND:"0x7147EF65840172d51d240F74251E454B7a99676C",

@@ -65,6 +65,18 @@ export const Network = (props: { className?: string, testMode?: boolean }) => {
                         </div>
 
                         <div onPress={() => {
+                            handleChangeActiveNetwork(ChainId.SONIC_MAINNET);
+                        }} className={"w-full flex flex-row gap-2 items-center hover:bg-gray/50 rounded-lg p-3 " + (chainId === ChainId.SONIC_MAINNET ? "bg-green-500  text-white " : "bg-default")}>
+                            <div className="thumb bsc">
+                                <img className={"w-10 h-10"} src="/images/coins/sonic.svg" alt="SONIC" />
+                            </div>
+                            <div className="flex flex-col items-start justify-start">
+                                <span className={"font-bold"}>SONIC</span>
+                                <small>SONIC MAIN NETWORK</small>
+                            </div>
+                        </div>
+
+                        <div onPress={() => {
                             handleChangeActiveNetwork(ChainId.CHILIZ_SPICY_TESTNET);
                         }} className={"w-full flex flex-row gap-2 items-center hover:bg-gray/50 rounded-lg p-3 " + (chainId === ChainId.CHILIZ_SPICY_TESTNET ? "bg-green-500  text-white " : "bg-default")}>
                             <div className="thumb bsc">

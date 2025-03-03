@@ -132,6 +132,10 @@ export const FALLBACK_URLS = {
     // "Fallback" URLs
     'https://api.testnet.abs.xyz'
   ],
+  [ChainId.SONIC_MAINNET]: [
+    // "Fallback" URLs
+    'https://rpc.soniclabs.com',
+  ],
 }
 
 /**
@@ -186,5 +190,9 @@ export const RPC_URLS = {
   [ChainId.ABSTRACT_TESTNET]: [
     // "Fallback" URLs
     'https://api.testnet.abs.xyz',
+  ],
+  [ChainId.SONIC_MAINNET]: [
+    // "Fallback" URLs
+    'https://rpc.soniclabs.com',
   ],
 }

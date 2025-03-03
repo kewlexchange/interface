@@ -136,7 +136,7 @@ export const useFindChainSymbol = (chainId) => {
     return contractInfo;
 }
 
-export const useFindNetworkByChainId = (chainId) => {
+export const useFindNetworkByChainId = (chainId : any) => {
     if(!chainId){chainId = parseInt(DEFAULT_CHAIN_INFO.chainId);}
 
 

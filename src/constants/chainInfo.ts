@@ -15,6 +15,7 @@ import polygonSquareLogoUrl from '../assets/svg/polygon_square_logo.svg'
 import polygonMaticLogo from '../assets/svg/polygon-matic-logo.svg'
 import bitciLogoURL from '../assets/svg/bitci.svg'
 import chilizLogoURL from '../assets/svg/chz.svg'
+import sonicLogoURL from '../assets/svg/sonic.svg'
 
 
 import { SupportedL1ChainId, SupportedL2ChainId } from './chains'
@@ -280,6 +281,19 @@ const CHAIN_INFO: ChainInfoMap = {
     squareLogoUrl: chilizLogoURL,
     nativeCurrency: { name: 'ETHEREUM', symbol: 'ETH', decimals: 18 },
     defaultListUrl: ["https://raw.githubusercontent.com/imonai/nfts/main/spicy/index.json"],
+  },
+  [ChainId.SONIC_MAINNET]: {
+    networkType: NetworkType.L1,
+    bridge: '',
+    docs: 'https://sonicscan.org',
+    explorer: 'https://sonicscan.org',
+    infoLink: 'https://info.kewl.exchange/#/sonic/',
+    label: 'Sonic',
+    logoUrl: sonicLogoURL,
+    circleLogoUrl: sonicLogoURL,
+    squareLogoUrl: sonicLogoURL,
+    nativeCurrency: { name: 'SONIC', symbol: 'S', decimals: 18 },
+    defaultListUrl: ["https://raw.githubusercontent.com/imonai/nfts/main/sonic/index.json"],
   },
 } as const
 

@@ -159,6 +159,6 @@ export const LP_BURNED_ASSETS = [
     "0x75D28E4c65aCD2EB6efCB0D200869E89C2c1ef1f"
 ]
 
-export const isLPAddressBurned = (address) => {
+export const isLPAddressBurned = (address : any) => {
     return LP_BURNED_ASSETS.includes(address);
 }

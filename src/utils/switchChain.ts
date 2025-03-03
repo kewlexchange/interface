@@ -28,6 +28,7 @@ export const switchChain = async (connector: Connector, chainId: SupportedChainI
     await connector.activate(chainId)
   } else {
     const info = useFindNetworkByChainId(chainId).networkData;
+    console.log("info",info)
     const addChainParameter = {
       chainId,
       chainName: info.chainName,
