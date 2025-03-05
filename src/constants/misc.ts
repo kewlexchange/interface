@@ -146,6 +146,22 @@ export const DECENTRALIZED_EXCHANGES = [
         dex:"SUSHI",
         router:"0xc35DADB65012eC5796536bD9864eD8773aBc74C4",
         weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
+    },
+
+    {
+        logo:"/images/dex/kewl.svg",
+        chainId:146,
+        dex:"KEWL",
+        router:"0xA0BB8f9865f732C277d0C162249A4F6c157ae9D0",
+        weth:"0x81e28dCAAC553Fce9225c266731FC450E0954e47"
+    },
+   
+    {
+        logo:"/images/dex/sonic-market.svg",
+        chainId:146,
+        dex:"SonicMarket",
+        router:"0x01D6747dD2d65dDD90FAEC2C84727c2706ee28E2",
+        weth:"0x81e28dCAAC553Fce9225c266731FC450E0954e47"
     }
 
 
