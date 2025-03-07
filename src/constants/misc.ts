@@ -78,35 +78,40 @@ export const DECENTRALIZED_EXCHANGES = [
         chainId:88888,
         dex:"KEWL",
         router:"0xA0BB8f9865f732C277d0C162249A4F6c157ae9D0",
-        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47"
+        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47",
+        flag:false
     },
     {
         logo:"/images/dex/kayen.png",
         chainId:88888,
         dex:"KAYEN",
         router:"0xE2918AA38088878546c1A18F2F9b1BC83297fdD3",
-        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47"
+        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47",
+        flag:false
     },
     {
         logo:"/images/dex/chilizswap.svg",
         chainId:88888,
         dex:"CHILIZSWAP",
         router:"0xcF4A2be8Fe92fEe8e350AD8D876274749Ae0CBb1",
-        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47"
+        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47",
+        flag:false
     },
     {
         logo:"/images/dex/dswap.png",
         chainId:88888,
         dex:"DIVISWAP",
         router:"0xbdd9c322ecf401e09c9d2dca3be46a7e45d48bb1",
-        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47"
+        weth:"0x677F7e16C7Dd57be1D4C8aD1244883214953DC47",
+        flag:false
     },
     {
         logo:"/images/dex/kewl.svg",
         chainId:88888,
         dex:"KEWLv1",
         router:"0xA0BB8f9865f732C277d0C162249A4F6c157ae9D0",
-        weth:"0x721EF6871f1c4Efe730Dce047D40D1743B886946"
+        weth:"0x721EF6871f1c4Efe730Dce047D40D1743B886946",
+        flag:false
     },
 
     
@@ -116,28 +121,32 @@ export const DECENTRALIZED_EXCHANGES = [
         chainId:43114,
         dex:"KEWL",
         router:"0xA0BB8f9865f732C277d0C162249A4F6c157ae9D0",
-        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
+        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        flag:false
     },
     {
         logo:"/images/dex/traderjoe.svg",
         chainId:43114,
         dex:"TRADERJOE",
         router:"0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10",
-        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
+        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        flag:false
     },
     {
         logo:"/images/dex/pangolin.svg",
         chainId:43114,
         dex:"PANGOLIN",
         router:"0xefa94DE7a4656D787667C749f7E1223D71E9FD88",
-        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
+        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        flag:false
     },
     {
         logo:"/images/dex/uniswap.svg",
         chainId:43114,
         dex:"UNISWAP",
         router:"0x9e5A52f57b3038F1B8EeE45F28b3C1967e22799C",
-        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
+        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        flag:false
     }
     ,
     {
@@ -145,7 +154,8 @@ export const DECENTRALIZED_EXCHANGES = [
         chainId:43114,
         dex:"SUSHI",
         router:"0xc35DADB65012eC5796536bD9864eD8773aBc74C4",
-        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
+        weth:"0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        flag:false
     },
 
     {
@@ -153,7 +163,8 @@ export const DECENTRALIZED_EXCHANGES = [
         chainId:146,
         dex:"KEWL",
         router:"0xA0BB8f9865f732C277d0C162249A4F6c157ae9D0",
-        weth:"0x81e28dCAAC553Fce9225c266731FC450E0954e47"
+        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+        flag:false
     },
    
     {
@@ -161,9 +172,21 @@ export const DECENTRALIZED_EXCHANGES = [
         chainId:146,
         dex:"SonicMarket",
         router:"0x01D6747dD2d65dDD90FAEC2C84727c2706ee28E2",
-        weth:"0x81e28dCAAC553Fce9225c266731FC450E0954e47"
+        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+        flag:false
+    }
+    ,
+   
+    {
+        logo:"/images/dex/shadow.svg",
+        chainId:146,
+        dex:"SHADOW",
+        router:"0x2dA25E7446A70D7be65fd4c053948BEcAA6374c8",
+        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+        flag:true
     }
 
+    
 
     
     

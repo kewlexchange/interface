@@ -12,6 +12,7 @@ export interface SwapParam {
     wrapper: string;
     pair: string;
     input: string;
+    flag:boolean;
   }
   
   export interface Router {
@@ -21,6 +22,7 @@ export interface SwapParam {
   
   export interface PairInfo {
     valid: boolean;
+    flag:boolean;
     reserve0: BigNumber;
     reserve1: BigNumber;
     amount0Out: BigNumber;
@@ -35,6 +37,7 @@ export interface SwapParam {
   }
   
   export interface PairInput {
+    flag:boolean;
     router: string; // Address type
     pair: string;   // Address type
     input: string;  // Address type

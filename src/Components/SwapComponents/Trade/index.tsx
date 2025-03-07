@@ -202,8 +202,11 @@ const _TRADE_TAB = () => {
           weth9: pair.pair.weth,
           wrapper: WRAPPER,
           pair: pair.pair.pair,
-          input: INPUT_TOKEN
+          input: INPUT_TOKEN,
+          flag:false,
         }
+
+        console.log("swapParams",swapParam)
         let overrides = {
           value: IS_NATIVE ? DEPOSIT_AMOUNT : 0
         }
@@ -482,6 +485,8 @@ const _TRADE_TAB = () => {
       return DECENTRALIZED_EXCHANGES.filter((exchange: any) => exchange.chainId === chainId).map((exchange) => ({
         router: exchange.router,
         weth: exchange.weth,
+        flag:exchange.flag,
+        stable:false
       }));
     };
 
@@ -680,6 +685,7 @@ const _TRADE_TAB = () => {
       }
       
      
+      console.log("tradingPairs",tradingPairs)
        
       tradingPairs.forEach((pair) => {
 
@@ -695,7 +701,8 @@ const _TRADE_TAB = () => {
             normalizeAmount(MINIMUM_LIQUIDITY, pair.pair.token1Decimals.toNumber())
           )
         ) {
-          let outputAmount = parseUnits(pair.outputAmount, quoteAsset?.decimals)
+          //let outputAmount = parseUnits(pair.outputAmount, quoteAsset?.decimals)
+          let outputAmount = JSBI.greaterThan(JSBI.BigInt(pair.pair.amount0Out.toString()), JSBI.BigInt(0)) ? pair.pair.amount0Out : pair.pair.amount1Out
 
           let INPUT_TOKEN = IS_NATIVE ? pair.pair.weth : baseAsset.address;
           let swapParam = {
@@ -704,8 +711,11 @@ const _TRADE_TAB = () => {
             weth9: pair.pair.weth,
             wrapper: WRAPPER,
             pair: pair.pair.pair,
-            input: INPUT_TOKEN
+            input: INPUT_TOKEN,
+            flag:pair.pair.flag 
           }
+
+          console.log("swapParam",swapParam)
 
 
           if (!allSwapParams.some((param:any) => param.pair === pair.pair)) {
@@ -803,17 +813,24 @@ const _TRADE_TAB = () => {
 
       let DEPOSIT_AMOUNT = ethers.utils.parseUnits(baseInputValue, baseAsset.decimals)
       let IS_NATIVE = (baseAsset.address === ETHER_ADDRESS || baseAsset.address === ethers.constants.AddressZero)
-      let outputAmount = parseUnits(pair.outputAmount, quoteAsset?.decimals)
+      //let outputAmount =  parseUnits(pair.outputAmount, quoteAsset?.decimals)
+      let outputAmount = pair.pair.amount0Out > 0 ? pair.pair.amount0Out : pair.pair.amount1Out
 
+      console.log("pair",pair)
       let INPUT_TOKEN = IS_NATIVE ? pair.pair.weth : baseAsset.address;
+
       let swapParam = {
         amountIn: DEPOSIT_AMOUNT,
         amountOut:outputAmount,
         weth9: pair.pair.weth,
         wrapper: WRAPPER,
         pair: pair.pair.pair,
-        input: INPUT_TOKEN
+        input: INPUT_TOKEN,
+        flag:pair.pair.flag
       }
+
+      console.log("swapParams",swapParam)
+
       let overrides = {
         value: IS_NATIVE ? DEPOSIT_AMOUNT : 0
       }
