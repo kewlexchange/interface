@@ -184,7 +184,26 @@ export const DECENTRALIZED_EXCHANGES = [
         router:"0x2dA25E7446A70D7be65fd4c053948BEcAA6374c8",
         weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
         flag:true
+    },
+
+    {
+        logo:"/images/dex/equalizer.svg",
+        chainId:146,
+        dex:"Equalizer",
+        router:"0xDDD9845Ba0D8f38d3045f804f67A1a8B9A528FcC",
+        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+        flag:true
+    },
+    {
+        logo:"/images/dex/metropolis.svg",
+        chainId:146,
+        dex:"Metropolis",
+        router:"0x1570300e9cFEC66c9Fb0C8bc14366C86EB170Ad0",
+        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+        flag:false
     }
+
+    
 
     
 
