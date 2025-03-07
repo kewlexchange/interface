@@ -522,7 +522,7 @@ export const BLOCKCHAINS = {
       },
 
 }
-export const DEFAULT_CHAIN_INFO = BLOCKCHAINS.CHZ.MAIN;
+export const DEFAULT_CHAIN_INFO = BLOCKCHAINS.SONIC.MAIN;
 
 export const CHAIN_IDS_TO_NAMES = {
   [ChainId.MAINNET]: 'mainnet',
