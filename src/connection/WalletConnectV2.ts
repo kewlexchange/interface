@@ -5,6 +5,7 @@ import { isIOS } from '../utils/userAgent'
 
 import { RPC_URLS } from '../constants/networks'
 import { isIMON, isKEWL } from '../hooks/useDomains'
+import { MAINNET_CHAIN_ID } from '@/constants/chainInfo'
 
 // Avoid testing for the best URL by only passing a single URL per chain.
 // Otherwise, WC will not initialize until all URLs have been tested (see getBestUrl in web3-react).
@@ -75,7 +76,7 @@ export class UniwalletConnect extends WalletConnectV2 {
 
   constructor({ actions, onError }: Omit<WalletConnectConstructorArgs, 'options'>) {
     // disables walletconnect's proprietary qr code modal; instead UniwalletModal will listen for events to trigger our custom modal
-    super({ actions, defaultChainId: ChainId.MAINNET, qrcode: false, onError })
+    super({ actions, defaultChainId: MAINNET_CHAIN_ID, qrcode: false, onError })
 
     this.events.once(URI_AVAILABLE, () => {
       this.provider?.events.on('disconnect', this.deactivate)

@@ -19,7 +19,7 @@ import { RPC_PROVIDERS } from '../constants/providers'
 import { Connection, ConnectionType } from './types'
 import { getInjection, getIsCoin98Wallet, getIsCoinbaseWallet, getIsInjected, getIsMetaMaskWallet, getIsOKXWallet, getIsRabbyWallet } from './utils'
 import { UniwalletConnect as UniwalletWCV2Connect, WalletConnectV2 } from './WalletConnectV2'
-import {MAINNET_INFO} from "../constants/chainInfo";
+import {MAINNET_CHAIN_ID, MAINNET_INFO} from "../constants/chainInfo";
 import { isMobile, isTouchable, isWebAndroid, isWebIOS } from '../utils/platform'
 
 function onError(error: Error) {
@@ -129,7 +129,7 @@ export const gnosisSafeConnection: Connection = {
 }
 
 export const walletConnectV2Connection: Connection = new (class implements Connection {
-  private initializer = (actions: Actions, defaultChainId = ChainId.CHILIZ_MAINNET) =>
+  private initializer = (actions: Actions, defaultChainId = MAINNET_CHAIN_ID) =>
     new WalletConnectV2({ actions, defaultChainId, onError })
 
   type = ConnectionType.WALLET_CONNECT_V2
@@ -172,7 +172,7 @@ const [web3CoinbaseWallet, web3CoinbaseWalletHooks] = initializeConnector<Coinba
     new CoinbaseWallet({
       actions,
       options: {
-        url: RPC_URLS[ChainId.CHILIZ_MAINNET][0],
+        url: RPC_URLS[MAINNET_CHAIN_ID][0],
         appName: 'Uniswap',
         appLogoUrl: UNISWAP_LOGO,
         reloadOnDisconnect: false,

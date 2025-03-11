@@ -10,6 +10,7 @@ import useEagerlyConnect from '../../hooks/useEagerlyConnect'
 import useOrderedConnections from '../../hooks/useOrderedConnections'
 import usePrevious from '../../hooks/usePrevious'
 import { useConnectedWallets } from '../../state/wallets/hooks'
+import { MAINNET_CHAIN_ID, MAINNET_INFO } from '@/constants/chainInfo';
 
 export default function Web3Provider({ children }: { children: ReactNode }) {
   useEagerlyConnect()
@@ -37,7 +38,7 @@ function Updater() {
   const { account, chainId, connector, provider } = useWeb3React()
 
   // Trace RPC calls (for debugging).
-  const networkProvider = isSupportedChain(chainId) ? RPC_PROVIDERS[chainId] : undefined
+  const networkProvider = isSupportedChain(chainId) ? RPC_PROVIDERS[chainId] : RPC_PROVIDERS[MAINNET_CHAIN_ID]
   const shouldTrace = false
   useEffect(() => {
     if (shouldTrace) {

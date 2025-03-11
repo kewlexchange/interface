@@ -43,6 +43,8 @@ import {BLOCKCHAINS, DEFAULT_CHAIN_INFO, isSupportedChain} from "../constants/ch
 import {BigNumber} from "@ethersproject/bignumber";
 import { ethers } from 'ethers';
 import { LogLevel } from '@ethersproject/logger';
+import { chain } from 'lodash';
+import { MAINNET_CHAIN_ID } from '@/constants/chainInfo';
 
 // returns null on errors
 export function useContract<T extends Contract = Contract>(
@@ -54,10 +56,17 @@ export function useContract<T extends Contract = Contract>(
     const { provider, account, chainId } = useWeb3React()
 
     return useMemo(() => {
-        if (!addressOrAddressMap || !ABI || !provider || !chainId) return null
+
+        console.log("provider",provider)
+
+
+        if (!addressOrAddressMap || !ABI || !provider ) return null
+        
+        let customChainID = !chainId ? MAINNET_CHAIN_ID : chainId
+   
         let address: string | undefined
         if (typeof addressOrAddressMap === 'string') address = addressOrAddressMap
-        else address = addressOrAddressMap[chainId]
+        else address = addressOrAddressMap[customChainID]
         if (!address) return null
         try {
             return getContract(address, ABI, provider, withSignerIfPossible && account ? account : undefined)
@@ -114,7 +123,7 @@ export function useERC20Contract() {
 
 
 
-export const useFindChainSymbol = (chainId) => {
+export const useFindChainSymbol = (chainId:any) => {
     var chainName : string;
     var networkName : string;
     var networkChainId : string;
@@ -150,7 +159,7 @@ export const useFindNetworkByChainId = (chainId : any) => {
 }
 
 
-export function useFindDiamondByChainId(chainId) {
+export function useFindDiamondByChainId(chainId:any) {
     var chainName : string;
     var networkName : string;
     var networkChainId : string;

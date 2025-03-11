@@ -1,5 +1,5 @@
 import CustomModal from "../Components/Modal";
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useMemo, useState } from 'react'
 import { AnimationHeader } from "../Components/AnimationHeader";
 import { Network } from "../Components/Network";
 import { Spinner } from "../Components/Spinner";
@@ -409,21 +409,28 @@ export const ModalSelectToken = ({ isShowing, disableToken, hide, tokenList, onS
     const [isSelected, setIsSelected] = useState(false);
 
 
+    
 
-    useEffect(() => {
+    
+   useEffect(() => {
         if (!tokenList) {
             return;
         }
-        if (searchText !== "") {
-            const filteredList = tokenList.filter((item) =>
-                item.symbol.toLowerCase().includes(searchText.toLowerCase())
-            );
-            setFilteredItems(filteredList);
-        } else {
-            setFilteredItems(tokenList)
-        }
+    
+        setFilteredItems([])
+    
+        setTimeout(() => {
+            const filteredList: any = searchText
+                ? tokenList.filter((item: any) =>
+                      item.symbol.toLowerCase().includes(searchText.toLowerCase())
+                  )
+                : tokenList;
+    
+            setFilteredItems(filteredList); // ✅ Sonra yeni listeyi ata
+        }, 0); 
+    }, [searchText, tokenList]); 
 
-    }, [searchText])
+    
 
     const getIconPath = (ticker: any) => {
         if (!tokenList) {

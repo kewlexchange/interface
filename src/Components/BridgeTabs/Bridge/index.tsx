@@ -147,7 +147,10 @@ const _BRIDGE_TAB = () => {
 
     const supportedChainList = [
         {chainId:ChainId.CHILIZ_MAINNET,chainInfo:getChainInfo(ChainId.CHILIZ_MAINNET)},
-        {chainId:ChainId.ARBITRUM_ONE,chainInfo:getChainInfo(ChainId.ARBITRUM_ONE)}
+        {chainId:ChainId.ARBITRUM_ONE,chainInfo:getChainInfo(ChainId.ARBITRUM_ONE)},
+        {chainId:ChainId.CHILIZ_SPICY_TESTNET,chainInfo:getChainInfo(ChainId.CHILIZ_SPICY_TESTNET)},
+        {chainId:ChainId.AVALANCHE,chainInfo:getChainInfo(ChainId.AVALANCHE)},
+        {chainId:ChainId.SONIC_MAINNET,chainInfo:getChainInfo(ChainId.SONIC_MAINNET)},
     ]
 
 

@@ -131,6 +131,6 @@ export function getCurrentChainBlockExplorer(chainId){
     return explorer;
 }
 
-export function generateTxLink(chainId,tx){
+export function generateTxLink(chainId:any,tx:any){
     return getCurrentChainBlockExplorer(chainId) + "/tx/" + tx;
 }

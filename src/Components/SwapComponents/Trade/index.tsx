@@ -59,6 +59,7 @@ const _TRADE_TAB = () => {
   
   const initTradeScreen = async () => {
 
+    console.log("chainId",chainId)
     if (!chainId) {
       return;
     }

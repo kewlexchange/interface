@@ -40,9 +40,9 @@ export const DEFAULT_CHAIN_ASSETS_URL = "https://raw.githubusercontent.com/kewle
 export const DEFAULT_CHAIN_NFT_URL = "https://raw.githubusercontent.com/kewlexchange/nfts/main/chiliz/nfts.json"
 export const DEFAULT_BITCI_CHAIN_NFT_URL = "https://raw.githubusercontent.com/kewlexchange/nfts/main/bitci/nfts.json"
 
-export declare const SUPPORTED_CHAINS: readonly [ChainId.CHILIZ_MAINNET,ChainId.CHILIZ_SPICY_TESTNET, ChainId.BITCI,ChainId.BITCI_TEST];
+export declare const SUPPORTED_CHAINS: readonly [ChainId.CHILIZ_MAINNET,ChainId.CHILIZ_SPICY_TESTNET, ChainId.BITCI,ChainId.SONIC_MAINNET,ChainId.BITCI_TEST,ChainId.AVALANCHE,ChainId.ARBITRUM_ONE];
 export declare type SupportedChainsType = typeof SUPPORTED_CHAINS[number];
-export const UniWalletSupportedChains = [ChainId.MAINNET, ChainId.ARBITRUM_ONE, ChainId.OPTIMISM, ChainId.POLYGON]
+export const UniWalletSupportedChains = [ChainId.MAINNET,,ChainId.SONIC_MAINNET, ChainId.ARBITRUM_ONE, ChainId.OPTIMISM, ChainId.POLYGON]
 
 export const BLOCKCHAINS = {
   BITCI:

@@ -319,7 +319,8 @@ export function getChainInfo(chainId: any): any {
   return undefined
 }
 
-export const MAINNET_INFO = CHAIN_INFO[ChainId.CHILIZ_MAINNET]
+export const MAINNET_CHAIN_ID = ChainId.SONIC_MAINNET
+export const MAINNET_INFO = CHAIN_INFO[MAINNET_CHAIN_ID]
 export function getChainInfoOrDefault(chainId: number | undefined) {
   return getChainInfo(chainId) ?? MAINNET_INFO
 }
