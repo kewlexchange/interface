@@ -876,6 +876,9 @@ const HomePage: React.FunctionComponent<IPage> = props => {
                                 Launch Platform →
                             </motion.button>
                             <motion.button
+                            onClick={()=>{
+                                window.location.href = 'https://docs.kewl.exchange'
+                            }}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 className="px-8 py-4 rounded-2xl bg-[#0A0A1B]/60 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 border border-[#7C3AED]/20"
