@@ -49,14 +49,14 @@ interface BaseChainInfo {
 
 interface L1ChainInfo extends BaseChainInfo {
   readonly networkType: NetworkType.L1
-  readonly defaultListUrl?: string
+  readonly defaultListUrl?: any
 }
 
 export interface L2ChainInfo extends BaseChainInfo {
   readonly networkType: NetworkType.L2
   readonly bridge: string
   readonly statusPage?: string
-  readonly defaultListUrl: string
+  readonly defaultListUrl?: any
 }
 
 type ChainInfoMap = { readonly [chainId: number]: L1ChainInfo | L2ChainInfo } & {
@@ -296,6 +296,7 @@ const CHAIN_INFO: ChainInfoMap = {
     defaultListUrl: ["https://raw.githubusercontent.com/imonai/nfts/main/sonic/index.json"],
   },
 } as const
+
 
 export function getChainInfo(chainId: SupportedL1ChainId): L1ChainInfo
 export function getChainInfo(chainId: SupportedL2ChainId): L2ChainInfo

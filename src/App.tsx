@@ -1051,8 +1051,9 @@ const App = () => {
 
 export default function () {
   return (<>
+      <Web3Provider>
     <Head />
-    <Web3Provider>
+
       <BlockNumberProvider>
         <App />
       </BlockNumberProvider>

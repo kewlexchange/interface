@@ -14,11 +14,11 @@ export const fetchAndUpdateAllTokenList = async (chainId,account) => {
     const EXCHANGE = useExchangeContract(chainId,true)
     var customTokens = useAppSelector((state) => state.user.customTokenList && state.user.customTokenList[chainId])
 
- 
+    const chainInfo = getChainInfoOrDefault(chainId)
+    
         if(!isSupportedChain(chainId)){
             return;
         }
-        const chainInfo = getChainInfoOrDefault(chainId)
         let fetchURL = chainInfo.defaultListUrl[0]
         if(fetchURL.length === 0){
             fetchURL = DEFAULT_CHAIN_ASSETS_URL;

@@ -135,6 +135,7 @@ export const FALLBACK_URLS = {
   [ChainId.SONIC_MAINNET]: [
     // "Fallback" URLs
     'https://rpc.soniclabs.com',
+    'https://rpc.ankr.com/sonic_mainnet'
   ],
 }
 
@@ -193,6 +194,6 @@ export const RPC_URLS = {
   ],
   [ChainId.SONIC_MAINNET]: [
     // "Fallback" URLs
-    'https://rpc.soniclabs.com',
+    'https://rpc.soniclabs.com', ...FALLBACK_URLS[ChainId.SONIC_MAINNET]
   ],
 }
