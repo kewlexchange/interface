@@ -229,6 +229,25 @@ export const DECENTRALIZED_EXCHANGES = [
         flag:false
     },
 
+    {
+        logo:"/images/dex/memebox.png",
+        chainId:146,
+        dex:"MEMEBOX",
+        router:"0x079463f811e6EB2E226908E79144CDDB59a7fB71",
+        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+        flag:false
+    },
+
+    {
+        logo:"/images/dex/spooky.png",
+        chainId:146,
+        dex:"SpookyFi",
+        router:"0xEE4bC42157cf65291Ba2FE839AE127e3Cc76f741",
+        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+        flag:false
+    },
+
+    
     
 
     
