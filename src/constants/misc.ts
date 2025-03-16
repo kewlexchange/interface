@@ -166,7 +166,15 @@ export const DECENTRALIZED_EXCHANGES = [
         weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
         flag:false
     },
-   
+     
+    {
+        logo:"/images/dex/shadow.svg",
+        chainId:146,
+        dex:"SHADOW",
+        router:"0x2dA25E7446A70D7be65fd4c053948BEcAA6374c8",
+        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+        flag:true
+    },
     {
         logo:"/images/dex/sonic-market.svg",
         chainId:146,
@@ -176,15 +184,7 @@ export const DECENTRALIZED_EXCHANGES = [
         flag:false
     }
     ,
-   
-    {
-        logo:"/images/dex/shadow.svg",
-        chainId:146,
-        dex:"SHADOW",
-        router:"0x2dA25E7446A70D7be65fd4c053948BEcAA6374c8",
-        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
-        flag:true
-    },
+ 
 
     {
         logo:"/images/dex/equalizer.svg",
@@ -220,6 +220,7 @@ export const DECENTRALIZED_EXCHANGES = [
         flag:false
     },
 
+    /*
     {
         logo:"/images/dex/memebox.png",
         chainId:146,
@@ -227,16 +228,9 @@ export const DECENTRALIZED_EXCHANGES = [
         router:"0x079463f811e6EB2E226908E79144CDDB59a7fB71",
         weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
         flag:false
-    },
+    },*/
 
-    {
-        logo:"/images/dex/memebox.png",
-        chainId:146,
-        dex:"MEMEBOX",
-        router:"0x079463f811e6EB2E226908E79144CDDB59a7fB71",
-        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
-        flag:false
-    },
+
 
     {
         logo:"/images/dex/spooky.png",
@@ -247,6 +241,15 @@ export const DECENTRALIZED_EXCHANGES = [
         flag:false
     },
 
+    {
+        logo:"/images/dex/ninemm.png",
+        chainId:146,
+        dex:"9MM",
+        router:"0x0f7B3FcBa276A65dd6E41E400055dcb75BA66750",
+        weth:"0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
+        flag:false
+    },
+    
     
     
 
