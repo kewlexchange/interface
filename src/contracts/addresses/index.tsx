@@ -524,7 +524,7 @@ export const CONTRACT_ADRESSES = {
                 LAUNCHPAD:"",
                 IMON404:"",
                 FAN_TOKEN_WRAPPER:"0x81e28dCAAC553Fce9225c266731FC450E0954e47",
-                METAMORPH:"",
+                METAMORPH:"0xbC27718aEcD28AE67Be8959B4B42C55325AA645d",
                 CHILIATOR:"",
                 BRIDGE:"",
                 MIGRATOR:"",

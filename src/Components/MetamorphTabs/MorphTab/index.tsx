@@ -176,7 +176,7 @@ const _MORPH_TAB = () => {
 
 
 
-                    <Card shadow='none' className="w-full flex flex-col gap-2 rounded-lg">
+                    <Card shadow='none' className="bg-transparent w-full flex flex-col gap-2 rounded-lg">
 
                         <div className="w-full rounded-xl swap">
 
@@ -206,7 +206,7 @@ const _MORPH_TAB = () => {
 
 
 
-                                    <div onPress={() => {
+                                    <div onClick={() => {
                                         setInputValue(baseAsset.balance, true)
                                     }} className="balance cursor-pointer">
                                         Balance: {baseAsset && baseAsset.balance}
@@ -234,7 +234,7 @@ const _MORPH_TAB = () => {
                         {
                              isAllowanceRequired() === true  && <Button className={"w-full"} onPress={() => {
                                 handleApprove(baseAsset.address)
-                            }} color="default">
+                            }} color="danger">
                                 Unlock
                             </Button>
                         }
@@ -242,7 +242,7 @@ const _MORPH_TAB = () => {
                        {
                             isAllowanceRequired() === false  && <Button className={"w-full"} onPress={() => {
                                 handleTokenToNFT()
-                            }} color="default">
+                            }} color="danger">
                                 Morph Token to NFT
                             </Button>
                        }
