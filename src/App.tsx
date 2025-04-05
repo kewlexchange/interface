@@ -333,6 +333,60 @@ const App = () => {
                     </Link>
                   </DropdownItem>
 
+                  <DropdownItem key={"nfts"} className="group/item">
+                      <Link 
+                        className="w-full flex items-center gap-3 relative p-2" 
+                        onPress={() => setIsMenuOpen(false)} 
+                        color="foreground" 
+                        as={NavLink} 
+                        to={"/nfts"}
+                      >
+                        {/* Hover background effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/[0.03] via-fuchsia-500/[0.05] to-violet-500/[0.03]
+                          transition-opacity duration-300" />
+
+                        {/* Hover border glow */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-violet-500/20 via-fuchsia-500/20 to-violet-500/20
+                          blur-xl transition-opacity duration-300" />
+
+                        {/* Shimmer effect */}
+                        <div className="absolute inset-0 rounded-xl opacity-0 group-hover/item:opacity-100
+                          bg-gradient-to-r from-transparent via-white/5 to-transparent
+                          translate-x-[-100%] group-hover/item:translate-x-[100%]
+                          transition-all duration-1000 ease-in-out" />
+
+                        {/* Icon container */}
+                        <div className="relative w-10 h-10 rounded-xl 
+                          bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]
+                          group-hover/item:from-violet-500/[0.1] group-hover/item:to-fuchsia-500/[0.1]
+                          flex items-center justify-center
+                          overflow-hidden transition-all duration-300
+                          shadow-[0_0_0_1px_rgba(139,92,246,0.1)]
+                          group-hover/item:shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                          <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 
+                            opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                          <ImageIcon className="w-5 h-5 text-violet-500 group-hover/item:text-violet-400 
+                            transition-colors relative z-10" />
+                        </div>
+
+                        {/* Text content */}
+                        <div className="relative flex flex-col z-10">
+                          <span className="text-sm font-medium bg-gradient-to-r from-violet-500 to-fuchsia-500
+                            bg-clip-text text-transparent
+                            group-hover/item:from-violet-400 group-hover/item:to-fuchsia-400
+                            transition-all duration-300">
+                            {t("NFTs")}
+                          </span>
+                          <span className="text-xs text-violet-500/60 group-hover/item:text-violet-400/80 
+                            transition-colors">
+                            Browse NFT collections
+                          </span>
+                        </div>
+                      </Link>
+                    </DropdownItem>
+
                   <DropdownItem key={"metamorph"} className="group/item">
                       <Link 
                         className="w-full flex items-center gap-3 relative p-2" 

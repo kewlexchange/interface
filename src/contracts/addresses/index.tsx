@@ -516,7 +516,7 @@ export const CONTRACT_ADRESSES = {
                 TOKEN:"",
                 EXCHANGE:"0xA0BB8f9865f732C277d0C162249A4F6c157ae9D0",
                 TRADE:"",
-                MARKET:"",
+                MARKET:"0x32A72466314D12AbD0091C0BF7F7eaeDE1BeE48e",
                 CHILIMON:"",
                 PLINKO:"",
                 DOMAIN:"",
