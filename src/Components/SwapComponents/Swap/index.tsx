@@ -445,11 +445,7 @@ const _SWAP_TAB = () => {
         const etherIn = baseAsset.address === ETHER_ADDRESS
         const etherOut = quoteAsset.address === ETHER_ADDRESS
 
-        if ([baseAsset.address, quoteAsset.address].includes("0x9631be8566fC71d91970b10AcfdEe29F21Da6C27")) {
-            setTransaction({ hash: '', summary: '', error: {message:"Unsupported Asset! Please Migrate IMON to KWL!"} });
-            toggleError();
-            return;
-        }
+  
         
 
         const amountIn: string = toHex(tradeInfo.maximumAmountIn(DEFAULT_ADD_SLIPPAGE_TOLERANCE))

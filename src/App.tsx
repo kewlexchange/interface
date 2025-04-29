@@ -1019,28 +1019,7 @@ const App = () => {
                           animate-spin-slow" />
               </div>
 
-             
-              {/* Enhanced Energy Cores - Moved behind grid */}
-              <div className="absolute inset-0 overflow-hidden z-[1]">
-                <div className="absolute top-1/4 -right-20 w-[500px] h-[500px]
-                          rounded-full bg-violet-500/20 blur-[120px]
-                          animate-energy-pulse mix-blend-screen" />
-                <div className="absolute bottom-1/4 -left-20 w-[500px] h-[500px]
-                          rounded-full bg-blue-500/20 blur-[120px]
-                          animate-energy-pulse animation-delay-1000 mix-blend-screen" />
-                <div className="absolute top-1/2 left-1/2 w-[300px] h-[300px]
-                          rounded-full bg-fuchsia-500/20 blur-[100px]
-                          animate-energy-pulse-fast mix-blend-screen" />
-              </div>
-
-       
-              {/* Enhanced Hexagonal Pattern - Moved to front */}
-              <div className="absolute inset-0 z-[2]">
-                <div className="absolute inset-0 bg-[url('/images/hex-pattern.svg')] bg-repeat opacity-[0.07]
-                          dark:opacity-[0.04] animate-float-slow scale-150" />
-                <div className="absolute inset-0 bg-[url('/images/hex-pattern-bold.svg')] bg-repeat opacity-[0.05]
-                          dark:opacity-[0.03] animate-float-slow-reverse scale-100" />
-              </div>
+        
 
               {/* Matrix-style Digital Rain - Moved behind radar */}
               <div className="absolute inset-0 z-[0]">

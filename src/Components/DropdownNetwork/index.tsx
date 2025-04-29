@@ -27,6 +27,7 @@ export const DropdownNetwork = (props: { className?: string, testMode?: boolean 
             try {
                 await switchChain(connector, chainId);
             } catch (error) {
+                console.log("error",error)
                 setTransaction({ hash: '', summary: '', error: error });
                 toggleError();
             } finally {

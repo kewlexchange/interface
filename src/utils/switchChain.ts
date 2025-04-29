@@ -2,8 +2,8 @@ import { Connector } from '@web3-react/types'
 import { networkConnection, uniwalletWCV2ConnectConnection, walletConnectV2Connection } from '../connection'
 import {BLOCKCHAINS, isSupportedChain, ChainId as SupportedChainId} from '../constants/chains'
 import {FALLBACK_URLS,RPC_URLS} from "../constants/networks"
-import { useFindNetworkByChainId } from '../hooks/useContract'
-
+import { useFindNetworkByChainId } from '@/hooks/useContract'
+ 
 function getRpcUrl(chainId: SupportedChainId): string {
   switch (chainId) {
     case SupportedChainId.MAINNET:
@@ -18,7 +18,9 @@ function getRpcUrl(chainId: SupportedChainId): string {
 }
 
 export const switchChain = async (connector: Connector, chainId: SupportedChainId) => {
+  console.log("switchChain",chainId)
   if (!isSupportedChain(chainId)) {
+    console.log("coder")
     throw new Error(`Chain ${chainId} not supported for connector (${typeof connector})`)
   } else if (
     connector === walletConnectV2Connection.connector ||
@@ -28,7 +30,6 @@ export const switchChain = async (connector: Connector, chainId: SupportedChainI
     await connector.activate(chainId)
   } else {
     const info = useFindNetworkByChainId(chainId).networkData;
-    console.log("info",info)
     const addChainParameter = {
       chainId,
       chainName: info.chainName,
@@ -39,19 +40,16 @@ export const switchChain = async (connector: Connector, chainId: SupportedChainI
 
     delete info?.enabled;
 
-    console.log("chainInfo",info)
-    const switchChainParameter = {
-      chainId:info.chainId,
-      chainName: info.chainName,
-      rpcUrls: [getRpcUrl(chainId)],
-      nativeCurrency: info.nativeCurrency,
-      blockExplorerUrls: info.blockExplorerUrls,
+  
+    try{
+      await connector.provider?.request({
+        method: "wallet_addEthereumChain",
+        params: [{ ...info, chainId: info.chainId }],
+      });
+    }catch(e){
+
     }
 
-    await connector.provider?.request({
-      method: "wallet_addEthereumChain",
-      params: [{ ...info, chainId: info.chainId }],
-    });
     await connector.activate(addChainParameter)
   }
 }

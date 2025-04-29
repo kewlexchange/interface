@@ -27,6 +27,8 @@ export const NetworkHeader = (props: { className?: string, testMode?: boolean })
             try {
                 await switchChain(connector, chainId);
             } catch (error) {
+                console.log("handleChangeActiveNetwork",error)
+
                 setTransaction({ hash: '', summary: '', error:error });
                 toggleError();
             } finally {
