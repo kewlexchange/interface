@@ -15,8 +15,9 @@ import { TRADE_TAB } from "../../Components/SwapComponents/Trade";
 import { ARBITRAGE_TAB } from "../../Components/SwapComponents/Arbitrage";
 import { useSocket } from "../../hooks/useSocketProvider";
 import { generateTxLink } from "../../utils/web3Provider";
-import { Ghost, Radar, ReplaceAll, Settings } from "lucide-react";
+import { Fan, Ghost, Radar, ReplaceAll, Settings } from "lucide-react";
 import { REFLECTOR_TAB } from "@/Components/SwapComponents/Reflector";
+import { FAN_TAB } from "@/Components/SwapComponents/Fan";
 
 
 const SwapPage: React.FunctionComponent<IPage> = props => {
@@ -170,6 +171,20 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                     </Tab>
 
                                     <Tab 
+                                        key="fan"
+                                        title={
+                                            <div className="flex items-center gap-2">
+                                                <div className="p-1.5 rounded-lg">
+                                                    <Fan className="w-4 h-4" />
+                                                </div>
+                                                <span>FAN</span>
+                                            </div>
+                                        }
+                                    >
+                                        <FAN_TAB />
+                                    </Tab>
+
+                                    <Tab 
                                         key="pools"
                                         title={
                                             <div className="flex items-center gap-2">
@@ -183,6 +198,8 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                         <POOL_TAB />
                                     </Tab>
 
+                                  
+{/* 
                                     <Tab 
                                         key="settings"
                                         title={
@@ -190,12 +207,11 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                                 <div className="p-1.5 rounded-lg">
                                                     <Settings className="w-4 h-4" />
                                                 </div>
-                                                <span>Config</span>
                                             </div>
                                         }
                                     >
                                         <SETTINGS_TAB />
-                                    </Tab>
+                                    </Tab> */}
                                 </Tabs>
                             </div>
                         </CardBody>
