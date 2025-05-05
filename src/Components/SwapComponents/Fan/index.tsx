@@ -14,7 +14,6 @@ import { useExchangeContract } from '@/hooks/useContract';
 import { INITIAL_ALLOWED_SLIPPAGE, TradeType } from '@/constants/misc';
 import JSBI from 'jsbi';
 import { parseEther } from 'ethers/lib/utils';
-import { ChainId } from '@/constants/chains';
 
 const _FAN_TAB = () => {
     const { connector, account, provider, chainId } = useWeb3React();
@@ -90,13 +89,6 @@ const _FAN_TAB = () => {
     
     const handlePurchase = async (totalDepositAmount:string) => {
         toggleLoading();
-
-        if(chainId != ChainId.CHILIZ){
-            let error = { message: "This is only available on Chiliz" }
-            setTransaction({ hash: '', summary: '', error: error });
-            toggleError();
-            return;
-        }
 
         const WCHZ = WETH9[chainId].address; 
         let KAYEN_ROUTER = {
@@ -190,11 +182,12 @@ const _FAN_TAB = () => {
         
                 const amountIn: string = toHex(_tradeInfo.maximumAmountIn(DEFAULT_ADD_SLIPPAGE_TOLERANCE))
                 const amountOut: string = toHex(_tradeInfo.outputAmount)
+                const amountOutMin: string = toHex(_tradeInfo.minimumAmountOut(DEFAULT_ADD_SLIPPAGE_TOLERANCE))
 
                 
                 let swapParam = {
                   amountIn: amountIn,
-                  amountOut:amountOut,
+                  amountOut:amountOutMin,
                   weth9: WCHZ,
                   wrapper: CHILIZ_WRAPPER,
                   pair: pair.pair,
