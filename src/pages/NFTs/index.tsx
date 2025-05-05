@@ -36,20 +36,6 @@ const NFTs: React.FunctionComponent<IPage> = props => {
                         <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/50 to-white/80" />
                     </div>
 
-                    {/* Energy Lines */}
-                    <div className="absolute inset-0">
-                        {[...Array(8)].map((_, i) => (
-                            <div key={i}
-                                className="absolute h-[1px] w-full
-                            bg-gradient-to-r from-transparent via-violet-500/40 to-transparent
-                            animate-scan-line"
-                                style={{
-                                    top: `${i * 12.5}%`,
-                                    animationDelay: `${i * 0.5}s`,
-                                    opacity: 0.3
-                                }} />
-                        ))}
-                    </div>
 
                     {/* Alien Tech Circles */}
                     <div className="absolute inset-0">
