@@ -1,0 +1,43 @@
+{sorted.map((token, idx) => (
+  <div
+    key={token.address}
+    className={`flex items-center justify-between p-4 ${
+      idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+    } hover:bg-gray-100 transition rounded-lg`}
+  >
+    <div className="flex items-center">
+      <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-purple-600 to-pink-500 p-1 shadow-md">
+        <div className="bg-white dark:bg-gray-800 rounded-full w-full h-full overflow-hidden flex items-center justify-center">
+          {token.logoURI ? (
+            <img
+              src={token.logoURI}
+              alt={token.symbol}
+              className="w-8 h-8 object-contain"
+            />
+          ) : (
+            <span className="text-purple-600 font-bold">
+              {token.symbol.slice(0, 2)}
+            </span>
+          )}
+        </div>
+      </div>
+      <div className="ml-4 truncate">
+        <p className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+          {token.symbol}
+        </p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          {token.name}
+        </p>
+      </div>
+    </div>
+
+    <div className="flex items-center space-x-6">
+      <p className="text-lg font-mono font-bold text-purple-600">
+        {formatBalance(token.balance)}
+      </p>
+      <p className="text-xs text-gray-400 dark:text-gray-500">
+        {truncateAddress(token.address)}
+      </p>
+    </div>
+  </div>
+))} 
