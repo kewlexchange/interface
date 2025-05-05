@@ -1006,40 +1006,6 @@ const App = () => {
 
 
 
-          <section className="absolute left-0 top-0 z-[0] w-screen h-screen rounded-lg min-h-[90vh] py-32 overflow-hidden">
-            {/* Advanced Sci-fi Tech Background */}
-            <div className="absolute inset-0">
-              {/* Enhanced Holographic Base Layer */}
-              <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] 
-                          from-violet-600/20 via-violet-900/15 to-transparent
-                          dark:from-violet-900/30 dark:via-violet-800/20 dark:to-black/90
-                          animate-pulse-slow" />
-                <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_deg,violet-500/5_90deg,transparent_180deg)] 
-                          animate-spin-slow" />
-              </div>
-
-        
-
-              {/* Matrix-style Digital Rain - Moved behind radar */}
-              <div className="absolute inset-0 z-[0]">
-                {[...Array(25)].map((_, i) => (
-                  <div key={i}
-                    className="absolute w-[1px] h-full
-                            bg-gradient-to-b from-transparent via-violet-500/30 to-transparent
-                            animate-digital-rain"
-                    style={{
-                      left: `${i * 4}%`,
-                      animationDelay: `${i * 0.2}s`,
-                      animationDuration: `${1.5 + Math.random() * 2}s`,
-                      opacity: 0.5 + Math.random() * 0.5
-                    }} />
-                ))}
-              </div>
-
-          
-            </div>
-          </section>
 
 
           <Routes>
