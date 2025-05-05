@@ -86,11 +86,17 @@ export const TokenBalances: FC = () => {
   const sorted = useMemo(() => {
     const copy = [...filtered];
     copy.sort((a, b) => {
-      const diff =
-        sortKey === 'symbol'
-          ? a.symbol.localeCompare(b.symbol)
-          : Number(a.balance) - Number(b.balance);
-      return sortOrder === 'asc' ? diff : -diff;
+      if (sortKey === 'symbol') {
+        const res = a.symbol.localeCompare(b.symbol);
+        return sortOrder === 'asc' ? res : -res;
+      }
+      const parse = (val: string | number) => {
+        const raw = val.toString().split(' ')[0];
+        return parseFloat(raw.replace(/,/g, '')) || 0;
+      };
+      const balA = parse(a.balance);
+      const balB = parse(b.balance);
+      return sortOrder === 'asc' ? balA - balB : balB - balA;
     });
     return copy;
   }, [filtered, sortKey, sortOrder]);
