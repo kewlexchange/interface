@@ -1,11 +1,11 @@
 export const isKEWL = () => {
-   return  window.location.host === 'www.kewl.exchange' || window.location.host === 'www.kewlswap.com' || window.location.host === '127.0.0.1:3000'
+   return  window.location.host === 'legacy.kewl.exchange' || window.location.host === 'legacy.kewl.exchange' || window.location.host === 'www.kewl.exchange' || window.location.host === 'www.kewlswap.com' || window.location.host === '127.0.0.1:3000'
 }
 
 
 export const isIMON = () => {
     console.log("IMON",window.location.host)
-    return  window.location.host === 'www.kewl.exchange' || window.location.host === 'www.kewlswap.com' || window.location.host === 'www.imon.ai' || window.location.host === 'imon.ai' || window.location.host === '127.0.0.1:3000' || window.location.host === 'latest.imon.ai' || window.location.host === 'https://imon-git-main-imon.vercel.app/'  || window.location.host === 'https://imon-git-main-imon.vercel.app'   
+    return    window.location.host === 'legacy.kewl.exchange' ||  window.location.host === 'www.kewl.exchange' || window.location.host === 'www.kewlswap.com' || window.location.host === 'www.imon.ai' || window.location.host === 'imon.ai' || window.location.host === '127.0.0.1:3000' || window.location.host === 'latest.imon.ai' || window.location.host === 'https://imon-git-main-imon.vercel.app/'  || window.location.host === 'https://imon-git-main-imon.vercel.app'   
  }
 
 export const isCHZDomains  = () =>{

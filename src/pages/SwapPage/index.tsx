@@ -197,6 +197,20 @@ const SwapPage: React.FunctionComponent<IPage> = props => {
                                     >
                                         <POOL_TAB />
                                     </Tab>
+                                    <Tab 
+                                        key="wrap"
+                                        title={
+                                            <div className="flex items-center gap-2">
+                                                <div className="p-1.5 rounded-lg">
+                                                    <span translate="no" className="material-symbols-outlined text-[18px]">waves</span>
+                                                </div>
+                                                <span>Wrap</span>
+                                            </div>
+                                        }
+                                    >
+                                        <WRAP_TAB />
+                                    </Tab>
+
 
                                   
 {/* 
